@@ -1,0 +1,16 @@
+/* styles/globals.css */
+
+@import './base/_reset.css';
+@import './base/_typography.css';
+@import './base/_colors.css';
+
+body {
+  background-color: var(--background-default);
+  color: var(--text-primary);
+}
+
+a {
+  color: var(--primary-color);
+}
+
+/* Here you import other styles as needed */

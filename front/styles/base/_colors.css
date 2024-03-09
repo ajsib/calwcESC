@@ -1,0 +1,11 @@
+/* styles/base/_colors.css */
+
+:root {
+    --primary-color: #364132; 
+    --secondary-color: #FFFFFF;
+    --accent-color: #444444;
+    --text-primary: #444444;
+    --text-secondary: #FFFFFF;
+    --background-default: #FFFFFF;
+    --background-alternate: #FBFBFB;
+  }

@@ -1,0 +1,37 @@
+/* styles/base/_typography.css */
+
+@import './_fonts.css';
+
+html, body {
+  font-family: 'PT Serif', serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-weight: 700; /* Bold */
+  font-size: 2rem;
+  font-family: 'PT Serif', serif;
+}
+
+h2 {
+  font-weight: 700; /* Bold */
+  font-size: 1.75rem;
+  font-family: 'PT Serif', serif;
+}
+
+/* Define styles for h3, h4, h5, h6 similarly */
+
+strong, b {
+  font-weight: 700; /* Bold */
+}
+
+em, i {
+  font-style: italic;
+}
+
+.caption, .figcaption {
+  font-family: 'PT Serif Caption', serif;
+  font-size: 0.75rem;
+}

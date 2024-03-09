@@ -1,0 +1,30 @@
+/* styles/base/_fonts.css */
+
+@font-face {
+    font-family: 'PT Serif';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/fonts/pt-serif.regular.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'PT Serif';
+    font-style: italic;
+    font-weight: 400;
+    src: url('/fonts/pt-serif.italic.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'PT Serif';
+    font-style: normal;
+    font-weight: 700;
+    src: url('/fonts/pt-serif.bold.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'PT Serif Caption';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/fonts/pt-serif.caption.ttf') format('truetype');
+  }
+  
