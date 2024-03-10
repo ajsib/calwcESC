@@ -7,6 +7,16 @@ const navigationStyle = css`
   align-items: center;
   width: 50vw;
   z-index: 10;
+
+  @media (max-width: 768px) { 
+    position: absolute; // Position the navigation absolutely within the header
+    top: 100%; // Align the top of the navigation with the bottom of the header
+    right: 0; // Align the navigation to the right
+    flex-direction: column;
+    a {
+      margin-top: 1.5rem; // Adjust as needed
+    }
+  }
 `;
 
 const linkStyle = css`
