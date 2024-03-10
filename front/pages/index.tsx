@@ -1,7 +1,7 @@
 // pages/index.tsx
-import React from 'react';
-import Header from '../components/Header/Header';
-import HeroSection from '../components/Landing/HeroSection';
+import Header from '@/components/Shared/Header/Header';
+import HeroSection from '@/components/Pages/Landing/Hero/HeroSection';
+import MissionSection from '@/components/Pages/Landing/Mission/MissionSection';
 
 
 export default function Home() {
@@ -9,6 +9,7 @@ export default function Home() {
     <>
       <Header />
       <HeroSection />
+      <MissionSection />
     </>
   );
 }

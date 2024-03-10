@@ -23,7 +23,7 @@ const linkStyle = css`
   color: var(--secondary-color);
   font-weight: bold;
   font-size: 1.2rem;
-  text-decoration: none;
+  text-decoration: none; 
   &:hover {
     text-decoration: underline;
   }
