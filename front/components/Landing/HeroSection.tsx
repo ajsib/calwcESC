@@ -16,8 +16,8 @@ const HeroImage = css`
   background-image: url('/images/landing/landing1.png'); // Replace with your image path
   background-size: cover;
   background-position: center;
-  width: 50vw; // Adjust based on your design
-  height: 90vh; // Adjust based on your design
+  width: 50vw; 
+  height: 90vh; 
   aspect-ratio: 1/1; // Ensure the image maintains a 1:1 aspect ratio
 `;
 

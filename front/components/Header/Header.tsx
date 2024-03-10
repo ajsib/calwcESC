@@ -7,9 +7,10 @@ const headerStyle = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // position: fixed;
   z-index: 10;
+  position: relative; 
   background: transparent;
+  height: 4rem;
 `;
 
 const Header = () => (
