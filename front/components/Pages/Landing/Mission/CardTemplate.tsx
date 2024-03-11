@@ -17,11 +17,13 @@ const cardSize = css`
 
 const cardImageStyle = css`
   width: calc(50% - 2.5rem);
-  height: auto;
+  height: 350px;
   margin-right: 2rem;
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
   margin-left: 0.5rem;
+  overflow: hidden;
+  object-fit: cover;
 `;
 
 const cardTextStyle = css`
