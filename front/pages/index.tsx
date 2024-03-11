@@ -2,6 +2,7 @@
 import Header from '@/components/Shared/Header/Header';
 import HeroSection from '@/components/Pages/Landing/Hero/HeroSection';
 import MissionSection from '@/components/Pages/Landing/Mission/MissionSection';
+import ActionSection from '@/components/Pages/Landing/Action/ActionSection';
 
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
       <Header />
       <HeroSection />
       <MissionSection />
+      <ActionSection />
     </>
   );
 }
