@@ -6,6 +6,7 @@ import Card from '@/components/UI/Card'; // Adjust the import path as necessary
 const cardStyle = css`
   display: flex;
   align-items: center;
+  height: 350px;
 `;
 
 const cardSize = css`
@@ -15,14 +16,20 @@ const cardSize = css`
     padding-bottom: 5rem;
 `;
 
+const cardImageContainerStyle = css`
+  width: 50%;
+  height: 100%;
+  margin-right: 2rem;
+  overflow: hidden;
+  `;
+
 const cardImageStyle = css`
-  width: calc(50% - 2.5rem);
-  height: 350px;
+  width: 100%;
+  height: 95%;
   margin-right: 2rem;
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
   margin-left: 0.5rem;
-  overflow: hidden;
   object-fit: cover;
 `;
 
@@ -30,6 +37,24 @@ const cardTextStyle = css`
   width: 50%;
   text-align: left;
   align-self: flex-start;
+  max-height: 100%;
+  overflow: auto;
+  /* Hide the scrollbar for WebKit browsers */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: transparent transparent; /* For Firefox */
+
+  /* For WebKit browsers (Chrome, Safari) */
+  &::-webkit-scrollbar {
+    width: 6px; /* Width of the scrollbar */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Color of the thumb */
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent; /* Color of the track */
+  }
 `;
 
 const cardTitleStyle = css`
@@ -64,7 +89,9 @@ const CardTemplate = ({ imageSrc, title, text }: CardTemplateProps) => (
   <div css={cardSize}>
     <Card>
      <div css={cardStyle}>
-       <img css={cardImageStyle} src={imageSrc} alt={title} />
+        <div css={cardImageContainerStyle}>
+          <img css={cardImageStyle} src={imageSrc} alt={title} />
+        </div>
         <div css={cardTextStyle}>
           <h1 css={cardTitleStyle}>{title}</h1>
           <p className="caption" css={cardDescriptionStyle}>{text}</p>
