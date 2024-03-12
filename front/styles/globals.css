@@ -13,4 +13,22 @@ a {
   color: var(--primary-color);
 }
 
+:root {
+  /* Define the default margin */
+  --margin: calc(8vw);
+}
+
+/* Adjust the margin based on viewport width */
+@media (max-width: 1500px) {
+  :root {
+    --margin: calc(5vw);
+  }
+}
+
+@media (max-width: 800px) {
+  :root {
+    --margin: calc(3vw);
+  }
+}
+
 /* Here you import other styles as needed */

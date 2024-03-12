@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 import HeroContent from './HeroContent';
 
 // Initial height of the hero section
-const initialHeroHeight = '90vh';
+const initialHeroHeight = '75vh';
 
 const HeroSection = () => {
   const [heroHeight, setHeroHeight] = useState(initialHeroHeight);
@@ -18,7 +18,7 @@ const HeroSection = () => {
       // Calculate the new height based on the scroll position
       // The more you scroll, the smaller the hero section becomes
       // `10` is a factor determining how quickly the section shrinks; adjust as needed
-      const newHeight = Math.max(50, 90 - currentScroll / 10);
+      const newHeight = Math.max(45, 75 - currentScroll);
 
       // Update the state to change the hero section's height
       setHeroHeight(`${newHeight}vh`);
@@ -35,19 +35,19 @@ const HeroSection = () => {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    height: ${heroHeight}; // Dynamic height based on state
-    transition: height 0.3s; // Smooth transition for the height change
+    height: ${heroHeight}; 
+    transition: height 0.3s;
     background-color: #FBFBFB;
     margin-top: -4rem;
   `;
 
   const HeroImage = css`
-    background-image: url('/images/landing/landing1.png');
+    background-image: url('/images/landing/landing1-2.png');
     background-size: cover;
     background-position: center;
     width: 50vw;
-    height: ${heroHeight}; // Dynamic height based on state
-    transition: height 0.3s; // Smooth transition for the height change
+    height: ${heroHeight};
+    transition: height 0.3s;
     aspect-ratio: 1/1;
   `;
 

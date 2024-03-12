@@ -5,7 +5,7 @@ import CardTemplate from './CardTemplate';
 
 const actionSectionStyle = css`
   text-align: center;
-  padding: 4rem 0;
+  padding: 2rem 0;
   background-color: #FBFBFB;
 `;
 
@@ -16,9 +16,13 @@ const getStartedStyle = css`
 `;
 
 const cardsContainerStyle = css`
+  gap: 2rem;
   display: flex;
-  justify-content: center; 
-  gap: 2rem; /
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: var(--margin);
+  // center the cards
+  // justify-content: center;
 `;
 
 const ActionSection = () => (
@@ -26,12 +30,12 @@ const ActionSection = () => (
     <h1 css={getStartedStyle}>Get Started</h1>
     <div css={cardsContainerStyle}>
       <CardTemplate
-        title="Already Running an Experiment?"
-        subtitle="View Your Dashboard"
+        title={<>Already Running <br /> an Experiment?</>}
+        subtitle={<>View Your <br /> Dashboard</>}
       />
       <CardTemplate
-        title="Ready to Begin an Experiment?"
-        subtitle="Submit a Request"
+        title={<>Ready to Begin <br /> an Experiment?</>}
+        subtitle={<>Submit <br /> a Request</>}
       />
     </div>
   </section>
