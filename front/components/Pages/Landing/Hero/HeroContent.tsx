@@ -6,34 +6,25 @@ const heroContentStyle = css`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
-  width: 50vw;
+  justify-content: left;
+  width: calc(50vw - var(--margin));
   text-align: left;
-  overflow: hidden; // Prevents any overflow of children outside this div
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    width: 80vw;
-  }
+  margin-left: var(--margin);
+  flex-wrap: wrap;
 `;
 
 const titleStyle = css`
-  font-size: calc(1.5rem + 1.5vw); // Combines a base size with scalability
+  font-size: calc(1.5rem + 1.5vw); 
   margin-bottom: 1rem;
   color: var(--primary-color);
   line-height: 1.3;
-  white-space: nowrap;
-  overflow: hidden; 
-  text-overflow: ellipsis; // Adds an ellipsis if text overflows
-  @media (max-width: 768px) {
-    font-size: calc(1rem + 3vw); // Increase scalability factor on smaller screens
-    white-space: normal; // Allows text wrapping on smaller screens
-  }
+  margin-right: calc(1rem + 1vw);
 `;
 
-
 const imageStyle = css`
-  margin-left: 3rem; 
+  aspect-ratio: 3/2;
+  height: calc(1rem + 3vw);
+  margin-right: calc(1rem + 1vw);
 `;
 
 const HeroContent = () => (

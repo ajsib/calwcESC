@@ -5,37 +5,39 @@ import Card from '@/components/UI/Card'; // Adjust the import path as necessary
 
 const cardStyle = css`
   display: flex;
-  align-items: center;
+  align-items: stretch;
 `;
 
 const cardSize = css`
-    // 100% minus the left and right padding
-    width: calc(100% - 24rem);
-    padding-left: 12rem;
-    padding-bottom: 5rem;
+  width: calc(100% - 2 * var(--margin));
+  padding-left: calc(var(--margin) - 0.5rem);
+  padding-bottom: 4rem;
 `;
 
-const cardImageStyle = css`
-  width: calc(50% - 2.5rem);
-  height: auto;
-  margin-right: 2rem;
-  margin-bottom: 0.5rem;
-  margin-top: 0.5rem;
-  margin-left: 0.5rem;
+const cardImage = css`
+  background-size: cover;
+  background-position: center;
+  width: calc(50% - 2.5rem); // Subtract your desired margin
+  margin: 0.5rem;
+  background-repeat: no-repeat; 
 `;
 
 const cardTextStyle = css`
-  width: 50%;
+  width: calc(50% - 2.5rem);
   text-align: left;
-  align-self: flex-start;
+  padding-left: 1.5rem;
+  padding-top: 4rem;
+  padding-bottom: 8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const cardTitleStyle = css`
   font-size: 2.5rem;
   color: var(--primary);
   font-weight: bold;
-  margin-top: 4rem;
-  margin-bottom: 2rem;
+  padding-bottom: 2rem;
 `;
 
 const cardDescriptionStyle = css`
@@ -43,13 +45,12 @@ const cardDescriptionStyle = css`
   text-align: justify;
   color: var(--primary);
   line-height: 1.2;
-  margin-bottom: 4rem;
-  margin-right: 2rem;
 `;
 
 const learnMoreStyle = css`
   font-size: 0.8rem;
   text-transform: uppercase;
+  padding-top: 3rem;
 `;
 
 interface CardTemplateProps {
@@ -62,11 +63,12 @@ const CardTemplate = ({ imageSrc, title, text }: CardTemplateProps) => (
   <div css={cardSize}>
     <Card>
      <div css={cardStyle}>
-       <img css={cardImageStyle} src={imageSrc} alt={title} />
+        {/* Use div with background image here */}
+        <div css={[cardImage, { backgroundImage: `url(${imageSrc})` }]} />
         <div css={cardTextStyle}>
           <h1 css={cardTitleStyle}>{title}</h1>
-          <p className="caption" css={cardDescriptionStyle}>{text}</p>
-          <p className="caption" css={learnMoreStyle}>Learn more</p>
+          <p css={cardDescriptionStyle}>{text}</p>
+          <p css={learnMoreStyle}>Learn more</p>
         </div>
       </div>
     </Card>
