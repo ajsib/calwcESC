@@ -16,6 +16,7 @@ const MissionSection = () => (
       text="The Canadian Army Experimentation Services Centre (ESC), part of the Canadian Land Warfare Centre (CALWC)
             in Kingston, Ontario, was founded to generate empirical evidence that informs decisions on proposed changes
             to land force operational capabilities."
+      order={0}
     />
     <CardTemplate
       imageSrc="/images/landing/landing3.png"
@@ -23,6 +24,7 @@ const MissionSection = () => (
       text="The ESC supports experimentation and wargaming for Force Development. The Canadian Forces are encouraged to
             engage in both formal and informal experimentation and submit proposals for the Army Experimentation Plan.
             Selected submissions receive ESC support."
+      order={0}
     />
   </div>
 );

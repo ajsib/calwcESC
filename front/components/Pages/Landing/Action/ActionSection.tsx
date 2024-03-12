@@ -20,9 +20,9 @@ const cardsContainerStyle = css`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-left: var(--margin);
+  // margin-left: var(--margin);
   // center the cards
-  // justify-content: center;
+  justify-content: center;
 `;
 
 const ActionSection = () => (

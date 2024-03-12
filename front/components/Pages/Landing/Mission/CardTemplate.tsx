@@ -6,6 +6,7 @@ import Card from '@/components/UI/Card'; // Adjust the import path as necessary
 const cardStyle = css`
   display: flex;
   align-items: stretch;
+  
 `;
 
 const cardSize = css`
@@ -57,16 +58,17 @@ interface CardTemplateProps {
   imageSrc: string;
   title: string;
   text: string;
+  order: number;
 }
 
-const CardTemplate = ({ imageSrc, title, text }: CardTemplateProps) => (
+const CardTemplate = ({ imageSrc, title, text, order }: CardTemplateProps) => (
   <div css={cardSize}>
     <Card>
-     <div css={cardStyle}>
-        {/* Use div with background image here */}
+     <div css={cardStyle} style={{ flexDirection: order === 0 ? 'row' : 'row-reverse' }}>
         <div css={[cardImage, { backgroundImage: `url(${imageSrc})` }]} />
         <div css={cardTextStyle}>
           <h1 css={cardTitleStyle}>{title}</h1>
+          {/* the order based on the order number, if it is 0 picture comes first, else picture comes last */}
           <p css={cardDescriptionStyle}>{text}</p>
           <p css={learnMoreStyle}>Learn more</p>
         </div>
