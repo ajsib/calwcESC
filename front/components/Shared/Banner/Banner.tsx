@@ -28,13 +28,13 @@ const textStyle = css`
     color: var(--secondary-color);
     font-weight: bold;
     font-size: 1.5rem;
-    margin-left: 5%; /* Adjust as needed */
+    margin-left: var(--margin); /* Adjust as needed */
 `;
 
 const titleStyle = css`
     position: absolute;
     top: 50%; /* Adjust as needed */
-    left: 5%; /* Adjust as needed */
+    left: var(--margin); /* Adjust as needed */
     color: var(--secondary-color);
     font-weight: bold;
     font-size: 3rem;
