@@ -8,21 +8,26 @@ const serviceContentStyle = css`
 `;
 
 const titleStyle = css`
-    font-size: 2.5rem;
-    font-weight: bold;
+    font-size: 2rem;
     margin-bottom: 3rem;
     margin-top: 3rem;
     `;
+
+const textStyle = css`
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    `;
+
 
 export default function ServiceContent() {
     return (
         <div css={serviceContentStyle}>
             <h1 css={titleStyle}>What is Experimentation?</h1>
-            <p>
+            <p css={textStyle}>
                 Experimentation is a fundamental tool for force development in the Canadian Army, we seek to uncover untapped value in novel operational methods and systems so that our leaders can make informed decisions in advancing our capabilities.
             </p>
             <br />
-            <p>
+            <p css={textStyle}>
                 We believe in the power of collective wisdom. By democratizing access to the experimentation process we are calling upon members of the Canadian Army and extended allied defense family to showcase your unique ideas and contribute to the experimentation process. Lets Discover, Test and Demonstrate new ways to serve our beautiful country that we proudly call home.
             </p>
         </div>

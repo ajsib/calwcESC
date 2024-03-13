@@ -15,6 +15,7 @@ const gridContainerStyle = css`
 
 const gridItemStyle = css`
   padding: 20px; /* Adjust the padding as needed */
+  width: 100%;
 `;
 
 interface GridContainerProps {

@@ -7,11 +7,11 @@ import { ReactNode } from 'react';
 
 const cardTemplateStyle = css`
     display: flex;
+    width: 50%;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    text-align: left;
+    padding: 3rem;
     border-radius: 1rem;
-    text-align: center;
     &:hover{
         svg {
             transform: translateX(5px); // Moves the arrow to the right on hover
@@ -20,17 +20,18 @@ const cardTemplateStyle = css`
 `;
 
 const cardTitleStyle = css`
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: bold;
     margin-bottom: 3rem;
+    text-align: justify;
     display: flex;
     align-items: center;
 `;
 
 const cardSubtitleStyle = css`
     font-size: 1.5rem;
-    font-weight: bold;
     margin-bottom: 3rem;
+    text-align: left;
 `;
 
 const arrowIconStyle = css`
