@@ -1,6 +1,6 @@
 // ./components/Landing/HeroContent.tsx
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+import { css } from "@emotion/react";
 
 const heroContentStyle = css`
   display: flex;
@@ -14,7 +14,7 @@ const heroContentStyle = css`
 `;
 
 const titleStyle = css`
-  font-size: calc(1.5rem + 1.5vw); 
+  font-size: calc(1.5rem + 1.5vw);
   margin-bottom: 1rem;
   color: var(--primary-color);
   line-height: 1.3;
@@ -29,8 +29,14 @@ const imageStyle = css`
 
 const HeroContent = () => (
   <div css={heroContentStyle}>
-    <p css={titleStyle}>Experimentation <br/> Services Centre</p>
-    <img css={imageStyle} src="/images/landing/div-patch.png" alt="Division Logo" />
+    <p css={titleStyle}>
+      Experimentation <br /> Services Centre
+    </p>
+    <img
+      css={imageStyle}
+      src="/images/landing/div-patch.png"
+      alt="Division Logo"
+    />
   </div>
 );
 
