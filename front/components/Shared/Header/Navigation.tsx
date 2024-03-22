@@ -29,11 +29,10 @@ const linkStyle = css`
 
 const Navigation = () => (
   <nav css={navigationStyle}>
-    {/* Use the css prop directly on the <a> tag inside <Link> */}
+    <Link href="/" css={linkStyle}>Home</Link>
+    <Link href="/about" css={linkStyle}>About</Link>
     <Link href="/services" css={linkStyle}>Services</Link>
-    <Link href="/connect" css={linkStyle}>Connect</Link>
-    <Link href="/library" css={linkStyle}>Library</Link>
-    <Link href="/about" css={linkStyle}>About </Link>
+    <Link href="/fr/" css={linkStyle}>Français</Link>
     <Link href="/login" css={linkStyle}>Login</Link>
   </nav>
 );
