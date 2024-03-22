@@ -15,7 +15,7 @@ a {
 
 :root {
   /* Define the default margin */
-  --margin: calc(8vw);
+  --margin: calc(10vw);
 }
 
 /* Adjust the margin based on viewport width */

@@ -1,10 +1,9 @@
 // pages/index.tsx
-import Header from '@/components/Shared/Header/Header';
-import HeroSection from '@/components/Pages/Landing/Hero/HeroSection';
-import MissionSection from '@/components/Pages/Landing/Mission/MissionSection';
-import ActionSection from '@/components/Pages/Landing/Action/ActionSection';
-import Footer from '@/components/Shared/Footer';
-
+import ActionSection from "@/components/Pages/Landing/Action/ActionSection";
+import HeroSection from "@/components/Pages/Landing/Hero/HeroSection";
+import MissionSection from "@/components/Pages/Landing/Mission/MissionSection";
+import Footer from "@/components/Shared/Footer";
+import Header from "@/components/Shared/Header/Header";
 
 export default function Home() {
   return (
