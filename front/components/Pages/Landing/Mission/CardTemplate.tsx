@@ -6,7 +6,6 @@ import Card from '@/components/UI/Card'; // Adjust the import path as necessary
 const cardStyle = css`
   display: flex;
   align-items: stretch;
-  
 `;
 
 const cardSize = css`
@@ -23,15 +22,19 @@ const cardImage = css`
   background-repeat: no-repeat; 
 `;
 
+const cardImageStyle = css`
+  width: calc(50% - 2.5rem);
+  height: auto;
+  margin-right: 2rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+`;
+
 const cardTextStyle = css`
   width: calc(50% - 2.5rem);
   text-align: left;
-  padding-left: 1.5rem;
-  padding-top: 4rem;
-  padding-bottom: 8rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-self: flex-start;
 `;
 
 const cardTitleStyle = css`
