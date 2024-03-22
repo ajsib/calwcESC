@@ -9,11 +9,13 @@ export default function Service() {
     return (
         <>
             <Banner src="/images/service/service1.png" alt="Services Banner" bannerText="Discover, Test, Demonstrate, Explore" title="Services"/>
-            <ServiceContent />
-            <Separator />
-            <Cards />
-            <Separator />
-            <Impact />
+            <div style={{background: 'white'}}>
+              <ServiceContent />
+              <Separator />
+              <Cards />
+              <Separator />
+              <Impact />
+            </div>
         </>
     );
 }

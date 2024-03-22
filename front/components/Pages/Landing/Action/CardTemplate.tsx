@@ -1,9 +1,8 @@
-// ./components/Pages/Landing/ActionSection/CardTemplate.tsx
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import Card from '@/components/UI/Card'; // Adjust the import path as necessary
-import { FiArrowRight } from 'react-icons/fi'; // Import the arrow icon from react-icons
+import Card from '@/components/UI/Card';
 import { ReactNode } from 'react';
+import WedgeMedium from '@/components/UI/arrows/RightWedgeThin';
 
 const cardContentStyle = css`
   display: flex;
@@ -25,38 +24,37 @@ const cardTitleStyle = css`
 `;
 
 const cardSubtitleStyle = css`
-  display: inline;
+  display: flex; /* Changed to flex to align subtitle and SVG vertically */
+  align-items: center; /* Vertically center the subtitle and SVG */
   font-size: 1.2rem;
   color: #555;
   position: relative;
   transition: all 0.3s ease-in-out;
-  line-height: 0rem;
-`;
-
-const cardStyleHover = css`
-
-  &:hover {
-    background-color: #fff; // Changes background to white on hover
-
-    &:hover {
-    
-        svg {
-          transform: translateX(5px); // Moves the arrow to the right on hover
-        }
-      }
-  }
+  line-height: 1.5rem;
 `;
 
 const arrowIconStyle = css`
-  padding-left: 0.75rem;
-  padding-bottom: 0.5rem;
+  margin-left: 1.5rem; /* Adjust margin instead of padding */
   transition: transform 0.3s ease-in-out;
-  font-size: 1.5rem;
+  width: 24px;
+  height: 24px;
+`;
+
+const cardStyleHover = css`
+  svg {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  &:hover {
+    svg {
+      transform: translateX(5px);
+    }
+  }
 `;
 
 interface CardTemplateProps {
-  title: ReactNode; 
-  subtitle: ReactNode; 
+  title: ReactNode;
+  subtitle: ReactNode;
 }
 
 const CardTemplate = ({ title, subtitle }: CardTemplateProps) => (
@@ -64,10 +62,10 @@ const CardTemplate = ({ title, subtitle }: CardTemplateProps) => (
     <Card>
       <div css={cardContentStyle}>
         <h2 css={cardTitleStyle}>{title}</h2>
-        <p css={cardSubtitleStyle}>
-          {subtitle}
-          <FiArrowRight css={arrowIconStyle} />
-        </p>
+        <div css={cardSubtitleStyle}>
+          <p>{subtitle}</p>
+          <div css={arrowIconStyle}><WedgeMedium size={26} /></div>
+        </div>
       </div>
     </Card>
   </div>

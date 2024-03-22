@@ -5,19 +5,18 @@ import React from 'react';
 const tableStyle = css`
   border-collapse: collapse;
   width: 100%;
-  height: 200px;
-  width: calc(100% - (var(--margin) * 2)); // 100% minus the left and right padding
+  height: 15rem;
+  width: calc(80% - (var(--margin) * 2));
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 3rem;
 `;
 
 const cellStyle = css`
-  border-right: 10px solid var(--primary-color); /* Adjust the border color as needed */
+  border-right: 1px solid var(--primary-color);
   padding: 8px;
   text-align: center;
   width: 25%;
-  /* Conditional border style for the last cell */
   &:last-child {
     border-right: none;
 `;
