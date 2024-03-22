@@ -35,6 +35,9 @@ const cardTextStyle = css`
   width: calc(50% - 2.5rem);
   text-align: left;
   align-self: flex-start;
+  padding-left: 1rem;
+  padding-top: 3rem;
+  padding-bottom: 4rem;
 `;
 
 const cardTitleStyle = css`
@@ -42,7 +45,7 @@ const cardTitleStyle = css`
   color: var(--primary);
   font-weight: bold;
   padding-bottom: 2rem;
-  position: relative; // Needed for positioning pseudo-elements
+  position: relative;
 `;
 
 const cardDescriptionStyle = css`
