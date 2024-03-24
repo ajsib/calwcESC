@@ -1,7 +1,7 @@
 /**@jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import CardTemplate from './CardTemplate';
-import GridContainer from './Grid';
+import GridContainer from '../../../Shared/Grid';
 import { FiArrowRight } from 'react-icons/fi';
 
 

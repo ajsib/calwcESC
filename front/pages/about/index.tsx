@@ -1,8 +1,9 @@
 import Banner from "@/components/Shared/Banner/Banner";
-import Picture from "@/components/Pages/AboutPage/Pictures";
-import Personel from "@/components/Pages/AboutPage/Personel";
+import Picture from "@/components/Pages/AboutPage/Pictures/Pictures";
+import Personel from "@/components/Pages/AboutPage/Pictures/Personel";
 import Separator from "@/components/Shared/Separator";
 import Mission from "@/components/Pages/AboutPage/Mission";
+import Experimentation from "@/components/Pages/AboutPage/Experiments/Experimentation";
 
 
 export default function About() {
@@ -16,6 +17,8 @@ export default function About() {
             </Picture>
             <Separator/>
             <Mission/>
+            <Separator/>
+            <Experimentation/>
         </>
     );
 }
