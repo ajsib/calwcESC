@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 
 const missionStyle = css`
   padding-top: 5rem;
+  background-color: var(--secondary-color);
 `;
 
 const MissionSection = () => {
@@ -21,23 +22,24 @@ const MissionSection = () => {
 
   return (
     <div css={missionStyle}>
-      <div onClick={handleAboutClick}>
+      <div onClick={handleServicesClick}>
         <CardTemplate
+
           imageSrc="/images/landing/landing2.png"
-          title="About Us"
-          text="The Canadian Army Experimentation Services Centre (ESC), part of the Canadian Land Warfare Centre (CALWC)
-              in Kingston, Ontario, was founded to generate empirical evidence that informs decisions on proposed changes
-              to land force operational capabilities."
+          title="Our Services"
+          text="The ESC engages and enables experimentation for Force Development. 
+                Members of the Canadian Forces engage formally through our centre
+                and informally through community experimentation. Exploring innovative solutions enhances readiness and adaptability across the CAF."
           order={0}
         />
       </div>
-      <div onClick={handleServicesClick}>
+      <div onClick={handleAboutClick}>
         <CardTemplate
-          imageSrc="/images/landing/landing3.png"
-          title="Our Services"
-          text="The ESC supports experimentation and wargaming for Force Development. The Canadian Forces are encouraged to
-              engage in both formal and informal experimentation and submit proposals for the Army Experimentation Plan.
-              Selected submissions receive ESC support."
+          imageSrc="/images/landing/landing3.png"          
+          title="About Us"
+          text="The Experimentation Services Centre (ESC), part of the Canadian Army Land Warfare Centre (CALWC) is located
+              in Kingston, Ontario. Our mission is generating empirical evidence that informs decisions on proposed changes
+              to land force operational capabilities."
           order={0}
         />
       </div>

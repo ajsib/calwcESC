@@ -7,7 +7,7 @@ const heroContentStyle = css`
   flex-direction: row;
   align-items: center;
   justify-content: left;
-  width: calc(50vw - var(--margin));
+  width: calc(50vw - var(--margin) - calc(1rem + 1vw)));
   text-align: left;
   margin-left: var(--margin);
   flex-wrap: wrap;

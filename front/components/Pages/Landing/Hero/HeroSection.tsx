@@ -1,44 +1,35 @@
-// ./components/Landing/HeroSection.tsx
 /** @jsxImportSource @emotion/react */
-import { useState, useEffect } from "react";
-import { css } from "@emotion/react";
-import HeroContent from "./HeroContent";
-
-// Initial height of the hero section
-const initialHeroHeight = "75vh";
+import { css } from '@emotion/react';
+import HeroContent from './HeroContent';
+import { useState, useEffect } from 'react';
 
 const HeroSection = () => {
-  const [heroHeight, setHeroHeight] = useState(initialHeroHeight);
+  const [offsetY, setOffsetY] = useState(0);
+
+  const handleScroll = () => setOffsetY(window.pageYOffset);
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Get the current scroll position
-      const currentScroll = window.scrollY;
+    window.addEventListener('scroll', handleScroll);
 
-      // Calculate the new height based on the scroll position
-      // The more you scroll, the smaller the hero section becomes
-      // `10` is a factor determining how quickly the section shrinks; adjust as needed
-      const newHeight = Math.max(45, 75 - currentScroll);
-
-      // Update the state to change the hero section's height
-      setHeroHeight(`${newHeight}vh`);
-    };
-
-    // Add the scroll event listener
-    window.addEventListener("scroll", handleScroll);
-
-    // Clean up the event listener
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const heroSectionStyle = css`
     display: flex;
     align-items: center;
-    justify-content: space-around;
     height: 63vh;
     transition: height 0.3s;
+    margin-top: -4rem
+  `;
+
+  const contentContainerStyle = css`
+    width: 50vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
     background-color: #fbfbfb;
-    margin-top: -4rem;
   `;
 
   const HeroImage = css`
@@ -46,17 +37,23 @@ const HeroSection = () => {
     background-size: cover;
     background-position: center;
     width: 50vw;
-    height: 63vh;
-    transition: height 0.3s;
+    height: calc(63vh + 4rem);
+    transform: translateY(${offsetY * 0.4}px);
+    transition: transform 0s ease-out, height 0s;
     aspect-ratio: 1/1;
+    z-index: -1;
+    right: 0;
+    margin-top: -4rem;
   `;
 
   return (
     <div css={heroSectionStyle}>
-      <HeroContent />
+      <div css={contentContainerStyle}>
+        <HeroContent />
+      </div>
       <div css={HeroImage} />
     </div>
-  );
+  );  
 };
 
 export default HeroSection;

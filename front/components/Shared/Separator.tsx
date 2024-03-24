@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 
 const separatorStyle = css`
-    width: calc(100% - (var(--margin) * 2)); // 100% minus the left and right padding
+    width: calc(100% - (var(--margin) * 2));
     margin-left: auto;
     margin-right: auto;
     margin-top: 3rem;

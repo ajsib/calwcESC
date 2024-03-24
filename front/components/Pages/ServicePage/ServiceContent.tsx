@@ -9,8 +9,8 @@ const serviceContentStyle = css`
 
 const titleStyle = css`
     font-size: 2rem;
-    margin-bottom: 3rem;
-    margin-top: 3rem;
+    padding-bottom: 3rem;
+    padding-top: 3rem;
     `;
 
 const textStyle = css`
