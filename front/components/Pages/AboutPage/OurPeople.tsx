@@ -7,6 +7,8 @@ const containerStyle = css`
     margin: 0 auto;
     display: flex;
     justify-content: center;
+    padding-bottom: 4REM;
+    
 `;
 
 const innerContainerStyle = css`
@@ -56,10 +58,11 @@ const profileInfoStyle = css`
 
 // New Header Section style
 const headerSectionStyle = css`
-    width: 100%;
+    width: calc(100% - 2 * var(--margin));
     margin-left: var(--margin);
     margin-right: var(--margin);
-    padding: 4REM 0; // Adds some padding above and below the text
+    padding: 4rem 0; // Adds some padding above and below the text
+    
 `;
 
 const nameStyle = css`
@@ -100,7 +103,7 @@ const Profile = ({ name, role, location, description }) => (
 // Main component
 const OurPeople = () => {
     return (
-        <>
+        <div style={{backgroundColor: 'white'}}>
         <HeaderSection />
         <section css={containerStyle}>
 
@@ -124,7 +127,7 @@ const OurPeople = () => {
                 </div>
             </div>
         </section>
-        </>
+        </div>
     );
 };
 
