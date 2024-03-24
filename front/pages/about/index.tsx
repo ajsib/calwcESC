@@ -1,11 +1,9 @@
-import Banner from "@/components/Shared/Banner/Banner";
-import Picture from "@/components/Pages/AboutPage/Pictures/Pictures";
-import Personel from "@/components/Pages/AboutPage/Pictures/Personel";
-import Separator from "@/components/Shared/Separator";
-import Mission from "@/components/Pages/AboutPage/Mission";
-import OurPeople from "@/components/Pages/AboutPage/OurPeople";
+import Banner from "@/components/Shared/Banner/Banner"
+import Separator from "@/components/Shared/Separator"
+import OurPeople from "@/components/Pages/AboutPage/OurPeople"
 import AboutUsContent from "@/components/Pages/AboutPage/AboutUsContent"
-import Cards from "@/components/Pages/AboutPage/Cards"
+import Publications from "@/components/Pages/AboutPage/Publications/PublicationsSection"
+import Footer from "@/components/Shared/Footer";
 
 
 export default function About() {
@@ -15,7 +13,8 @@ export default function About() {
             <OurPeople />
             <AboutUsContent />
             <Separator />
-            <Cards />
+            <Publications />
+            <Footer/>
 
         </>
     );

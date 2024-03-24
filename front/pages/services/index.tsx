@@ -11,7 +11,6 @@ export default function Service() {
         <>
             <Banner src="/images/service/service1.png" alt="Services Banner" bannerText="Discover, Test, Demonstrate, Explore" title="Services"/>
             <div style={{background: 'white'}}>
-              <Separator />
               <ServiceContent />
               <Separator />
               <Cards />

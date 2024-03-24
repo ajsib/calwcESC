@@ -7,7 +7,7 @@ const containerStyle = css`
     margin: 0 auto;
     display: flex;
     justify-content: center;
-    padding-bottom: 4REM;
+    padding-bottom: 4rem;
     
 `;
 
@@ -30,22 +30,32 @@ const profilesGridStyle = css`
 
 const profileStyle = css`
     display: flex;
-    flex-direction: column; // Stack image on top of text for better mobile viewing
-    align-items: center; // Center items for a cleaner look
-    text-align: center; // Center text for a better visual flow
-    padding: 24px; // Increase padding for more whitespace
-    gap: 16px; // Adjust gap for better visual separation
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); // Soften the shadow for a subtler effect
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    gap: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
     flex-grow: 1;
-    max-width: 300px;
+    max-width: calc(100% - 4 * var(--margin) - 2rem);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+        cursor: pointer; 
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        transform: translateY(-1px);
+    }
 `;
+
+
 
 const profileImageStyle = css`
     width: 100px;
     height: 100px;
-    background-color: grey; // Consider using a pattern or icon here
+    background-color: grey;
     border-radius: 50%;
-    overflow: hidden; // In case of actual images, this will keep them circular
 `;
 
 const profileInfoStyle = css`
@@ -56,41 +66,23 @@ const profileInfoStyle = css`
     max-width: 180px; // Increased width for better layout
 `;
 
-// New Header Section style
-const headerSectionStyle = css`
-    width: calc(100% - 2 * var(--margin));
+const titleStyle = css`
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 4rem;
+    padding-top: 3rem;
     margin-left: var(--margin);
-    margin-right: var(--margin);
-    padding: 4rem 0; // Adds some padding above and below the text
-    
 `;
 
-const nameStyle = css`
-    font-size: 1.2rem; 
-    font-weight: bold; 
-    margin-bottom: 4px; 
-`;
-
-const roleLocationStyle = css`
-    font-size: 1rem; // Slightly smaller font for role and location
-    color: #555; // A darker grey for better readability
-`;
-
-const descriptionStyle = css`
-    font-size: 0.9rem; // Small font size for description
-    color: #777; // Lighter grey to differentiate from more important info
-    margin-top: 8px; // Add space before the description
-`;
-
-// New HeaderSection component
-const HeaderSection = () => (
-    <section css={headerSectionStyle}>
-        <h1>Our People</h1>
-    </section>
-);
+interface ProfileProps {
+    name: string;
+    role: string;
+    location: string;
+    description: string;
+}
 
 // Profile component
-const Profile = ({ name, role, location, description }) => (
+const Profile: React.FC<ProfileProps> = ({ name, role, location, description }) => (
     <article css={profileStyle}>
         <div css={profileImageStyle} />
         <div css={profileInfoStyle}>
@@ -104,15 +96,14 @@ const Profile = ({ name, role, location, description }) => (
 const OurPeople = () => {
     return (
         <div style={{backgroundColor: 'white'}}>
-        <HeaderSection />
-        <section css={containerStyle}>
-
+        <h1 css={titleStyle}> Our People</h1>
+        <div css={containerStyle}>
             <div css={innerContainerStyle}>
                 <div css={profilesGridStyle}>
                     <Profile
-                        name="Daniel Aminetzah"
-                        role="Senior Partner"
-                        location="New York"
+                        name="Chris Allen"
+                        role="Major"
+                        location="CALWC Kingston"
                         description="Advises global agricultural and specialty chemicals companies..." />
                     <Profile
                         name="Avinash Goyal"
@@ -126,7 +117,7 @@ const OurPeople = () => {
                         description="Provides guidance on Strategy, M&A, Restructuring and..." />
                 </div>
             </div>
-        </section>
+        </div>
         </div>
     );
 };

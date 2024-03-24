@@ -9,9 +9,10 @@ const aboutUsContentStyle = css`
 
 const titleStyle = css`
     font-size: 2rem;
-    padding-bottom: 3rem;
+    font-weight: 300;
+    margin-bottom: 3rem;
     padding-top: 3rem;
-    `;
+`;
 
 const textStyle = css`
     font-size: 1.2rem;
@@ -23,7 +24,7 @@ const textStyle = css`
 export default function AboutUsContent() {
     return (
         <div css={aboutUsContentStyle}>
-            <h1 css={titleStyle}>Our Mission</h1>
+            <h1 css={[titleStyle]}>Our Mission</h1>
             <p css={textStyle}>
                 The CA Experimentation Services Centre (ESC) is a section within the Canadian Land Warfare Centre
                 (CALWC), located in Kingston, ON, and was established to produce empirical evidence to objectively

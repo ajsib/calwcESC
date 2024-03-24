@@ -47,7 +47,7 @@ export default function OperationsContent() {
     return (
         <div>
             <h1 css={titleStyle}>Operational Expertise</h1>
-            <GridContainer>
+            <GridContainer margin={200}>
                 <CardTemplate title=<>Experiment <br></br> Consultation</>
                 subtitle="Get the process started with our team to run an experiment." />
                 <CardTemplate title=<>Knowledge <br></br> Base</> 

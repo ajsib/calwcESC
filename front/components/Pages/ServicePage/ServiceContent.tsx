@@ -11,15 +11,15 @@ const serviceContentStyle = css`
 const textStyle = css`
     font-size: 1.2rem;
     margin-top: 1rem;
-    line-height: 1.4rem;
+    line-height: 2rem;
     font-weight: 400;
 `;
 
 const titleStyle = css`
-    font-size: 1rem;
-    font-weight: 800;
-    margin-bottom: 3rem;
-    margin-top: 1rem;
+    font-size: 2rem;
+    font-weight: 300;
+    padding-bottom: 3rem;
+    padding-top: 3rem;
 `;
 
 export default function ServiceContent() {
