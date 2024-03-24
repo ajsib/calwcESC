@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 import CardTemplate from './CardTemplate';
 import GridContainer from '../../../Shared/Grid';
-import { FiArrowRight } from 'react-icons/fi';
+import RightWedge from '@/components/UI/arrows/RightWedgeBold';
 
 
 const titleStyle = css`
@@ -13,7 +13,7 @@ const titleStyle = css`
     margin-left: var(--margin);
     `;
 
-const faqStyle = css`
+    const faqStyle = css`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,31 +22,42 @@ const faqStyle = css`
     cursor: pointer;
     margin-top: 3rem;
     margin-bottom: 3rem;
-    transition: 0.3s ease;
-    &:hover {
-        text-decoration: underline;
-        svg {
-            transform: translateX(5px); // Moves the arrow to the right on hover
-        }
+    gap: 1rem;
+    text-decoration: none; 
+    transition: text-decoration 0.3s ease, transform 0.3s ease;
+  
+    svg {
+      transition: transform 0.3s ease; // Ensure the SVG has the transition
     }
-    `;
+  
+    &:hover {
+      text-decoration: underline; 
+      svg {
+        transform: translateX(5px); 
+      }
+    }
+  `;
+  
+  
 
 
-export default function Cards() {
+
+
+export default function OperationsContent() {
     return (
         <div>
             <h1 css={titleStyle}>Operational Expertise</h1>
             <GridContainer>
-                <CardTemplate title="Experiment Consultation" 
+                <CardTemplate title=<>Experiment <br></br> Consultation</>
                 subtitle="Get the process started with our team to run an experiment." />
-                <CardTemplate title="Knowledge Base" 
+                <CardTemplate title=<>Knowledge <br></br> Base</> 
                 subtitle="Explore our knowledge base to find information on past experiments, or reports." />
-                <CardTemplate title="Active Experiments" 
+                <CardTemplate title=<>Active <br></br> Experiments</>
                 subtitle="See what is happening, what it’s related to and who is involved" />
-                <CardTemplate title="Community Experimentation" 
+                <CardTemplate title=<>Community <br></br> Experimentation</>
                 subtitle="Get in on the action, share ideas and collaborate." />
             </GridContainer>
-            <p css={faqStyle}>Have any questions? Visit our FAQ <FiArrowRight /></p>
+            <p css={faqStyle}>Have any questions? See our FAQ <RightWedge size={15} /></p>
         </div>
     )
 }
