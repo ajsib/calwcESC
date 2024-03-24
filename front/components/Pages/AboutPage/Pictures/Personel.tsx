@@ -17,6 +17,7 @@ const containerStyle = css`
     display: flex;
     flex-direction: row;
     align-items: center;
+    
 `;
 
 const textStyle = css`
