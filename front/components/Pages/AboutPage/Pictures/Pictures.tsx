@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import React from 'react';
+import { titleStyle } from '@/styles/GlobalStyles';
 
 interface PictureProps {
         children?: React.ReactNode;
@@ -16,14 +17,6 @@ const containerStyle = css`
   margin-right: auto;
   margin-top: 3rem;
 `;
-
-const titleStyle = css`
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: 3rem;
-    margin-top: 1rem;
-    margin-left: var(--margin);
-    `;
 
 
 export default function Picture({ children } : PictureProps) {
