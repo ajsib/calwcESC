@@ -7,7 +7,6 @@ import { ReactNode } from 'react';
 const cardTemplateStyle = css`
     display: flex;
     flex-direction: column;
-    padding: 1rem;
     width: 100%;
     border-radius: 1rem;
     svg {

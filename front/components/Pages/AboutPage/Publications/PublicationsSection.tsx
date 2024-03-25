@@ -21,7 +21,7 @@ export default function Cards() {
     return (
         <div css={parentStyle}>
           <h1 css={titleStyle}>Publications</h1>
-          <GridContainer margin={100}>
+          <GridContainer margin={5}>
             <CardTemplate 
                 title={<>Experimentation <br/> Handbook</>}
                 subtitle="Get the process started with our team to run an experiment." 
