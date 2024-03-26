@@ -1,28 +1,33 @@
 /**@jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import React, { useEffect, useState } from 'react';
 
 const serviceContentStyle = css`
-    width: calc(100% - (var(--margin) * 2)); // 100% minus the left and right padding
+    width: calc(100% - (var(--margin) * 2)); 
     margin-left: auto;
     margin-right: auto;
 `;
 
-const titleStyle = css`
-    font-size: 2rem;
-    margin-bottom: 3rem;
-    margin-top: 3rem;
-    `;
-
 const textStyle = css`
     font-size: 1.2rem;
-    margin-bottom: 3rem;
-    `;
+    margin-top: 1rem;
+    line-height: 2rem;
+    font-weight: 400;
+`;
 
+const titleStyle = css`
+    font-size: 2rem;
+    font-weight: 300;
+    padding-bottom: 3rem;
+    padding-top: 3rem;
+`;
 
 export default function ServiceContent() {
+
+
     return (
         <div css={serviceContentStyle}>
-            <h1 css={titleStyle}>What is Experimentation?</h1>
+            <h1 css={[titleStyle]}>What is Experimentation?</h1>
             <p css={textStyle}>
                 Experimentation is a fundamental tool for force development in the Canadian Army, we seek to uncover untapped value in novel operational methods and systems so that our leaders can make informed decisions in advancing our capabilities.
             </p>

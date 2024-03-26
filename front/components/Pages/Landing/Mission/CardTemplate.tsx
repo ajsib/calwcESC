@@ -1,7 +1,8 @@
 // ./components/Pages/Landing/Mission/CardTemplate.tsx
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import Card from "@/components/UI/Card"; // Adjust the import path as necessary
+import Card from "@/components/UI/Card";
+import WedgeRightBold from '@/components/UI/arrows/RightWedgeBold'
 
 const cardStyle = css`
   display: flex;
@@ -56,26 +57,30 @@ const cardDescriptionStyle = css`
 `;
 
 const learnMoreStyle = css`
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  padding-top: 3rem;
+  font-size: 0.9rem;
+  // text-transform: uppercase;
+  padding-right: 1rem;
 `;
 
-const cardHoverEffect = css`
-  .card-title-hover-effect::after {
-    content: "";
-    position: absolute;
-    bottom: -1px; // Adjust as necessary to position the underline
-    left: 0;
-    width: 100%; // Underline spans the full element width
-    height: 2px; // Thickness of the underline
-    background-color: var(--primary); // Color of the underline
-    opacity: 0; // Start fully transparent
-    transition: opacity 0.5s ease-in-out; // Smooth transition for the opacity
+const cardStyleHover = css`
+  svg {
+    transition: transform 0.2s ease-in-out;
   }
-  &:hover .card-title-hover-effect::after {
-    opacity: 1; // Fully visible on hover
+
+  &:hover {
+    svg {
+      transform: translateX(5px);
+    }
   }
+`;
+
+const columnWrapperStyle = css`
+  display: flex;
+  flex-direction: row;
+  padding-top: 4rem;
+  padding-bottom; 3rem;
+  justify-content: left;
+  align-items: center;
 `;
 
 interface CardTemplateProps {
@@ -86,7 +91,7 @@ interface CardTemplateProps {
 }
 
 const CardTemplate = ({ imageSrc, title, text }: CardTemplateProps) => (
-  <div css={[cardSize, cardHoverEffect]}>
+  <div css={[cardSize, cardStyleHover]}>
     <Card>
       <div css={cardStyle}>
         {/* Use div with background image here */}
@@ -96,7 +101,10 @@ const CardTemplate = ({ imageSrc, title, text }: CardTemplateProps) => (
             {title}
           </h1>
           <p css={cardDescriptionStyle}>{text}</p>
-          <p css={learnMoreStyle}>Learn more</p>
+          <div css={columnWrapperStyle}>
+            <p className="caption" css={learnMoreStyle}>Learn more</p>
+            <WedgeRightBold size={14}/>
+          </div>
         </div>
       </div>
     </Card>

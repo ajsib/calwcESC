@@ -1,20 +1,30 @@
 /**@jsxImportSource @emotion/react */
 import Card from '@/components/UI/Card';
 import { css } from '@emotion/react';
-import { FiArrowRight } from 'react-icons/fi';
+import RightWedgeBold from '@/components/UI/arrows/RightWedgeThin';
 import { ReactNode } from 'react';
+
+const cardStyleHover = css`
+  svg {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  &:hover {
+    svg {
+      transform: translateX(5px);
+    }
+  }
+`;
 
 
 const cardTemplateStyle = css`
     display: flex;
-    width: 50%;
     flex-direction: column;
-    text-align: left;
     padding: 3rem;
     border-radius: 1rem;
     &:hover{
         svg {
-            transform: translateX(5px); // Moves the arrow to the right on hover
+            transform: translateX(5px);
           }
     }
 `;
@@ -23,6 +33,7 @@ const cardTitleStyle = css`
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 3rem;
+    gap: 2rem;
     text-align: justify;
     display: flex;
     align-items: center;
@@ -34,10 +45,6 @@ const cardSubtitleStyle = css`
     text-align: left;
 `;
 
-const arrowIconStyle = css`
-    transition: transform 0.3s ease-in-out;
-    `;
-
 interface CardTemplateProps {
     title: ReactNode; 
     subtitle: ReactNode; 
@@ -45,10 +52,10 @@ interface CardTemplateProps {
 
 export default function CardTemplate({title, subtitle}: CardTemplateProps) {
     return (
-        <div>
+        <div css={cardStyleHover}>
             <Card>
                 <div css={cardTemplateStyle}>
-                    <h1 css={cardTitleStyle}>{title} <FiArrowRight css={arrowIconStyle}/></h1>
+                    <h1 css={cardTitleStyle}>{title} <RightWedgeBold size={26}/></h1>
                     <p css={cardSubtitleStyle}>{subtitle}</p>
                 </div>
             </Card>

@@ -4,10 +4,10 @@ import { ReactNode } from "react";
 import { css } from "@emotion/react";
 
 const cardStyle = css`
-  transition: box-shadow 0.25s ease-in-out; // Slower transition for a more luxurious feel
+  transition: box-shadow 0.25s ease-in-out; 
   cursor: pointer; // Change cursor to pointer
   &:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); // Bigger and more diffuse shadow for an elegant design
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   }
 `;
 

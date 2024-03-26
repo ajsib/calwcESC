@@ -1,36 +1,37 @@
 /**@jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import React, {ReactNode} from 'react';
+import React, { ReactNode } from 'react';
 
-
-const gridContainerStyle = css`
-  display: grid;
-  grid-template-columns: auto auto; /* Two columns with automatic width */
-  gap: 20px; /* Adjust the gap between grid items as needed */
-  width: calc(100% - (var(--margin) * 2)); // 100% minus the left and right padding
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 3rem;
-`;
-
-const gridItemStyle = css`
-  padding: 20px; /* Adjust the padding as needed */
-  width: 100%;
-`;
-
-interface GridContainerProps {
+interface FlexContainerProps {
   children: ReactNode;
+  margin: number; // Prop to control the margin. Defaulted to 0 if not provided.
 }
 
-export default function GridContainer({ children } : GridContainerProps) {
-    const childrenArray = React.Children.toArray(children);
-  return (
-    <div css={gridContainerStyle}>
-      {childrenArray.map((child, index) => (
-        <div key={index} css={gridItemStyle}>
-          {child}
-        </div>
-      ))}
-    </div>
-  );
+export default function FlexContainer({ children, margin = 0 }: FlexContainerProps) {
+  // Updated container style to wrap flex items if there's not enough space
+  const flexContainerStyle = css`
+    display: flex;
+    flex-wrap: wrap; // Allow the container's items to wrap onto multiple lines
+    justify-content: space-between;
+    gap: 2rem;
+    margin-left: calc(var(--margin) + ${margin}rem);
+    margin-right: calc(var(--margin) + ${margin}rem);
+    width: calc(100% - ${2 * margin}rem - 2 * var(--margin));
+  `;
+
+  // Updated style for children to flexibly fill the space or wrap when needed
+  const childStyle = css`
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    flex-basis: calc(50% - 1rem); // Adjusted flex-basis for potential wrapping
+    flex-grow: 1; // Allow children to grow and fill the available space
+  `;
+
+  // Render all children within a single flex container
+  const renderedChildren = React.Children.map(children, (child) => (
+    <div css={childStyle}>{child}</div>
+  ));
+
+  return <div css={flexContainerStyle}>{renderedChildren}</div>;
 }

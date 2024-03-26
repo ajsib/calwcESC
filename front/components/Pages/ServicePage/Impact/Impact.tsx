@@ -15,9 +15,8 @@ const divStyle = css`
     `;
 
 const statStyle = css`
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: blue;
+    font-size: 4rem;
+    font-weight: thin;
     `;
 const textStyle = css`
     text-align: center;
@@ -30,20 +29,20 @@ export default function Impact(){
             <h1 css={titleStyle}>Our Impact</h1>
             <Table>
                     <div css={divStyle}>
-                        <p css={statStyle}>25</p>
-                        <p css={textStyle}>Countries Served</p>
+                        <p css={statStyle}>10</p>
+                        <p css={textStyle}>Open Experiments</p>
                     </div>
                     <div css={divStyle}>
-                        <p css={statStyle}>18</p>
-                        <p css={textStyle}>Of the top 20 defense companies served</p>
+                        <p css={statStyle}>5</p>
+                        <p css={textStyle}>Partner Nations</p>
                     </div>
                     <div css={divStyle}>
-                        <p css={statStyle}>21</p>
-                        <p css={textStyle}>Of the top 25 global aerospace companies served</p>
+                        <p css={statStyle}>41</p>
+                        <p css={textStyle}>Publications</p>
                     </div>
                     <div css={divStyle}>
-                        <p css={statStyle}>500</p>
-                        <p css={textStyle}>A&D Experts</p>
+                        <p css={statStyle}>1</p>
+                        <p css={textStyle}>Defense Family</p>
                     </div>
             </Table>
         </div>

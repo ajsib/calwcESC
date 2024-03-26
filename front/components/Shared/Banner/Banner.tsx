@@ -1,46 +1,7 @@
-// ./components/Shared/Banner/Banner.tsx
 /**@jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import Header from "../Header/Header";
-
-
-const imageStyle = css`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-`;
-
-const divStyle = css`
-    position: absolute;
-    display: flex;
-    align-items: center;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 10%; /* Adjust as needed */
-    background-color: var(--primary-color);
-`;
-
-const textStyle = css`
-    color: var(--secondary-color);
-    font-weight: bold;
-    font-size: 1.5rem;
-    margin-left: var(--margin); /* Adjust as needed */
-`;
-
-const titleStyle = css`
-    position: absolute;
-    top: 50%; /* Adjust as needed */
-    left: var(--margin); /* Adjust as needed */
-    color: var(--secondary-color);
-    font-weight: bold;
-    font-size: 3rem;
-    z-index: 2;
-`;
-
+import { useEffect, useState } from 'react'
 
 interface BannerProps {
     src: string;
@@ -49,20 +10,62 @@ interface BannerProps {
     title: string;
 }
 
+export default function Banner({src, alt, bannerText, title}: BannerProps) {
+    const [offsetY, setOffsetY] = useState(0);
 
-const headerStyle = css`
-    position: relative;
-    width: 100%;
-    height: 400px;
-`;
+    useEffect(() => {
+        const handleScroll = () => setOffsetY(window.scrollY);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
+    const imageStyle = css`
+        position: absolute;
+        top: -4rem;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: translateY(${offsetY * 0.4}px);
+        transition: transform 0s ease-out, height 0s;
+        z-index: -1;
+    `;
 
-export default function Banner({
-    src,
-    alt,
-    bannerText,
-    title
-}: BannerProps) {
+    const divStyle = css`
+        position: absolute;
+        display: flex;
+        align-items: center;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 4rem;
+        background-color: var(--primary-color);
+    `;
+
+    const textStyle = css`
+        color: var(--secondary-color);
+        font-weight: bold;
+        font-size: 1.8rem;
+        margin-left: var(--margin);
+        word-spacing: 0.3rem;
+    `;
+
+    const titleStyle = css`
+        position: absolute;
+        top: calc(50% - 2rem);
+        left: var(--margin);
+        color: var(--secondary-color);
+        font-weight: bold;
+        font-size: 3.3rem;
+        z-index: 2;
+    `;
+
+    const headerStyle = css`
+        position: relative;
+        width: 100%;
+        height: calc(63vh);
+    `;
+
     return (
         <div css={headerStyle}>
             <Header />
