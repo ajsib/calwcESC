@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 import CardTemplate from './CardTemplate';
 import GridContainer from '@/components/Shared/Grid';
-import { useRouter } from 'next/router'; // Added router
+import { useRouter } from 'next/router'; 
 
 const titleStyle = css`
   font-size: 1rem;
@@ -17,32 +17,32 @@ const parentStyle = css`
 `;
 
 export default function Cards() {
-  const router = useRouter(); // Initialized router
-  const { locale } = router; // Get current locale from router
+  const router = useRouter(); 
+  const { locale } = router; 
 
   // Define translated titles and subtitles based on locale
   const Title1 = locale === 'en' ? (
     <>Experimentation <br /> Handbook</>
   ) : (
-    <>Manuel <br /> d'Expérimentation </>
+    <>Manuel <br /> d&apos;Expérimentation </>
   );
 
   const Subtitle1 = locale === 'en' ? (
-    "Get the process started with our team to run an experiment."
+    <>Get the process started with our team to run an experiment.</>
   ) : (
-    "Commencez le processus avec notre équipe pour mener une expérience scientifique."
+    <>Commencez le processus avec notre équipe pour mener une expérience scientifique.</>
   );
 
   const Title2 = locale === 'en' ? (
     <>Data <br /> Insights</>
   ) : (
-    <>Perspectives de <br /> Données</>
+    <>Aperçu de <br /> Données</>
   );
 
   const Subtitle2 = locale === 'en' ? (
-    "Dive into analytics and insights from our latest experiments."
+    <>Dive into analytics and insights from our latest experiments.</>
   ) : (
-    "Plongez dans les analyses et perspectives de nos dernières expériences."
+    <>Plongez dans les analyses et perspectives de nos dernières expériences.</>
   );
 
   const Title3 = locale === 'en' ? (
@@ -52,21 +52,21 @@ export default function Cards() {
   );
 
   const Subtitle3 = locale === 'en' ? (
-    "Understanding the methodology behind successful controlled trials."
+    <>Understanding the methodology behind successful controlled trials.</>
   ) : (
-    "Comprendre la méthodologie derrière les essais contrôlés réussis."
+    <>Comprendre la méthodologie derrière les essais contrôlés réussis.</>
   );
 
   const Title4 = locale === 'en' ? (
     <>Innovation <br /> Frameworks</>
   ) : (
-    <>Cadres <br /> d'Innovation</>
+    <>Cadres <br /> d&apos;Innovation</>
   );
 
   const Subtitle4 = locale === 'en' ? (
-    "Frameworks to foster innovation and creativity in your experiments."
+    <>Frameworks to foster innovation and creativity in your experiments.</>
   ) : (
-    "Cadres pour favoriser l'innovation et la créativité dans vos expériences."
+    <>Cadres pour favoriser l&apos;innovation et la créativité dans vos expériences.</>
   );
 
   return (

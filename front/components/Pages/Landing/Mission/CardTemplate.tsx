@@ -87,7 +87,7 @@ const columnWrapperStyle = css`
 interface CardTemplateProps {
   imageSrc: string;
   title: string;
-  text: string;
+  text: React.ReactNode;
   order: number;
 }
 

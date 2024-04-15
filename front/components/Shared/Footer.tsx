@@ -25,8 +25,8 @@ const Footer = () => {
 
   const currentYear = new Date().getFullYear();
   // Define translated text based on locale
-  const OrganizationName = locale === 'en' ? 'Canadian Army Land Warfare Centre' : 'Centre de Guerre Terrestre de l\'Armée Canadienne';
-  const ServiceCenterName = locale === 'en' ? 'Experimentation Services Centre' : 'Centre de Services d\'Expérimentation';
+  const OrganizationName = locale === 'en' ? <>Canadian Army Land Warfare Centre</> : <>Centre de Guerre Terrestre de l&apos;Armée Canadienne</>;
+  const ServiceCenterName = locale === 'en' ? <>Experimentation Services Centre</> : <>Centre de Services d&apos;Expérimentation</>;
 
   return (
     <footer css={footerStyle}>

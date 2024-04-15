@@ -38,7 +38,7 @@ const ActionSection = () => {
   const Title1 = locale === 'en' ? (
     <>Already Running <br /> an Experiment?</>
   ) : (
-    <>Déjà en cours <br /> d'expérimentation ?</>
+    <>Déjà en cours <br /> d&apos;expérimentation ?</>
   );
 
   const Subtitle1 = locale === 'en' ? (

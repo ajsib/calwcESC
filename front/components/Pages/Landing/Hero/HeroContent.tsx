@@ -32,7 +32,7 @@ const HeroContent = () => {
   const router = useRouter();
   const { locale } = router;
 
-  const Title = locale === 'en' ? <>Experimentation <br /> Services Centre</> : <>Centre de services <br /> d'expérimentation </>; /* corrected */
+  const Title = locale === 'en' ? <>Experimentation <br /> Services Centre</> : <>Centre de services <br /> d&apos;expérimentation </>; /* corrected */
 
   return (
     <div css={heroContentStyle}>

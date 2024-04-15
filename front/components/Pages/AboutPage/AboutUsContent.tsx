@@ -34,8 +34,8 @@ export default function AboutUsContent() {
         </>
     ) : (
         <>
-            Le Centre de Services d'Expérimentation (ESC) de l'AC est une section au sein du Centre de Guerre Terrestre Canadien
-            (CGTC), situé à Kingston, en Ontario, et a été créé pour produire des preuves empiriques afin d'informer de manière
+            Le Centre de Services d&apos;Expérimentation (ESC) de l&apos;AC est une section au sein du Centre de Guerre Terrestre Canadien
+            (CGTC), situé à Kingston, en Ontario, et a été créé pour produire des preuves empiriques afin d&apos;informer de manière
             objective les décisions ultérieures concernant les changements proposés aux capacités opérationnelles des forces terrestres.
         </>
     );
@@ -50,11 +50,11 @@ export default function AboutUsContent() {
         </>
     ) : (
         <>
-            La mission principale de l'ESC est d'être l'organisation de soutien qui exécute et facilite l'expérimentation
+            La mission principale de l&apos;ESC est d&apos;être l&apos;organisation de soutien qui exécute et facilite l&apos;expérimentation
             et les jeux de guerre au soutien du développement des forces. Il est prévu, attendu et encouragé que des
             expérimentations formelles et informelles aient lieu au sein des Forces canadiennes. Ces événements doivent
-            être proposés pour inclusion dans le Plan d'expérimentation de l'Armée et les soumissions réussies seront
-            priorisées pour recevoir le soutien de l'ESC.
+            être proposés pour inclusion dans le Plan d&apos;expérimentation de l&apos;Armée et les soumissions réussies seront
+            priorisées pour recevoir le soutien de l&apos;ESC.
         </>
     );
 
@@ -68,10 +68,10 @@ export default function AboutUsContent() {
         </>
     ) : (
         <>
-            Bien que l'ESC n'ait pas besoin de contrôler ou de mener explicitement toutes les expérimentations dans l'AC,
-            l'ESC est responsable de superviser la conduite de toutes les expérimentations au sein de l'AC. En tant que tel,
-            l'ESC doit être le premier point de contact pour toute organisation au sein de l'AC qui souhaite mener une expérimentation.
-            Cela facilite la coordination appropriée et l'allocation des ressources en soutien aux efforts de FD de l'AC et permet
+            Bien que l&apos;ESC n&apos;ait pas besoin de contrôler ou de mener explicitement toutes les expérimentations dans l&apos;AC,
+            l&apos;ESC est responsable de superviser la conduite de toutes les expérimentations au sein de l&apos;AC. En tant que tel,
+            l&apos;ESC doit être le premier point de contact pour toute organisation au sein de l&apos;AC qui souhaite mener une expérimentation.
+            Cela facilite la coordination appropriée et l&apos;allocation des ressources en soutien aux efforts de FD de l&apos;AC et permet
             le suivi centralisé des expériences et de leurs résultats.
         </>
     );
