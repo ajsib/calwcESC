@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react';
 
 interface FlexContainerProps {
   children: ReactNode;
-  margin: number; // Prop to control the margin. Defaulted to 0 if not provided.
+  margin?: number; // Prop to control the margin. Defaulted to 0 if not provided.
 }
 
 export default function FlexContainer({ children, margin = 0 }: FlexContainerProps) {

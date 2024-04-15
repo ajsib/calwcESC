@@ -49,7 +49,7 @@ export default function Impact(){
                     </div>
                     <div css={divStyle}>
                         <p css={statStyle}>1</p>
-                        <p css={textStyle}>Defense Family</p>
+                        <p css={textStyle}>Defence Family</p>
                     </div>
             </Table>
         </div>
