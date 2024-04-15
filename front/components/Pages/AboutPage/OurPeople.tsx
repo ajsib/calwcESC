@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import React from 'react';
+import { useRouter } from 'next/router'; // Added router
 
 // Styles
 const containerStyle = css`
@@ -8,19 +9,18 @@ const containerStyle = css`
     display: flex;
     justify-content: center;
     padding-bottom: 4rem;
-    
 `;
 
 const innerContainerStyle = css`
     width: 100%;
-    max-width: 1200px; // Limit the maximum width
+    max-width: 1200px;
 `;
 
 const profilesGridStyle = css`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 20px; // Consistent gap between cards
+    gap: 20px; 
 
     @media (max-width: 768px) {
         flex-direction: column;
@@ -48,8 +48,6 @@ const profileStyle = css`
         transform: translateY(-1px);
     }
 `;
-
-
 
 const profileImageStyle = css`
     width: 100px;
@@ -94,30 +92,36 @@ const Profile: React.FC<ProfileProps> = ({ name, role, location, description }) 
 
 // Main component
 const OurPeople = () => {
+    const router = useRouter(); // Initialized router
+    const { locale } = router; // Get current locale from router
+
+    // Define translated title based on locale
+    const Title = locale === 'en' ? 'Our People' : 'Notre équipe';
+
     return (
         <div style={{backgroundColor: 'white'}}>
-        <h1 css={titleStyle}> Our People</h1>
-        <div css={containerStyle}>
-            <div css={innerContainerStyle}>
-                <div css={profilesGridStyle}>
-                    <Profile
-                        name="Chris Allen"
-                        role="Major"
-                        location="CALWC Kingston"
-                        description="Advises global agricultural and specialty chemicals companies..." />
-                    <Profile
-                        name="Avinash Goyal"
-                        role="Senior Partner"
-                        location="Mumbai"
-                        description="Helps chemical and agriculture companies meet the challenges..." />
-                    <Profile
-                        name="Ulrich Weihe"
-                        role="Senior Partner"
-                        location="Frankfurt"
-                        description="Provides guidance on Strategy, M&A, Restructuring and..." />
+            <h1 css={titleStyle}>{Title}</h1>
+            <div css={containerStyle}>
+                <div css={innerContainerStyle}>
+                    <div css={profilesGridStyle}>
+                        <Profile
+                            name="Chris Allen"
+                            role="Major"
+                            location="CALWC Kingston"
+                            description="Advises global agricultural and specialty chemicals companies..." />
+                        <Profile
+                            name="Avinash Goyal"
+                            role="Senior Partner"
+                            location="Mumbai"
+                            description="Helps chemical and agriculture companies meet the challenges..." />
+                        <Profile
+                            name="Ulrich Weihe"
+                            role="Senior Partner"
+                            location="Frankfurt"
+                            description="Provides guidance on Strategy, M&A, Restructuring and..." />
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     );
 };

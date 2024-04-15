@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import Link from 'next/link'; // Import the Link component from Next.js
+import Link from 'next/link';
+import { useRouter } from 'next/router'; 
 
 const navigationStyle = css`
   display: flex;
@@ -10,9 +11,9 @@ const navigationStyle = css`
   z-index: 10;
 
   @media (max-width: 768px) { 
-    position: absolute; // Position the navigation absolutely within the header
-    top: 100%; // Align the top of the navigation with the bottom of the header
-    right: 0; // Align the navigation to the right
+    position: absolute;
+    top: 100%;
+    right: 0;
     flex-direction: column;
   }
 `;
@@ -21,20 +22,31 @@ const linkStyle = css`
   color: var(--secondary-color);
   font-weight: bold;
   font-size: 1.2rem;
-  text-decoration: none !important; /* Ensure text-decoration is none */
+  text-decoration: none !important;
   &:hover {
-    text-decoration: underline !important; /* Apply underline on hover, ensure it's applied with !important if necessary */
+    text-decoration: underline !important;
   }
 `;
 
-const Navigation = () => (
-  <nav css={navigationStyle}>
-    <Link href="/" css={linkStyle}>Home</Link>
-    <Link href="/about" css={linkStyle}>About</Link>
-    <Link href="/services" css={linkStyle}>Services</Link>
-    <Link href="/fr/" css={linkStyle}>Français</Link>
-    <Link href="/login" css={linkStyle}>Login</Link>
-  </nav>
-);
+const Navigation = () => {
+  const router = useRouter();
+  const { locale, asPath } = router;
+  const toggleLocale = locale === 'en' ? 'fr' : 'en';
+  const languageLabel = locale === 'en' ? 'Français' : 'English';  
+  const Home = locale === 'en' ? 'Home' : 'Accueil'
+  const About = locale === 'en' ? 'About' : 'Notre mission'
+  const Services = locale === 'en' ? 'Services' : 'Nos services'
+  const Login = locale === 'en' ? 'Login' : 'Se connecter'
+
+  return (
+    <nav css={navigationStyle}>
+      <Link href="/" css={linkStyle}>{Home}</Link>
+      <Link href="/about" css={linkStyle}>{About}</Link>
+      <Link href="/services" css={linkStyle}>{Services}</Link>
+      <Link href={asPath} locale={toggleLocale} css={linkStyle}>{languageLabel}</Link>
+      <Link href="/login" css={linkStyle}>{Login}</Link>
+    </nav>
+  );
+};
 
 export default Navigation;

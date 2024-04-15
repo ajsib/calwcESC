@@ -55,10 +55,11 @@ const cardStyleHover = css`
 interface CardTemplateProps {
   title: ReactNode;
   subtitle: ReactNode;
+  onClick?: () => void; 
 }
 
-const CardTemplate = ({ title, subtitle }: CardTemplateProps) => (
-  <div css={cardStyleHover}>
+const CardTemplate = ({ title, subtitle, onClick }: CardTemplateProps) => (
+  <div css={cardStyleHover} onClick={onClick}>
     <Card>
       <div css={cardContentStyle}>
         <h2 css={cardTitleStyle}>{title}</h2>

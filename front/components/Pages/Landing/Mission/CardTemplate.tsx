@@ -3,6 +3,7 @@
 import { css } from "@emotion/react";
 import Card from "@/components/UI/Card";
 import WedgeRightBold from '@/components/UI/arrows/RightWedgeBold'
+import { useRouter } from 'next/router'; 
 
 const cardStyle = css`
   display: flex;
@@ -86,29 +87,36 @@ const columnWrapperStyle = css`
 interface CardTemplateProps {
   imageSrc: string;
   title: string;
-  text: string;
+  text: React.ReactNode;
   order: number;
 }
 
-const CardTemplate = ({ imageSrc, title, text }: CardTemplateProps) => (
-  <div css={[cardSize, cardStyleHover]}>
-    <Card>
-      <div css={cardStyle}>
-        {/* Use div with background image here */}
-        <div css={[cardImage, { backgroundImage: `url(${imageSrc})` }]} />
-        <div css={cardTextStyle}>
-          <h1 className="card-title-hover-effect" css={cardTitleStyle}>
-            {title}
-          </h1>
-          <p css={cardDescriptionStyle}>{text}</p>
-          <div css={columnWrapperStyle}>
-            <p className="caption" css={learnMoreStyle}>Learn more</p>
-            <WedgeRightBold size={14}/>
+const CardTemplate = ({ imageSrc, title, text }: CardTemplateProps) => {
+  const router = useRouter();
+  const { locale } = router;
+
+  const LearnMore = locale === 'en' ? 'Learn More' : 'En savoir plus';
+  
+  return (
+    <div css={cardSize}>
+      <Card>
+        <div css={[cardStyle, cardStyleHover]}>
+          {/* Use div with background image here */}
+          <div css={[cardImage, { backgroundImage: `url(${imageSrc})` }]} />
+          <div css={cardTextStyle}>
+            <h1 className="card-title-hover-effect" css={cardTitleStyle}>
+              {title}
+            </h1>
+            <p css={cardDescriptionStyle}>{text}</p>
+            <div css={columnWrapperStyle}>
+              <p className="caption" css={learnMoreStyle}>{LearnMore}</p>
+              <WedgeRightBold size={14}/>
+            </div>
           </div>
         </div>
-      </div>
-    </Card>
-  </div>
-);
+      </Card>
+    </div>
+  );
+}
 
 export default CardTemplate;
