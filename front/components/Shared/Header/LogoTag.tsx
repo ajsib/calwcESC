@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { useRouter } from 'next/router'; // Make sure to use 'next/router' instead of 'next/navigation'
+import { useRouter } from 'next/router'; 
+
 
 const logoContainerStyle = css`
     display: flex;
@@ -25,8 +26,14 @@ const logoTextStyle = css`
     width: 8rem;
 `;
 
+
+
+
+
 const LogoTag = () => {
-    const router = useRouter();
+    const router = useRouter()
+    const { locale } = router;
+    const Acronym = locale === 'en' ? 'CALWC' : 'CGTAC';
 
     const handleClick = () => {
         router.push('/');
@@ -35,7 +42,7 @@ const LogoTag = () => {
     return (
         <div css={logoContainerStyle} onClick={handleClick}>
             <img css={logoImageStyle} src="/images/logo-calwc.png" alt="Logo" />
-            <span css={logoTextStyle}>CALWC</span>
+            <span css={logoTextStyle}>{Acronym}</span>
         </div>
     );
 };

@@ -1,13 +1,14 @@
 // ./components/Landing/HeroContent.tsx
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { useRouter } from 'next/router'; 
 
 const heroContentStyle = css`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: left;
-  width: calc(50vw - var(--margin) - calc(1rem + 1vw)));
+  justify-content: flex-start; /* corrected */
+  width: calc(50vw - var(--margin) - calc(1rem + 1vw)); /* corrected */
   text-align: left;
   margin-left: var(--margin);
   flex-wrap: wrap;
@@ -27,17 +28,24 @@ const imageStyle = css`
   margin-right: calc(1rem + 1vw);
 `;
 
-const HeroContent = () => (
-  <div css={heroContentStyle}>
-    <p css={titleStyle}>
-      Experimentation <br /> Services Centre
-    </p>
-    <img
-      css={imageStyle}
-      src="/images/landing/div-patch.png"
-      alt="Division Logo"
-    />
-  </div>
-);
+const HeroContent = () => {
+  const router = useRouter();
+  const { locale } = router;
+
+  const Title = locale === 'en' ? <>Experimentation <br /> Services Centre</> : <>Centre de services <br /> d'expérimentation </>; /* corrected */
+
+  return (
+    <div css={heroContentStyle}>
+      <p css={titleStyle}>
+        {Title}
+      </p>
+      <img
+        css={imageStyle}
+        src="/images/landing/div-patch.png"
+        alt="Division Logo"
+      />
+    </div>
+  );
+};
 
 export default HeroContent;
