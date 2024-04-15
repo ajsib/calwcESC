@@ -1,14 +1,7 @@
 /**@jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import Table from './Table';
-
-const titleStyle = css`
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: 3rem;
-    margin-top: 1rem;
-    margin-left: var(--margin);
-    `;
+import { titleStyle } from '@/styles/GlobalStyles';
 
 
 const divStyle = css`
