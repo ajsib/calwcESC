@@ -1,7 +1,7 @@
 /**@jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import CardTemplate from './CardTemplate';
-import GridContainer from '../../../Shared/Grid';
+import GridContainer from '@/components/Shared/Public/Grid';
 import RightWedge from '@/components/UI/arrows/RightWedgeBold';
 import { useRouter } from 'next/router'; // Added router
 

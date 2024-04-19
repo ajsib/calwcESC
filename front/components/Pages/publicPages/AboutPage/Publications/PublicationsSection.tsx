@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import CardTemplate from './CardTemplate';
-import GridContainer from '@/components/Shared/Grid';
+import GridContainer from '@/components/Shared/Public/Grid';
 import { useRouter } from 'next/router'; 
 
 const titleStyle = css`
