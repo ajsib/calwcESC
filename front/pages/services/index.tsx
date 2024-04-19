@@ -1,10 +1,10 @@
-import Banner from "@/components/Shared/Banner/Banner";
-import ServiceContent from "@/components/Pages/ServicePage/ServiceContent";
-import Separator from "@/components/Shared/Separator";
-import Cards from "@/components/Pages/ServicePage/Operations/OperationsContent"
-import Impact from "@/components/Pages/ServicePage/Impact/Impact";
-import Footer from "@/components/Shared/Footer";
-import { useRouter } from 'next/router'; 
+import Banner from "@/components/Shared/Public/Banner/Banner";
+import ServiceContent from "@/components/Pages/publicPages/ServicePage/ServiceContent";
+import Separator from "@/components/Shared/Public/Separator";
+import Cards from "@/components/Pages/publicPages/ServicePage/Operations/OperationsContent"
+import Impact from "@/components/Pages/publicPages/ServicePage/Impact/Impact";
+import Footer from "@/components/Shared/Public/Footer";
+import { useRouter } from 'next/router';
 
 export default function Service() {
     const router = useRouter(); 
