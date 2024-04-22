@@ -1,4 +1,3 @@
-// components/Pages/internalPages/ProjectManagement/TaskList.tsx
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import TaskCard from './TaskCard';
@@ -32,7 +31,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
     <div css={taskListStyle}>
       {mockTasks.map((task) => (
         <div key={task.id}>
-          <TaskCard title={task.title} /* Pass other props as needed */ />
+          <TaskCard title={task.title} dueDate="" isComplete={false} /> {/* Added dueDate and isComplete */}
           <SubTaskCard parentTask={task} />
         </div>
       ))}
