@@ -36,7 +36,7 @@ const sideMenuStyle = (isOpen: boolean) => css`
   z-index: 1000;
   transition: transform 0.3s ease-in-out;
   transform: ${isOpen ? 'translateX(0)' : 'translateX(-100%)'};
-  animation: ${isOpen ? `${slideIn} 0.3s ease-out forwards` : `${slideOut} 0.3s ease-out forwards`};
+  // animation: ${isOpen ? slideIn : slideOut} 0.3s ease-out forwards;
   border-right: 1px solid #ccc; 
 `;
 
