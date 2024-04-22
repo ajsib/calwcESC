@@ -1,6 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 
+interface TaskCardProps {
+  title: string;
+  dueDate: string;
+  isComplete: boolean;
+}
+
 const taskCardStyle = css`
   border: 1px solid #eee;
   margin: 0.5rem 0;
@@ -28,15 +34,15 @@ const actionButtonsStyle = css`
   align-items: center;
 `;
 
-const TaskCard = ({ title, dueDate, isComplete }) => {
+const TaskCard: React.FC<TaskCardProps> = ({ title, dueDate, isComplete }) => {
   return (
     <div css={taskCardStyle}>
       <div css={taskTitleStyle}>{title}</div>
-      <div css={avatarStyle}></div> {/* Placeholder for the avatar */}
+      <div css={avatarStyle}></div>
       <div css={actionButtonsStyle}>
-        <div>{dueDate}</div> {/* Display the due date */}
+        <div>{dueDate}</div> 
         {isComplete ? (
-          <span>&#10003;</span> // Check mark for completeness
+          <span>&#10003;</span> 
         ) : null}
       </div>
     </div>
