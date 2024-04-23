@@ -66,16 +66,16 @@ const CardTemplate = ({ imageSrc, title, text, isMobile }: CardTemplateProps) =>
 
   const cardSize = css`
   padding-top: 2rem;
-  width: calc(100% - 2 * var(--margin) + 1rem);
-  padding-left: ${isMobile ? 'calc(var(--margin))' : 'calc(var(--margin) - 0.5rem)'};
-  padding-right: ${isMobile ? 'calc(var(--margin))' : 'calc(var(--margin) - 0.5rem)'};
+  width: ${isMobile ? 'calc(100% - 1.5rem)' : 'calc(100% - 2 * var(--margin) + 1rem)'};
+  padding-left: ${isMobile ? '0.75rem' : 'calc(var(--margin) - 0.5rem)'};
+  padding-right: ${isMobile ? '0.75rem' : 'calc(var(--margin) - 0.5rem)'};
   padding-bottom: 2rem;
 `;
 
 
   const cardImage = css`
     height: ${isMobile ? '20rem' : 'auto'};
-    background-size: cover;
+    background-size:  cover;
     background-position: center;
     width: ${isMobile ? 'calc(100%)' : 'calc(50% - 2.5rem)'};
     margin: ${isMobile ? '0rem' : '1rem'};

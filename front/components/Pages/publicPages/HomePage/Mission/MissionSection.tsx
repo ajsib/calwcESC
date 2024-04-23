@@ -12,17 +12,21 @@ const missionStyle = css`
 const MissionSection = () => {
   const router = useRouter();
   const { locale } = router;
+  const [offsetY, setOffsetY] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
+  const handleScroll = () => setOffsetY(window.scrollY);
+  const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', checkMobile);
+    checkMobile(); 
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', checkMobile);
     };
-
-    window.addEventListener('resize', handleResize);
-    handleResize();
-
-    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const Title1 = locale === 'en' ? 'About Us' : 'À Propos De Nous';
