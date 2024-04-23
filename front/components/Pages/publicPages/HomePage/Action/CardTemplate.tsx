@@ -52,6 +52,7 @@ const cardContentStyle = css`
   width: ${isMobile ? 'calc(100% -2rem)' : 'calc(50vw - var(--margin) - 12rem)'};
   text-align: left;
   transition: background-color 0.3s ease-in-out;
+  align-items: center;
 `;
 
 const cardTitleStyle = css`
@@ -64,6 +65,7 @@ const cardTitleStyle = css`
 const cardSubtitleStyle = css`
   display: flex;
   align-items: center;
+  width: 100%;
   font-size: ${isMobile ? '1rem' : '1.2rem'}; // Reduced font size for mobile
   color: #555;
   position: relative;
