@@ -1,0 +1,45 @@
+[
+    {
+      "fileName": "Annual_Report_2023.pdf",
+      "fileType": "PDF",
+      "creator": "John Doe",
+      "dateAdded": "2023-01-15",
+      "dateModified": "2023-01-20"
+    },
+    {
+      "fileName": "Company_Budget_2024.xlsx",
+      "fileType": "Spreadsheet",
+      "creator": "Jane Smith",
+      "dateAdded": "2023-12-05",
+      "dateModified": "2023-12-10"
+    },
+    {
+      "fileName": "Meeting_Notes_2024_03_22.docx",
+      "fileType": "Document",
+      "creator": "Michael Johnson",
+      "dateAdded": "2024-03-22",
+      "dateModified": "2024-03-23"
+    },
+    {
+        "fileName": "Annual_Report_2023.pdf",
+        "fileType": "PDF",
+        "creator": "John Doe",
+        "dateAdded": "2023-01-15",
+        "dateModified": "2023-01-20"
+      },
+      {
+        "fileName": "Company_Budget_2024.xlsx",
+        "fileType": "Spreadsheet",
+        "creator": "Jane Smith",
+        "dateAdded": "2023-12-05",
+        "dateModified": "2023-12-10"
+      },
+      {
+        "fileName": "Meeting_Notes_2024_03_22.docx",
+        "fileType": "Document",
+        "creator": "Michael Johnson",
+        "dateAdded": "2024-03-22",
+        "dateModified": "2024-03-23"
+      }
+  ]
+  
