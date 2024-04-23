@@ -14,6 +14,7 @@ const cardStyleHover = css`
       transform: translateX(5px);
     }
   }
+
 `;
 
 

@@ -61,6 +61,9 @@ export default function Banner({src, alt, bannerText, title}: BannerProps) {
         font-weight: bold;
         font-size: 3.3rem;
         z-index: 2;
+        @media (max-width: 768px) {
+            font-size: 2.5rem;
+        }
     `;
 
     const headerStyle = css`
