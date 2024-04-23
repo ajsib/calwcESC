@@ -12,8 +12,14 @@ const arrowIconStyle = css`
 `;
 
 const cardStyleHover = css`
-  &:hover svg {
-    transform: translateX(5px);
+  svg {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  &:hover {
+    svg {
+      transform: translateX(5px);
+    }
   }
 `;
 
@@ -30,14 +36,18 @@ const CardTemplate = ({ title, subtitle, onClick, isMobile }: CardTemplateProps)
     width: ${isMobile ? 'calc(100% - 2rem)' : 'calc(50vw - var(--margin) - 12rem)'};
     padding: ${isMobile ? '0rem 1rem;' : '3rem 6rem'};
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   `;
 
 const cardContentStyle = css`
   display: flex;
   flex-direction: column;
-  padding-left: ${isMobile ? '1rem' : '3rem'};
-  padding-right: ${isMobile ? '1rem' : '6rem'};
-  padding-top: ${isMobile ? '2rem' : '4rem'};
+  padding-left: ${isMobile ? '1rem' : '2rem'};
+  padding-right: ${isMobile ? '1rem' : '2rem'};
+  padding-top: ${isMobile ? '2rem' : '2rem'};
   padding-bottom: ${isMobile ? '4rem' : '8rem'};
   width: ${isMobile ? 'calc(100% -2rem)' : 'calc(50vw - var(--margin) - 12rem)'};
   text-align: left;

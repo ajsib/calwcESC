@@ -22,7 +22,6 @@ const cardTemplateStyle = css`
     display: flex;
     flex-direction: column;
     padding: 3rem;
-    border-radius: 1rem;
     &:hover{
         svg {
             transform: translateX(5px);
@@ -46,6 +45,7 @@ const cardTitleStyle = css`
         font-size: 1.5rem;
         gap: 0.5rem;
         margin-bottom: 2rem;
+        text-align: left;
     }
 `;
 
@@ -57,6 +57,7 @@ const cardSubtitleStyle = css`
     @media (max-width: 768px) {
         font-size: 1.2rem;
         margin-bottom: 2rem;
+        text-align: left;
     }
 `;
 
