@@ -5,34 +5,43 @@ import { useState, useEffect } from 'react';
 
 const HeroSection = () => {
   const [offsetY, setOffsetY] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const handleScroll = () => setOffsetY(window.pageYOffset);
+  const handleScroll = () => setOffsetY(window.scrollY);
+  const checkMobile = () => setIsMobile(window.innerWidth <= 768);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', checkMobile);
+    checkMobile(); 
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', checkMobile);
+    };
   }, []);
 
   const heroSectionStyle = css`
     display: flex;
     align-items: center;
-    height: 63vh;
+    height: ${isMobile ? '35vh' : '63vh'};
     transition: height 0.3s;
-    margin-top: -4rem
+    margin-top: -4rem;
+    flex-direction: ${isMobile ? 'column' : 'row'};
   `;
 
   const contentContainerStyle = css`
-    width: 50vw;
-    height: 100%;
+    width: ${isMobile ? '100vw' : '50vw'};
+    height: ${isMobile ? '30vh' : '100%'};
+    padding-top:${isMobile ? '4rem' : '0rem'};
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: ${isMobile ? 'flex-end' : 'flex-start'};
     background-color: #fbfbfb;
   `;
 
-  const HeroImage = css`
+  const HeroImage = !isMobile && css`
     background-image: url("/images/landing/landing1-2.png");
     background-size: cover;
     background-position: center;
@@ -49,11 +58,11 @@ const HeroSection = () => {
   return (
     <div css={heroSectionStyle}>
       <div css={contentContainerStyle}>
-        <HeroContent />
+        <HeroContent isMobile={isMobile} />
       </div>
-      <div css={HeroImage} />
+      {!isMobile && <div css={HeroImage} />}
     </div>
-  );  
+  );
 };
 
 export default HeroSection;

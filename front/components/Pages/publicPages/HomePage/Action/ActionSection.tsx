@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import CardTemplate from './CardTemplate';
-import { useRouter } from 'next/router'; // Added router
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 
 const actionSectionStyle = css`
   text-align: center;
@@ -15,76 +16,48 @@ const getStartedStyle = css`
   margin-bottom: 3rem;
 `;
 
-const cardsContainerStyle = css`
-  gap: 2rem;
+const cardsContainerStyle = (isMobile: boolean) => css`
+  gap: ${isMobile ? '0.5rem' : '2rem'};
   display: flex;
-  flex-direction: row;
+  flex-direction: ${isMobile ? 'column' : 'row'};
   flex-wrap: wrap;
   justify-content: center;
 `;
 
 const ActionSection = () => {
-  const router = useRouter(); // Initialized router
-  const { locale } = router; // Get current locale from router
+  const router = useRouter();
+  const { locale } = router;
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Define translated "Get Started" text based on locale
-  const GetStartedText = locale === 'en' ? (
-    <h1 css={getStartedStyle}>Get Started</h1>
-  ) : (
-    <h1 css={getStartedStyle}>Rejoignez-nous</h1>
-  );
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
 
-  // Define translated titles and subtitles for cards based on locale
-  const Title1 = locale === 'en' ? (
-    <>Already Running <br /> an Experiment?</>
-  ) : (
-    <>Déjà en cours <br /> d&apos;expérimentation ?</>
-  );
+    handleResize(); // Initial call to set isMobile based on window width
 
-  const Subtitle1 = locale === 'en' ? (
-    <>View Your <br /> Dashboard</>
-  ) : (
-    <>Voir votre <br /> tableau de bord</>
-  );
+    window.addEventListener('resize', handleResize);
 
-  const Title2 = locale === 'en' ? (
-    <>Ready to Begin <br /> an Experiment?</>
-  ) : (
-    <>Prêt à commencer <br /> une expérience ?</>
-  );
-
-  const Subtitle2 = locale === 'en' ? (
-    <>Submit <br /> a Request</>
-  ) : (
-    <>Soumettre <br /> une demande</>
-  );
-
-  // Handler functions for card clicks
-  const handleDashboardClick = () => {
-    // Define the appropriate route based on locale
-    const route = locale === 'en' ? '/dashboard' : '/tableau-de-bord';
-    router.push(route);
-  };
-
-  const handleSubmitRequestClick = () => {
-    // Define the appropriate route based on locale
-    const route = locale === 'en' ? '/submit-request' : '/soumettre-demande';
-    router.push(route);
-  };
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); // Empty dependency array to run effect only once on mount
 
   return (
     <section css={actionSectionStyle}>
-      {GetStartedText}
-      <div css={cardsContainerStyle}>
+      <h1 css={getStartedStyle}>{locale === 'en' ? 'Get Started' : 'Rejoignez-nous'}</h1>
+      <div css={cardsContainerStyle(isMobile)}>
         <CardTemplate
-          title={Title1}
-          subtitle={Subtitle1}
-          onClick={handleDashboardClick} // Added click handler
+          title={locale === 'en' ? 'Already Running an Experiment?' : 'Déjà en cours d\'expérimentation ?'}
+          subtitle={locale === 'en' ? 'View Your Dashboard' : 'Voir votre tableau de bord'}
+          onClick={() => router.push(locale === 'en' ? '/dashboard' : '/tableau-de-bord')}
+          isMobile={isMobile}
         />
         <CardTemplate
-          title={Title2}
-          subtitle={Subtitle2}
-          onClick={handleSubmitRequestClick} // Added click handler
+          title={locale === 'en' ? 'Ready to Begin an Experiment?' : 'Prêt à commencer une expérience ?'}
+          subtitle={locale === 'en' ? 'Submit a Request' : 'Soumettre une demande'}
+          onClick={() => router.push(locale === 'en' ? '/submit-request' : '/soumettre-demande')}
+          isMobile={isMobile}
         />
       </div>
     </section>

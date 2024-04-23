@@ -9,13 +9,6 @@ const navigationStyle = css`
   align-items: center;
   width: 50vw;
   z-index: 10;
-
-  @media (max-width: 768px) { 
-    position: absolute;
-    top: 100%;
-    right: 0;
-    flex-direction: column;
-  }
 `;
 
 const linkStyle = css`

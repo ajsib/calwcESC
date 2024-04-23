@@ -1,46 +1,8 @@
-// ./components/Pages/Landing/Mission/CardTemplate.tsx
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import Card from "@/components/UI/Card";
 import WedgeRightBold from '@/components/UI/arrows/RightWedgeBold'
 import { useRouter } from 'next/router'; 
-
-const cardStyle = css`
-  display: flex;
-  align-items: stretch;
-`;
-
-const cardSize = css`
-  width: calc(100% - 2 * var(--margin));
-  padding-left: calc(var(--margin) - 0.5rem);
-  padding-bottom: 4rem;
-`;
-
-const cardImage = css`
-  background-size: cover;
-  background-position: center;
-  width: calc(50% - 2.5rem); // Subtract your desired margin
-  margin: 1rem;
-  background-repeat: no-repeat;
-`;
-
-const cardImageStyle = css`
-  width: calc(50% - 2.5rem);
-  height: auto;
-  margin-right: 2rem;
-  margin-bottom: 0.5rem;
-  margin-top: 0.5rem;
-  margin-left: 0.5rem;
-`;
-
-const cardTextStyle = css`
-  width: calc(50% - 2.5rem);
-  text-align: left;
-  align-self: flex-start;
-  padding-left: 1rem;
-  padding-top: 3rem;
-  padding-bottom: 4rem;
-`;
 
 const cardTitleStyle = css`
   font-size: 2.5rem;
@@ -59,7 +21,6 @@ const cardDescriptionStyle = css`
 
 const learnMoreStyle = css`
   font-size: 0.9rem;
-  // text-transform: uppercase;
   padding-right: 1rem;
 `;
 
@@ -89,20 +50,53 @@ interface CardTemplateProps {
   title: string;
   text: React.ReactNode;
   order: number;
+  isMobile: boolean;
 }
 
-const CardTemplate = ({ imageSrc, title, text }: CardTemplateProps) => {
+const CardTemplate = ({ imageSrc, title, text, isMobile }: CardTemplateProps) => {
   const router = useRouter();
   const { locale } = router;
 
   const LearnMore = locale === 'en' ? 'Learn More' : 'En savoir plus';
-  
+
+  const cardStyle = css`
+    display: flex;
+    flex-direction: ${isMobile ? 'column' : 'row'}; // Updated to conditionally set flex-direction
+  `;
+
+  const cardSize = css`
+  padding-top: 2rem;
+  width: ${isMobile ? 'calc(100% - 1.5rem)' : 'calc(100% - 2 * var(--margin) + 1rem)'};
+  padding-left: ${isMobile ? '0.75rem' : 'calc(var(--margin) - 0.5rem)'};
+  padding-right: ${isMobile ? '0.75rem' : 'calc(var(--margin) - 0.5rem)'};
+  padding-bottom: 2rem;
+`;
+
+
+  const cardImage = css`
+    height: ${isMobile ? '20rem' : 'auto'};
+    background-size:  cover;
+    background-position: center;
+    width: ${isMobile ? 'calc(100%)' : 'calc(50% - 2.5rem)'};
+    margin: ${isMobile ? '0rem' : '1rem'};
+    background-repeat: no-repeat;
+  `;
+
+  const cardTextStyle = css`
+    width: ${isMobile ? 'calc(100% - 1rem)' : 'calc(50% - 2.5rem)'};
+    text-align: left;
+    align-self: flex-start;
+    padding-left: 0.5rem;
+    padding-right: ${isMobile ? '0.5rem' : '0rem'};
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+  `;
+
   return (
     <div css={cardSize}>
       <Card>
-        <div css={[cardStyle, cardStyleHover]}>
-          {/* Use div with background image here */}
-          <div css={[cardImage, { backgroundImage: `url(${imageSrc})` }]} />
+        <div css={[cardStyle, cardStyleHover]}> 
+          <div css={[cardImage, { backgroundImage: `url(${imageSrc})` }]} /> 
           <div css={cardTextStyle}>
             <h1 className="card-title-hover-effect" css={cardTitleStyle}>
               {title}
