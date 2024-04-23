@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import CardTemplate from './CardTemplate';
 import GridContainer from '@/components/Shared/Public/Grid';
 import { useRouter } from 'next/router'; 
+import { useState, useEffect } from 'react';
 
 const titleStyle = css`
   font-size: 1rem;
@@ -19,6 +20,21 @@ const parentStyle = css`
 export default function Cards() {
   const router = useRouter(); 
   const { locale } = router; 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize(); // Initial call to set isMobile based on window width
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); // Empty dependency array to run effect only once on mount
 
   // Define translated titles and subtitles based on locale
   const Title1 = locale === 'en' ? (
@@ -72,7 +88,7 @@ export default function Cards() {
   return (
     <div css={parentStyle}>
       <h1 css={titleStyle}>Publications</h1>
-      <GridContainer margin={5}>
+      <GridContainer margin={isMobile ? 1 : 5}>
         <CardTemplate
           title={Title1}
           subtitle={Subtitle1}

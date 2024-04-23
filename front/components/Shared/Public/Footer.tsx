@@ -16,8 +16,18 @@ const footerStyle = css`
   b {
     font-weight: normal;
     color: #c5c6c7;
+    margin: 0 0.5rem;
+  }
+
+  p {
+    margin-left: 0.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
   }
 `;
+
 
 const Footer = () => {
   const router = useRouter(); // Initialized router
@@ -30,7 +40,7 @@ const Footer = () => {
 
   return (
     <footer css={footerStyle}>
-      {currentYear} &nbsp;<b>{OrganizationName}&nbsp;</b> — &nbsp;<b>{ServiceCenterName}</b>
+      <p>{currentYear}</p> &nbsp;<b>{OrganizationName}&nbsp;</b> — &nbsp;<b>{ServiceCenterName}</b>
     </footer>
   );
 };

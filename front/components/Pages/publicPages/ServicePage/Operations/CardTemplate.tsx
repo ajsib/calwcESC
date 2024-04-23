@@ -27,6 +27,10 @@ const cardTemplateStyle = css`
             transform: translateX(5px);
           }
     }
+
+    @media (max-width: 768px) {
+        padding: 2rem;
+    }
 `;
 
 const cardTitleStyle = css`
@@ -37,12 +41,22 @@ const cardTitleStyle = css`
     text-align: justify;
     display: flex;
     align-items: center;
+    @media (max-width: 768px) {
+        font-size: 1.5rem;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+    }
 `;
 
 const cardSubtitleStyle = css`
     font-size: 1.5rem;
     margin-bottom: 3rem;
     text-align: left;
+    width: 100%;
+    @media (max-width: 768px) {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
 `;
 
 interface CardTemplateProps {

@@ -4,6 +4,7 @@ import CardTemplate from './CardTemplate';
 import GridContainer from '@/components/Shared/Public/Grid';
 import RightWedge from '@/components/UI/arrows/RightWedgeBold';
 import { useRouter } from 'next/router'; // Added router
+import { useState, useEffect } from 'react';
 
 const titleStyle = css`
     font-size: 1rem;
@@ -36,11 +37,29 @@ const faqStyle = css`
             transform: translateX(5px); 
         }
     }
+    @media (max-width: 768px) {
+        font-size: 1.2rem;
+    }
 `;
 
 export default function OperationsContent() {
     const router = useRouter(); // Initialized router
     const { locale } = router; // Get current locale from router
+    const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize(); // Initial call to set isMobile based on window width
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); // Empty dependency array to run effect only once on mount
 
     // Define translated title based on locale
     const Title = locale === 'en' ? <>Operational Expertise</> : <>Expertise Opérationnelle</>;
@@ -48,7 +67,7 @@ export default function OperationsContent() {
     return (
         <div>
             <h1 css={titleStyle}>{Title}</h1>
-            <GridContainer margin={10}>
+            <GridContainer margin={isMobile ? 1 : 10}>
                 <CardTemplate
                     title={locale === 'en' ? <>Experiment <br /> Consultation</> : <>Consultation <br /> d&apos;expérimentation</>}
                     subtitle={locale === 'en' ? <>Get the process started with our team to run an experiment.</> : <>Commencez le processus avec notre équipe pour mener une expérience.</>}
