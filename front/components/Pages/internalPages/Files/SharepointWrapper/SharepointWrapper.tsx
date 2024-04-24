@@ -5,6 +5,7 @@ import fileData from './dummyFiles.json';
 const SharepointWrapperStyle = css`
   border: 1px solid #ccc;
   overflow-x: auto; // Make the table scrollable on small screens
+  margin-top: 1rem;
 `;
 
 const tableStyle = css`

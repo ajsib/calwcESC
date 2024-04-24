@@ -1,0 +1,27 @@
+[
+    {
+      "profilePhoto": "/images/profile1.jpg",
+      "name": "Alex Johnson",
+      "rank": "Manager",
+      "email": "alex.johnson@example.com",
+      "department": "Marketing",
+      "reportsTo": "Samantha Smith"
+    },
+    {
+      "profilePhoto": "/images/profile2.jpg",
+      "name": "Bethany Huang",
+      "rank": "Senior Developer",
+      "email": "bethany.huang@example.com",
+      "department": "Engineering",
+      "reportsTo": "Raj Patel"
+    },
+    {
+      "profilePhoto": "/images/profile3.jpg",
+      "name": "Charles Duncan",
+      "rank": "UX Designer",
+      "email": "charles.duncan@example.com",
+      "department": "Design",
+      "reportsTo": "Maria Garcia"
+    }
+  ]
+  

@@ -23,6 +23,7 @@ const FileSystemPage = () => {
       <NavigationTabs />
       <Separator />
       <FileCards />
+      <Separator />
       <SharepointWrapper />
     </div>
   );
