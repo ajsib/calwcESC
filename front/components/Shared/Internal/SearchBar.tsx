@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, ChangeEvent, FocusEvent } from "react";
 import styled from "@emotion/styled";
 import SearchIcon from '@/components/UI/icons/SearchIcon'; // Importing the SearchIcon component
 
@@ -59,9 +59,9 @@ const FilterButton = styled.button`
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isFocused, setIsFocused] = useState(false);
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleSearchChange = (e) => {
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
@@ -77,7 +77,7 @@ const SearchBar = () => {
     <MainContainer>
       <SearchContainer
         isFocused={isFocused}
-        onClick={() => inputRef.current.focus()}
+        onClick={() => inputRef.current?.focus()}
       >
         <SearchIcon size={32} />
         <StyledInput
