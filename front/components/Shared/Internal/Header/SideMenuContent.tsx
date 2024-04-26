@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import LogoTag from "../../../Shared/Public/Header/LogoTag";
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const MenuContentContainer = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ const Logo = () => {
   return <LogoTag disabled={true} />;
 };
 
-const MenuOption = styled.a`
+const MenuOption = styled.div`
   display: flex;
   align-items: center;
   padding: 10px 32px;
@@ -67,26 +67,22 @@ const BottomSection = styled.div`
 `;
 
 const SideMenuContent: React.FC = () => {
+  const router = useRouter();
+
+  const handleNavigation = (path: string) => {
+    router.push(path);
+  };
+
   return (
     <MenuContentContainer>
       <TopSection>
         <Logo />
       </TopSection>
-      <Link href="/dashboard" style={{ textDecoration: 'none' }} passHref>
-        <MenuOption>Dashboard</MenuOption>
-      </Link>
-      <a href="/tickets" style={{ textDecoration: 'none' }}>
-        <MenuOption>Tickets</MenuOption>
-      </a>
-      <Link href="/project-management" style={{ textDecoration: 'none' }} passHref>
-        <MenuOption>Project Management</MenuOption>
-      </Link>
-      <Link href="/files" style={{ textDecoration: 'none' }} passHref>
-        <MenuOption>Files</MenuOption>
-      </Link>
-      <Link href="/team" style={{ textDecoration: 'none' }} passHref>
-        <MenuOption>Team</MenuOption>
-      </Link>
+      <MenuOption onClick={() => handleNavigation("/dashboard")}>Dashboard</MenuOption>
+      <MenuOption onClick={() => handleNavigation("/dashboard/tickets")}>Tickets</MenuOption>
+      <MenuOption onClick={() => handleNavigation("/project-management")}>Project Management</MenuOption>
+      <MenuOption onClick={() => handleNavigation("/files")}>Files</MenuOption>
+      <MenuOption onClick={() => handleNavigation("/team")}>Team</MenuOption>
       <BottomSection>
         <Button>Sign out</Button>
         <Button>FR</Button>
