@@ -16,13 +16,13 @@ interface SubTaskCardProps {
 }
 
 const subTaskCardStyle = css`
-  border: 1px solid #eee;
-  margin: 0.5rem 0;
-  padding: 0.5rem 1rem;
+  border: 1px solid #DADADA;
+  margin: 0.5rem 0 0.5rem 2rem; /* Adjusted margin */
+  padding: 1rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-left: 2rem; /* 2rem indentation for subtasks */
+  background-color: #fff;
 `;
 
 const subTaskTitleStyle = css`

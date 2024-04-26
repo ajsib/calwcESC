@@ -6,8 +6,10 @@ import { css } from "@emotion/react";
 const cardStyle = css`
   transition: box-shadow 0.25s ease-in-out; 
   cursor: pointer; // Change cursor to pointer
-  &:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  @media (min-width: 768px) {
+    &:hover {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
   }
 `;
 

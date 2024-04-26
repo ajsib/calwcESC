@@ -12,11 +12,18 @@ interface BannerProps {
 
 export default function Banner({src, alt, bannerText, title}: BannerProps) {
     const [offsetY, setOffsetY] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => setOffsetY(window.scrollY);
+        const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+        window.addEventListener('resize', checkMobile);
+        checkMobile(); 
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', checkMobile);
+          };
     }, []);
 
     const imageStyle = css`
@@ -61,12 +68,15 @@ export default function Banner({src, alt, bannerText, title}: BannerProps) {
         font-weight: bold;
         font-size: 3.3rem;
         z-index: 2;
+        @media (max-width: 768px) {
+            font-size: 2.5rem;
+        }
     `;
 
     const headerStyle = css`
         position: relative;
         width: 100%;
-        height: calc(63vh);
+        height: ${isMobile ? '35vh' : '63vh'};
     `;
 
     return (

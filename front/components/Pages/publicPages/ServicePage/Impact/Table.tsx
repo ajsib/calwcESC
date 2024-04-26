@@ -25,18 +25,21 @@ const cellStyle = css`
 // Mobile table style
 const mobileTableStyle = css`
   border-collapse: collapse;
-  width: 100%;
+  width: 60%;
   margin: 0 auto;
   margin-bottom: 3rem;
 `;
 
 const mobileCellStyle = css`
+  padding: 1rem;
   border-bottom: 1px solid var(--primary-color);
-  padding: 8px;
   text-align: center;
-  &:last-child {
-    border-bottom: none;
-  }
+`;
+
+const mobileCellLastChildStyle = css`
+  padding: 1rem;
+  border-bottom: none;  // Removes the border for the last child
+  text-align: center;
 `;
 
 interface TableProps {
@@ -51,7 +54,7 @@ function MobileTable({ children }: TableProps) {
       <tbody>
         {childrenArray.map((child, index) => (
           <tr key={index}>
-            <td css={mobileCellStyle}>
+            <td css={index === childrenArray.length - 1 ? mobileCellLastChildStyle : mobileCellStyle}>
               {child}
             </td>
           </tr>
@@ -60,7 +63,6 @@ function MobileTable({ children }: TableProps) {
     </table>
   );
 }
-
 
 interface TableProps {
   children: ReactNode;

@@ -17,6 +17,9 @@ const cardDescriptionStyle = css`
   text-align: justify;
   color: var(--primary);
   line-height: 1.2;
+  @media (max-width: 768px) {
+    text-align: left;
+  }
 `;
 
 const learnMoreStyle = css`

@@ -1,64 +1,56 @@
-/** @jsxImportSource @emotion/react */
-import { css, keyframes } from '@emotion/react';
-import CloseIcon from '@/components/UI/icons/CloseIcon';
-import { MouseEvent } from 'react';
+// components/SideMenu.js
+import React from "react";
+import styled from "@emotion/styled";
+import SideMenuContent from "./SideMenuContent";
 
-interface SideMenuProps {
+type MenuProps = {
   isOpen: boolean;
-  onClose: () => void;
-}
+};
 
-const slideIn = keyframes`
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-`;
-
-const slideOut = keyframes`
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-`;
-
-const sideMenuStyle = (isOpen: boolean) => css`
-  background-color: #fff;
-  width: 250px;
-  height: 100vh;
+const Overlay = styled.div<MenuProps>`
+  display: ${({ isOpen }) => (isOpen ? "block" : "none")};
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
-  transition: transform 0.3s ease-in-out;
-  transform: ${isOpen ? 'translateX(0)' : 'translateX(-100%)'};
-  // animation: ${isOpen ? slideIn : slideOut} 0.3s ease-out forwards;
-  border-right: 1px solid #ccc; 
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); // Dark overlay
+  z-index: 999; // Overlay should be below the side menu but above other content
 `;
 
-const closeIconStyle = css`
-  position: absolute;
-  top: 16px;
-  right: 12px;
-  cursor: pointer; // Change the mouse cursor on hovering over the icon
+const Menu = styled.div<MenuProps>`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: ${({ isOpen }) => (isOpen ? "364px" : "0")};
+  height: 100%;
+  background-color: #ffffff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  transition: width 0.3s ease;
+  overflow-x: hidden;
+  z-index: 1000; // Make sure the menu is above the overlay
 `;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+`;
+
+type SideMenuProps = {
+  isOpen: boolean;
+  onClose: () => void;
+};
 
 const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
-  const handleClose = (event: MouseEvent<HTMLDivElement>) => {
-    event.stopPropagation(); // Prevent event bubbling
-    onClose(); // Call the onClose function when the close icon is clicked
-  };
-
   return (
-    <div css={sideMenuStyle(isOpen)}>
-      <div css={closeIconStyle} onClick={handleClose}>
-        <CloseIcon />
-      </div>
-    </div>
+    <>
+      {isOpen && <Overlay isOpen={isOpen} onClick={onClose} />}
+      <Menu isOpen={isOpen}>
+        <SideMenuContent />
+      </Menu>
+    </>
   );
 };
 

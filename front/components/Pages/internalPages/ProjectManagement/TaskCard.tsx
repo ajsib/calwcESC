@@ -8,13 +8,14 @@ interface TaskCardProps {
 }
 
 const taskCardStyle = css`
-  border: 1px solid #eee;
-  margin: 0.5rem 0;
+  border: 1.5px solid #DADADA;
+  margin: 1.5rem 0 0.5rem; /* Adjusted margin-top to 1rem */
   padding: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
+
 
 const taskTitleStyle = css`
   flex-grow: 1;

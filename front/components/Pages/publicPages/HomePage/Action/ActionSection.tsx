@@ -17,7 +17,7 @@ const getStartedStyle = css`
 `;
 
 const cardsContainerStyle = (isMobile: boolean) => css`
-  gap: ${isMobile ? '0.5rem' : '2rem'};
+  gap: ${isMobile ? '0.5rem' : '1rem'};
   display: flex;
   flex-direction: ${isMobile ? 'column' : 'row'};
   flex-wrap: wrap;

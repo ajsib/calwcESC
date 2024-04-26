@@ -6,7 +6,7 @@ import HamburgerIcon from '@/components/UI/icons/HamburgerMenu';
 import SideMenu from './SideMenu';
 
 const headerStyle = css`
-  background-color: #f5f5f5;
+  background-color: #364132;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
   position: relative;
   z-index: 10;
@@ -14,10 +14,11 @@ const headerStyle = css`
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  height: 60px;
+  height: 68px;
 `;
 
 const logoStyle = css`
+  color: #fff;
 `;
 
 const profileIconStyle = css`
@@ -29,6 +30,7 @@ const profileIconStyle = css`
 
 const hamburgerIconContainer = css`
   cursor: pointer; /* Set cursor to pointer on hover */
+  color: #fff; /* Set color to white */
 `;
 
 const Header = () => {

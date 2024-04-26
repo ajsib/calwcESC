@@ -6,9 +6,9 @@ interface FloatingActionButtonProps {
 }
 
 const fabStyle = css`
-  width:5rem;
-  height: 5rem;
-  background-color: var(--primary-color);
+  width: 4rem;
+  height: 4rem;
+  background-color: rgba(0, 123, 255, 0.8);
   color: white;
   border-radius: 50%;
   display: flex;
