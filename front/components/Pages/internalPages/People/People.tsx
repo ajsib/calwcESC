@@ -1,7 +1,7 @@
 // pages/people.tsx
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import SearchBar from ".//SearchBar";
+import SearchBar from '@/components/Shared/Internal/SearchBar';
 import Separator from '@/components/Shared/Internal/Separator';
 import ProfileCardsList from './Team/CardList';
 
@@ -9,7 +9,7 @@ const peoplePageStyle = css`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 1rem;
+  padding-top: 2rem;
   position: relative;
 `;
 
