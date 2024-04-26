@@ -20,21 +20,12 @@ const cardStyle = css`
   margin: 0.5rem 0;
   background-color: #fff;
   border: 1px solid #ddd;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  position: relative; /* Make the card position relative for absolute positioning of RightWedgeBold */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Reduced box-shadow */
+  position: relative;
   transition: transform 0.3s ease;
   &:hover {
     cursor: pointer;
     transform: translateY(-2px);
-    svg {
-      transform: translateX(5px);
-    }
-  }
-  svg {
-    position: absolute;
-    top: 8%;
-    right: 1%;
-    transition: transform 0.3s ease; /* Smooth transition */
   }
 `;
 
@@ -63,28 +54,40 @@ const profilePhotoStyle = css`
 
 const nameStyle = css`
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.7rem; /* Increased font size */
+  line-height: 2.2rem; /* Adjusted line height */
 `;
 
 const rankStyle = css`
-  font-size: 1.2rem;
+  font-size: 1.4rem; /* Adjusted font size */
+  font-weight: bold; /* Added font weight */
 `;
 
 const emailStyle = css`
-  font-size: 1rem;
+  font-size: 1rem; /* Adjusted font size */
+  color: #666; /* Added color */
 `;
 
 const departmentStyle = css`
-  font-size: 1rem;
+  font-size: 1.1rem; /* Adjusted font size */
+  color: #666; /* Added color */
 `;
 
 const reportsToStyle = css`
-  font-size: 1rem;
+  font-size: 1.1rem; /* Adjusted font size */
+  color: #666; /* Added color */
 `;
 
 const linkStyle = css`
   text-decoration: none;
   color: inherit;
+`;
+
+const rightWedgeStyle = css`
+  position: absolute;
+  top: 50%;
+  right: 1.5rem; /* Adjusted position */
+  transform: translateY(-50%); /* Centered on the y-axis */
 `;
 
 const ProfileCard = ({ profilePhoto, name, rank, email, department, reportsTo }: ProfileCardProps) => {
@@ -97,19 +100,21 @@ const ProfileCard = ({ profilePhoto, name, rank, email, department, reportsTo }:
 
   return (
     <Link css={linkStyle} href={`/team/${encodeURIComponent(name)}`} passHref>
-        <div css={cardStyle} onClick={handleClick}>
-          <RightWedgeMedium size={21} />
-          <div css={photoParentStyle}>
-            <div css={profilePhotoStyle} style={{ backgroundImage: `url(${profilePhoto})`, backgroundSize: 'cover' }}></div>
-          </div>
-          <div css={textStyle}>
-            <div css={nameStyle}>{name}</div>
-            <div css={rankStyle}>{rank}</div>
-            <div css={emailStyle}>{email}</div>
-            <div css={departmentStyle}>{department}</div>
-            <div css={reportsToStyle}>Reports to: {reportsTo}</div>
-          </div>
+      <div css={cardStyle} onClick={handleClick}>
+        <div css={rightWedgeStyle}>
+          <RightWedgeMedium size={26} /> {/* Adjusted size */}
         </div>
+        <div css={photoParentStyle}>
+          <div css={profilePhotoStyle} style={{ backgroundImage: `url(${profilePhoto})`, backgroundSize: 'cover' }}></div>
+        </div>
+        <div css={textStyle}>
+          <div css={nameStyle}>{name}</div>
+          <div css={rankStyle}>{rank}</div>
+          <div css={departmentStyle}>{department}</div>
+          <div css={reportsToStyle}>Reports to: {reportsTo}</div>
+          <div css={emailStyle}>{email}</div>
+        </div>
+      </div>
     </Link>
   );
 };

@@ -6,7 +6,7 @@ interface HamburgerMenuProps {
 
 const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ size = 24 }) => (
   <svg
-    fill="#1D1D1B"
+    fill="#fff"
     width={`${size}px`}
     height={`${size}px`}
     viewBox="0 0 12 12"
@@ -22,9 +22,9 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ size = 24 }) => (
       strokeWidth="0.384"
     ></g>
     <g id="SVGRepo_iconCarrier">
-      <rect fill="#1D1D1B" height="1" width="11" x="0.5" y="5.5"/>
-      <rect fill="#1D1D1B" height="1" width="11" x="0.5" y="2.5"/>
-      <rect fill="#1D1D1B" height="1" width="11" x="0.5" y="8.5"/>
+      <rect fill="#fff" height="1" width="11" x="0.5" y="5.5"/>
+      <rect fill="#fff" height="1" width="11" x="0.5" y="2.5"/>
+      <rect fill="#fff" height="1" width="11" x="0.5" y="8.5"/>
     </g>
   </svg>
 );

@@ -4,6 +4,7 @@ import StatusOverview from "@/components/Pages/internalPages/ProjectManagement/S
 import TaskSearchBar from "@/components/Pages/internalPages/ProjectManagement/TaskSearchBar";
 import TaskList from "@/components/Pages/internalPages/ProjectManagement/TaskList";
 import BucketSwitcher from "@/components/Pages/internalPages/ProjectManagement/BucketSwitcher";
+import SearchBar from "@/components/Shared/Internal/SearchBar";
 
 const ProjectManagementPage = () => {
   // Replace with actual task data fetching logic
@@ -41,7 +42,7 @@ const ProjectManagementPage = () => {
       <Header/>
       <StatusOverview />
       <BucketSwitcher />
-      <TaskSearchBar />
+      <SearchBar />
       <TaskList tasks={tasks} />
     </>
   );

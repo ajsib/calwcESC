@@ -30,21 +30,23 @@ const logoTextStyle = css`
 
 
 
-const LogoTag = () => {
+const LogoTag = ({ disabled = false, ...props }) => {
     const router = useRouter()
-    const { locale } = router;
-    const Acronym = locale === 'en' ? 'CALWC' : 'CGTAC';
-
+    const { locale } = router
+    const Acronym = locale === 'en' ? 'CALWC' : 'CGTAC'
+  
     const handleClick = () => {
-        router.push('/');
-    };
-
+      if (!disabled) {
+        router.push('/')
+      }
+    }
+  
     return (
-        <div css={logoContainerStyle} onClick={handleClick}>
-            <img css={logoImageStyle} src="/images/logo-calwc.png" alt="Logo" />
-            <span css={logoTextStyle}>{Acronym}</span>
-        </div>
-    );
-};
-
-export default LogoTag;
+      <div css={logoContainerStyle} onClick={handleClick}>
+        <img css={logoImageStyle} src="/images/logo-calwc.png" alt="Logo" />
+        <span css={logoTextStyle}>{Acronym}</span>
+      </div>
+    )
+  }
+  
+  export default LogoTag

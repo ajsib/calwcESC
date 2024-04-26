@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import SearchIcon from '@/components/UI/icons/SearchIcon'; // Importing the SearchIcon component
+import FilterIcon from '@/components/UI/icons/FilterIcon';
 
 const searchBarContainerStyle = css`
   display: flex;
@@ -28,8 +29,12 @@ const filterDivStyle = css`
   margin-left: 1rem;
   padding: 1rem;
   cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   transition: background-color 0.3s ease;
-
+  width: 5rem;
   &:hover {
     background-color: #eaeaea;
   }
@@ -48,7 +53,7 @@ const dropdownStyle = css`
   border: 1px solid #ddd;
   margin-top: 0.5rem;
   padding: 1rem;
-  right: 2rem;
+  right: 3.3rem;
   z-index: 10; // Ensure the dropdown appears above other elements
 `;
 
@@ -70,16 +75,17 @@ const TaskSearchBarWithFilters = () => {
 
   return (
     <div css={searchBarContainerStyle}>
+      {/* Search Icon wrapped in a div acting as a submit button */}
+      <div css={searchButtonStyle} onClick={handleSubmit} role="button" tabIndex={0}>
+        <SearchIcon size={24} />
+      </div>
       <input
         css={taskSearchBarStyle}
         type="search"
         placeholder="Search tasks..."
         // Add onChange handler as needed
       />
-      {/* Search Icon wrapped in a div acting as a submit button */}
-      <div css={searchButtonStyle} onClick={handleSubmit} role="button" tabIndex={0}>
-        <SearchIcon size={24} />
-      </div>
+
       <div
         css={filterDivStyle}
         onClick={() => setShowFilters(!showFilters)}
@@ -87,6 +93,7 @@ const TaskSearchBarWithFilters = () => {
         tabIndex={0} 
       >
         Filters
+        <FilterIcon size={24} />
       </div>
       {showFilters && (
         <div css={dropdownStyle}>

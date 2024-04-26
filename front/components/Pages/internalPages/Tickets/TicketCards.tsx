@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import Circle from '@/components/UI/Dot';
 
 interface Ticket {
   id: string;
@@ -58,6 +59,20 @@ const ticketInfoStyle = css`
 `;
 
 const TicketCards: React.FC<{ tickets: Ticket[] }> = ({ tickets }) => {
+  // get the color/icon based on the priority
+  const getColor = (priority: string) => {
+    switch (priority) {
+      case "High":
+        return { color: "red", icon: <Circle size={10} color="red" /> };
+      case "Medium":
+        return { color: "orange", icon: <Circle size={10} color="orange" /> };
+      case "Low":
+        return { color: "green", icon: <Circle size={10} color="green" /> };
+      default:
+        return { color: "gray", icon: <Circle size={10} color="gray" /> };
+    }
+  };
+
   return (
     <div css={ticketCardsStyle}>
       {tickets.map((ticket) => (
@@ -71,7 +86,14 @@ const TicketCards: React.FC<{ tickets: Ticket[] }> = ({ tickets }) => {
           </div>
           <div css={ticketInfoStyle}>
             <span>Status: {ticket.status}</span>
-            <span>Priority: {ticket.priority}</span>
+            <span>
+            <span css={{ marginLeft: '0.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.2rem', marginRight: '16px' }}>
+                {getColor(ticket.priority).icon}
+                
+              </span>
+              Priority: {ticket.priority}
+
+            </span>
             <span>Assigned to: {ticket.assignedTo}</span>
           </div>
         </div>
