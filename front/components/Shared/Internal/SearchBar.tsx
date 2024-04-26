@@ -35,14 +35,6 @@ const StyledInput = styled.input`
   border: none;
 `;
 
-const SearchIconPlaceholder = styled.div`
-  width: 34px;
-  height: 34px;
-  background-color: grey;
-  margin-left: 24px;
-  margin-right: 8px;
-`;
-
 const FilterButton = styled.button`
   background-color: #fff;
   padding-left: 16px;
