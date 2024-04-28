@@ -31,15 +31,23 @@ const faqStyle = css`
         transition: transform 0.3s ease; // Ensure the SVG has the transition
     }
 
+    @media (max-width: 768px) {
+        font-size: 1.2rem;
+    }
+
     &:hover {
         text-decoration: underline; 
         svg {
             transform: translateX(5px); 
         }
     }
-    @media (max-width: 768px) {
-        font-size: 1.2rem;
-    }
+`;
+
+const faqContainerStyle = css`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 export default function OperationsContent() {
@@ -85,7 +93,12 @@ export default function OperationsContent() {
                     subtitle={locale === 'en' ? <>Get in on the action, share ideas and collaborate.</> : <>Participez à l&apos;action, partagez des idées et collaborez.</>}
                 />
             </GridContainer>
-            <p css={faqStyle}>{locale === 'en' ? <>Have any questions? See our FAQ</> : <>Vous avez des questions ? Consultez notre FAQ</>} <RightWedge size={15} /></p>
+            <div css={faqContainerStyle}>
+                <p css={faqStyle}>
+                    {locale === 'en' ? <>Have any questions? See our FAQ</> : <>Vous avez des questions ? Consultez notre FAQ</>}
+                    <RightWedge size={15} />
+                </p>
+            </div>
         </div>
     )
 }
