@@ -19,7 +19,7 @@ const statsOverviewStyle = css`
   background-color: #FBFBFB;
   padding: 1rem;
   gap: 1rem;
-  align-items: stretch; // Ensures all child elements stretch to the same height
+  align-items: stretch;
 `;
 
 // Style for the stats cards
@@ -34,7 +34,7 @@ const statCardStyle = css`
   justify-content: center;
   align-items: center;
   line-height: 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added box shadow */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
 const titleStyle = css`

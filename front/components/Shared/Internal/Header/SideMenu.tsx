@@ -2,6 +2,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import SideMenuContent from "./SideMenuContent";
+import RightWedgeBold from "@/components/UI/arrows/RightWedgeMedium";
 
 type MenuProps = {
   isOpen: boolean;
@@ -31,11 +32,12 @@ const Menu = styled.div<MenuProps>`
   z-index: 1000; // Make sure the menu is above the overlay
 `;
 
-const CloseButton = styled.button`
+const WedgeContainer = styled.div`
   position: absolute;
   top: 20px;
   right: 20px;
   cursor: pointer;
+  z-index: 100000;
 `;
 
 type SideMenuProps = {
@@ -48,6 +50,9 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
     <>
       {isOpen && <Overlay isOpen={isOpen} onClick={onClose} />}
       <Menu isOpen={isOpen}>
+        <WedgeContainer onClick={onClose}>
+          <RightWedgeBold size={27} fillColor="#FFFFFF" />
+        </WedgeContainer>
         <SideMenuContent />
       </Menu>
     </>

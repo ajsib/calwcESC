@@ -3,18 +3,20 @@ import React from 'react';
 
 interface RightWedgeThinProps {
   size?: number;
+  fillColor?: string; // New prop to specify fill color
 }
 
-const RightWedgeThin: React.FC<RightWedgeThinProps> = ({ size = 24 }) => (
+const RightWedgeThin: React.FC<RightWedgeThinProps> = ({ size = 24, fillColor = '#364132' }) => (
   <svg
-    fill="#364132"
+    fill={fillColor} // Use the new prop to set the fill color
     width={`${size}px`}
     height={`${size}px`}
     viewBox="-3.2 -3.2 38.40 38.40"
     version="1.1"
-    xmlns="http://www.w3.org/2000/svg"
-    stroke="#364132"
-    strokeWidth="0.96"  >
+    xmlns="(link unavailable)"
+    stroke={fillColor} // Also update the stroke color to match the fill color
+    strokeWidth="0.96"
+  >
     <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
     <g
       id="SVGRepo_tracerCarrier"
@@ -30,6 +32,3 @@ const RightWedgeThin: React.FC<RightWedgeThinProps> = ({ size = 24 }) => (
 );
 
 export default RightWedgeThin;
-
-
-

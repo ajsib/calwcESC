@@ -7,10 +7,9 @@ import ModuleNavigation from './ModuleNavigation';
 const profileNavContainer = css`
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid #ccc;
-  margin: 2rem;
+  background: #FBFBFB;
   gap: 1rem;
-  padding-bottom: 2rem;
+  padding: 2rem;
 `;
 
 const ProfileNav = () => {

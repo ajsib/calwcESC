@@ -25,8 +25,10 @@ const getProportionalWidth = (widthPercentage: number) => css`
 
 // Navigation item base styles
 const navigationItemBaseStyle = css`
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   display: flex;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: #fff;
   justify-content: center;
   align-items: center;
   text-align: center;
