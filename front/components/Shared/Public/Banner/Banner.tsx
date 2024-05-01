@@ -1,7 +1,7 @@
-/**@jsxImportSource @emotion/react */
+/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import Header from "../Header/Header";
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 interface BannerProps {
     src: string;
@@ -18,24 +18,33 @@ export default function Banner({src, alt, bannerText, title}: BannerProps) {
         const handleScroll = () => setOffsetY(window.scrollY);
         const checkMobile = () => setIsMobile(window.innerWidth <= 768);
         window.addEventListener('resize', checkMobile);
-        checkMobile(); 
         window.addEventListener('scroll', handleScroll);
+        checkMobile();
         return () => {
             window.removeEventListener('scroll', handleScroll);
             window.removeEventListener('resize', checkMobile);
-          };
+        };
     }, []);
 
     const imageStyle = css`
+    position: absolute;
+    top: -4rem;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translateY(${offsetY * 0.4}px);
+    z-index: -1;
+`;
+
+    const overlayStyle = css`
         position: absolute;
-        top: -4rem;
+        top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        object-fit: cover;
-        transform: translateY(${offsetY * 0.4}px);
-        transition: transform 0s ease-out, height 0s;
-        z-index: -1;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5) 10%, rgba(0, 0, 0, 0) 100%);
+        z-index: 1;
     `;
 
     const divStyle = css`
@@ -76,13 +85,15 @@ export default function Banner({src, alt, bannerText, title}: BannerProps) {
     const headerStyle = css`
         position: relative;
         width: 100%;
-        height: ${isMobile ? '35vh' : '63vh'};
+        height: ${isMobile ? '35vh' : '50vh'};
+        overflow: hidden; 
     `;
 
     return (
         <div css={headerStyle}>
             <Header />
             <img css={imageStyle} src={src} alt={alt} />
+            <div css={overlayStyle}></div>
             <h1 css={titleStyle}>{title}</h1>
             <div css={divStyle}><p css={textStyle}>{bannerText}</p></div>
         </div>

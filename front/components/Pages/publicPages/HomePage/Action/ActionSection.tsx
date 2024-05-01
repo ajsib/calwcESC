@@ -34,14 +34,14 @@ const ActionSection = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
-    handleResize(); // Initial call to set isMobile based on window width
+    handleResize();
 
     window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []); // Empty dependency array to run effect only once on mount
+  }, []); 
 
   return (
     <section css={actionSectionStyle}>
