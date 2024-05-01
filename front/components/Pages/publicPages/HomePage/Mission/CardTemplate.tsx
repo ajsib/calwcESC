@@ -54,9 +54,10 @@ interface CardTemplateProps {
   text: React.ReactNode;
   order: number;
   isMobile: boolean;
+  onClick?: () => void;
 }
 
-const CardTemplate = ({ imageSrc, title, text, isMobile }: CardTemplateProps) => {
+const CardTemplate = ({ imageSrc, title, text, isMobile, onClick }: CardTemplateProps) => {
   const router = useRouter();
   const { locale } = router;
 
@@ -98,7 +99,7 @@ const CardTemplate = ({ imageSrc, title, text, isMobile }: CardTemplateProps) =>
   return (
     <div css={cardSize}>
       <Card>
-        <div css={[cardStyle, cardStyleHover]}> 
+        <div css={[cardStyle, cardStyleHover]} onClick={onClick}> 
           <div css={[cardImage, { backgroundImage: `url(${imageSrc})` }]} /> 
           <div css={cardTextStyle}>
             <h1 className="card-title-hover-effect" css={cardTitleStyle}>

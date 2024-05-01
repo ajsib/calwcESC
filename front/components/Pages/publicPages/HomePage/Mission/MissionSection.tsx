@@ -41,22 +41,24 @@ const MissionSection = () => {
 
   return (
     <div css={missionStyle}>
-      <div onClick={() => router.push('/about')}>
+      <div>
         <CardTemplate
           imageSrc="/images/landing/flicker13.jpg"
           title={Title1}
           text={Text1}
           order={0}
           isMobile={isMobile}
+          onClick={() => router.push('/about')}
         />
       </div>
-      <div onClick={() => router.push('/services')}>
+      <div>
         <CardTemplate
           imageSrc="/images/landing/flicker6.jpg"
           title={Title2}
           text={Text2}
           order={1}
           isMobile={isMobile}
+          onClick={() => router.push('/services')}
         />
       </div>
     </div>

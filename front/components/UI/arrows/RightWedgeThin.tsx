@@ -3,11 +3,12 @@ import React from 'react';
 
 interface RightWedgeThinProps {
     size?: number;
+    color?: string;
   }
   
-  const RightWedgeThin: React.FC<RightWedgeThinProps> = ({ size = 24 }) => (
+  const RightWedgeThin: React.FC<RightWedgeThinProps> = ({ size = 24, color='#364132' }) => (
     <svg
-      fill="#364132"
+      fill={color}
       width={`${size}px`}
       height={`${size}px`}
       viewBox="-3.2 -3.2 38.40 38.40"

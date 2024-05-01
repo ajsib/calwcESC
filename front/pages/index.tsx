@@ -4,12 +4,14 @@ import HeroSection from "@/components/Pages/publicPages/HomePage/Hero/HeroSectio
 import MissionSection from "@/components/Pages/publicPages/HomePage/Mission/MissionSection";
 import Footer from "@/components/Shared/Public//Footer";
 import Header from "@/components/Shared/Public//Header/Header";
+import Newsfeed from "@/components/Pages/publicPages/HomePage/Newfeed/Newsfeed";
 
 export default function Home() {
   return (
     <>
       <Header />
       <HeroSection />
+      <Newsfeed />
       <MissionSection />
       <ActionSection />
       <Footer />

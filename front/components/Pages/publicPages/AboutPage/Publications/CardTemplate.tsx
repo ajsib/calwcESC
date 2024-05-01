@@ -15,7 +15,9 @@ const cardTemplateStyle = css`
     width: 100%; // Ensure width is controlled by container
     min-height: 420px; // Set a minimum height to maintain consistency
     border-radius: 1rem;
-
+    svg {
+        transition: transform 0.2s ease-in-out;
+    }
     &:hover {
         svg {
             transform: translateX(5px);
