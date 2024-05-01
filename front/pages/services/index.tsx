@@ -15,7 +15,7 @@ export default function Service() {
 
     return (
         <>
-            <Banner src="/images/service/service1.png" alt="Services Banner" bannerText={bannerText} title={title}/>
+            <Banner src="/images/landing/flicker12.jpg" alt="Services Banner" bannerText={bannerText} title={title}/>
             <div style={{background: 'white'}}>
               <ServiceContent />
               <Separator />
