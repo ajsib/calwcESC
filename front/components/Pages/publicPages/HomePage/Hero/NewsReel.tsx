@@ -2,17 +2,6 @@ import { useState, useEffect } from 'react';
 
 export const newsItems = [
     {
-      imageUrl: "/images/landing/flicker1.jpg",
-      content: () => (
-        <>
-          <h1 style={{ color: 'white' }}>{`Good ${new Date().getHours() < 12 ? 'Morning' : new Date().getHours() < 18 ? 'Afternoon' : 'Evening'}`}</h1>
-          <ul>
-            <li>{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</li>
-          </ul>
-        </>
-      )
-    },
-    {
         imageUrl: "/images/landing/flicker4.jpg",
         content: () => (
           <>

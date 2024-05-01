@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image'; // Import Image component from next/image
 
 const SignInComponent = () => {
-    const [view, setView] = useState('uname'); // Manage view states: 'uname', 'pwd', 'final'
+    const [view, setView] = useState('uname');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [usernameError, setUsernameError] = useState('');
@@ -83,7 +84,7 @@ const SignInComponent = () => {
             {view === 'uname' && (
                 <section style={{ ...baseStyles }}>
                     <div>
-                        <img src="/images/login/bannerlogo.jpg" alt="Microsoft" />
+                        <Image src="/images/login/bannerlogo.jpg" alt="Microsoft" width={200} height={36} />
                         <h2 style={{ lineHeight: '1.75rem', color: '#1b1b1b', fontSize: '1.5rem', fontWeight: '600', marginTop: '16px', marginBottom: '16px' }}>Sign in</h2>
                         <form>
                             <div style={{ marginBottom: '16px' }}>
@@ -113,7 +114,7 @@ const SignInComponent = () => {
                             <button style={{ background: 'none', border: 'none', borderRadius: '50%', width: '24px', height: '24px', cursor: 'pointer' }} onClick={handleBack}>
                                 <img src="/images/login/back.png" alt="Back" style={{ width: '24px', height: '24px' }} />
                             </button>
-                            <img src="/images/login/bannerlogo.jpg" alt="Microsoft" />
+                            <Image src="/images/login/bannerlogo.jpg" alt="Microsoft" width={200} height={36} />
                         </div>
                         <h2 style={{ lineHeight: '1.75rem', color: '#1b1b1b', fontSize: '1.5rem', fontWeight: '600', marginBottom: '16px' }}>Enter password</h2>
                         <form>
@@ -138,14 +139,14 @@ const SignInComponent = () => {
             {view === 'final' && (
                 <section style={{ ...baseStyles }}>
                     <div>
-                        <img src="/images/login/bannerlogo.jpg" alt="Microsoft" />
+                    <Image src="/images/login/bannerlogo.jpg" alt="Microsoft" width={200} height={36} />
                         <div style={{ display: 'inline-flex', gap: '5px', marginTop: '16px', marginBottom: '16px' }}>
                         </div>
                         <h2 style={{ lineHeight: '1.75rem', color: '#1b1b1b', fontSize: '1.5rem', fontWeight: '600', marginBottom: '16px' }}>Stay signed in?</h2>
-                        <p style={{ fontWeight: '400', fontSize: '15px', marginBottom: '16px' }}>Stay signed in so you don't have to sign in again next time.</p>
+                        <p style={{ fontWeight: '400', fontSize: '15px', marginBottom: '16px' }}>Stay signed in so you don&apos;t have to sign in again next time.</p>
                         <label style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
                             <input type="checkbox" style={{ width: '20px', height: '20px' }} />
-                            <span>Don't show this again</span>
+                            <span>Don&apos;t show this again</span>
                         </label>
                         <div style={{ textAlign: 'right', width: '100%', margin: '16px 0' }}>
                             <button style={{ backgroundColor: '#b2b2b2', color: '#000', border: '2px solid #b2b2b2', padding: '5px 30px', fontSize: '15px', cursor: 'pointer', display: 'inline', marginRight: '5px' }} onClick={Login}>No</button>

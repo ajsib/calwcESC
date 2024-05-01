@@ -27,6 +27,13 @@ export const SmallNewsCard: React.FC<SmallNewsCardProps> = ({ item }) => {
     &:hover {
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     }
+    &:hover .readMoreStyle {
+      cursor: pointer;
+      text-decoration: underline;
+      svg {
+        transform: translateX(3px);
+      }
+    }
   `;
 
   const contentStyle = css`
@@ -40,25 +47,18 @@ export const SmallNewsCard: React.FC<SmallNewsCardProps> = ({ item }) => {
   `;
 
   const readMoreStyle = css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  color: white;
-  font-size: 0.8rem;
-  gap: 0.4rem;
-  svg{
-      transition: all 0.5s ease;
-  }
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    color: white;
+    font-size: 0.8rem;
+    gap: 0.4rem;
     svg {
-      transform: translateX(3px);
+      transition: all 0.5s ease;
     }
-  }
   `;
 
   return (
@@ -66,10 +66,10 @@ export const SmallNewsCard: React.FC<SmallNewsCardProps> = ({ item }) => {
       <div css={contentStyle}>
         <h4>{item.title}</h4>
       </div>
-      <div css={readMoreStyle}>
-            <p>Read More</p>
-            <RightWedgeThin color='#fff' size={11} />
-        </div>
+      <div css={readMoreStyle} className="readMoreStyle">
+        <p>Read More</p>
+        <RightWedgeThin color='#fff' size={11} />
+      </div>
     </div>
   );
 };
