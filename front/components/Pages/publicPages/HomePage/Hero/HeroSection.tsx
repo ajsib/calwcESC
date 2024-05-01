@@ -43,7 +43,7 @@ const HeroSection = () => {
   const heroSectionStyle = css`
     display: flex;
     align-items: center;
-    height: ${isMobile ? '35vh' : '50vh'};
+    height: ${isMobile ? '35vh' : '40vh'};
     transition: height 0.3s;
     margin-top: -4rem;
     flex-direction: ${isMobile ? 'column' : 'row'};
@@ -54,7 +54,7 @@ const HeroSection = () => {
     background-size: cover;
     background-position: center;
     width: 50vw;
-    height: calc(50vh);
+    height: calc(40vh);
     position: relative;
     transition: background-image 0.6s ease-in-out; 
   `;
