@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { LargeNewsCard } from './NewsCards/LargeCard';
 import { MediumNewsCard } from './NewsCards/MediumCard';
 import { SmallNewsCard } from './NewsCards/SmallCard';
+import NewsNavigateCard from './NewsButton';
 
 interface NewsItem {
   title: string;
@@ -91,9 +92,10 @@ const NewsSection = () => {
         {newsItems.length > 2 && <MediumNewsCard item={newsItems[2]} />}
       </div>
       <div css={rightColumn}>
-        {newsItems.slice(3).map((item, index) => (
+        {newsItems.slice(4).map((item, index) => (
           <SmallNewsCard key={index} item={item} />
         ))}
+        <NewsNavigateCard />
       </div>
     </div>
   );
