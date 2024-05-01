@@ -84,7 +84,7 @@ const SignInComponent = () => {
             {view === 'uname' && (
                 <section style={{ ...baseStyles }}>
                     <div>
-                        <Image src="/images/login/bannerlogo.jpg" alt="Microsoft" width={200} height={100} />
+                        <Image src="/images/login/bannerlogo.jpg" alt="Microsoft" width={200} height={36} />
                         <h2 style={{ lineHeight: '1.75rem', color: '#1b1b1b', fontSize: '1.5rem', fontWeight: '600', marginTop: '16px', marginBottom: '16px' }}>Sign in</h2>
                         <form>
                             <div style={{ marginBottom: '16px' }}>
@@ -114,7 +114,7 @@ const SignInComponent = () => {
                             <button style={{ background: 'none', border: 'none', borderRadius: '50%', width: '24px', height: '24px', cursor: 'pointer' }} onClick={handleBack}>
                                 <img src="/images/login/back.png" alt="Back" style={{ width: '24px', height: '24px' }} />
                             </button>
-                            <Image src="/images/login/bannerlogo.jpg" alt="Microsoft" width={200} height={100} />
+                            <Image src="/images/login/bannerlogo.jpg" alt="Microsoft" width={200} height={36} />
                         </div>
                         <h2 style={{ lineHeight: '1.75rem', color: '#1b1b1b', fontSize: '1.5rem', fontWeight: '600', marginBottom: '16px' }}>Enter password</h2>
                         <form>
@@ -139,7 +139,7 @@ const SignInComponent = () => {
             {view === 'final' && (
                 <section style={{ ...baseStyles }}>
                     <div>
-                        <Image src="/images/login/bannerlogo.jpg" alt="Microsoft" width={200} height={100} />
+                    <Image src="/images/login/bannerlogo.jpg" alt="Microsoft" width={200} height={36} />
                         <div style={{ display: 'inline-flex', gap: '5px', marginTop: '16px', marginBottom: '16px' }}>
                         </div>
                         <h2 style={{ lineHeight: '1.75rem', color: '#1b1b1b', fontSize: '1.5rem', fontWeight: '600', marginBottom: '16px' }}>Stay signed in?</h2>
