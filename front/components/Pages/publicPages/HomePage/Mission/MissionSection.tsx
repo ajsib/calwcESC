@@ -63,7 +63,7 @@ const MissionSection = () => {
       </div>
       <div>
         <CardTemplate
-          imageSrc="/images/landing/flicker6.jpg"
+          imageSrc="/images/landing/flicker16.jpg"
           title={Title2}
           text={Text2}
           isMobile={isMobile}
