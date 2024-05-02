@@ -38,54 +38,53 @@ const NewsSearch = () => {
     `;
 
     const buttonStyle = css`
-        padding: 1rem;
-        background-color: #007BFF;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        width: 10%;
-        height: 100%;
-        cursor: pointer;
-        align-self: flex-end; /* Align the button to the bottom of its container */
-        &:hover {
-            background-color: #0056b3;
-        }
-    `;
+    padding: 1rem;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    width: 10%;
+    height: 100%;
+    cursor: pointer;
+    align-self: flex-end; /* Align the button to the bottom of its container */
+    &:hover {
+        background-color: #0056b3;
+    }
+`;
+
 
     return (
         <form css={formStyle} onSubmit={(e) => { e.preventDefault(); handleSearch(); }}>
             <div css={searchParentStyle}>
-                <div>
-                    <label css={labelStyle} htmlFor="searchTerm">Search Articles</label>
-                    <input
-                        css={inputStyle}
-                        id="searchTerm"
-                        type="text"
-                        placeholder="Enter search term"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label css={labelStyle} htmlFor="dateFrom">Date From</label>
-                    <input
-                        css={inputStyle}
-                        id="dateFrom"
-                        type="date"
-                        value={dateFrom}
-                        onChange={(e) => setDateFrom(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label css={labelStyle} htmlFor="dateTo">Date To</label>
-                    <input
-                        css={inputStyle}
-                        id="dateTo"
-                        type="date"
-                        value={dateTo}
-                        onChange={(e) => setDateTo(e.target.value)}
-                    />
-                </div>
+                <label css={labelStyle} htmlFor="searchTerm">Search Articles</label>
+                <input
+                    css={inputStyle}
+                    id="searchTerm"
+                    type="text"
+                    placeholder="Enter search term"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+            </div>
+            <div>
+                <label css={labelStyle} htmlFor="dateFrom">Date From</label>
+                <input
+                    css={inputStyle}
+                    id="dateFrom"
+                    type="date"
+                    value={dateFrom}
+                    onChange={(e) => setDateFrom(e.target.value)}
+                />
+            </div>
+            <div>
+                <label css={labelStyle} htmlFor="dateTo">Date To</label>
+                <input
+                    css={inputStyle}
+                    id="dateTo"
+                    type="date"
+                    value={dateTo}
+                    onChange={(e) => setDateTo(e.target.value)}
+                />
             </div>
             <button css={buttonStyle} type="submit"><SearchIcon size={24} /></button>
         </form>

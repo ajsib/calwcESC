@@ -1,10 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import NewsSearch from './NewsSearch';
+import NewsDisplay from './NewsDisplay';
 
 
 const allNewsSyle = css`
-    margin: 1rem;
+    margin-top: 3rem;
+    margin-left: var(--margin);
+    margin-right: var(--margin);
 `;
 
 export default function AllNews() {
@@ -12,6 +15,7 @@ export default function AllNews() {
         <div css={allNewsSyle}>
             <h1>News</h1>
             <NewsSearch />
+            <NewsDisplay numPages={6} />
         </div>
     );
 }
