@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-
-
+import { useRouter } from 'next/router';
+import { useArticle } from '@/contexts/ArticleContext';
 
 const newsCardStyle = css`
     display: flex;
@@ -12,6 +12,7 @@ const newsCardStyle = css`
     width: 100%;
     margin-bottom: 1rem;
     border-bottom: 1px solid #ccc;
+    cursor: pointer; /* Change cursor on hover to indicate it's clickable */
 
     > p {
         width: 10rem; /* Exact width for the date alignment */
@@ -37,18 +38,28 @@ const titleStyle = css`
     margin-bottom: 0.5rem;
 `;
 
-
 interface NewsCardProps {
+    id: number;
     title: string;
-    description: string;
-    imageUrl: string;
     date: string;
+    imageUrl: string;
+    description: string;
+    content: string;
+    priority: number;
 }
 
+export default function NewsCard({ id, title, description, imageUrl, date, priority, content }: NewsCardProps) {
+    const router = useRouter();
+    const articleContext = useArticle()!;
+    const {setArticle} = articleContext;
 
-export default function NewsCard({ title, description, imageUrl, date }: NewsCardProps) {
+    const handleClick = () => {
+        setArticle({id, title, date, imageUrl, description, content, priority});
+        router.push(`/news/${encodeURIComponent(id)}`);
+    }
+
     return (
-        <div css={newsCardStyle}>
+        <div css={newsCardStyle} onClick={handleClick}>
             <p>{date}</p>
             <img css={imageStyle} src={imageUrl} alt={title} />
             <div>

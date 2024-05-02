@@ -9,16 +9,28 @@ interface NewsItem {
     description: string;
     imageUrl: string;
     date: string;
+    priority: number;
+    id: number;
+    content: string;
 }
 
 const NewsDisplay = () => {
-    const [newsItems, setNewsItems] = useState<NewsItem[]>(NewsData);
+    const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const itemsPerPage = 5;
-    const [numPages, setNumPages] = useState<number>(Math.ceil(newsItems.length / itemsPerPage));
 
     useEffect(() => {
-        setNumPages(Math.ceil(newsItems.length / itemsPerPage));
+        // Fetch data and sort by priority descending
+        const sortedNewsItems = [...NewsData].sort((a: NewsItem, b: NewsItem) => b.priority - a.priority);
+        setNewsItems(sortedNewsItems);
+    }, []);
+
+    const [numPages, setNumPages] = useState<number>(1);
+
+    useEffect(() => {
+        if (newsItems.length > 0) {
+            setNumPages(Math.ceil(newsItems.length / itemsPerPage));
+        }
     }, [newsItems]);
 
     const handlePageChange = (page: number) => {
@@ -96,8 +108,8 @@ const NewsDisplay = () => {
                 <p>Title</p>
             </div>
             <div css={newsCardsContainerStyle}>
-                {currentItems.map((article, index) => (
-                    <NewsCard key={index} title={article.title} description={article.description} imageUrl={article.imageUrl} date={article.date} />
+                {currentItems.map((article: NewsItem, index: number) => (
+                    <NewsCard key={index} title={article.title} description={article.description} imageUrl={article.imageUrl} date={article.date} id={article.id} priority={article.priority} content={article.content} />
                 ))}
             </div>
         </div>
