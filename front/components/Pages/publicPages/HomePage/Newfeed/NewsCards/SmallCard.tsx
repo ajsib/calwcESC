@@ -6,7 +6,7 @@ interface NewsItem {
   title: string;
   date: string;
   imageUrl: string;
-  content: string;
+  description: string;
 }
 
 interface SmallNewsCardProps {

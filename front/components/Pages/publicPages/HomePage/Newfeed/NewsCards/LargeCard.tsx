@@ -7,7 +7,7 @@ interface NewsItem {
   title: string;
   date: string;
   imageUrl: string;
-  content: string;
+  description: string;
 }
 
 interface LargeNewsCardProps {
@@ -127,7 +127,7 @@ export const LargeNewsCard: React.FC<LargeNewsCardProps> = ({ item }) => {
           <small>{item.date}</small>
         </div>
         <div css={descriptionStyle} className='description'>
-            <p>{item.content}</p> {/* Content shown at the bottom on hover */}
+            <p>{item.description}</p> {/* Content shown at the bottom on hover */}
             <div css={readMoreStyle}>
                 <p>Read More</p>
                 <RightWedgeThin color='#fff' size={15} />

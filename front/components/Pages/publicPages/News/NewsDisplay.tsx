@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import NewsCard from './NewsCard';  // Import the NewsCard component
+import NewsData from '@/components/Pages/publicPages/News/data.json';
 
 interface NewsItem {
     title: string;
@@ -10,13 +11,15 @@ interface NewsItem {
     date: string;
 }
 
-interface NewsDisplayProps {
-    totalResults?: number; // Make totalResults prop optional
-    numPages: number;
-}
-
-const NewsDisplay = ({ totalResults = 0, numPages }: NewsDisplayProps) => {
+const NewsDisplay = () => {
+    const [newsItems, setNewsItems] = useState<NewsItem[]>(NewsData);
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const itemsPerPage = 5;
+    const [numPages, setNumPages] = useState<number>(Math.ceil(newsItems.length / itemsPerPage));
+
+    useEffect(() => {
+        setNumPages(Math.ceil(newsItems.length / itemsPerPage));
+    }, [newsItems]);
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
@@ -43,24 +46,15 @@ const NewsDisplay = ({ totalResults = 0, numPages }: NewsDisplayProps) => {
     `;
 
     const labelsStyle = css`
-    display: flex;
-    flex-direction: row;
-    padding-bottom: 0.5rem;
-    gap: 1rem;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-
-    > p {
-        width: 10rem;
-        text-align: left;
-        &:last-of-type {
-            margin-left: 10rem;
-            text-align: right;
-        }
-    }
-`;
+        display: flex;
+        flex-direction: row;
+        padding-bottom: 0.5rem;
+        gap: 1rem;
+        align-items: center;
+        border-bottom: 1px solid #ccc;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    `;
 
     const pageSelectorStyle = css`
         display: flex;
@@ -73,49 +67,28 @@ const NewsDisplay = ({ totalResults = 0, numPages }: NewsDisplayProps) => {
         flex-direction: column;
     `;
 
-    // Enhanced Pagination Component
     const Pagination = () => {
-        const pages = Array.from({ length: Math.min(5, numPages) }, (_, i) => i + 1);
+        const pageNumbers = Array.from({ length: numPages }, (_, i) => i + 1);
         return (
             <div css={pageSelectorStyle}>
                 <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage <= 1}>Previous</button>
-                {pages.map(page => (
+                {pageNumbers.map(page => (
                     <button key={page} onClick={() => handlePageChange(page)} disabled={page === currentPage}>
                         {page}
                     </button>
                 ))}
-                {numPages > 5 && <span>...</span>}
                 <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage >= numPages}>Next</button>
             </div>
         );
     };
 
-    // Dummy data for news articles
-    const newsArticles: NewsItem[] = [
-        {
-            title: "Title 1",
-            description: "This is a short description of the first news item.",
-            imageUrl: "/images/landing/flicker8.jpg",
-            date: "2024-05-01"
-        },
-        {
-            title: "Title 2",
-            description: "This is a short description of the second news item.",
-            imageUrl: "/images/landing/flicker8.jpg",
-            date: "2024-05-02"
-        },
-        {
-            title: "Title 3",
-            description: "This is a short description of the third news item.",
-            imageUrl: "/images/landing/flicker8.jpg",
-            date: "2024-05-03"
-        }
-    ];
+    // Get the current items to display
+    const currentItems = newsItems.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
     return (
         <div css={containerStyle}>
             <div css={headerStyle}>
-                <div css={resultsStyle}>{newsArticles.length} entries found</div>
+                <div css={resultsStyle}>{newsItems.length} entries found</div>
                 <Pagination />
             </div>
             <div css={labelsStyle}>
@@ -123,7 +96,7 @@ const NewsDisplay = ({ totalResults = 0, numPages }: NewsDisplayProps) => {
                 <p>Title</p>
             </div>
             <div css={newsCardsContainerStyle}>
-                {newsArticles.map((article, index) => (
+                {currentItems.map((article, index) => (
                     <NewsCard key={index} title={article.title} description={article.description} imageUrl={article.imageUrl} date={article.date} />
                 ))}
             </div>

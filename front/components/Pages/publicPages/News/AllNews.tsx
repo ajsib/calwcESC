@@ -15,7 +15,7 @@ export default function AllNews() {
         <div css={allNewsSyle}>
             <h1>News</h1>
             <NewsSearch />
-            <NewsDisplay numPages={6} />
+            <NewsDisplay />
         </div>
     );
 }
