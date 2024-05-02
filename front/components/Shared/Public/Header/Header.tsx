@@ -6,13 +6,17 @@ import FloatingActionButton from '@/components/Shared/Public/FloatingActionButto
 import MobileMenuOverlay from '@/components/Shared/Public/Header/MobileMenuOverlay';
 import { useState } from 'react';
 
-const headerStyle = css`
+interface HeaderProps {
+  backgroundColor?: string; // Make backgroundColor prop optional
+}
+
+const headerStyle = (backgroundColor?: string) => css`
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 10;
   position: relative;
-  background: transparent;
+  background: ${backgroundColor || 'transparent'}; /* Use the passed background color or default to transparent */
   height: 4rem;
 `;
 
@@ -33,14 +37,14 @@ const floatingButtonContainerStyle = css`
   }
 `;
 
-const Header = () => {
+const Header: React.FC<HeaderProps> = ({ backgroundColor }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => setMenuOpen(!isMenuOpen);
 
   return (
     <>
-      <header css={headerStyle}>
+      <header css={headerStyle(backgroundColor)}>
         <LogoTag />
         <div css={navigationStyle}><Navigation /></div>
       </header>

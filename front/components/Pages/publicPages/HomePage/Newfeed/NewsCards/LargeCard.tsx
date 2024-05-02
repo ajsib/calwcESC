@@ -1,13 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import Link from 'next/link';
 import RightWedgeThin from '@/components/UI/arrows/RightWedgeThin';
+import { useRouter } from 'next/router';
+import { useArticle } from '@/contexts/ArticleContext';
 
 interface NewsItem {
+  id: number; 
   title: string;
   date: string;
   imageUrl: string;
-  content: string;
+  description: string;
+  content: string; 
+  priority: number;
 }
 
 interface LargeNewsCardProps {
@@ -15,6 +19,15 @@ interface LargeNewsCardProps {
 }
 
 export const LargeNewsCard: React.FC<LargeNewsCardProps> = ({ item }) => {
+  const router = useRouter();
+  const articleContext = useArticle();
+  const { setArticle } = articleContext!;
+
+  const handleClick = () => {
+    setArticle(item);
+    router.push(`/news/${encodeURIComponent(item.id)}`);
+  };
+
   const cardStyle = css`
     display: flex;
     flex-direction: column;
@@ -29,9 +42,9 @@ export const LargeNewsCard: React.FC<LargeNewsCardProps> = ({ item }) => {
     background-size: cover;
     background-position: center;
     transition: all 0.5s ease;
-
+    cursor: pointer; /* Ensure it's clickable */
     &:hover {
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
       div.content {
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
@@ -39,15 +52,16 @@ export const LargeNewsCard: React.FC<LargeNewsCardProps> = ({ item }) => {
       .content p {
         opacity: 1;
       }
-
-      .title{
+      .title {
         height: 10rem;
         padding: 1.5rem 0;
       }
-
-      .description{
+      .description {
         height: 15rem;
         opacity: 1;
+        svg {
+          transform: translateX(3px);
+        }
       }
     }
   `;
@@ -70,9 +84,8 @@ export const LargeNewsCard: React.FC<LargeNewsCardProps> = ({ item }) => {
     right: 0;
     padding: 0 2.5rem;
     z-index: 2;
-    height: 8rem; // Smaller max-height to start
+    height: 8rem; 
     transition: height 0.7s ease, background-color 0.5s ease;
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -82,9 +95,9 @@ export const LargeNewsCard: React.FC<LargeNewsCardProps> = ({ item }) => {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    `;
+  `;
 
-    const descriptionStyle = css`
+  const descriptionStyle = css`
     z-index: 2;
     height: 5rem; // Smaller max-height to start
     transition: height 0.7s ease, opacity 0.5s ease, background-color 0.5s ease;
@@ -94,32 +107,32 @@ export const LargeNewsCard: React.FC<LargeNewsCardProps> = ({ item }) => {
     opacity: 0;
     font-size: 1.3rem;
     padding: 1rem 0;
-`;
+  `;
 
   const readMoreStyle = css`
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
-  bottom: 1rem;
-  right: 1rem;
+  bottom:2rem;
+  right: 2rem;
   color: white;
   font-size: 1.2rem;
   gap: 0.4rem;
   svg{
       transition: all 0.5s ease;
-  }
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-    svg {
-      transform: translateX(5px);
     }
-  }
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+      svg {
+        transform: translateX(5px);
+      }
+    }
   `;
 
   return (
-    <div css={cardStyle}>
+    <div css={cardStyle} onClick={handleClick}>
       <div className="overlay" css={overlayStyle}></div>
       <div className="content" css={contentStyle}>
         <div css={titleStyle} className='title'> {/* Title and date always visible */}
@@ -127,9 +140,9 @@ export const LargeNewsCard: React.FC<LargeNewsCardProps> = ({ item }) => {
           <small>{item.date}</small>
         </div>
         <div css={descriptionStyle} className='description'>
-            <p>{item.content}</p> {/* Content shown at the bottom on hover */}
+            <p>{item.description}</p> {/* Content shown at the bottom on hover */}
             <div css={readMoreStyle}>
-                <p>Read More</p>
+                <p>Read Article</p>
                 <RightWedgeThin color='#fff' size={15} />
             </div>
         </div>

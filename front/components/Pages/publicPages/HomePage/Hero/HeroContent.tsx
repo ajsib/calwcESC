@@ -11,22 +11,24 @@ const HeroContent: React.FC<HeroContentProps> = ({ isMobile }) => {
   const { locale } = router;
 
   const heroContentStyle = css`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: ${isMobile ? 'center' : 'flex-start'};
-    width: ${isMobile ? '100%' : 'calc(50vw - var(--margin) - calc(1rem + 1vw))'};
-    text-align: left;
-    margin-left: var(--margin);
-    flex-wrap: wrap;
-    height: ${isMobile ? '100%' : 'auto'};
-  `;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: ${isMobile ? 'center' : 'flex-start'};
+  width: ${isMobile ? '100%' : 'calc(50vw - var(--margin) - calc(1rem + 1vw))'};
+  text-align: left;
+  margin-left: var(--margin);
+  flex-wrap: wrap;
+  height: ${isMobile ? '100%' : 'auto'};
+  padding-top: 2rem; 
+`;
+
 
   const titleStyle = css`
     font-size: ${isMobile ? '2.2rem' : 'calc(1.5rem + 1.5vw)'};
-    margin-bottom: 1rem;
+    // margin-bottom: 1rem;
     color: var(--primary-color);
-    line-height: 1.3;
+    line-height: 1.2;
     margin-right: calc(1rem + 1vw);
   `;
 

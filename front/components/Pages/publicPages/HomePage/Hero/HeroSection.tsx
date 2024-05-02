@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
+import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import HeroContent from './HeroContent';
-import { useState, useEffect } from 'react';
-import useNewsReel, { newsItems } from './NewsReel';
+import useNewsReel, { newsItems } from './NewsReel/NewsReel';
+import CardTemplate from './NewsReel/CardTemplate';
 
 const HeroSection = () => {
   const [offsetY, setOffsetY] = useState(0);
@@ -56,7 +57,7 @@ const HeroSection = () => {
     width: 50vw;
     height: calc(40vh);
     position: relative;
-    transition: background-image 0.6s ease-in-out; 
+    transition: background-image 0.6s ease-in-out;
   `;
 
   const overlayStyle = css`
@@ -69,48 +70,17 @@ const HeroSection = () => {
   `;
 
   const newsFeedStyle = css`
-  position: absolute;
-  padding: 1rem;
-  padding-bottom: 2rem;
-  bottom: 0;
-  right: 0;
-  width: calc(45% - 2rem);
-  padding-right: 2rem;
-  height: 20%;
-  max-width: calc(100% - 2rem);
-  max-height: 55%;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  line-height: 1.6;
-  display: grid;
-  grid-template-rows: auto 1fr;
-  align-items: start;
-  text-align: left;
-  overflow: hidden;
-  transition: width 0.6s ease-in-out, height 0.6s ease-in-out, background 0.6s ease-in-out, opacity 0.6s ease-in-out;
-  z-index: 200;
-  font-size: 16px;
-  &:hover {
-    width: calc(90% - 4rem);
-    height: 80%;
-    background: rgba(0, 0, 0, 0.8);
-    h1, h2, h3, h4, h5, h6 {
-      font-size: 22px;
-    }
-  }
-  h1, h2, h3, h4, h5, h6 {
-    color: white; 
-    font-size: 1.8rem; 
-    transition: font-size 0.4s ease-in-out; 
-  }
-  a {
-    color: white;
-  }
-  ul {
-    grid-row: 3;
-    overflow: hidden;
-  }
-`;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    position: absolute;
+    max-height: calc(100% - 4rem);
+    width: 100%;
+    height: auto;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;    
+  `;
 
   return (
     <div css={heroSectionStyle}>
@@ -118,10 +88,10 @@ const HeroSection = () => {
         <HeroContent isMobile={isMobile} />
       </div>
       <div css={heroImageStyle} >
-        <div css={newsFeedStyle} >
-          {newsItems[currentIndex].content()}
-        </div>
         <div css={overlayStyle}></div>
+        <div css={newsFeedStyle}>
+          <CardTemplate {...newsItems[currentIndex].props} />
+        </div>
       </div>
     </div>
   );
