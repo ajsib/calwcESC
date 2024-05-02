@@ -15,78 +15,75 @@ const NewsSearch = () => {
 
     const formStyle = css`
         display: flex;
-        align-items: center; /* Align items vertically */
-        justify-content: space-between;
+        flex-direction: row;
         margin-top: 1rem;
-    `;
+        gap: 2rem;
+        align-items: center;
 
-    const labelStyle = css`
-        display: block;
-        font-weight: bold;
-        margin-bottom: 0.5rem;
-    `;
-
-    const searchParentStyle = css`
-        width: 60%;
     `;
 
     const inputStyle = css`
-        padding: 1rem;
         border: 1px solid #ccc;
-        border-radius: 4px;
-        width: 100%;
     `;
 
-    const buttonStyle = css`
-    padding: 1rem;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    width: 10%;
+    const inputContainerStyle = css`
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
     height: 100%;
-    cursor: pointer;
-    align-self: flex-end; /* Align the button to the bottom of its container */
-    &:hover {
-        background-color: #0056b3;
+    input {
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    button {
+        width: 100%;
+        background-color: var(--secondary-color);
+        color: white;
+        border: 1px solid white;
+        cursor: pointer;
+        display: flex;
+        transition: all 0.1s ease-in-out;
+        height: 100%;
+        padding: 0.5rem;
+        &:hover {
+            border: 1px solid #ccc;
+        }
     }
 `;
 
 
+    const textInputStyle = css`
+        width: 50%;
+    `;
+
+    const dateInputStyle = css`
+        width: 20%;
+    `;
+
     return (
         <form css={formStyle} onSubmit={(e) => { e.preventDefault(); handleSearch(); }}>
-            <div css={searchParentStyle}>
-                <label css={labelStyle} htmlFor="searchTerm">Search Articles</label>
-                <input
-                    css={inputStyle}
-                    id="searchTerm"
-                    type="text"
-                    placeholder="Enter search term"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                />
+            <div css={[inputContainerStyle, textInputStyle]}>
+                <label htmlFor="searchTerm">Search Term:</label>
+                <input name='searchTerm' css={inputStyle} type="text" placeholder="Search news" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
             </div>
-            <div>
-                <label css={labelStyle} htmlFor="dateFrom">Date From</label>
-                <input
-                    css={inputStyle}
-                    id="dateFrom"
-                    type="date"
-                    value={dateFrom}
-                    onChange={(e) => setDateFrom(e.target.value)}
-                />
+            <div css={[inputContainerStyle, dateInputStyle]}>
+                <label htmlFor="dateFrom">Date From:</label>
+                <input name='dateFrom' css={inputStyle} type="date" value={dateFrom} onChange={(e) => setDateFrom(e.target.value)} />
             </div>
-            <div>
-                <label css={labelStyle} htmlFor="dateTo">Date To</label>
-                <input
-                    css={inputStyle}
-                    id="dateTo"
-                    type="date"
-                    value={dateTo}
-                    onChange={(e) => setDateTo(e.target.value)}
-                />
+            <div css={[inputContainerStyle, dateInputStyle]}>
+                <label htmlFor="dateTo">Date To:</label>
+                <input name='dateTo' css={inputStyle} type="date" value={dateTo} onChange={(e) => setDateTo(e.target.value)} />
             </div>
-            <button css={buttonStyle} type="submit"><SearchIcon size={24} /></button>
+            <div css={inputContainerStyle}>
+                <label htmlFor="search">&nbsp;</label>
+                <button type="submit">
+                    <SearchIcon size={20} />
+                </button>
+            </div>
         </form>
     );
 };

@@ -34,9 +34,12 @@ const imageStyle = css`
 `;
 
 const titleStyle = css`
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+    width: 65%;
+    h3{
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
 `;
 
 const dateStyle = css`
@@ -86,8 +89,8 @@ const NewsCard = ({ id, title, description, imageUrl, date, priority, content }:
             <div css={imageStyle}>
                 <img src={imageUrl} alt={title} />
             </div>
-            <div>
-                <h3 css={titleStyle}>{title}</h3>
+            <div css={titleStyle}>
+                <h3>{title}</h3>
                 <p>{description}</p>
             </div>
             <div css={readMoreStyle}>

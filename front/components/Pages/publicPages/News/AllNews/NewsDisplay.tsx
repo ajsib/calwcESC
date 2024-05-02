@@ -18,7 +18,7 @@ interface NewsItem {
 const NewsDisplay = () => {
     const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const itemsPerPage = 5;
+    const itemsPerPage = 12;
 
     useEffect(() => {
         // Fetch data and sort by priority descending
@@ -106,6 +106,9 @@ const NewsDisplay = () => {
                 {currentItems.map((article: NewsItem, index: number) => (
                     <NewsCard key={index} title={article.title} description={article.description} imageUrl={article.imageUrl} date={article.date} id={article.id} priority={article.priority} content={article.content} />
                 ))}
+            </div>
+            <div css={[headerStyle, { padding: '1rem 0'}]}>
+                <Pagination numPages={numPages} currentPage={currentPage} handlePageChange={handlePageChange} />
             </div>
         </div>
     );

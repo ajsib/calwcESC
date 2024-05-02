@@ -31,6 +31,7 @@ const arrowButtonStyle = css`
 
 const numberButtonStyle = css`
     background-color: transparent;
+    color: #aaa;
     border: none;
     cursor: pointer;
     display: flex;
@@ -40,13 +41,13 @@ const numberButtonStyle = css`
     transition: all 0.3s ease;
     &:hover {
         color: var(--primary-color); /* Change text color on hover */
-        border-bottom: 4px solid var(--primary-color); /* Add bottom border on hover */
+        font-weight: bold;
     }
 `;
 
 const activeButtonStyle = css`
     color: var(--primary-color); /* Change text color for active button */
-    border-bottom: 4px solid var(--primary-color); /* Add bottom border for active button */
+    font-weight: bold;
 `;
 
 const disabledButtonStyle = css`
