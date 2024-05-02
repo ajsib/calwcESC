@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import fileData from './dummyFiles.json';
+import fileData from '@/components/Shared/API/Data/files-dummy.json';
 
 const SharepointWrapperStyle = css`
   border: 1px solid #ccc;

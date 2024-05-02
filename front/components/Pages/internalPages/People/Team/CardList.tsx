@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import ProfileCard from './Card';
-import dummyProfiles from './dummyPeople.json';
+import dummyProfiles from '@/components/Shared/API/Data/profiles-dummy.json';
 
 const profilesListStyle = css`
   display: flex;

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import TicketCards from '../../Tickets/TicketCards';
-import ticketsData from '../../../../../pages/dashboard/tickets-dummy.json';
+import ticketsData from '@/components/Shared/API/Data/tickets-dummy.json';
 
 const ticketsStyle = css`
   display: flex;

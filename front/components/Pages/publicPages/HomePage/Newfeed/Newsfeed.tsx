@@ -4,7 +4,7 @@ import { LargeNewsCard } from './NewsCards/LargeCard';
 import { MediumNewsCard } from './NewsCards/MediumCard';
 import { SmallNewsCard } from './NewsCards/SmallCard';
 import NewsNavigateCard from './NewsButton';
-import NewsData from '@/components/Pages/publicPages/News/data.json';
+import NewsData from '@/components/Shared/API/Data/news-dummy.json';
 import { useState, useEffect } from 'react';
 
 interface NewsItem {
@@ -14,6 +14,7 @@ interface NewsItem {
   description: string;
   content: string;
   priority: number;
+  id: number;
 }
 
 const NewsSection = () => {
