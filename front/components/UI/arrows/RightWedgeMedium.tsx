@@ -1,21 +1,22 @@
-// RightWedgeThin.tsx
 import React from 'react';
 
 interface RightWedgeThinProps {
   size?: number;
-  fillColor?: string; // New prop to specify fill color
+  fillColor?: string; // Fill color
+  rotation?: number; // Rotation angle in degrees
 }
 
-const RightWedgeThin: React.FC<RightWedgeThinProps> = ({ size = 24, fillColor = '#364132' }) => (
+const RightWedgeThin: React.FC<RightWedgeThinProps> = ({ size = 24, fillColor = '#364132', rotation = 0 }) => (
   <svg
-    fill={fillColor} // Use the new prop to set the fill color
+    fill={fillColor} // Use the fill color prop
     width={`${size}px`}
     height={`${size}px`}
     viewBox="-3.2 -3.2 38.40 38.40"
     version="1.1"
     xmlns="(link unavailable)"
-    stroke={fillColor} // Also update the stroke color to match the fill color
+    stroke={fillColor} // Use the fill color for stroke as well
     strokeWidth="0.96"
+    style={{ transform: `rotate(${rotation}deg)` }} // Apply rotation transform
   >
     <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
     <g

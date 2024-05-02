@@ -1,5 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { useRouter } from 'next/router';
+import { useArticle } from '@/contexts/ArticleContext';
 import RightWedgeThin from '@/components/UI/arrows/RightWedgeThin';
 
 interface NewsItem {
@@ -7,6 +9,9 @@ interface NewsItem {
   date: string;
   imageUrl: string;
   description: string;
+  id: number;
+  priority: number;
+  content: string;
 }
 
 interface MediumNewsCardProps {
@@ -14,6 +19,15 @@ interface MediumNewsCardProps {
 }
 
 export const MediumNewsCard: React.FC<MediumNewsCardProps> = ({ item }) => {
+  const router = useRouter();
+  const articleContext = useArticle()!;
+  const { setArticle } = articleContext;
+
+  const handleClick = () => {
+    setArticle(item); // Set the article using the item data
+    router.push(`/news/${encodeURIComponent(item.id)}`); // Navigate to the appropriate article
+  };
+
   const cardStyle = css`
     display: flex;
     flex-direction: column;
@@ -23,6 +37,7 @@ export const MediumNewsCard: React.FC<MediumNewsCardProps> = ({ item }) => {
     height: 50%;
     max-height: 100%;
     transition: all 0.5s ease;
+    cursor: pointer;
     &:hover {
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
       // Apply hover effects to the arrow and "Read More" text
@@ -72,12 +87,10 @@ export const MediumNewsCard: React.FC<MediumNewsCardProps> = ({ item }) => {
     svg {
         transition: all 0.5s ease;
     }
-    `;
-
-  
+  `;
 
   return (
-    <div css={cardStyle}>
+    <div css={cardStyle} onClick={handleClick}>
       <img src={item.imageUrl} alt={item.title} css={imageStyle} />
       <div css={contentStyle}>
         <h3>{item.title}</h3>
