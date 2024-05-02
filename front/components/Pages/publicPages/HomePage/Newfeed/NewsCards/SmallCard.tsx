@@ -31,33 +31,40 @@ export const SmallNewsCard: React.FC<SmallNewsCardProps> = ({ item }) => {
   const cardStyle = css`
     display: flex;
     flex-direction: column;
-    color: white;
     position: relative;
     overflow: hidden;
-    background-color: #333;
-    height: 50%;
+    height: 50%;  // Adjusted to better fit smaller dimensions
     max-height: 100%;
     transition: all 0.5s ease;
+    width: calc(100% - 1rem);
+    margin-left: 1rem;
     &:hover {
+      cursor: pointer;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-      cursor: pointer;
-    }
-    &:hover .readMoreStyle {
-      cursor: pointer;
-      text-decoration: underline;
-      svg {
-        transform: translateX(3px);
+      .readMoreStyle {
+        text-decoration: underline;
+        color: #444;  // Changed to match MediumNewsCard's hover color style
+        svg {
+          transform: translateX(3px);
+          fill: #444;  // Match the SVG fill on hover to MediumNewsCard
+        }
       }
     }
   `;
 
   const contentStyle = css`
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
+    position: relative;
     z-index: 2;
+    margin: 1rem;
+    color: #444;  // Updated to match MediumNewsCard text color
     h4 {
-      font-size: 1.2rem;
+      font-size: 1rem;  // Smaller than h3 in MediumNewsCard to suit SmallCard
+      font-weight: bold;
+      line-height: 1.3rem;
+      margin-bottom: 10px;
+    }
+    small {
+      font-size: 0.85rem;
     }
   `;
 
@@ -68,11 +75,11 @@ export const SmallNewsCard: React.FC<SmallNewsCardProps> = ({ item }) => {
     position: absolute;
     bottom: 1rem;
     right: 1rem;
-    color: white;
-    font-size: 0.8rem;
+    color: #666;  // Subdued color to match MediumNewsCard
+    font-size: 0.9rem;
     gap: 0.4rem;
     svg {
-      transition: all 0.5s ease;
+      transition: all 0.2s ease;
     }
   `;
 
@@ -80,10 +87,11 @@ export const SmallNewsCard: React.FC<SmallNewsCardProps> = ({ item }) => {
     <div css={cardStyle} onClick={handleClick}>
       <div css={contentStyle}>
         <h4>{item.title}</h4>
+        <small>{item.date}</small>
       </div>
       <div css={readMoreStyle} className="readMoreStyle">
-        <p>Read More</p>
-        <RightWedgeThin color='#fff' size={11} />
+        <p>Read Article</p>
+        <RightWedgeThin color='#555' size={11} />
       </div>
     </div>
   );

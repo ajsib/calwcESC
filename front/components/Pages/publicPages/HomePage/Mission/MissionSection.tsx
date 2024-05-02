@@ -5,9 +5,20 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
 const missionStyle = css`
-  padding-top: 2rem;
   background-color: var(--secondary-color);
+  height: calc(100vh-3rem);
+  min-height: 44rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 1rem 0;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: auto;
+  }
 `;
+
 
 const MissionSection = () => {
   const router = useRouter();
@@ -46,17 +57,15 @@ const MissionSection = () => {
           imageSrc="/images/landing/flicker13.jpg"
           title={Title1}
           text={Text1}
-          order={0}
           isMobile={isMobile}
           onClick={() => router.push('/about')}
         />
       </div>
       <div>
         <CardTemplate
-          imageSrc="/images/landing/flicker6.jpg"
+          imageSrc="/images/landing/flicker16.jpg"
           title={Title2}
           text={Text2}
-          order={1}
           isMobile={isMobile}
           onClick={() => router.push('/services')}
         />

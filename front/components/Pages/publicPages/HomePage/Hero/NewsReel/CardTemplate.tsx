@@ -15,12 +15,14 @@ const CardTemplate: React.FC<CardTemplateProps> = ({ items, type }) => {
 
 const containerStyle = css`
     display: flex;
-    width: 100%;
+    justify-content: space-between;
+    width: 50%;
+    margin-left: calc(50%);
     padding: 1rem;
     background: linear-gradient(to bottom right, rgba(51, 51, 51, 0.9), transparent),
                 linear-gradient(to top left, rgba(51, 51, 51, 0.7), transparent);
     transition: background 0.3s ease, transform 0.3s ease;
-    transform: translateX(20%);
+    transform: translateX(30%);
     &:hover {
       background: linear-gradient(to bottom right, rgba(51, 51, 51, 0.9), transparent),
                   linear-gradient(to top left, rgba(51, 51, 51, 0.9), transparent),
@@ -34,7 +36,7 @@ const containerStyle = css`
 `;
 
   const itemsStyle = css`
-    width: 80%;
+    width: 70%;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -74,8 +76,8 @@ const containerStyle = css`
   `;
 
   const buttonStyle = css`
-    width: 20%;
     display: flex;
+    width: 25%;
     align-items: center;
     justify-content: center;
     background-color: #444;
@@ -90,6 +92,12 @@ const containerStyle = css`
     padding: 1rem;
     font-size: 1.2rem;
     color: #fff;
+  `;
+
+  const fillerDivStyle = css`
+  display: flex;
+  flex-direction: column;
+  width:5%
   `;
 
   const renderHeader = () => {
@@ -111,6 +119,7 @@ const containerStyle = css`
           </div>
         ))}
       </div>
+      <div css={fillerDivStyle}/>
       <div css={buttonStyle}>
         <div css={buttonText}>{type === 'event' ? 'View All Events' : 'View All Links'}</div>
       </div>

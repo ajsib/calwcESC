@@ -14,7 +14,7 @@ interface NewsItem {
   description: string;
   content: string;
   priority: number;
-  id: number;
+  id: number; 
 }
 
 const NewsSection = () => {
@@ -62,7 +62,7 @@ const NewsSection = () => {
           <MediumNewsCard key={index} item={item} />
         ))}
       </div>
-      <div css={rightColumn}>
+      <div css={[rightColumn, { borderLeft: '1px solid #999' }]}>
         {/* Render priority 3 items in small cards */}
         {newsItems.filter(item => item.priority === 3).map((item, index) => (
           <SmallNewsCard key={index} item={item} />

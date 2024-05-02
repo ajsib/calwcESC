@@ -5,12 +5,12 @@ import { useRouter } from 'next/router';
 import { useArticle } from '@/contexts/ArticleContext';
 
 interface NewsItem {
-  id: number; // Ensure the ID is part of the NewsItem for routing
+  id: number; 
   title: string;
   date: string;
   imageUrl: string;
   description: string;
-  content: string; // Assume content is needed for detailed view
+  content: string; 
   priority: number;
 }
 
@@ -44,7 +44,7 @@ export const LargeNewsCard: React.FC<LargeNewsCardProps> = ({ item }) => {
     transition: all 0.5s ease;
     cursor: pointer; /* Ensure it's clickable */
     &:hover {
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
       div.content {
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
@@ -84,7 +84,7 @@ export const LargeNewsCard: React.FC<LargeNewsCardProps> = ({ item }) => {
     right: 0;
     padding: 0 2.5rem;
     z-index: 2;
-    height: 8rem; // Smaller max-height to start
+    height: 8rem; 
     transition: height 0.7s ease, background-color 0.5s ease;
     display: flex;
     flex-direction: column;
@@ -110,16 +110,16 @@ export const LargeNewsCard: React.FC<LargeNewsCardProps> = ({ item }) => {
   `;
 
   const readMoreStyle = css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    color: white;
-    font-size: 1.2rem;
-    gap: 0.4rem;
-    svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom:2rem;
+  right: 2rem;
+  color: white;
+  font-size: 1.2rem;
+  gap: 0.4rem;
+  svg{
       transition: all 0.5s ease;
     }
     &:hover {
@@ -142,7 +142,7 @@ export const LargeNewsCard: React.FC<LargeNewsCardProps> = ({ item }) => {
         <div css={descriptionStyle} className='description'>
             <p>{item.description}</p> {/* Content shown at the bottom on hover */}
             <div css={readMoreStyle}>
-                <p>Read More</p>
+                <p>Read Article</p>
                 <RightWedgeThin color='#fff' size={15} />
             </div>
         </div>
