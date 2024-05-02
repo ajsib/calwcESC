@@ -12,6 +12,7 @@ const ProjectManagementPage = () => {
     {
       id: 1,
       title: 'Design Homepage',
+      hasSubtasks: true,
       subTasks: [
         { id: 1, title: 'Create wireframes' },
         { id: 2, title: 'Design UI mockups' },
@@ -20,11 +21,13 @@ const ProjectManagementPage = () => {
     {
       id: 2,
       title: 'Implement Login Feature',
+      hasSubtasks: true,
       subTasks: [{ id: 3, title: 'Implement frontend' }],
     },
     {
       id: 3,
       title: 'Refactor Codebase',
+      hasSubtasks: true,
       subTasks: [
         { id: 4, title: 'Optimize performance' },
         { id: 5, title: 'Clean up redundant code' },
@@ -33,6 +36,7 @@ const ProjectManagementPage = () => {
     {
       id: 4,
       title: 'Test New Feature',
+      hasSubtasks: false,
       subTasks: [{ id: 6, title: 'Write test cases' }],
     },
   ];

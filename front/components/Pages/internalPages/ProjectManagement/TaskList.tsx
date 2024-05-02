@@ -1,16 +1,24 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { useState } from 'react';
 import TaskCard from './TaskCard';
 import SubTaskCard from './SubTaskCard';
+
+interface SubTask {
+  id: number;
+  title: string;
+  isChecked?: boolean;
+}
 
 interface Task {
   id: number;
   title: string;
-  // Assume other properties like assignee, due date, etc., are part of the Task type
+  hasSubtasks: boolean;
+  subTasks: SubTask[];
 }
 
 interface TaskListProps {
-  tasks?: Task[];
+  tasks: Task[];
 }
 
 const taskListStyle = css`
@@ -18,21 +26,25 @@ const taskListStyle = css`
 `;
 
 const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
-  // Replace with actual tasks data
-  const mockTasks: Task[] = tasks || [
-    { title: 'Design Homepage', id: 1 },
-    { title: 'Implement Login Feature', id: 2 },
-    { title: 'Refactor Codebase', id: 3 },
-    { title: 'Test New Feature', id: 4 },
-    // ... other tasks
-  ];
+  const [expandedTaskId, setExpandedTaskId] = useState<number | null>(null);
+
+  const toggleSubtasks = (id: number) => {
+    setExpandedTaskId((prevId) => (prevId === id ? null : id));
+  };
 
   return (
     <div css={taskListStyle}>
-      {mockTasks.map((task) => (
+      {tasks.map((task) => (
         <div key={task.id}>
-          <TaskCard title={task.title} dueDate="" isComplete={false} /> {/* Added dueDate and isComplete */}
-          <SubTaskCard parentTask={task} />
+          <TaskCard
+            title={task.title}
+            dueDate=""
+            isComplete={false}
+            onToggleSubtasks={() => toggleSubtasks(task.id)}
+            expandSubtasks={expandedTaskId === task.id}
+            hasSubtasks={task.hasSubtasks}
+          />
+          {task.hasSubtasks && <SubTaskCard subTasks={task.subTasks} expanded={expandedTaskId === task.id} />}
         </div>
       ))}
     </div>

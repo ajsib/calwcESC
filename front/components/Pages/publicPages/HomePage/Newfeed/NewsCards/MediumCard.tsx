@@ -1,5 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { useRouter } from 'next/router';
+import { useArticle } from '@/contexts/ArticleContext';
 import RightWedgeThin from '@/components/UI/arrows/RightWedgeThin';
 
 interface NewsItem {
@@ -7,6 +9,9 @@ interface NewsItem {
   date: string;
   imageUrl: string;
   description: string;
+  id: number;
+  priority: number;
+  content: string;
 }
 
 interface MediumNewsCardProps {
@@ -14,6 +19,15 @@ interface MediumNewsCardProps {
 }
 
 export const MediumNewsCard: React.FC<MediumNewsCardProps> = ({ item }) => {
+  const router = useRouter();
+  const articleContext = useArticle()!;
+  const { setArticle } = articleContext;
+
+  const handleClick = () => {
+    setArticle(item); // Set the article using the item data
+    router.push(`/news/${encodeURIComponent(item.id)}`); // Navigate to the appropriate article
+  };
+
   const cardStyle = css`
   display: flex;
   flex-direction: column;
@@ -90,6 +104,7 @@ export const MediumNewsCard: React.FC<MediumNewsCardProps> = ({ item }) => {
     svg {
       transition: all 0.2s ease;
     }
+  `;
   `;
 
   return (

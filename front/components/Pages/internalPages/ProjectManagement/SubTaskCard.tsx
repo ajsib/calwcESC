@@ -1,64 +1,74 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-import { useState } from 'react';
+import { css, keyframes } from '@emotion/react';
+import { useState, useEffect } from 'react';
 
 interface SubTask {
   id: number;
   title: string;
-  isChecked?: boolean; // Added isChecked as optional property
+  isChecked?: boolean;
 }
 
 interface SubTaskCardProps {
-  parentTask: {
-    id: number;
-    title: string;
-  };
+  subTasks: SubTask[];
+  expanded: boolean;
 }
 
-const subTaskCardStyle = css`
-  border: 1px solid #DADADA;
-  margin: 0.5rem 0 0.5rem 2rem; /* Adjusted margin */
-  padding: 1rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #fff;
+const slideDown = keyframes`
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+  to {
+    max-height: 500px;
+    opacity: 1;
+  }
 `;
 
-const subTaskTitleStyle = css`
-  flex-grow: 1;
+const slideUp = keyframes`
+  from {
+    max-height: 500px;
+    opacity: 1;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
 `;
 
-const checkboxStyle = css`
-  margin-left: 1rem; /* Margin between subtask title and checkbox */
+const subTaskCardContainerStyle = (expanded: boolean) => css`
+  overflow: hidden;
+  animation: ${expanded ? slideDown : slideUp} 0.5s ease forwards;
 `;
 
-const SubTaskCard: React.FC<SubTaskCardProps> = ({ parentTask }) => {
-  // Replace with actual subtasks data
-  const [subTasks, setSubTasks] = useState<SubTask[]>([
-    { title: 'Subtask 1', id: 1, isChecked: false }, // Added isChecked
-    { title: 'Subtask 2', id: 2, isChecked: false }, // Added isChecked
-    // ... other subtasks
-  ]);
+const SubTaskCard: React.FC<SubTaskCardProps> = ({ subTasks, expanded }) => {
+  useEffect(() => {
+    console.log("SubTaskCard animation triggered: ", expanded);
+  }, [expanded]);
 
-  const handleSubTaskToggle = (id: number) => {
-    setSubTasks((prevSubTasks) =>
-      prevSubTasks.map((subTask) =>
-        subTask.id === id ? { ...subTask, isChecked: !subTask.isChecked } : subTask
-      )
-    );
-  };
+  const subTaskCardStyle = css`
+    border: 1px solid #DADADA;
+    margin: 0.5rem 0 0.5rem 2rem;
+    padding: 1rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+  `;
+
+  const checkboxStyle = css`
+    margin-left: 1rem;
+  `;
 
   return (
-    <div>
+    <div css={subTaskCardContainerStyle(expanded)}>
       {subTasks.map((subTask) => (
         <div key={subTask.id} css={subTaskCardStyle}>
-          <div css={subTaskTitleStyle}>{subTask.title}</div>
+          <div>{subTask.title}</div>
           <input
             type="checkbox"
             css={checkboxStyle}
             checked={subTask.isChecked || false}
-            onChange={() => handleSubTaskToggle(subTask.id)}
+            onChange={() => {}}
           />
         </div>
       ))}
