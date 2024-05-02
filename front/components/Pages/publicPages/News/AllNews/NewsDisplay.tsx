@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
 import NewsCard from './NewsCard';  // Import the NewsCard component
 import NewsData from '@/components/Pages/publicPages/News/data.json';
+import Pagination from './Pagination';
 
 interface NewsItem {
     title: string;
@@ -47,31 +48,30 @@ const NewsDisplay = () => {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding-bottom: 0.5rem;
         border-bottom: 1px solid #ccc;
-        margin-bottom: 0.5rem;
     `;
 
     const resultsStyle = css`
+        display: flex;
+        padding: 0 1rem;
+        align-items: center;
+        gap: 0.2rem;
+        flex-direction: row;
         font-size: 1rem;
         color: #333;
+        p{
+            font-weight: bold;
+        }
     `;
 
     const labelsStyle = css`
         display: flex;
         flex-direction: row;
-        padding-bottom: 0.5rem;
         gap: 1rem;
         align-items: center;
         border-bottom: 1px solid #ccc;
         font-size: 1rem;
-        margin-bottom: 1rem;
-    `;
-
-    const pageSelectorStyle = css`
-        display: flex;
-        gap: 10px;
-        align-items: center;
+        padding: 1rem;
     `;
 
     const newsCardsContainerStyle = css`
@@ -79,20 +79,14 @@ const NewsDisplay = () => {
         flex-direction: column;
     `;
 
-    const Pagination = () => {
-        const pageNumbers = Array.from({ length: numPages }, (_, i) => i + 1);
-        return (
-            <div css={pageSelectorStyle}>
-                <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage <= 1}>Previous</button>
-                {pageNumbers.map(page => (
-                    <button key={page} onClick={() => handlePageChange(page)} disabled={page === currentPage}>
-                        {page}
-                    </button>
-                ))}
-                <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage >= numPages}>Next</button>
-            </div>
-        );
-    };
+    const dateStyle = css`
+        width: 6rem;
+        font-size: 1rem;
+    `;
+
+    const fillerStyle = css`
+        width: 10rem;
+    `;
 
     // Get the current items to display
     const currentItems = newsItems.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -100,12 +94,13 @@ const NewsDisplay = () => {
     return (
         <div css={containerStyle}>
             <div css={headerStyle}>
-                <div css={resultsStyle}>{newsItems.length} entries found</div>
-                <Pagination />
+                <div css={resultsStyle}><p>{newsItems.length}</p> entries found</div>
+                <Pagination numPages={numPages} currentPage={currentPage} handlePageChange={handlePageChange} />
             </div>
             <div css={labelsStyle}>
-                <p>Date</p>
-                <p>Title</p>
+                <div css={dateStyle}>Date</div>
+                <div css={fillerStyle}></div>
+                <div>Title</div>
             </div>
             <div css={newsCardsContainerStyle}>
                 {currentItems.map((article: NewsItem, index: number) => (

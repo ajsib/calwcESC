@@ -2,34 +2,35 @@
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { useArticle } from '@/contexts/ArticleContext';
+import RightWedgeThin from '@/components/UI/arrows/RightWedgeThin';
 
 const newsCardStyle = css`
+    position: relative;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    padding-bottom: 1rem;
+    padding: 1rem 0;
     gap: 1rem;
     width: 100%;
-    margin-bottom: 1rem;
     border-bottom: 1px solid #ccc;
-    cursor: pointer; /* Change cursor on hover to indicate it's clickable */
-
-    > p {
-        width: 10rem; /* Exact width for the date alignment */
-        text-align: left; /* Center the date */
+    transition: all 0.3s ease;
+    svg{
+        transition: all 0.5s ease;
     }
-
-    > img {
-        width: 15rem;
-        height: 10rem;
-        object-fit: cover;
+    &:hover {
+        cursor: pointer;
+        background-color: #ccc;
+        svg {
+          transform: translateX(5px);
+        }
     }
 `;
+
 const imageStyle = css`
-    width: 15rem;
-    height: 10rem;
-    object-fit: cover;
-    margin-right: 1rem;
+    img {
+        width: 10rem;
+        height: 100%;
+    }
 `;
 
 const titleStyle = css`
@@ -37,6 +38,25 @@ const titleStyle = css`
     font-weight: bold;
     margin-bottom: 0.5rem;
 `;
+
+const dateStyle = css`
+    width: 6rem;
+    font-size: 1rem;
+    color: #6c757d;
+    padding-left: 1rem;
+`;
+
+
+const readMoreStyle = css`
+  display: flex;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  gap: 0.4rem;
+  `;
 
 interface NewsCardProps {
     id: number;
@@ -48,24 +68,34 @@ interface NewsCardProps {
     priority: number;
 }
 
-export default function NewsCard({ id, title, description, imageUrl, date, priority, content }: NewsCardProps) {
+const NewsCard = ({ id, title, description, imageUrl, date, priority, content }: NewsCardProps) => {
     const router = useRouter();
     const articleContext = useArticle()!;
-    const {setArticle} = articleContext;
+    const { setArticle } = articleContext;
 
     const handleClick = () => {
-        setArticle({id, title, date, imageUrl, description, content, priority});
+        setArticle({ id, title, date, imageUrl, description, content, priority });
         router.push(`/news/${encodeURIComponent(id)}`);
-    }
+    };
 
     return (
         <div css={newsCardStyle} onClick={handleClick}>
-            <p>{date}</p>
-            <img css={imageStyle} src={imageUrl} alt={title} />
+            <div css={dateStyle}>
+                <p>{date}</p>
+            </div>
+            <div css={imageStyle}>
+                <img src={imageUrl} alt={title} />
+            </div>
             <div>
                 <h3 css={titleStyle}>{title}</h3>
                 <p>{description}</p>
-            </div>  
+            </div>
+            <div css={readMoreStyle}>
+                <p>Read More</p>
+                <RightWedgeThin size={15} />
+            </div>
         </div>
     );
 }
+
+export default NewsCard;
