@@ -10,7 +10,7 @@ import tasks from "@/components/Shared/API/Data/tasks-dummy.json";
 import NewTaskModal from '@/components/Pages/internalPages/ProjectManagement/Modals/NewTask';
 import ManageTeamsModal from '@/components/Pages/internalPages/ProjectManagement/Modals/BucketsModal';
 import ArchiveModal from '@/components/Pages/internalPages/ProjectManagement/Modals/ArchiveModal';
-import TaskDetailsModal from '@/components/Pages/internalPages/ProjectManagement/Modals/TaskDetails';
+import TaskDetailsModal from '@/components/Pages/internalPages/ProjectManagement/Modals/TaskDetails/TaskDetails';
 
 const commonContainerStyle = css`
   margin: 2rem var(--margin);
@@ -47,7 +47,6 @@ const ProjectManagementPage = () => {
   const [allTasks, setAllTasks] = useState(tasks);
   const [isTeamsModalOpen, setIsTeamsModalOpen] = useState(false);
   const [isArchiveModalOpen, setIsArchiveModalOpen] = useState(false);
-  const [isTaskDetailsModalOpen, setIsTaskDetailsModalOpen] = useState(false);
 
   
   const addTeam = (teamName: string) => {

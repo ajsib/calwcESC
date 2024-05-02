@@ -3,23 +3,9 @@ import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
 import TaskCard from './TaskCard';
 import SubTaskCard from './SubTaskCard';
-import TaskDetailsModal from './Modals/TaskDetails';
+import TaskDetailsModal from './Modals/TaskDetails/TaskDetails';
+import {Task} from '@/components/Shared/Types/types';
 
-interface SubTask {
-  id: number;
-  title: string;
-  isChecked?: boolean;
-}
-
-interface Task {
-  id: number;
-  title: string;
-  subTasks: SubTask[];
-  people: number[];
-  bucket: string;
-  status: string;
-  dueDate: string;
-}
 
 interface TaskListProps {
   tasks: Task[];
