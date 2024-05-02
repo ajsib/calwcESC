@@ -1,11 +1,11 @@
 import Footer from "@/components/Shared/Public/Footer";
 import Header from "@/components/Shared/Public/Header/Header";
-import AllNews from "@/components/Pages/publicPages/News/AllNews";
+import AllNews from "@/components/Pages/publicPages/News/AllNews/AllNews";
 
 export default function News() {
     return (
         <>
-            <Header />
+            <Header backgroundColor='var(--primary-color)' />
             <AllNews />
             <Footer />
         </>
