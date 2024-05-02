@@ -1,50 +1,101 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import Card from "@/components/UI/Card";
-import WedgeRightBold from '@/components/UI/arrows/RightWedgeBold'
+import WedgeRightBold from '@/components/UI/arrows/RightWedgeBold';
 import { useRouter } from 'next/router'; 
 
-const cardTitleStyle = css`
-  font-size: 2.5rem;
-  color: var(--primary);
-  font-weight: bold;
-  padding-bottom: 2rem;
-  position: relative;
-`;
-
-const cardDescriptionStyle = css`
+const baseStyles = css`
   font-size: 1.2rem;
-  text-align: justify;
+  text-align: left;
   color: var(--primary);
-  line-height: 1.2;
-  @media (max-width: 768px) {
-    text-align: left;
-  }
 `;
 
-const learnMoreStyle = css`
-  font-size: 0.9rem;
-  padding-right: 1rem;
-`;
+const cardStyles = css`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: calc(100% - 2rem);
+  margin: 0 1rem;
+  height: calc(50vh - 1.5rem);
+  min-height: 22rem;
+  box-shadow: none;
+  transition: box-shadow 0.5s ease;
 
-const cardStyleHover = css`
+  /* Add transition property to the SVG */
   svg {
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.3s ease; /* Adjust the duration and easing as needed */
   }
 
   &:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     svg {
-      transform: translateX(5px);
+      transform: translateX(3px);
+    }
+    .learn-more {
+      text-decoration: underline;
     }
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: auto;
+  }
+`;
+
+
+const cardImageStyle = css`
+  height: auto;
+  background-size: cover;
+  background-position: center;
+  width: calc(50% - 2rem);
+  margin: 1rem;
+  background-repeat: no-repeat;
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: 0;
+    height: 20rem;
+  }
+`;
+
+const cardTextStyle = css`
+  width: calc(50% - 5rem);
+  height: calc(100% - 4rem);
+  padding-top: 2rem;
+  margin-right: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+const textStyle = css`
+  ${baseStyles};
+  font-size: 2.5rem;
+  font-weight: bold;
+`;
+
+const descriptionStyle = css`
+  ${baseStyles};
+  font-size: 1.2rem;
+  line-height: 1.5;
+`;
+
+const learnMoreStyle = css`
+  ${baseStyles};
+  font-size: 1.1rem;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  transition: text-decoration 0.2s ease-out;
 `;
 
 const columnWrapperStyle = css`
   display: flex;
   flex-direction: row;
-  padding-top: 4rem;
-  padding-bottom; 3rem;
-  justify-content: left;
+  justify-content: start;
   align-items: center;
 `;
 
@@ -52,67 +103,25 @@ interface CardTemplateProps {
   imageSrc: string;
   title: string;
   text: React.ReactNode;
-  order: number;
   isMobile: boolean;
   onClick?: () => void;
 }
 
 const CardTemplate = ({ imageSrc, title, text, isMobile, onClick }: CardTemplateProps) => {
   const router = useRouter();
-  const { locale } = router;
-
-  const LearnMore = locale === 'en' ? 'Learn More' : 'En savoir plus';
-
-  const cardStyle = css`
-    display: flex;
-    flex-direction: ${isMobile ? 'column' : 'row'}; // Updated to conditionally set flex-direction
-  `;
-
-  const cardSize = css`
-  padding-top: 2rem;
-  width: ${isMobile ? 'calc(100% - 1.5rem)' : 'calc(100% - 2 * var(--margin) + 1rem)'};
-  padding-left: ${isMobile ? '0.75rem' : 'calc(var(--margin) - 0.5rem)'};
-  padding-right: ${isMobile ? '0.75rem' : 'calc(var(--margin) - 0.5rem)'};
-  padding-bottom: 2rem;
-`;
-
-
-  const cardImage = css`
-    height: ${isMobile ? '20rem' : 'auto'};
-    background-size:  cover;
-    background-position: center;
-    width: ${isMobile ? 'calc(100%)' : 'calc(50% - 2.5rem)'};
-    margin: ${isMobile ? '0rem' : '1rem'};
-    background-repeat: no-repeat;
-  `;
-
-  const cardTextStyle = css`
-    width: ${isMobile ? 'calc(100% - 1rem)' : 'calc(50% - 2.5rem)'};
-    text-align: left;
-    align-self: flex-start;
-    padding-left: 0.5rem;
-    padding-right: ${isMobile ? '0.5rem' : '0rem'};
-    padding-top: 3rem;
-    padding-bottom: 4rem;
-  `;
+  const LearnMoreText = router.locale === 'en' ? 'Learn More' : 'En savoir plus';
 
   return (
-    <div css={cardSize}>
-      <Card>
-        <div css={[cardStyle, cardStyleHover]} onClick={onClick}> 
-          <div css={[cardImage, { backgroundImage: `url(${imageSrc})` }]} /> 
-          <div css={cardTextStyle}>
-            <h1 className="card-title-hover-effect" css={cardTitleStyle}>
-              {title}
-            </h1>
-            <p css={cardDescriptionStyle}>{text}</p>
-            <div css={columnWrapperStyle}>
-              <p className="caption" css={learnMoreStyle}>{LearnMore}</p>
-              <WedgeRightBold size={14}/>
-            </div>
-          </div>
+    <div css={cardStyles} onClick={onClick}> 
+      <div css={[cardImageStyle, { backgroundImage: `url(${imageSrc})` }]} /> 
+      <div css={cardTextStyle}>
+        <h1 css={textStyle}>{title}</h1>
+        <p css={descriptionStyle}>{text}</p>
+        <div css={columnWrapperStyle}>
+          <p css={learnMoreStyle} className="learn-more">{LearnMoreText}</p>
+          <WedgeRightBold size={16}/>
         </div>
-      </Card>
+      </div>
     </div>
   );
 }

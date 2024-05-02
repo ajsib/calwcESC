@@ -15,39 +15,57 @@ interface MediumNewsCardProps {
 
 export const MediumNewsCard: React.FC<MediumNewsCardProps> = ({ item }) => {
   const cardStyle = css`
-    display: flex;
-    flex-direction: column;
-    background-color: #333;
-    position: relative;
-    overflow: hidden;
-    height: 50%;
-    max-height: 100%;
-    transition: all 0.5s ease;
-    &:hover {
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-      // Apply hover effects to the arrow and "Read More" text
-      .readMoreText {
-        text-decoration: underline;
-      }
-      svg {
-        transform: translateX(3px);
-      }
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: calc(50% - 0.5rem);
+  max-height: 100%;
+  transition: all 0.5s ease;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    .readMoreText {
+      text-decoration: underline;
+      color: #444;
     }
+    svg {
+      transform: translateX(3px);
+      // fill: #444;
+    }
+  }
+`;
+
+  const imageContainerStyle = css`
+    position: relative;
+    width: 100%;
+    height: calc(50% - 0.5rem);
+    overflow: hidden;
   `;
 
   const imageStyle = css`
     width: 100%;
-    height: calc(50% - 0.5rem);
+    height: 100%;
     object-fit: cover;
+  `;
+
+  const overlayStyle = css`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3) 10%, rgba(0, 0, 0, 0) 100%);
   `;
 
   const contentStyle = css`
     position: relative;
     z-index: 2;
     margin: 1rem;
-    color: white;
+    color: #444;
     h3 {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
+      font-weight: bold;
+      line-height: 1.3rem;
       margin-bottom: 10px;
     }
     small {
@@ -65,27 +83,28 @@ export const MediumNewsCard: React.FC<MediumNewsCardProps> = ({ item }) => {
     position: absolute;
     bottom: 1rem;
     right: 1rem;
-    color: white;
+    color: #666;
     font-size: 0.9rem;
     gap: 0.4rem;
     cursor: pointer;
     svg {
-        transition: all 0.5s ease;
+      transition: all 0.2s ease;
     }
-    `;
-
-  
+  `;
 
   return (
     <div css={cardStyle}>
-      <img src={item.imageUrl} alt={item.title} css={imageStyle} />
+      <div css={imageContainerStyle}>
+        <img src={item.imageUrl} alt={item.title} css={imageStyle} />
+        <div css={overlayStyle}></div>
+      </div>
       <div css={contentStyle}>
         <h3>{item.title}</h3>
         <small>{item.date}</small>
       </div>
       <div css={readMoreStyle}>
         <p className="readMoreText">Read Article</p>
-        <RightWedgeThin color='#fff' size={13} />
+        <RightWedgeThin color='#555' size={13} />
       </div>
     </div>
   );

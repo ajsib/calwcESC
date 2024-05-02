@@ -31,7 +31,7 @@ export const LargeNewsCard: React.FC<LargeNewsCardProps> = ({ item }) => {
     transition: all 0.5s ease;
 
     &:hover {
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
       div.content {
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
@@ -70,7 +70,7 @@ export const LargeNewsCard: React.FC<LargeNewsCardProps> = ({ item }) => {
     right: 0;
     padding: 0 2.5rem;
     z-index: 2;
-    height: 8rem; // Smaller max-height to start
+    height: 8rem; 
     transition: height 0.7s ease, background-color 0.5s ease;
 
     display: flex;
@@ -101,8 +101,8 @@ export const LargeNewsCard: React.FC<LargeNewsCardProps> = ({ item }) => {
   align-items: center;
   justify-content: center;
   position: absolute;
-  bottom: 1rem;
-  right: 1rem;
+  bottom:2rem;
+  right: 2rem;
   color: white;
   font-size: 1.2rem;
   gap: 0.4rem;
@@ -129,7 +129,7 @@ export const LargeNewsCard: React.FC<LargeNewsCardProps> = ({ item }) => {
         <div css={descriptionStyle} className='description'>
             <p>{item.description}</p> {/* Content shown at the bottom on hover */}
             <div css={readMoreStyle}>
-                <p>Read More</p>
+                <p>Read Article</p>
                 <RightWedgeThin color='#fff' size={15} />
             </div>
         </div>

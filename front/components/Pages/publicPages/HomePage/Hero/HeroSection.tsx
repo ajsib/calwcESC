@@ -75,6 +75,7 @@ const HeroSection = () => {
     color: #fff;
     position: absolute;
     max-height: calc(100% - 4rem);
+    width: 100%;
     height: auto;
     bottom: 0;
     right: 0;
