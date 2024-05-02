@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import SearchIcon from '@/components/UI/icons/SearchIcon';
 
-const NewsSearchComponent = () => {
+const NewsSearch = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [dateFrom, setDateFrom] = useState('');
     const [dateTo, setDateTo] = useState('');
@@ -14,34 +15,38 @@ const NewsSearchComponent = () => {
 
     const formStyle = css`
         display: flex;
-        align-items: center;
-        justify-content: space-around;
-        margin: 20px;
-        padding: 10px;
-        background: #f3f3f3;
-        border-radius: 8px;
+        align-items: center; /* Align items vertically */
+        justify-content: space-between;
+        margin-top: 1rem;
     `;
 
     const labelStyle = css`
         display: block;
         font-weight: bold;
-        margin-bottom: 5px;
+        margin-bottom: 0.5rem;
+    `;
+
+    const searchParentStyle = css`
+        width: 60%;
     `;
 
     const inputStyle = css`
-        padding: 8px;
-        margin-right: 20px;
+        padding: 1rem;
         border: 1px solid #ccc;
         border-radius: 4px;
+        width: 100%;
     `;
 
     const buttonStyle = css`
-        padding: 8px 16px;
+        padding: 1rem;
         background-color: #007BFF;
         color: white;
         border: none;
         border-radius: 4px;
+        width: 10%;
+        height: 100%;
         cursor: pointer;
+        align-self: flex-end; /* Align the button to the bottom of its container */
         &:hover {
             background-color: #0056b3;
         }
@@ -49,40 +54,42 @@ const NewsSearchComponent = () => {
 
     return (
         <form css={formStyle} onSubmit={(e) => { e.preventDefault(); handleSearch(); }}>
-            <div>
-                <label css={labelStyle} htmlFor="searchTerm">Search Articles</label>
-                <input
-                    css={inputStyle}
-                    id="searchTerm"
-                    type="text"
-                    placeholder="Enter search term"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                />
+            <div css={searchParentStyle}>
+                <div>
+                    <label css={labelStyle} htmlFor="searchTerm">Search Articles</label>
+                    <input
+                        css={inputStyle}
+                        id="searchTerm"
+                        type="text"
+                        placeholder="Enter search term"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <label css={labelStyle} htmlFor="dateFrom">Date From</label>
+                    <input
+                        css={inputStyle}
+                        id="dateFrom"
+                        type="date"
+                        value={dateFrom}
+                        onChange={(e) => setDateFrom(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <label css={labelStyle} htmlFor="dateTo">Date To</label>
+                    <input
+                        css={inputStyle}
+                        id="dateTo"
+                        type="date"
+                        value={dateTo}
+                        onChange={(e) => setDateTo(e.target.value)}
+                    />
+                </div>
             </div>
-            <div>
-                <label css={labelStyle} htmlFor="dateFrom">Date From</label>
-                <input
-                    css={inputStyle}
-                    id="dateFrom"
-                    type="date"
-                    value={dateFrom}
-                    onChange={(e) => setDateFrom(e.target.value)}
-                />
-            </div>
-            <div>
-                <label css={labelStyle} htmlFor="dateTo">Date To</label>
-                <input
-                    css={inputStyle}
-                    id="dateTo"
-                    type="date"
-                    value={dateTo}
-                    onChange={(e) => setDateTo(e.target.value)}
-                />
-            </div>
-            <button css={buttonStyle} type="submit">Search</button>
+            <button css={buttonStyle} type="submit"><SearchIcon size={24} /></button>
         </form>
     );
 };
 
-export default NewsSearchComponent;
+export default NewsSearch;
