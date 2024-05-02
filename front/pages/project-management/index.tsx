@@ -11,6 +11,7 @@ import NewTaskModal from '@/components/Pages/internalPages/ProjectManagement/Mod
 import ManageTeamsModal from '@/components/Pages/internalPages/ProjectManagement/Modals/BucketsModal';
 import ArchiveModal from '@/components/Pages/internalPages/ProjectManagement/Modals/ArchiveModal';
 import TaskDetailsModal from '@/components/Pages/internalPages/ProjectManagement/Modals/TaskDetails/TaskDetails';
+import { Task, SubTask } from '@/components/Shared/Types/types';
 
 const commonContainerStyle = css`
   margin: 2rem var(--margin);
@@ -22,22 +23,6 @@ const paperStyle = css`
   background-color: #f3f3f3;
   padding: 1rem;
 `;
-
-interface SubTask {
-  id: number;
-  title: string;
-  isChecked?: boolean;
-}
-
-type Task = {
-  id: number;
-  title: string;
-  subTasks: SubTask[];
-  people: number[];
-  bucket: string;
-  status: string;
-  dueDate: string;
-};
 
 const ProjectManagementPage = () => {
   const [selectedStatus, setSelectedStatus] = useState<string | null>(null);

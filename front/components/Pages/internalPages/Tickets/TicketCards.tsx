@@ -1,16 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import Circle from '@/components/UI/Dot';
-
-interface Ticket {
-  id: string;
-  title: string;
-  status: string;
-  priority: string;
-  date: string;
-  assignedTo: string;
-  description: string;
-}
+import { Ticket } from '@/components/Shared/Types/types';
 
 const ticketCardsStyle = css`
   display: flex;

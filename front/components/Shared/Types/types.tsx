@@ -23,4 +23,22 @@ export interface Profile {
     department: string;
     reportsTo: string;
   }
+
+export interface File {
+  fileName: string;
+  fileType: string;
+  creator: string;
+  dateAdded: string;
+  dateModified: string;
+}
+
+export interface Ticket {
+  id: string;
+  title: string;
+  status: string;
+  priority: string;
+  date: string;
+  assignedTo: string;
+  description: string;
+}
   

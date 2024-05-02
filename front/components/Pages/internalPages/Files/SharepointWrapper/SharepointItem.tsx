@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
 import { css } from '@emotion/react';
+import { File } from '@/components/Shared/Types/types';
 
 // Styles for the entire file entry
 const fileEntryStyle = css`
@@ -25,15 +26,9 @@ const fileInfoStyle = css`
   text-overflow: ellipsis;
 `;
 
-interface FileProps {
-  fileName: string;
-  fileType: string;
-  creator: string;
-  dateAdded: string;
-  dateModified: string;
-}
 
-const FileEntry: React.FC<FileProps> = ({ fileName, fileType, creator, dateAdded, dateModified }) => {
+
+const FileEntry: React.FC<File> = ({ fileName, fileType, creator, dateAdded, dateModified }) => {
   return (
     <div css={fileEntryStyle}>
       <div css={fileNameStyle}>{fileName}</div>
