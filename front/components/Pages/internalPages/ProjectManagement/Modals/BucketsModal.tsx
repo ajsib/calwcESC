@@ -1,25 +1,32 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from 'react';
-import Modal from './Modal'; // Reusing the Modal component
+import Modal from '../../../../Shared/Internal/Modal'; // Reusing the Modal component
 import { css } from '@emotion/react';
 
 const formStyle = css`
   display: flex;
   flex-direction: column;
+  padding: 1rem;
+  background: #f3f3f3;
 `;
 
 const inputStyle = css`
   margin: 10px 0;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: Arial, sans-serif; /* Change font family */
+  background-color: #f3f3f3;
+  transition: border-color 0.3s ease-in-out;
 `;
 
 const buttonStyle = css`
   margin-top: 10px;
   padding: 10px 20px;
   border: none;
-  background-color: #4287f5;
+  background-color: var(--primary-color);
   color: white;
+  font-size: 1rem;
   cursor: pointer;
 `;
 

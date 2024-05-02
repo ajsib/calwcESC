@@ -1,34 +1,61 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from 'react';
-import Modal from './Modal'; // Assuming Modal is a previously defined component
+import Modal from '../../../../Shared/Internal/Modal'; // Assuming Modal is a previously defined component
 import { css } from '@emotion/react';
 import peopleData from '@/components/Shared/API/Data/profiles-dummy.json';
 
 const formStyle = css`
   display: flex;
   flex-direction: column;
+  padding: 1rem;
+  background: #f3f3f3;
 `;
 
 const inputStyle = css`
   margin: 10px 0;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: Arial, sans-serif; /* Change font family */
+  background-color: #f3f3f3;
+  transition: border-color 0.3s ease-in-out;
 `;
 
 const selectStyle = css`
   margin: 10px 0;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: Arial, sans-serif; /* Change font family */
+  background-color: #f3f3f3;
+  transition: border-color 0.3s ease-in-out;
 `;
 
 const buttonStyle = css`
-  margin-top: 10px;
   padding: 10px 20px;
   border: none;
-  background-color: #4287f5;
+  background-color: var(--primary-color);
   color: white;
+  font-size: 1rem;
   cursor: pointer;
 `;
+
+const subTaskContainerStyle = css`
+    display: flex; 
+    justify-content: 
+    space-between; 
+    align-items: center;
+    gap: 10px;
+    button {
+        width: 50%;
+        height: 100%;
+    }
+    input {
+        width: 50%;
+        height: 100%;
+    }
+`;
+
 
 interface SubTask {
   id: number;
@@ -49,9 +76,10 @@ interface NewTaskModalProps {
   isOpen: boolean;
   close: () => void;
   addTask: (task: Task) => void;
+  teams: string[]; // Array of teams
 }
 
-const NewTaskModal: React.FC<NewTaskModalProps> = ({ isOpen, close, addTask }) => {
+const NewTaskModal: React.FC<NewTaskModalProps> = ({ isOpen, close, addTask, teams }) => {
   const [title, setTitle] = useState('');
   const [subTasks, setSubTasks] = useState<SubTask[]>([]);
   const [subTaskInput, setSubTaskInput] = useState('');
@@ -88,21 +116,23 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({ isOpen, close, addTask }) =
     }
   };
 
-  const findPersonById = (id: number) => {
-    return peopleData.find(person => person.id === id);
-  };
-
   return (
     <Modal isOpen={isOpen} close={close}>
       <form css={formStyle} onSubmit={handleSubmit}>
-        <input css={inputStyle} value={title} onChange={e => setTitle(e.target.value)} placeholder="Title" />
+        <input
+          css={inputStyle}
+          placeholder="Title"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+        />
         
-        <div>
+        <div css={subTaskContainerStyle}>
           <input css={inputStyle} value={subTaskInput} onChange={e => setSubTaskInput(e.target.value)} placeholder="Add SubTask" />
           <button type="button" css={buttonStyle} onClick={handleAddSubTask}>Add SubTask</button>
         </div>
 
         <select css={selectStyle} value={people.toString()} onChange={handleSelectChange}>
+          <option value="">Select People</option>
           {peopleData.map(person => (
             <option key={person.id} value={person.id}>
               {person.name}
@@ -112,8 +142,11 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({ isOpen, close, addTask }) =
 
         <select css={selectStyle} value={bucket} onChange={e => setBucket(e.target.value)}>
           <option value="">Select Bucket</option>
-          <option value="Marketing Team">Marketing Team</option>
-          <option value="Development Team">Development Team</option>
+          {teams.map(team => (
+            <option key={team} value={team}>
+              {team}
+            </option>
+          ))}
         </select>
 
         <select css={selectStyle} value={status} onChange={e => setStatus(e.target.value)}>

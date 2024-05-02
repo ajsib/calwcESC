@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import RightWedgeThin from '@/components/UI/arrows/RightWedgeMedium';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-interface SubTask {
+type SubTask = {
   id: number;
   title: string;
   isChecked?: boolean;
-}
+};
 
 interface TaskCardProps {
   title: string;
@@ -19,17 +19,35 @@ interface TaskCardProps {
   people: Number[];
   bucket: string;
   status: string;
+  onClick: () => void;
 }
 
-const TaskCard: React.FC<TaskCardProps> = ({ title, dueDate, isComplete, onToggleSubtasks, expandSubtasks, subTasks, people, bucket, status }) => {
-  const [hover, setHover] = useState(false); // State to handle hover
-  const [dropdownActive, setDropdownActive] = useState(false); // State to track dropdown activation
-  const [hasSubtasks, setHasSubtasks] = useState(subTasks.length > 0); // State to track subtasks
+const TaskCard: React.FC<TaskCardProps> = ({
+  title,
+  dueDate,
+  isComplete,
+  onToggleSubtasks,
+  expandSubtasks,
+  subTasks,
+  people,
+  bucket,
+  status,
+  onClick,
+}) => {
+  const [hover, setHover] = useState(false);
+  const [dropdownActive, setDropdownActive] = useState(false);
+  const [hasSubtasks, setHasSubtasks] = useState(subTasks.length > 0);
+  useEffect(() => {
+    setDropdownActive(expandSubtasks);
+  }, [expandSubtasks]);
 
-  // Calculate the margin-right value based on the hasSubtasks prop
+  const handleToggleSubtasks = () => {
+    setDropdownActive(!dropdownActive);
+    onToggleSubtasks();
+  };
+
   const marginRightValue = hasSubtasks ? '1rem' : '3rem';
 
-  // Define the avatarStyle with the calculated margin-right value
   const avatarStyle = css`
     width: 40px;
     height: 40px;
@@ -39,13 +57,19 @@ const TaskCard: React.FC<TaskCardProps> = ({ title, dueDate, isComplete, onToggl
   `;
 
   const taskCardStyle = css`
-  border: 1.5px solid #DADADA;
-  padding: 2rem; // Increased from 1rem for more internal space
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: ${dropdownActive ? '1rem' : '1.5rem'}; // Increased spacing
-  position: relative;
+    border: 1.5px solid #dadada;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: ${dropdownActive ? '1rem' : '1.5rem'};
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; // Added transition
+    &:hover:not(:active) { // Exclude hover effect when the button is being clicked
+      transform: ${hover ? "none" : "translateY(-2px)"};
+      box-shadow: ${hover ? "none" : "0 4px 6px rgba(0,0,0,0.05)"};
+      cursor: pointer;
+    }
   `;
 
   const statusBorderStyle = css`
@@ -63,7 +87,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ title, dueDate, isComplete, onToggl
     top: 0;
     bottom: 0;
     width: 2px;
-    background-color: rgba(0, 0, 0, 0.1); // Grey overlay color with opacity
+    background-color: rgba(0, 0, 0, 0.1);
   `;
 
   const taskTitleStyle = css`
@@ -73,8 +97,8 @@ const TaskCard: React.FC<TaskCardProps> = ({ title, dueDate, isComplete, onToggl
     font-weight: bold;
     align-items: center;
     flex-grow: 1;
-    margin-left: 0.5rem; // Adjust margin for space between border and text
-    position: relative; /* Position relative for absolute positioning of status circle */
+    margin-left: 0.5rem;
+    position: relative;
   `;
 
   const actionButtonsStyle = css`
@@ -91,13 +115,14 @@ const TaskCard: React.FC<TaskCardProps> = ({ title, dueDate, isComplete, onToggl
     padding: 0.5rem;
     margin-left: 0.5rem;
     transition: background-color 0.3s ease;
+    cursor: pointer;
     svg {
       transition: transform 0.3s ease, fill 0.3s ease;
     }
     &:hover {
       svg {
-        fill: #000; // Changing fill color to black on hover
-        transform: rotate(90deg); // Rotating SVG on hover
+        fill: #000;
+        transform: rotate(90deg);
       }
     }
   `;
@@ -109,28 +134,28 @@ const TaskCard: React.FC<TaskCardProps> = ({ title, dueDate, isComplete, onToggl
   `;
 
   return (
-    <div css={taskCardStyle}>
+    <div css={taskCardStyle} onClick={hover ? undefined : onClick}>
       <div css={statusBorderStyle}></div>
       <div css={statusOverlayStyle}></div>
-      <div css={taskTitleStyle}>
-        {title}
-      </div>
-      <div css={[avatarStyle, { hasSubtasks }]}></div> {/* Pass hasSubtasks as a prop */}
+      <div css={taskTitleStyle}>{title}</div>
+      <div css={[avatarStyle, { hasSubtasks }]}></div>
       <div css={actionButtonsStyle}>
         <div css={dateStyle}>{dueDate}</div>
         {isComplete ? <span>&#10003;</span> : null}
         {hasSubtasks ? (
-          <button 
+          <button
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
-            onClick={() => {
-              setDropdownActive(!dropdownActive); // Toggle dropdown activation
-              onToggleSubtasks(); // Call the provided toggle function
-            }} 
-            css={dropDownButtonStyle}>
-            <RightWedgeThin size={20} rotation={hover ? 90 : dropdownActive ? 90 : 0} fillColor={hover ? '#777' : dropdownActive ? '#777' : '#bbb'} />
+            onClick={handleToggleSubtasks}
+            css={dropDownButtonStyle}
+          >
+            <RightWedgeThin
+              size={20}
+              rotation={hover ? 90 : dropdownActive ? 90 : 0}
+              fillColor={hover ? '#777' : dropdownActive ? '#777' : '#bbb'}
+            />
           </button>
-        ) : null }
+        ) : null}
       </div>
     </div>
   );

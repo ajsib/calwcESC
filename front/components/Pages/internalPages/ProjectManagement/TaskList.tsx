@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
 import TaskCard from './TaskCard';
 import SubTaskCard from './SubTaskCard';
+import TaskDetailsModal from './Modals/TaskDetails';
 
 interface SubTask {
   id: number;
@@ -10,7 +11,7 @@ interface SubTask {
   isChecked?: boolean;
 }
 
-type Task = {
+interface Task {
   id: number;
   title: string;
   subTasks: SubTask[];
@@ -18,7 +19,7 @@ type Task = {
   bucket: string;
   status: string;
   dueDate: string;
-};
+}
 
 interface TaskListProps {
   tasks: Task[];
@@ -31,26 +32,34 @@ const taskListStyle = css`
 
 const TaskList: React.FC<TaskListProps> = ({ tasks, onAddTask }) => {
   const [expandedTaskId, setExpandedTaskId] = useState<number | null>(null);
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const openTaskDetails = (task: Task) => {
+    setSelectedTask(task);
+    setIsModalOpen(true);
+  };
 
   const toggleSubtasks = (id: number) => {
-    setExpandedTaskId((prevId) => (prevId === id ? null : id));
+    setExpandedTaskId(prevId => prevId === id ? null : id);
   };
 
   useEffect(() => {
-    // Check if there are any new tasks added and expand the newly added task
     if (tasks.length > 0) {
-      setExpandedTaskId(tasks[tasks.length - 1].id); // Expand the last added task
+      setExpandedTaskId(tasks[tasks.length - 1].id);
     }
   }, [tasks]);
 
-  const filteredTasks = tasks.filter(task => task.status !== 'Complete'); // Filter out tasks with status 'Complete'
+  const filteredTasks = tasks.filter(task => task.status !== 'Complete');
 
   return (
     <div css={taskListStyle}>
       {filteredTasks.map((task) => (
         <div key={task.id}>
           <TaskCard
+            onClick={() => openTaskDetails(task)}
             title={task.title}
+            dueDate={task.dueDate}
             isComplete={false}
             onToggleSubtasks={() => toggleSubtasks(task.id)}
             expandSubtasks={expandedTaskId === task.id}
@@ -58,11 +67,17 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onAddTask }) => {
             people={task.people}
             bucket={task.bucket}
             status={task.status}
-            dueDate={task.dueDate}
           />
           {task.subTasks.length > 0 && <SubTaskCard subTasks={task.subTasks} expanded={expandedTaskId === task.id} />}
         </div>
       ))}
+      {selectedTask && (
+        <TaskDetailsModal
+          task={selectedTask}
+          isOpen={isModalOpen}
+          close={() => setIsModalOpen(false)}
+        />
+      )}
     </div>
   );
 };

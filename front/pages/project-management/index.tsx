@@ -10,6 +10,7 @@ import tasks from "@/components/Shared/API/Data/tasks-dummy.json";
 import NewTaskModal from '@/components/Pages/internalPages/ProjectManagement/Modals/NewTask';
 import ManageTeamsModal from '@/components/Pages/internalPages/ProjectManagement/Modals/BucketsModal';
 import ArchiveModal from '@/components/Pages/internalPages/ProjectManagement/Modals/ArchiveModal';
+import TaskDetailsModal from '@/components/Pages/internalPages/ProjectManagement/Modals/TaskDetails';
 
 const commonContainerStyle = css`
   margin: 2rem var(--margin);
@@ -46,6 +47,7 @@ const ProjectManagementPage = () => {
   const [allTasks, setAllTasks] = useState(tasks);
   const [isTeamsModalOpen, setIsTeamsModalOpen] = useState(false);
   const [isArchiveModalOpen, setIsArchiveModalOpen] = useState(false);
+  const [isTaskDetailsModalOpen, setIsTaskDetailsModalOpen] = useState(false);
 
   
   const addTeam = (teamName: string) => {
@@ -56,14 +58,8 @@ const ProjectManagementPage = () => {
     setTeams(teams.filter(t => t !== teamName));
   };
 
-  useEffect(() => {
-    console.log("Updated tasks:", allTasks);
-  }, [allTasks]);
-
   const addTask = (task : Task) => {
     setAllTasks([...allTasks, task]);
-    console.log('Added task:', task);
-    console.log('All tasks:', allTasks);
   };
 
   const onAddTask = (newTask: Task) => {
@@ -86,7 +82,7 @@ const ProjectManagementPage = () => {
   return (
     <>
       <div>
-        <NewTaskModal isOpen={isModalOpen} close={() => setIsModalOpen(false)} addTask={addTask} />
+        <NewTaskModal isOpen={isModalOpen} close={() => setIsModalOpen(false)} addTask={addTask} teams={teams} />
         <ManageTeamsModal
         isOpen={isTeamsModalOpen}
         close={() => setIsTeamsModalOpen(false)}

@@ -43,10 +43,6 @@ const subTaskCardContainerStyle = (expanded: boolean) => css`
 const SubTaskCard: React.FC<SubTaskCardProps> = ({ subTasks, expanded }) => {
   const [checkedState, setCheckedState] = useState(subTasks.map(subTask => subTask.isChecked || false));
 
-  useEffect(() => {
-    console.log("SubTaskCard animation triggered: ", expanded);
-  }, [expanded]);
-
   const handleCheckboxChange = (index: number) => {
     const newCheckedState = [...checkedState];
     newCheckedState[index] = !newCheckedState[index];

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import Modal from './Modal'; // Reusing the existing Modal component
+import Modal from '../../../../Shared/Internal/Modal'; // Reusing the existing Modal component
 import TaskCard from '../TaskCard';
 import SubTaskCard from '../SubTaskCard';
 import { css } from '@emotion/react';
@@ -10,6 +10,8 @@ const listContainerStyle = css`
   flex-direction: column;
   max-height: 80vh; // Setting a max height for scrolling
   overflow-y: auto;
+  padding: 1rem;
+  background: #f3f3f3;
 `;
 
 interface SubTask {
@@ -41,7 +43,7 @@ const ArchiveModal: React.FC<ArchiveModalProps> = ({ isOpen, close, tasks }) => 
     <Modal isOpen={isOpen} close={close}>
       <div css={listContainerStyle}>
         {completedTasks.map((task) => (
-          <div key={task.id}>
+          <div key={task.id} css={{ marginBottom: '1rem' }}>
             <TaskCard
               title={task.title}
               isComplete={true}
