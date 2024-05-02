@@ -13,8 +13,11 @@ interface SubTask {
 interface Task {
   id: number;
   title: string;
-  hasSubtasks: boolean;
   subTasks: SubTask[];
+  people: Number[];
+  bucket: string;
+  status: string;
+  dueDate: string;
 }
 
 interface TaskListProps {
@@ -22,7 +25,7 @@ interface TaskListProps {
 }
 
 const taskListStyle = css`
-  margin: 1rem 2rem;
+  margin: 2rem 0; // Increased top and bottom margins for more separation
 `;
 
 const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
@@ -32,19 +35,24 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
     setExpandedTaskId((prevId) => (prevId === id ? null : id));
   };
 
+  const filteredTasks = tasks.filter(task => task.status !== 'Complete'); // Filter out tasks with status 'Complete'
+
   return (
     <div css={taskListStyle}>
-      {tasks.map((task) => (
+      {filteredTasks.map((task) => (
         <div key={task.id}>
           <TaskCard
             title={task.title}
-            dueDate=""
             isComplete={false}
             onToggleSubtasks={() => toggleSubtasks(task.id)}
             expandSubtasks={expandedTaskId === task.id}
-            hasSubtasks={task.hasSubtasks}
+            subTasks={task.subTasks}
+            people={task.people}
+            bucket={task.bucket}
+            status={task.status}
+            dueDate={task.dueDate}
           />
-          {task.hasSubtasks && <SubTaskCard subTasks={task.subTasks} expanded={expandedTaskId === task.id} />}
+          {task.subTasks.length > 0 && <SubTaskCard subTasks={task.subTasks} expanded={expandedTaskId === task.id} />}
         </div>
       ))}
     </div>

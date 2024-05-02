@@ -6,14 +6,10 @@ const MainContainer = styled.div`
   // margin-top: 2rem;
   display: flex;
   align-items: center;
-  height: 4rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  height: 3rem;
   background-color: #fff;
   border: 1px solid #e9e9e9; 
-  box-shadow:
-    rgba(0, 0, 0, 0.07) 0px 10px 25px -5px,
-    rgba(0, 0, 0, 0.03) 0px 10px 10px -5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.09);
 `;
 
 const SearchContainer = styled.div<{ isFocused: boolean }>`
@@ -72,7 +68,7 @@ const SearchBar = () => {
         isFocused={isFocused}
         onClick={() => inputRef.current?.focus()}
       >
-        <SearchIcon size={26} />
+        <SearchIcon size={20} />
         <StyledInput
           ref={inputRef}
           placeholder="Search..."

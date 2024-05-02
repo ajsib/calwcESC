@@ -6,19 +6,21 @@ import DropDownIcon from '@/components/UI/icons/DropDown';
 interface BucketTeamSelectorProps {
   currentTeam?: string;
   teams?: string[];
+  onTeamSelect: (team: string) => void;
 }
+
 
 const selectorContainerStyle = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #ddd;
-  padding: 1rem;
-  margin: 2rem 0;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.5rem;
+  margin-bottom: 3rem;
 `;
 
 const titleStyle = css`
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   font-weight: bold;
 `;
 
@@ -33,6 +35,7 @@ const dropdownStyle = css`
 `;
 
 const dropdownText = css`
+  font-family: PT Serif;
   user-select: none;
   margin-right: 0.5rem;
 `;
@@ -52,30 +55,28 @@ const dropdownItemStyle = css`
   padding: 0.5rem 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
-
+  font-size: 1rem;
   &:hover {
     background-color: #f0f0f0;
   }
 `;
 
-const BucketTeamSelector: React.FC<BucketTeamSelectorProps> = ({ currentTeam, teams }) => {
+const BucketTeamSelector: React.FC<BucketTeamSelectorProps> = ({ currentTeam, teams, onTeamSelect }) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
-  // Replace with actual teams data
-  const mockTeams: string[] = teams || ['Development Team', 'Marketing Team', 'Design Team'];
-  const selectedTeam: string = currentTeam || mockTeams[0];
+  const mockTeams: string[] = teams || ['Development Team', 'Marketing Team', 'Design Team', 'All'];
 
   const handleTeamSelect = (team: string) => {
-    console.log(`Selected team: ${team}`);
+    onTeamSelect(team);
     setShowDropdown(false);
   };
 
   return (
-    <div css={selectorContainerStyle}>
-      <div css={titleStyle}>{selectedTeam}</div>
+    <div css={[selectorContainerStyle]}>
+      <div css={titleStyle}>{currentTeam}</div>
       <div css={dropdownContainerStyle}>
         <div css={dropdownStyle} onClick={() => setShowDropdown(!showDropdown)}>
-          <span css={dropdownText}>Change Team/Initiative/Bucket</span>
+          <span css={dropdownText}>{currentTeam ? currentTeam : 'Choose Team'}</span>
           <DropDownIcon />
         </div>
         {showDropdown && (

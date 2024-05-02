@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
 import NewsCard from './NewsCard';  // Import the NewsCard component
-import NewsData from '@/components/Pages/publicPages/News/data.json';
+import NewsData from '@/components/Shared/API/Data/news-dummy.json';
 import Pagination from './Pagination';
 
 interface NewsItem {

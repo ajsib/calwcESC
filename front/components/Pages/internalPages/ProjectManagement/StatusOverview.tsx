@@ -1,8 +1,10 @@
-// components/Pages/internalPages/ProjectManagement/StatusOverview.tsx
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import Circle from '@/components/UI/Dot';
+import { useState, useEffect } from 'react'; // Import useState and useEffect hooks
 
+// Import dummy data here
+import tasks from "@/components/Shared/API/Data/tasks-dummy.json";
 
 const statusOverviewStyle = css`
   display: flex;
@@ -57,30 +59,78 @@ const titleStyle = css`
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  `;
+`;
 
+interface StatusCardProps {
+  status: string;
+  count: number;
+  selected: boolean;
+  onClick: () => void;
+}
 
-const StatusOverview = () => {
-  const statusData = {
-    toDoCount: 8,
-    inProgressCount: 5,
-    overdueCount: 2
+const StatusCard: React.FC<StatusCardProps> = ({ status, count, selected, onClick }) => (
+  <div css={[statusCardStyle, selected && { backgroundColor: '#e0e0e0' }]} onClick={onClick}>
+    <h2>{count}</h2>
+    <p css={titleStyle}><Circle color={status === 'To Do' ? '#4287f5' : status === 'In Progress' ? 'orange' : '#ad1818'} size={10} />{status}</p>
+  </div>
+);
+
+interface StatusOverviewProps {
+  onSelectStatus: (status: string) => void;
+  selectedStatus: string | null;
+}
+
+const StatusOverview: React.FC<StatusOverviewProps> = ({ onSelectStatus }) => {
+  // State variables to store counts for each status
+  const [toDoCount, setToDoCount] = useState<number>(0);
+  const [inProgressCount, setInProgressCount] = useState<number>(0);
+  const [overdueCount, setOverdueCount] = useState<number>(0);
+  const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
+
+  // Effect to calculate counts when component mounts or data changes
+  useEffect(() => {
+    // Calculate counts from dummy data
+    const counts = tasks.reduce(
+      (acc: { toDo: number; inProgress: number; overdue: number }, task) => {
+        switch (task.status) {
+          case 'To Do':
+            acc.toDo++;
+            break;
+          case 'In Progress':
+            acc.inProgress++;
+            break;
+          case 'Overdue':
+            acc.overdue++;
+            break;
+          default:
+            break;
+        }
+        return acc;
+      },
+      { toDo: 0, inProgress: 0, overdue: 0 }
+    );
+
+    // Update state with counts
+    setToDoCount(counts.toDo);
+    setInProgressCount(counts.inProgress);
+    setOverdueCount(counts.overdue);
+  }, [tasks]);
+
+  const handleStatusClick = (status: string) => {
+    if (selectedStatus === status) {
+      setSelectedStatus(null);
+      onSelectStatus('');
+    } else {
+      setSelectedStatus(status);
+      onSelectStatus(status);
+    }
   };
 
   return (
     <div css={statusOverviewStyle}>
-      <div css={statusCardStyle}>
-        <h2>{statusData.toDoCount}</h2>
-        <p css={titleStyle}><Circle color='#4287f5' size={10} />To Do</p>
-      </div>
-      <div css={statusCardStyle}>
-        <h2>{statusData.inProgressCount}</h2>
-        <p css={titleStyle}><Circle color='orange' size={10} />In Progress</p>
-      </div>
-      <div css={statusCardStyle}>
-        <h2>{statusData.overdueCount}</h2>
-        <p css={titleStyle}><Circle color='#ad1818' size={10} />Overdue</p>
-      </div>
+      <StatusCard status="To Do" count={toDoCount} selected={selectedStatus === 'To Do'} onClick={() => handleStatusClick('To Do')} />
+      <StatusCard status="In Progress" count={inProgressCount} selected={selectedStatus === 'In Progress'} onClick={() => handleStatusClick('In Progress')} />
+      <StatusCard status="Overdue" count={overdueCount} selected={selectedStatus === 'Overdue'} onClick={() => handleStatusClick('Overdue')} />
       <div css={buttonContainerStyle}>
         <div css={buttonStyle}>New Task</div>
         <div css={buttonStyle}>Edit Buckets</div>

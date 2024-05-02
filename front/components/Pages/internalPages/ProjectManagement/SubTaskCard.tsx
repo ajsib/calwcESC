@@ -41,19 +41,28 @@ const subTaskCardContainerStyle = (expanded: boolean) => css`
 `;
 
 const SubTaskCard: React.FC<SubTaskCardProps> = ({ subTasks, expanded }) => {
+  const [checkedState, setCheckedState] = useState(subTasks.map(subTask => subTask.isChecked || false));
+
   useEffect(() => {
     console.log("SubTaskCard animation triggered: ", expanded);
   }, [expanded]);
 
-  const subTaskCardStyle = css`
-    border: 1px solid #DADADA;
-    margin: 0.5rem 0 0.5rem 2rem;
-    padding: 1rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #fff;
-  `;
+  const handleCheckboxChange = (index: number) => {
+    const newCheckedState = [...checkedState];
+    newCheckedState[index] = !newCheckedState[index];
+    setCheckedState(newCheckedState);
+  };
+
+  const subTaskCardStyle = (isLast: boolean) => css`
+  border: 1px solid #DADADA;
+  margin-left: 2rem; // Increased for better visual nesting
+  padding: 1.5rem 2rem; // Increased padding for more space
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f3f3f3;
+  margin-bottom: ${isLast ? '2rem' : '1rem'}; // Increased bottom margin
+`;
 
   const checkboxStyle = css`
     margin-left: 1rem;
@@ -61,14 +70,14 @@ const SubTaskCard: React.FC<SubTaskCardProps> = ({ subTasks, expanded }) => {
 
   return (
     <div css={subTaskCardContainerStyle(expanded)}>
-      {subTasks.map((subTask) => (
-        <div key={subTask.id} css={subTaskCardStyle}>
+      {subTasks.map((subTask, index) => (
+        <div key={subTask.id} css={subTaskCardStyle(index === subTasks.length - 1)}>
           <div>{subTask.title}</div>
           <input
             type="checkbox"
             css={checkboxStyle}
-            checked={subTask.isChecked || false}
-            onChange={() => {}}
+            checked={checkedState[index]}
+            onChange={() => handleCheckboxChange(index)}
           />
         </div>
       ))}
