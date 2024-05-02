@@ -25,6 +25,13 @@ export const MediumNewsCard: React.FC<MediumNewsCardProps> = ({ item }) => {
     transition: all 0.5s ease;
     &:hover {
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      // Apply hover effects to the arrow and "Read More" text
+      .readMoreText {
+        text-decoration: underline;
+      }
+      svg {
+        transform: translateX(3px);
+      }
     }
   `;
 
@@ -61,18 +68,13 @@ export const MediumNewsCard: React.FC<MediumNewsCardProps> = ({ item }) => {
     color: white;
     font-size: 0.9rem;
     gap: 0.4rem;
-    svg{
+    cursor: pointer;
+    svg {
         transition: all 0.5s ease;
     }
-    &:hover {
-      cursor: pointer;
-      text-decoration: underline;
-      svg {
-        transform: translateX(3px);
-      }
-    }
     `;
-    
+
+  
 
   return (
     <div css={cardStyle}>
@@ -82,7 +84,7 @@ export const MediumNewsCard: React.FC<MediumNewsCardProps> = ({ item }) => {
         <small>{item.date}</small>
       </div>
       <div css={readMoreStyle}>
-        <p>Read More</p>
+        <p className="readMoreText">Read Article</p>
         <RightWedgeThin color='#fff' size={13} />
       </div>
     </div>

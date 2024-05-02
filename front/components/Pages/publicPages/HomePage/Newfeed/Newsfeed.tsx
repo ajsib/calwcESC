@@ -29,10 +29,10 @@ const NewsSection = () => {
   const sectionStyle = css`
     display: flex;
     width: calc(100% - 2rem);
-    height: 50vh;
-    background-color: #fff;
+    height: calc(60vh - 2rem);
+    background-color: #eee;
     gap: 1rem;
-    margin: 1rem;
+    padding: 1rem;
   `;
 
   const leftColumn = css`
