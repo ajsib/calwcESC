@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { FC } from 'react';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { useArticle } from '@/contexts/ArticleContext';
@@ -18,7 +19,7 @@ interface MediumNewsCardProps {
   item: NewsItem;
 }
 
-export const MediumNewsCard: React.FC<MediumNewsCardProps> = ({ item }) => {
+export const MediumNewsCard: FC<MediumNewsCardProps> = ({ item }) => {
   const router = useRouter();
   const articleContext = useArticle()!;
   const { setArticle } = articleContext;
@@ -104,7 +105,6 @@ export const MediumNewsCard: React.FC<MediumNewsCardProps> = ({ item }) => {
     svg {
       transition: all 0.2s ease;
     }
-  `;
   `;
 
   return (
