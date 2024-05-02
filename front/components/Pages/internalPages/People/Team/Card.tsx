@@ -3,15 +3,7 @@ import { css } from '@emotion/react';
 import Link from 'next/link';
 import { useTeamMember } from '@/contexts/TeamMemberContext';
 import RightWedgeMedium from '@/components/UI/arrows/RightWedgeMedium';
-
-interface ProfileCardProps {
-  profilePhoto: string;
-  name: string;
-  rank: string;
-  email: string;
-  department: string;
-  reportsTo: string;
-}
+import { Profile } from '@/components/Shared/Types/types';
 
 const cardStyle = css`
   display: flex;
@@ -90,12 +82,12 @@ const rightWedgeStyle = css`
   transform: translateY(-50%); /* Centered on the y-axis */
 `;
 
-const ProfileCard = ({ profilePhoto, name, rank, email, department, reportsTo }: ProfileCardProps) => {
+const ProfileCard = ({ profilePhoto, name, rank, email, department, reportsTo, id }: Profile) => {
   const teamMemberContext = useTeamMember()!;
   const { setTeamMember } = teamMemberContext;
 
   const handleClick = () => {
-    setTeamMember({ profilePhoto, name, rank, email, department, reportsTo });
+    setTeamMember({id, profilePhoto, name, rank, email, department, reportsTo });
   };
 
   return (

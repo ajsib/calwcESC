@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from 'react';
-import Modal from '../../../../Shared/Internal/Modal'; // Assuming Modal is a previously defined component
+import Modal from '../../../../../Shared/Internal/Modal'; // Assuming Modal is a previously defined component
 import { css } from '@emotion/react';
 import peopleData from '@/components/Shared/API/Data/profiles-dummy.json';
+import{ Task, SubTask } from '@/components/Shared/Types/types';
 
 const formStyle = css`
   display: flex;
@@ -55,22 +56,6 @@ const subTaskContainerStyle = css`
         height: 100%;
     }
 `;
-
-
-interface SubTask {
-  id: number;
-  title: string;
-}
-
-interface Task {
-  id: number;
-  title: string;
-  subTasks: SubTask[];
-  people: number[];
-  bucket: string;
-  status: string;
-  dueDate: string;
-}
 
 interface NewTaskModalProps {
   isOpen: boolean;

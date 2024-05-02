@@ -7,6 +7,7 @@ interface TeamMember {
     department: string;
     reportsTo: string;
     profilePhoto: string;
+    id: number;
 }
 
 interface TeamMemberContextType {

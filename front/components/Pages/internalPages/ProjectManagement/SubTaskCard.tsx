@@ -1,12 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from '@emotion/react';
 import { useState, useEffect } from 'react';
-
-interface SubTask {
-  id: number;
-  title: string;
-  isChecked?: boolean;
-}
+import { SubTask } from '@/components/Shared/Types/types';
 
 interface SubTaskCardProps {
   subTasks: SubTask[];

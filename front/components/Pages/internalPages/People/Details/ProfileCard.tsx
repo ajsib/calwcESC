@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useState } from 'react';
+import { Profile } from '@/components/Shared/Types/types';
 
 // Existing styles integrated with your provided styles
 const generalProfileCardStyle = css`
@@ -121,18 +122,8 @@ const editButtonStyle = css`
   }
 `;
 
-// Props interface
-interface GeneralProfileCardProps {
-  profilePhoto: string;
-  name: string;
-  rank: string;
-  email: string;
-  department: string;
-  reportsTo: string;
-}
-
 // Component
-const GeneralProfileCard = ({ profilePhoto, name, rank, email, department, reportsTo }: GeneralProfileCardProps) => {
+const GeneralProfileCard = ({ profilePhoto, name, rank, email, department, reportsTo }: Profile) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const toggleEdit = () => {

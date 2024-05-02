@@ -23,6 +23,7 @@ const ProfileCardsList = () => {
           email={profile.email}
           department={profile.department}
           reportsTo={profile.reportsTo}
+          id={profile.id}
         />
       ))}
     </div>

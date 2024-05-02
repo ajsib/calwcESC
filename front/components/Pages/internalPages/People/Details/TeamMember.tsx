@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import GeneralProfileCard from './ProfileCard';
 import Tabs from './Tabs';
 import TicketCards from './TicketCards';
+import { Profile } from '@/components/Shared/Types/types';
 
 const teamMemberStyle = css`
   display: flex;
@@ -11,16 +12,7 @@ const teamMemberStyle = css`
   padding: 1rem;
 `;
 
-interface TeamMemberProps {
-  profilePhoto: string;
-  name: string;
-  rank: string;
-  email: string;
-  department: string;
-  reportsTo: string;
-}
-
-const TeamMember = ({ profilePhoto, name, rank, email, department, reportsTo }: TeamMemberProps) => {
+const TeamMember = ({ profilePhoto, name, rank, email, department, reportsTo, id }: Profile) => {
   return (
     <div css={teamMemberStyle}>
       <GeneralProfileCard 
@@ -30,6 +22,7 @@ const TeamMember = ({ profilePhoto, name, rank, email, department, reportsTo }: 
         email={email}
         department={department}
         reportsTo={reportsTo}
+        id={id}
       />
       <Tabs />
       <TicketCards />

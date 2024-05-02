@@ -7,7 +7,7 @@ import TaskList from "@/components/Pages/internalPages/ProjectManagement/TaskLis
 import BucketSwitcher from "@/components/Pages/internalPages/ProjectManagement/BucketSwitcher";
 import SearchBar from "@/components/Shared/Internal/SearchBar";
 import tasks from "@/components/Shared/API/Data/tasks-dummy.json";
-import NewTaskModal from '@/components/Pages/internalPages/ProjectManagement/Modals/NewTask';
+import NewTaskModal from '@/components/Pages/internalPages/ProjectManagement/Modals/NewTask/NewTask';
 import ManageTeamsModal from '@/components/Pages/internalPages/ProjectManagement/Modals/BucketsModal';
 import ArchiveModal from '@/components/Pages/internalPages/ProjectManagement/Modals/ArchiveModal';
 import TaskDetailsModal from '@/components/Pages/internalPages/ProjectManagement/Modals/TaskDetails/TaskDetails';
