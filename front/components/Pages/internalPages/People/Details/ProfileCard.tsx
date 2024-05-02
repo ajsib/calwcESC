@@ -3,16 +3,27 @@ import { css } from '@emotion/react';
 import { useState } from 'react';
 import { Profile } from '@/components/Shared/Types/types';
 
-// Existing styles integrated with your provided styles
 const generalProfileCardStyle = css`
   display: flex;
   align-items: center;
-  padding: 2.5rem;
+  padding: 2rem 0;
   margin: 0.5rem 0;
   background-color: #fff;
   border: 1px solid #ddd;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   position: relative;
+  width: 100%;
+`;
+
+// Profile photo style with fixed dimensions
+const profilePhotoStyle = css`
+  width: 150px;
+  height: 150px;
+  background-color: #eee;
+  border-radius: 50%;
+  margin: 0 1.5rem;
+  background-size: cover;
+  background-position: center;
 `;
 
 // Provided styles
@@ -24,19 +35,9 @@ const photoParentStyle = css`
   height: 100%;
 `;
 
-// Profile photo style with cover and position center
-const profilePhotoStyle = css`
-  width: 130px;
-  height: 130px;
-  background-color: #eee;
-  border-radius: 50%;
-  margin-right: 1.5rem;
-  background-size: cover;
-  background-position: center;
-`;
-
 // Customized file input style
 const fileInputStyle = css`
+  margin: 0 1.5rem;
   appearance: none;
   width: 130px;
   height: 130px;
@@ -69,8 +70,6 @@ const fileInputStyle = css`
 const infoTextStyle = css`
   & input {
     font-weight: normal;
-    border: 1px solid #ddd;
-    border-radius: 4px;
   }
   & input::placeholder {
     color: #666;
@@ -80,7 +79,7 @@ const infoTextStyle = css`
 const textParentStyle = css`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
 `;
 
 // Provided styles applied to the corresponding tags

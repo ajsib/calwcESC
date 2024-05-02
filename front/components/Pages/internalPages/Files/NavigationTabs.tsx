@@ -1,5 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import ManageShortcutsModal from './EditShortCuts';
+import { useState } from 'react';
 
 const tabsStyle = css`
   display: flex;
@@ -47,6 +49,10 @@ const getProportionalWidth = (widthPercentage: number) => css`
 `;
 
 const NavigationTabs = () => {
+    const [isManageShortcutsModalOpen, setIsManageShortcutsModalOpen] = useState(false);
+
+    const [shortcuts, setShortcuts] = useState(["Shortcut 1", "Shortcut 2", "Shortcut 3", "Shortcut 4", "Shortcut 5"]);
+
     const manageShortcutsWidth = 60;
     const shortcut1Width = 20;
     const shortcut2Width = 20;
@@ -54,22 +60,40 @@ const NavigationTabs = () => {
     const shortcut4Width = 25;
     const shortcut5Width = 50;
 
+    const handleManageShortcutsClick = () => {
+        setIsManageShortcutsModalOpen(true);
+    };
 
-  return (
-    <div css={tabsStyle}>
-      <div css={rowStyle}>
-        <div css={[tabStyle, getProportionalWidth(manageShortcutsWidth)]}>Manage Shortcuts</div>
-        <div css={[tabStyle, getProportionalWidth(shortcut1Width)]}>Shortcut 1</div>
-        <div css={[tabStyle, getProportionalWidth(shortcut2Width)]}>Shortcut 2</div>
-        
-      </div>
-      <div css={rowStyle}>
-        <div css={[tabStyle, getProportionalWidth(shortcut3Width)]}>Shortcut 3</div>
-        <div css={[tabStyle, getProportionalWidth(shortcut4Width)]}>Shortcut 4</div>
-        <div css={[tabStyle, getProportionalWidth(shortcut5Width)]}>Shortcut 5</div>
-      </div>
-    </div>
-  );
+    const deleteShortcut = (shortcut: string) => {
+        // delete shortcut with matching name
+        const newShortcuts = shortcuts.filter(s => s !== shortcut);
+        setIsManageShortcutsModalOpen(false);
+        setShortcuts(newShortcuts);
+    };
+
+    const addShortcut = (shortcut: string) => {
+        if (!shortcuts.includes(shortcut) && shortcuts.length < 5) {
+            const newShortcuts = [...shortcuts, shortcut];
+            setShortcuts(newShortcuts);
+        }
+    }; // <- Closing curly brace was missing here
+
+    return (
+        <div css={tabsStyle}>
+            <div css={rowStyle}>
+                <div css={[tabStyle, getProportionalWidth(manageShortcutsWidth)]} onClick={handleManageShortcutsClick}>Manage Shortcuts</div>
+                <div css={[tabStyle, getProportionalWidth(shortcut1Width)]}>Shortcut 1</div>
+                <div css={[tabStyle, getProportionalWidth(shortcut2Width)]}>Shortcut 2</div>
+            </div>
+            <div css={rowStyle}>
+                <div css={[tabStyle, getProportionalWidth(shortcut3Width)]}>Shortcut 3</div>
+                <div css={[tabStyle, getProportionalWidth(shortcut4Width)]}>Shortcut 4</div>
+                <div css={[tabStyle, getProportionalWidth(shortcut5Width)]}>Shortcut 5</div>
+            </div>
+
+            <ManageShortcutsModal isOpen={isManageShortcutsModalOpen} close={() => setIsManageShortcutsModalOpen(false)} shortcuts={shortcuts} addShortcut={addShortcut} deleteShortcut={deleteShortcut} />
+        </div>
+    );
 };
 
 export default NavigationTabs;

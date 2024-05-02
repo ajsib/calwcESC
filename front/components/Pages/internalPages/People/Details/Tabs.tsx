@@ -24,12 +24,12 @@ const tabStyle = css`
   }
 `;
 
-const Tabs = () => {
+const Tabs = ({handleTabClick}: {handleTabClick: (tab: string) => void}) => {
   return (
     <div css={tabsStyle}>
-      <div css={tabStyle}>Active Tickets</div>
-      <div css={tabStyle}>Tasks</div>
-      <div css={tabStyle}>Files</div>
+      <div onClick={() => handleTabClick('tickets')} css={tabStyle}>Active Tickets</div>
+      <div onClick={() => handleTabClick('tasks')} css={tabStyle}>Tasks</div>
+      <div onClick={() => handleTabClick('files')} css={tabStyle}>Files</div>
     </div>
   );
 };

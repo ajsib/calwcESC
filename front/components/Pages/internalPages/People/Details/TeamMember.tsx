@@ -2,8 +2,9 @@
 import { css } from '@emotion/react';
 import GeneralProfileCard from './ProfileCard';
 import Tabs from './Tabs';
-import TicketCards from './TicketCards';
+import CardDisplay from './CardDisplay';
 import { Profile } from '@/components/Shared/Types/types';
+import { useState } from 'react';
 
 const teamMemberStyle = css`
   display: flex;
@@ -13,6 +14,12 @@ const teamMemberStyle = css`
 `;
 
 const TeamMember = ({ profilePhoto, name, rank, email, department, reportsTo, id }: Profile) => {
+  const [selectedTab, setSelectedTab] = useState('All');
+
+  const handleTabClick = (tab: string) => {
+    setSelectedTab(tab);
+  };
+
   return (
     <div css={teamMemberStyle}>
       <GeneralProfileCard 
@@ -24,8 +31,8 @@ const TeamMember = ({ profilePhoto, name, rank, email, department, reportsTo, id
         reportsTo={reportsTo}
         id={id}
       />
-      <Tabs />
-      <TicketCards />
+      <Tabs handleTabClick={handleTabClick} />
+      <CardDisplay selectedTab={selectedTab} />
     </div>
   );
 };

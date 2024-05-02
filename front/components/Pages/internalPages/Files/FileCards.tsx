@@ -1,5 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import FileCard from './FileCard';
+import fileData from '@/components/Shared/API/Data/files-dummy.json';
+import { File } from '@/components/Shared/Types/types';
 
 const fileCardsStyle = css`
     display: grid;
@@ -10,32 +13,17 @@ const fileCardsStyle = css`
     width: 100%;
 `;
 
-const fileCardStyle = css`
-  background-color: #fff;
-  border: 1px solid #ccc;
-  padding: 1rem;
-  border-radius: 4px;
-  height: 10rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const FileCard = ({ name }: { name: string }) => {
-  return (
-    <div css={fileCardStyle}>
-      {name}
-    </div>
-  );
-};
-
 const FileCards = () => {
-  const files = ["File 1", "File 2", "File 3", "File 4"];
+  // Sort fileData by last edited timestamp in descending order
+  const sortedFiles: File[] = fileData.sort((a: File, b: File) => new Date(b.dateModified).getTime() - new Date(a.dateModified).getTime());
+
+  // Select the 4 most recently edited files
+  const recentFiles: File[] = sortedFiles.slice(0, 4);
 
   return (
-   <div css={fileCardsStyle}>
-      {files.map((file) => (
-        <FileCard key={file} name={file} />
+    <div css={fileCardsStyle}>
+      {recentFiles.map((file: File, index) => (
+        <FileCard key={index} name={file.fileName} />
       ))}
     </div>
   );
