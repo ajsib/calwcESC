@@ -78,9 +78,12 @@ const StatusCard: React.FC<StatusCardProps> = ({ status, count, selected, onClic
 interface StatusOverviewProps {
   onSelectStatus: (status: string) => void;
   selectedStatus: string | null;
+  openModal: () => void;
+  openTeamsModal: () => void;
+  openArchiveModal: () => void;
 }
 
-const StatusOverview: React.FC<StatusOverviewProps> = ({ onSelectStatus }) => {
+const StatusOverview: React.FC<StatusOverviewProps> = ({ onSelectStatus, openModal, openTeamsModal, openArchiveModal }) => {
   // State variables to store counts for each status
   const [toDoCount, setToDoCount] = useState<number>(0);
   const [inProgressCount, setInProgressCount] = useState<number>(0);
@@ -132,9 +135,9 @@ const StatusOverview: React.FC<StatusOverviewProps> = ({ onSelectStatus }) => {
       <StatusCard status="In Progress" count={inProgressCount} selected={selectedStatus === 'In Progress'} onClick={() => handleStatusClick('In Progress')} />
       <StatusCard status="Overdue" count={overdueCount} selected={selectedStatus === 'Overdue'} onClick={() => handleStatusClick('Overdue')} />
       <div css={buttonContainerStyle}>
-        <div css={buttonStyle}>New Task</div>
-        <div css={buttonStyle}>Edit Buckets</div>
-        <div css={buttonStyle}>View Archive</div>
+        <div css={buttonStyle} onClick={openModal}>New Task</div>
+        <div css={buttonStyle} onClick={openTeamsModal}>Edit Buckets</div>
+        <div css={buttonStyle} onClick={openArchiveModal}>View Archive</div>
       </div>
     </div>
   );

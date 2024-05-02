@@ -1,5 +1,6 @@
 [
     {
+      "id": 1,
       "profilePhoto": "/images/profile1.jpg",
       "name": "Alex Johnson",
       "rank": "Manager",
@@ -8,6 +9,7 @@
       "reportsTo": "Samantha Smith"
     },
     {
+      "id": 2,
       "profilePhoto": "/images/profile2.jpg",
       "name": "Bethany Huang",
       "rank": "Senior Developer",
@@ -16,6 +18,7 @@
       "reportsTo": "Raj Patel"
     },
     {
+      "id": 3,
       "profilePhoto": "/images/profile3.jpg",
       "name": "Charles Duncan",
       "rank": "UX Designer",
