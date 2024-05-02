@@ -5,12 +5,12 @@ import { useRouter } from 'next/router';
 import { useArticle } from '@/contexts/ArticleContext';
 
 interface NewsItem {
-  id: number; // Ensure the ID is part of the NewsItem for routing
+  id: number; 
   title: string;
   date: string;
   imageUrl: string;
   description: string;
-  content: string; // Assume content is needed for detailed view
+  content: string; 
   priority: number;
 }
 

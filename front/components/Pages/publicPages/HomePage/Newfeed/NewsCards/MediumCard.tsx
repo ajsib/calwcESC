@@ -25,8 +25,8 @@ export const MediumNewsCard: FC<MediumNewsCardProps> = ({ item }) => {
   const { setArticle } = articleContext;
 
   const handleClick = () => {
-    setArticle(item); // Set the article using the item data
-    router.push(`/news/${encodeURIComponent(item.id)}`); // Navigate to the appropriate article
+    setArticle(item); 
+    router.push(`/news/${encodeURIComponent(item.id)}`); 
   };
 
   const cardStyle = css`
@@ -108,7 +108,7 @@ export const MediumNewsCard: FC<MediumNewsCardProps> = ({ item }) => {
   `;
 
   return (
-    <div css={cardStyle}>
+    <div css={cardStyle} onClick={handleClick}>
       <div css={imageContainerStyle}>
         <img src={item.imageUrl} alt={item.title} css={imageStyle} />
         <div css={overlayStyle}></div>

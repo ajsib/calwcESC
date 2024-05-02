@@ -14,6 +14,7 @@ interface NewsItem {
   description: string;
   content: string;
   priority: number;
+  id: number; 
 }
 
 const NewsSection = () => {
