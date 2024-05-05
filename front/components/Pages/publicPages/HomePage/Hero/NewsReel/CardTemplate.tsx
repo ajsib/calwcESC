@@ -23,7 +23,7 @@ const CardTemplate: React.FC<CardTemplateProps> = ({ items, type, progressItem, 
     justify-content: space-between;
     width: calc(25% + 25%);
     margin-left: 50%;
-    transform: translateX(calc(50% - 1rem));
+    transform: translateX(calc(50%));
     padding: 1rem;
     background: linear-gradient(to bottom right, rgba(51, 51, 51, 0.9), transparent),
                 linear-gradient(to top left, rgba(51, 51, 51, 0.7), transparent);
@@ -135,9 +135,13 @@ const CardTemplate: React.FC<CardTemplateProps> = ({ items, type, progressItem, 
   const navButtonStyle = css`
     display: flex;
     align-items: center;
-    margin: 0 1rem;
-    transition: opacity 0.3s ease;
+    padding: 0 2rem;
+    margin-right: 1rem;
+    transition: opacity, background-color 0.3s ease;
     opacity: 0;
+    &:hover {
+      background-color: #444;
+    }
   `;
 
   const itemsContainerStyle = css`
@@ -145,10 +149,9 @@ const CardTemplate: React.FC<CardTemplateProps> = ({ items, type, progressItem, 
     flex-direction: row;
     align-items: center;
     gap: 1rem;
-    width: 100%;
     margin-left: auto;
     margin-right: auto;
-    width: calc(100% - (var(--margin) * 2));
+    width: 100%;
     `;
 
   const renderHeader = () => {
