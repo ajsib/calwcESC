@@ -17,6 +17,23 @@ interface CardTemplateProps {
 }
 
 const CardTemplate: React.FC<CardTemplateProps> = ({ items, type, progressItem, regressItem }) => {
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+  const handleProgress = () => {
+    if (!isButtonDisabled) {
+      setIsButtonDisabled(true);
+      progressItem();
+      setTimeout(() => setIsButtonDisabled(false), 1000); 
+    }
+  };
+
+  const handleRegress = () => {
+    if (!isButtonDisabled) {
+      setIsButtonDisabled(true);
+      regressItem();
+      setTimeout(() => setIsButtonDisabled(false), 1000);
+    }
+  };
 
   const containerStyle = css`
     display: flex;
@@ -164,8 +181,8 @@ const CardTemplate: React.FC<CardTemplateProps> = ({ items, type, progressItem, 
 
   return (
     <div css={containerStyle}>
-      <div onClick={regressItem} css={[leftButtonStyle, navButtonStyle]} className='button'>
-        <LeftWedgeThin size={16} fillColor='#fff' />
+      <div onClick={handleRegress} css={[leftButtonStyle, navButtonStyle]} className='button'>
+        <LeftWedgeThin size={25} fillColor='#fff' />
       </div>
       <div css={itemsContainerStyle}>
         <div css={itemsStyle}>
@@ -191,8 +208,8 @@ const CardTemplate: React.FC<CardTemplateProps> = ({ items, type, progressItem, 
           ))}
         </div>
       </div>
-      <div onClick={progressItem} css={[rightButtonStyle, navButtonStyle]} className='button'>
-        <RightWedgeThin color='#fff' size={16} />
+      <div onClick={ handleProgress} css={[rightButtonStyle, navButtonStyle]} className='button'>
+        <RightWedgeThin color='#fff' size={25} />
       </div>
     </div>
   );
