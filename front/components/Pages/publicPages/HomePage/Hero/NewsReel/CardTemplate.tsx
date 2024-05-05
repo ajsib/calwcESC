@@ -1,5 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { useState } from 'react';
+import RightWedgeThin from '@/components/UI/arrows/RightWedgeThin';
+import LeftWedgeThin from '@/components/UI/arrows/LeftWedgeThin';
 
 interface CardTemplateProps {
     items: {
@@ -8,10 +11,13 @@ interface CardTemplateProps {
       date?: string;
       url?: string;
     }[];
+    progressItem: () => void;
+    regressItem: () => void;
     type: 'event' | 'link';
 }
 
-const CardTemplate: React.FC<CardTemplateProps> = ({ items, type }) => {
+const CardTemplate: React.FC<CardTemplateProps> = ({ items, type, progressItem, regressItem }) => {
+
   const containerStyle = css`
     display: flex;
     justify-content: space-between;
@@ -34,18 +40,23 @@ const CardTemplate: React.FC<CardTemplateProps> = ({ items, type }) => {
       .link-column {
         opacity: 1; // Fade in on hover
       }
+      .button {
+        opacity: 1; // Fade in on hover
+      }
     }
   `;
 
   const itemsStyle = css`
-    width: 50%; // Increase width to accommodate two columns
+    width: 100%; // Increase width to accommodate two columns
     display: flex;
     flex-direction: column;
+    align-items: flex-start; // Align items to the left within each column
     gap: 1rem;
   `;
 
   const itemStyle = css`
     transition: color 0.3s ease, opacity 0.3s ease;
+    width: 100%; // Full width to align text properly
     &:hover {
       cursor: pointer;
       color: #ff9900;
@@ -61,6 +72,20 @@ const CardTemplate: React.FC<CardTemplateProps> = ({ items, type }) => {
     font-weight: bold;
     padding-right: 1rem;
     padding-bottom: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-direction: row;
+    svg {
+      transition: transform 0.3s ease;
+    }
+    &:hover {
+      cursor: pointer;
+      svg {
+        transform: translateX(5px);
+      }
+      color: #ff9900;
+    }
   `;
 
   const HeaderStyle = css`
@@ -69,6 +94,8 @@ const CardTemplate: React.FC<CardTemplateProps> = ({ items, type }) => {
     padding-right: 1rem;
     padding-bottom: 1rem;
     transition: font-size 0.3s ease;
+    width: 100%;
+    text-align: left;
   `;
 
   const dateStyle = css`
@@ -77,14 +104,52 @@ const CardTemplate: React.FC<CardTemplateProps> = ({ items, type }) => {
     transition: color 0.3s ease;
   `;
 
-  const linkColumnStyle = css`
-    width: 50%;
+  const leftButtonStyle = css`
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    opacity: 0; // Start with hidden links
-    transition: opacity 0.3s ease;
+    align-items: center;
+    svg {
+      transition: transform 0.3s ease;
+    }
+    &:hover {
+      cursor: pointer;
+      svg {
+        transform: translateX(-5px);
+      }
+    }
   `;
+
+  const rightButtonStyle = css`
+    display: flex;
+    align-items: center;
+    svg {
+      transition: transform 0.3s ease;
+    }
+    &:hover {
+      cursor: pointer;
+      svg {
+        transform: translateX(5px);
+      }
+    }
+  `;
+
+  const navButtonStyle = css`
+    display: flex;
+    align-items: center;
+    margin: 0 1rem;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+  `;
+
+  const itemsContainerStyle = css`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    width: calc(100% - (var(--margin) * 2));
+    `;
 
   const renderHeader = () => {
     if (type === 'event') {
@@ -96,26 +161,35 @@ const CardTemplate: React.FC<CardTemplateProps> = ({ items, type }) => {
 
   return (
     <div css={containerStyle}>
-      <div css={itemsStyle}>
-        <div className="header" css={HeaderStyle}>{renderHeader()}</div>
-        {items.map((item) => (
-          <div key={item.id} css={itemStyle}>
-            <div css={titleStyle}>{item.title}</div>
-            {item.date && <div css={dateStyle}>{item.date}</div>}
-          </div>
-        ))}
+      <div onClick={regressItem} css={[leftButtonStyle, navButtonStyle]} className='button'>
+        <LeftWedgeThin size={16} fillColor='#fff' />
       </div>
-      <div className="link-column" css={linkColumnStyle}>
-        {items.map((item) => (
-          <div key={item.id} css={itemStyle}>
-            <div css={titleStyle}>{item.title}</div>
-            {item.date && <div css={dateStyle}>{item.date}</div>}
-          </div>
-        ))}
-        {/* "View All" now as the last link in the second column */}
-        <div css={itemStyle}>
-          <div css={titleStyle}>{type === 'event' ? 'View All Events' : 'View All Links'}</div>
+      <div css={itemsContainerStyle}>
+        <div css={itemsStyle}>
+          <div className="header" css={HeaderStyle}>{renderHeader()}</div>
+          {items.map((item) => (
+            <div key={item.id} css={itemStyle}>
+              <div css={titleStyle}>{item.title}</div>
+              {item.date && <div css={dateStyle}>{item.date}</div>}
+            </div>
+          ))}
         </div>
+        
+        <div className="link-column" css={[itemsStyle, {opacity: 0}]}>
+            <div css={[titleStyle, {textDecoration: 'underline'}]}>
+              {type === 'event' ? 'View All Events' : 'View All Links'}
+              <RightWedgeThin color='#fff' size={16} />
+            </div>
+          {items.map((item) => (
+            <div key={item.id} css={itemStyle}>
+              <div css={titleStyle}>{item.title}</div>
+              {item.date && <div css={dateStyle}>{item.date}</div>}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div onClick={progressItem} css={[rightButtonStyle, navButtonStyle]} className='button'>
+        <RightWedgeThin color='#fff' size={16} />
       </div>
     </div>
   );

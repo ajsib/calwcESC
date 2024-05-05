@@ -8,7 +8,8 @@ import CardTemplate from './NewsReel/CardTemplate';
 const HeroSection = () => {
   const [offsetY, setOffsetY] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const [currentIndex, setCurrentIndex] = useNewsReel();
+  const [currentIndex, setCurrentIndex, progressItem, regressItem] = useNewsReel();
+  
 
   const handleScroll = () => {
     const position = window.scrollY;
@@ -93,7 +94,7 @@ const HeroSection = () => {
       <div css={heroImageStyle} >
         <div css={overlayStyle}></div>
         <div css={newsFeedStyle}>
-          <CardTemplate {...newsItems[currentIndex].props} />
+          <CardTemplate progressItem={progressItem} regressItem={regressItem} {...newsItems[currentIndex].props} />
         </div>
       </div>
     </div>
