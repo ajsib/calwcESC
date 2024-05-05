@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { useRouter } from 'next/router'; 
+import { useRouter } from 'next/router';
 
 interface HeroContentProps {
   isMobile: boolean;
@@ -11,39 +11,36 @@ const HeroContent: React.FC<HeroContentProps> = ({ isMobile }) => {
   const { locale } = router;
 
   const heroContentStyle = css`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: ${isMobile ? 'center' : 'flex-start'};
-  width: ${isMobile ? '100%' : 'calc(50vw - var(--margin) - calc(1rem + 1vw))'};
-  text-align: left;
-  margin-left: var(--margin);
-  flex-wrap: wrap;
-  height: ${isMobile ? '100%' : 'auto'};
-  padding-top: 2rem; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    width: calc(50vw - 1.5rem); 
+    height: ${isMobile ? '100%' : '100vh'}; 
+    text-align: left; 
+    background-color: rgba(0, 0, 0, 0.3); /* Slightly transparent black */
+  `;
+
+  const titleStyle = css`
+  position: sticky; /* Make the title sticky */
+  top: 30vh; /* Stick the title 25% down from the top of the viewport */
+  left: calc(25% - 1.5rem); /* Adjust the left position as needed */
+  transform: translate(-50%, -50%); 
+  font-size: ${isMobile ? '2.2rem' : 'calc(1.5rem + 2vw)'};
+  color: #fff;
+  // font-weight: bold;
+  line-height: 1.2;
+  -webkit-text-stroke: 0.5px #222;
+  text-stroke: 0.5px #222;
 `;
 
 
-  const titleStyle = css`
-    font-size: ${isMobile ? '2.2rem' : 'calc(1.5rem + 1.5vw)'};
-    // margin-bottom: 1rem;
-    color: var(--primary-color);
-    line-height: 1.2;
-    margin-right: calc(1rem + 1vw);
-  `;
-
-  const imageStyle = css`
-    aspect-ratio: ${isMobile ? 'auto' : '3/2'};
-    height: ${isMobile ? '2rem' : 'calc(1rem + 3vw)'};
-    margin-right: calc(1rem + 1vw);
-  `;
 
   const Title = locale === 'en' ? <>Experimentation <br /> Services Centre</> : <>Centre de services <br /> d&apos;expérimentation </>;
 
   return (
     <div css={heroContentStyle}>
       <p css={titleStyle}>{Title}</p>
-      <img css={imageStyle} src="/images/landing/div-patch.png" alt="Division Logo"/>
     </div>
   );
 };
