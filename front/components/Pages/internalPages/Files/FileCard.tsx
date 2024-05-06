@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import e from 'express';
 
 const fileCardStyle = css`
   background-color: #fff;
