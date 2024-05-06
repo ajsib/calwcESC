@@ -6,7 +6,8 @@ import { useState, useEffect } from 'react';
 
 const missionStyle = css`
   background-color: var(--secondary-color);
-  height: calc(100vh-7rem);
+  height: calc(100vh-4rem);
+  margin: 2rem 0;
   min-height: 44rem;
   display: flex;
   flex-direction: column;

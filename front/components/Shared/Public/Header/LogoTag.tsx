@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router'; 
+import MapleLeaf from '@/components/UI/icons/MapleLeaf'
 
 interface LogoTagProps {
   isScrolled?: boolean;
@@ -50,7 +51,6 @@ const LogoTag = ({ isScrolled, disabled = false }: LogoTagProps) => {
   return (
     <div css={logoContainerStyle} onClick={handleClick}>
       <img css={[logoImageStyle, { height: logoHeight }]} src="/images/logo-calwc.png" alt="Logo" />
-      <img css={[logoImageStyle, { height: logoHeight }]} src="/images/pflag.png" alt="Logo" />
       <span css={[logoTextStyle, { height: logoHeight }]}>
         {Acronym}
       </span>
