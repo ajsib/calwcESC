@@ -30,7 +30,7 @@ const NewsSection = () => {
   const sectionStyle = css`
     display: flex;
     width: calc(100% - 2rem);
-    height: calc(60vh - 2rem);
+    height: calc(65vh - 2rem);
     background-color: #eee;
     gap: 1rem;
     padding: 1rem;

@@ -52,6 +52,13 @@ export const newsItems: {
   
 const useNewsReel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const advanceItem = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % newsItems.length);
+  };
+
+  const regressItem = () => {
+    setCurrentIndex((prevIndex) => prevIndex > 0 ? prevIndex - 1 : newsItems.length - 1);
+  };
   
   useEffect(() => {
     const interval = setInterval(() => {
@@ -60,7 +67,7 @@ const useNewsReel = () => {
     return () => clearInterval(interval);
   }, []);
   
-  return [currentIndex, setCurrentIndex] as const;
+  return [currentIndex, setCurrentIndex, advanceItem, regressItem] as const;
 };
 
 export default useNewsReel;

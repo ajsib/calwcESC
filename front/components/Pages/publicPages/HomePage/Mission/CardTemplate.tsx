@@ -16,7 +16,7 @@ const cardStyles = css`
   justify-content: space-between;
   width: calc(100% - 2rem);
   margin: 0 1rem;
-  height: calc(50vh - 1.5rem);
+  height: calc(50vh - 3rem);
   min-height: 22rem;
   box-shadow: none;
   transition: box-shadow 0.5s ease;
