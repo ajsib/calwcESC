@@ -50,13 +50,13 @@ const ActionSection = () => {
       <div css={styles.cardsContainer(isMobile)}>
         <CardTemplate
           title={locale === 'en' ? 'Already Running an Experiment?' : 'Déjà en cours d\'expérimentation ?'}
-          subtitle={locale === 'en' ? 'View Your Dashboard' : 'Voir votre tableau de bord'}
+          subtitle={locale === 'en' ? 'Tell us about it' : 'parlez-nous de'}
           onClick={() => router.push(locale === 'en' ? '/dashboard' : '/tableau-de-bord')}
           isMobile={isMobile}
         />
         <CardTemplate
           title={locale === 'en' ? 'Ready to Begin an Experiment?' : 'Prêt à commencer une expérience ?'}
-          subtitle={locale === 'en' ? 'Submit a Request' : 'Soumettre une demande'}
+          subtitle={locale === 'en' ? 'Begin the journey' : 'Commencer le voyage'}
           onClick={() => router.push(locale === 'en' ? '/submit-request' : '/soumettre-demande')}
           isMobile={isMobile}
         />
