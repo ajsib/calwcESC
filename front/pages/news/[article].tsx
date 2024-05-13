@@ -1,5 +1,5 @@
 import { useArticle } from '@/contexts/ArticleContext';
-import Article from '@/components/Pages/publicPages/News/NewsArticle/Article';
+import Article from '@/components/landing/News/NewsArticle/Article';
 import Header from '@/components/Shared/Public/Header/Header';
 import Footer from '@/components/Shared/Public/Footer';
 

@@ -2,15 +2,15 @@
 import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
 import Header from "@/components/Shared/Internal/Header/Header";
-import StatusOverview from "@/components/Pages/internalPages/ProjectManagement/StatusOverview";
-import TaskList from "@/components/Pages/internalPages/ProjectManagement/TaskList";
-import BucketSwitcher from "@/components/Pages/internalPages/ProjectManagement/BucketSwitcher";
+import StatusOverview from "@/components/modules/ProjectManagement/StatusOverview";
+import TaskList from "@/components/modules/ProjectManagement/TaskList";
+import BucketSwitcher from "@/components/modules/ProjectManagement/BucketSwitcher";
 import SearchBar from "@/components/Shared/Internal/SearchBar";
 import tasks from "@/components/Shared/API/Data/tasks-dummy.json";
-import NewTaskModal from '@/components/Pages/internalPages/ProjectManagement/Modals/NewTask/NewTask';
-import ManageTeamsModal from '@/components/Pages/internalPages/ProjectManagement/Modals/BucketsModal';
-import ArchiveModal from '@/components/Pages/internalPages/ProjectManagement/Modals/ArchiveModal';
-import TaskDetailsModal from '@/components/Pages/internalPages/ProjectManagement/Modals/TaskDetails/TaskDetails';
+import NewTaskModal from '@/components/modules/ProjectManagement/Modals/NewTask/NewTask';
+import ManageTeamsModal from '@/components/modules/ProjectManagement/Modals/BucketsModal';
+import ArchiveModal from '@/components/modules/ProjectManagement/Modals/ArchiveModal';
+import TaskDetailsModal from '@/components/modules/ProjectManagement/Modals/TaskDetails/TaskDetails';
 import { Task, SubTask } from '@/components/Shared/Types/types';
 
 const commonContainerStyle = css`

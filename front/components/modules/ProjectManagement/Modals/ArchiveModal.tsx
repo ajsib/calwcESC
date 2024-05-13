@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import Modal from '../../../../Shared/Internal/Modal'; // Reusing the existing Modal component
+import Modal from '@/components/Shared/Internal/Modal'
 import TaskCard from '../TaskCard';
 import SubTaskCard from '../SubTaskCard';
 import { css } from '@emotion/react';

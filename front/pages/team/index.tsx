@@ -1,4 +1,4 @@
-import PeoplePage from "@/components/Pages/internalPages/People/People";
+import PeoplePage from "@/components/modules/People/People";
 import Header from "@/components/Shared/Internal/Header/Header";
 
 export default function People() {

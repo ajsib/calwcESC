@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from 'react';
-import Modal from '../../../../../Shared/Internal/Modal'; // Assuming Modal is a previously defined component
+import Modal from '@/components/Shared/Internal/Modal'; 
 import { css } from '@emotion/react';
 import peopleData from '@/components/Shared/API/Data/profiles-dummy.json';
 import{ Task, SubTask } from '@/components/Shared/Types/types';

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from 'react';
-import Modal from '../../../../Shared/Internal/Modal'; // Reusing the Modal component
+import Modal from '@/components/Shared/Internal/Modal'; 
 import { css } from '@emotion/react';
 
 const formStyle = css`

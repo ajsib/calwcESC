@@ -1,8 +1,8 @@
 import Banner from "@/components/Shared/Public/Banner/Banner"
 import Separator from "@/components/Shared/Public/Separator"
-import OurPeople from "@/components/Pages/publicPages/AboutPage/OurPeople"
-import AboutUsContent from "@/components/Pages/publicPages/AboutPage/AboutUsContent"
-import Publications from "@/components/Pages/publicPages/AboutPage/Publications/PublicationsSection"
+import OurPeople from "@/components/landing/AboutPage/OurPeople"
+import AboutUsContent from "@/components/landing/AboutPage/AboutUsContent"
+import Publications from "@/components/landing/AboutPage/Publications/PublicationsSection"
 import Footer from "@/components/Shared/Public/Footer";
 import { useRouter } from 'next/router'; 
 

@@ -1,7 +1,7 @@
 // pages/team/[name].tsx
 import { useRouter } from 'next/router';
 import { useTeamMember } from '../../contexts/TeamMemberContext';
-import TeamMember from '@/components/Pages/internalPages/People/Details/TeamMember';
+import TeamMember from '@/components/modules/People/Details/TeamMember';
 
 const TeamMemberPage = () => {
   const router = useRouter();

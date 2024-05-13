@@ -1,12 +1,12 @@
 // pages/index.tsx
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import ActionSection from "@/components/Pages/publicPages/HomePage/Action/ActionSection"
-import HeroSection from "@/components/Pages/publicPages/HomePage/Hero/HeroSection";
-import MissionSection from "@/components/Pages/publicPages/HomePage/Mission/MissionSection";
+import ActionSection from "@/components/landing/HomePage/Action/ActionSection"
+import HeroSection from "@/components/landing/HomePage/Hero/HeroSection";
+import MissionSection from "@/components/landing/HomePage/Mission/MissionSection";
 import Footer from "@/components/Shared/Public//Footer";
 import Header from "@/components/Shared/Public//Header/Header";
-import Newsfeed from "@/components/Pages/publicPages/HomePage/Newfeed/Newsfeed";
+import Newsfeed from "@/components/landing/HomePage/Newfeed/Newsfeed";
 
 export default function Home() {
 

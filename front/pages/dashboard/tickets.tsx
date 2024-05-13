@@ -1,6 +1,6 @@
 import Header from "@/components/Shared/Internal/Header/Header";
-import Stats from "@/components/Pages/internalPages/Tickets/Stats";
-import TicketCards from "@/components/Pages/internalPages/Tickets/TicketCards";
+import Stats from "@/components/modules/Tickets/Stats";
+import TicketCards from "@/components/modules/Tickets/TicketCards";
 import ticketsData from "@/components/Shared/API/Data/tickets-dummy.json";
 
 const TicketsPage = () => {
