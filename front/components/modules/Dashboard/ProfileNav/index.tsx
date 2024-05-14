@@ -1,8 +1,8 @@
-// components/Pages/internalPages/Dashboard/ProfileNav/ProfileNav.tsx
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import ProfileCard from './ProfileCard';
-import ModuleNavigation from './ModuleNavigation';
+import React from 'react';
+import ProfileContainer from './components/ProfileCon';
+import ModuleNavigation from './components/Navigation';
 
 const profileNavContainer = css`
   display: flex;
@@ -12,13 +12,11 @@ const profileNavContainer = css`
   padding: 2rem;
 `;
 
-const ProfileNav = () => {
-  return (
+const ProfileNavModule: React.FC = () => (
     <div css={profileNavContainer}>
-      <ProfileCard />
+      <ProfileContainer />
       <ModuleNavigation />
     </div>
-  );
-};
+);
 
-export default ProfileNav;
+export default ProfileNavModule;

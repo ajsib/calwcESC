@@ -1,0 +1,9 @@
+{
+  "profile": {
+    "id": 1,
+    "name": "John Doe",
+    "rank": "Captain",
+    "department": "Engineering",
+    "lastLogin": "2024-04-27T10:00:00Z"
+  }
+}

@@ -2,7 +2,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import Header from "@/components/Shared/Internal/Header/Header";
-import ProfileNav from "@/components/modules/Dashboard/ProfileNav/ProfileNav";
+import ProfileNav from "@/components/modules/Dashboard/ProfileNav";
 import UniversalSearch from "@/components/modules/Dashboard/UniversalSearch";
 import Overview from "@/components/modules/Dashboard/Overview";
 import SearchBar from '@/components/Shared/Internal/SearchBar';

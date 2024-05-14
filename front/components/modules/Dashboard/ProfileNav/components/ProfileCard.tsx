@@ -1,7 +1,11 @@
-// components/Pages/internalPages/Dashboard/ProfileNav/ProfileCard.tsx
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import React from 'react';
+import { UserProfile } from '../Types';
+
+interface ProfileCardProps {
+  user: UserProfile;
+}
 
 const profileCardStyle = css`
   display: flex;
@@ -40,8 +44,8 @@ const profileInfoSection = css`
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center horizontally */
-  justify-content: center; /* Center vertically */
+  align-items: center; 
+  justify-content: center; 
 `;
 
 
@@ -50,9 +54,9 @@ const rankEpauletSection = css`
   width: auto;
   height: 100px;
   aspect-ratio: 1;
-  // background: #ddd; // Placeholder color
+  
 
-  // Placeholder for epaulet image
+
   background-image: url('/images/internal/ranks/captain.png');
   background-size: contain;
   background-position: center;
@@ -73,7 +77,7 @@ const rankStyle = css`
 
 const departmentStyle = css`
   font-size: 1rem;
-  color: #666; // Department is gray
+  color: #666; 
 `;
 
 const lastLoginStyle = css`
@@ -82,22 +86,20 @@ const lastLoginStyle = css`
   color: #333;
 `;
 
-const ProfileCard = () => {
-  return (
-    <div css={profileCardStyle}>
-      <div css={profileImageSection} />
-      <div css={profileInfoSection}>
-        <p css={nameStyle}>First Last Name</p>
-        <p>
-           <span css={rankStyle}>Captain</span>
-           <span css={departmentStyle}> | Department</span>
-        </p>
-        {/* <p css={emailStyle}>user@example.com</p> */}
-        <p className='caption' css={lastLoginStyle}>Last Login: 27 Apr 2024, 1000 hours</p>
-      </div>
-      <div css={rankEpauletSection} />
+const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => (
+  <div css={profileCardStyle}>
+    <div css={profileImageSection} style={{ backgroundImage: `url(${user.profileImage})` }} />
+    <div css={profileInfoSection}>
+      <p css={nameStyle}>{user.name}</p>
+      <p>
+        <span css={rankStyle}>{user.rank}</span>
+        <span css={departmentStyle}> | {user.department}</span>
+      </p>
+      <p className='caption' css={lastLoginStyle}>Last Login: {user.lastLogin}</p>
     </div>
-  );
-};
+    <div css={rankEpauletSection} style={{ backgroundImage: `url(${user.rankImage})` }}
+    />
+  </div>
+);
 
 export default ProfileCard;
