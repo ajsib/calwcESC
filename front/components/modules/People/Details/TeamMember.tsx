@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import GeneralProfileCard from './ProfileCard';
 import Tabs from './Tabs';
 import CardDisplay from './CardDisplay';
-import { Profile } from '@/components/Shared/Types/types';
+import { Profile } from '../Types';
 import { useState } from 'react';
 
 const teamMemberStyle = css`

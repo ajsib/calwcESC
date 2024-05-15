@@ -1,7 +1,7 @@
 // pages/people.tsx
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import SearchBar from '@/components/modules/Dashboard/SearchBar/components/SearchBar';
+import SearchBar from './SearchBar';
 import Separator from '@/components/Shared/Internal/Separator';
 import ProfileCardsList from './Team/CardList';
 

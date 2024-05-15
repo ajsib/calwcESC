@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import { Profile } from '@/components/Shared/Types/types';
+import { Profile } from '../Types';
 
 const generalProfileCardStyle = css`
   display: flex;

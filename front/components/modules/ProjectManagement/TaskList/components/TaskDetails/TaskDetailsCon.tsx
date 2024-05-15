@@ -4,7 +4,7 @@ import TaskEditForm from './EditForm';
 import TaskDisplay from './TaskDisplay';
 import { useState, useEffect } from 'react';
 import Modal from './Modal';
-import profiles from '@/components/Shared/API/Data/profiles-dummy.json';
+import profiles from '../../../profiles-dummy.json';
 import { SubTask, Profile } from '@/components/modules/ProjectManagement/Types';
 import { TaskDetailsModalProps } from '../../Types';
 import { useProjectManagement } from '../../../ProjectManagementContext';

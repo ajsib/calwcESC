@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import Link from 'next/link';
 import { useTeamMember } from '@/contexts/TeamMemberContext';
 import RightWedgeMedium from '@/components/UI/arrows/RightWedgeMedium';
-import { Profile } from '@/components/Shared/Types/types';
+import { Profile } from '../Types';
 
 const cardStyle = css`
   display: flex;
