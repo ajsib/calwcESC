@@ -5,7 +5,7 @@ import Header from "@/components/Shared/Internal/Header/Header";
 import StatusOverview from "@/components/modules/ProjectManagement/StatusOverview";
 import TaskList from "@/components/modules/ProjectManagement/TaskList";
 import BucketSwitcher from "@/components/modules/ProjectManagement/BucketSwitcher";
-import SearchBar from "@/components/Shared/Internal/SearchBar";
+import SearchBar from "@/components/modules/Dashboard/SearchBar/components/SearchBar";
 import tasks from "@/components/Shared/API/Data/tasks-dummy.json";
 import NewTaskModal from '@/components/modules/ProjectManagement/Modals/NewTask/NewTask';
 import ManageTeamsModal from '@/components/modules/ProjectManagement/Modals/BucketsModal';

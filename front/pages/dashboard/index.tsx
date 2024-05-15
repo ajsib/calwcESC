@@ -3,9 +3,9 @@
 import { css } from '@emotion/react';
 import Header from "@/components/Shared/Internal/Header/Header";
 import ProfileNav from "@/components/modules/Dashboard/ProfileNav";
-import UniversalSearch from "@/components/modules/Dashboard/UniversalSearch";
-import Overview from "@/components/modules/Dashboard/Overview";
-import SearchBar from '@/components/Shared/Internal/SearchBar';
+import Overview from '@/components/modules/Dashboard/Overview';
+import SearchBar from '@/components/modules/Dashboard/SearchBar';
+import { DashboardProvider } from '@/components/modules/Dashboard/DashboardContext';
 
 const dashboardStyle = css`
   display: flex;
@@ -18,8 +18,10 @@ export default function Dashboard() {
     <div css={dashboardStyle}>
       <Header />
       <ProfileNav />
-      <SearchBar />
-      <Overview />
+      <DashboardProvider>
+        <SearchBar />
+        <Overview />
+      </DashboardProvider>
     </div>
   );
 }

@@ -1,14 +1,13 @@
-import React, { useState, useRef, ChangeEvent, FocusEvent } from "react";
 import styled from "@emotion/styled";
 import SearchIcon from '@/components/UI/icons/SearchIcon'; // Importing the SearchIcon component
+import SearchBarProps from "@/components/modules/Dashboard/SearchBar/Types";
 
 const MainContainer = styled.div`
-  // margin-top: 2rem;
   display: flex;
   align-items: center;
   height: 3rem;
   background-color: #fff;
-  border: 1px solid #e9e9e9; 
+  border: 1px solid #e9e9e9;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.09);
 `;
 
@@ -45,29 +44,10 @@ const FilterButton = styled.button`
   }
 `;
 
-const SearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isFocused, setIsFocused] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
-
+const SearchBar = ({isFocused, searchTerm, inputRef, handleSearchChange, handleBlur, handleFocus} : SearchBarProps) => {
   return (
     <MainContainer>
-      <SearchContainer
-        isFocused={isFocused}
-        onClick={() => inputRef.current?.focus()}
-      >
+      <SearchContainer isFocused={isFocused} onClick={handleFocus}>
         <SearchIcon size={20} />
         <StyledInput
           ref={inputRef}

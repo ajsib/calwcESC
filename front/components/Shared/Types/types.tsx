@@ -31,14 +31,4 @@ export interface File {
   dateAdded: string;
   dateModified: string;
 }
-
-export interface Ticket {
-  id: string;
-  title: string;
-  status: string;
-  priority: string;
-  date: string;
-  assignedTo: string;
-  description: string;
-}
   

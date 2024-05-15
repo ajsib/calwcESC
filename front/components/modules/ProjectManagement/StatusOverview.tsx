@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import Circle from '@/components/UI/Dot';
+import Circle from '@/components/UI/icons/Dot';
 import { useState, useEffect } from 'react'; // Import useState and useEffect hooks
 
 // Import dummy data here

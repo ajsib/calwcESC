@@ -43,9 +43,7 @@ const LogoTag = ({ isScrolled, disabled = false }: LogoTagProps) => {
   const logoHeight = isScrolled ? '3rem' : '4rem'; // Adjust height based on isScrolled
 
   const handleClick = () => {
-    if (!disabled) {
       router.push('/')
-    }
   }
 
   return (

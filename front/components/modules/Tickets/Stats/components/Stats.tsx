@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import Circle from '@/components/UI/Dot';
-import { Ticket } from '@/components/Shared/Types/types';
+import Circle from '@/components/UI/icons/Dot';
+import { StatsProps } from '../Types';
 
 // Layout for the stats and button container
 const statsOverviewStyle = css`
@@ -62,11 +62,7 @@ const buttonStyle = css`
   }
 `;
 
-const Stats: React.FC<{ tickets: Ticket[] }> = ({ tickets }) => {
-  const openTickets = tickets.filter(ticket => ticket.status === "Open");
-  const highPriorityTickets = tickets.filter(ticket => ticket.priority === "High");
-  const mediumPriorityTickets = tickets.filter(ticket => ticket.priority === "Medium");
-  const lowPriorityTickets = tickets.filter(ticket => ticket.priority === "Low");
+const Stats = ({ openTickets, highPriorityTickets, mediumPriorityTickets, lowPriorityTickets } : StatsProps) => {
 
   return (
     <div css={statsOverviewStyle}>

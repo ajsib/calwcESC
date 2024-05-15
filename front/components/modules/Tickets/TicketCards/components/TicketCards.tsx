@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import Circle from '@/components/UI/Dot';
-import { Ticket } from '@/components/Shared/Types/types';
+import Circle from '@/components/UI/icons/Dot';
+import { Ticket } from '../Types';
 
 const ticketCardsStyle = css`
   display: flex;
