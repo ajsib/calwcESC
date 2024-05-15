@@ -1,14 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { useState } from 'react';
 import DropDownIcon from '@/components/UI/icons/DropDown';
-
-interface BucketTeamSelectorProps {
-  currentTeam?: string;
-  teams?: string[];
-  onTeamSelect: (team: string) => void;
-}
-
+import { BucketTeamSelectorProps } from '../Types';
 
 const selectorContainerStyle = css`
   display: flex;
@@ -61,28 +54,20 @@ const dropdownItemStyle = css`
   }
 `;
 
-const BucketTeamSelector: React.FC<BucketTeamSelectorProps> = ({ currentTeam, teams, onTeamSelect }) => {
-  const [showDropdown, setShowDropdown] = useState(false);
-
-  const mockTeams: string[] = teams || ['Development Team', 'Marketing Team', 'Design Team', 'All'];
-
-  const handleTeamSelect = (team: string) => {
-    onTeamSelect(team);
-    setShowDropdown(false);
-  };
+const BucketTeamSelector: React.FC<BucketTeamSelectorProps> = ({ currentTeam, teams, onTeamSelect, showDropdown, setShowDropdown }) => {
 
   return (
     <div css={[selectorContainerStyle]}>
       <div css={titleStyle}>{currentTeam}</div>
       <div css={dropdownContainerStyle}>
-        <div css={dropdownStyle} onClick={() => setShowDropdown(!showDropdown)}>
+        <div css={dropdownStyle} onClick={setShowDropdown}>
           <span css={dropdownText}>{currentTeam ? currentTeam : 'Choose Team'}</span>
           <DropDownIcon />
         </div>
         {showDropdown && (
           <div css={dropdownContentStyle}>
-            {mockTeams.map((team) => (
-              <div key={team} css={dropdownItemStyle} onClick={() => handleTeamSelect(team)}>
+            {teams.map((team) => (
+              <div key={team} css={dropdownItemStyle} onClick={() => onTeamSelect(team)}>
                 {team}
               </div>
             ))}

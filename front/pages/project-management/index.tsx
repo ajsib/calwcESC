@@ -1,90 +1,20 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-import { useState, useEffect } from 'react';
 import Header from "@/components/Shared/Internal/Header/Header";
-import StatusOverview from "@/components/modules/ProjectManagement/StatusOverview";
-import TaskList from "@/components/modules/ProjectManagement/TaskList";
-import BucketSwitcher from "@/components/modules/ProjectManagement/BucketSwitcher";
-import SearchBar from "@/components/modules/Dashboard/SearchBar/components/SearchBar";
-import tasks from "@/components/Shared/API/Data/tasks-dummy.json";
-import NewTaskModal from '@/components/modules/ProjectManagement/Modals/NewTask/NewTask';
-import ManageTeamsModal from '@/components/modules/ProjectManagement/Modals/BucketsModal';
-import ArchiveModal from '@/components/modules/ProjectManagement/Modals/ArchiveModal';
-import TaskDetailsModal from '@/components/modules/ProjectManagement/Modals/TaskDetails/TaskDetails';
-import { Task, SubTask } from '@/components/Shared/Types/types';
-
-const commonContainerStyle = css`
-  margin: 2rem var(--margin);
-  width: calc(100% - 2 * var(--margin));
-`;
-
-const paperStyle = css`
-  margin: 2rem 0;
-  background-color: #f3f3f3;
-  padding: 1rem;
-`;
+import StatusOverview from '@/components/modules/ProjectManagement/StatusOverview';
+import { ProjectManagementProvider } from '@/components/modules/ProjectManagement/ProjectManagementContext';
+import TaskList from '@/components/modules/ProjectManagement/TaskList';
+import BucketSwitcher from '@/components/modules/ProjectManagement/BucketSwitcher';
+import SearchBar from "@/components/modules/ProjectManagement/SearchBar";
 
 const ProjectManagementPage = () => {
-  const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
-  const [selectedBucket, setSelectedBucket] = useState<string>("All");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [teams, setTeams] = useState<string[]>(["All", "Marketing Team", "Development Team", "Design Team"]);
-  const [allTasks, setAllTasks] = useState(tasks);
-  const [isTeamsModalOpen, setIsTeamsModalOpen] = useState(false);
-  const [isArchiveModalOpen, setIsArchiveModalOpen] = useState(false);
-
-  
-  const addTeam = (teamName: string) => {
-    setTeams([...teams, teamName]);
-  };
-
-  const deleteTeam = (teamName: string) => {
-    setTeams(teams.filter(t => t !== teamName));
-  };
-
-  const addTask = (task : Task) => {
-    setAllTasks([...allTasks, task]);
-  };
-
-  const onAddTask = (newTask: Task) => {
-    addTask(newTask);
-    setIsModalOpen(false);
-  };
-
-  const handleSelectStatus = (status: string) => {
-    if (selectedStatus === status) {
-      setSelectedStatus(null); // Clear selection if the same status is clicked again
-    } else {
-      setSelectedStatus(status);
-    }
-  };
-
-  const filteredTasks = selectedStatus ? allTasks.filter(task => task.status === selectedStatus) : allTasks;
-
-  const filteredTasksByBucket = selectedBucket === "All" ? filteredTasks : filteredTasks.filter(task => task.bucket === selectedBucket);
-
   return (
     <>
-      <div>
-        <NewTaskModal isOpen={isModalOpen} close={() => setIsModalOpen(false)} addTask={addTask} teams={teams} />
-        <ManageTeamsModal
-        isOpen={isTeamsModalOpen}
-        close={() => setIsTeamsModalOpen(false)}
-        teams={teams}
-        addTeam={addTeam}
-        deleteTeam={deleteTeam}
-        />
-        <ArchiveModal isOpen={isArchiveModalOpen} close={() => setIsArchiveModalOpen(false)} tasks={allTasks} />
-      </div>
       <Header />
-      <StatusOverview selectedStatus={selectedStatus} onSelectStatus={handleSelectStatus} openModal={() => setIsModalOpen(true)} openTeamsModal={() => setIsTeamsModalOpen(true)} openArchiveModal={() => setIsArchiveModalOpen(true)}/>
-      <div css={commonContainerStyle}>
+      <ProjectManagementProvider>
+        <StatusOverview />
         <SearchBar />
-        <div css={paperStyle}>
-          <BucketSwitcher currentTeam={selectedBucket} onTeamSelect={setSelectedBucket} teams={teams}/>
-          <TaskList tasks={filteredTasksByBucket} onAddTask={onAddTask} />
-        </div>
-      </div>
+        <BucketSwitcher />
+        <TaskList />
+      </ProjectManagementProvider>
     </>
   );
 };

@@ -1,9 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from 'react';
-import Modal from '@/components/Shared/Internal/Modal'; 
+import Modal from './Slideout';
 import { css } from '@emotion/react';
-import peopleData from '@/components/Shared/API/Data/profiles-dummy.json';
-import{ Task, SubTask } from '@/components/Shared/Types/types';
+import { NewTaskModalProps } from '../../Types';
 
 const formStyle = css`
   display: flex;
@@ -57,49 +55,10 @@ const subTaskContainerStyle = css`
     }
 `;
 
-interface NewTaskModalProps {
-  isOpen: boolean;
-  close: () => void;
-  addTask: (task: Task) => void;
-  teams: string[]; // Array of teams
-}
 
-const NewTaskModal: React.FC<NewTaskModalProps> = ({ isOpen, close, addTask, teams }) => {
-  const [title, setTitle] = useState('');
-  const [subTasks, setSubTasks] = useState<SubTask[]>([]);
-  const [subTaskInput, setSubTaskInput] = useState('');
-  const [people, setPeople] = useState<number[]>([]);
-  const [bucket, setBucket] = useState('');
-  const [status, setStatus] = useState('');
-  const [dueDate, setDueDate] = useState('');
 
-  const handleAddSubTask = () => {
-    const newSubTask = { id: Math.floor(Math.random() * 10000), title: subTaskInput };
-    setSubTasks([...subTasks, newSubTask]);
-    setSubTaskInput('');
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Prevent form from submitting early
-    const newTask = {
-      id: Math.floor(Math.random() * 10000), // Simulate ID generation
-      title,
-      subTasks,
-      people,
-      bucket,
-      status,
-      dueDate
-    };
-    addTask(newTask);
-    close();
-  };
-
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedId = parseInt(e.target.value);
-    if (!people.includes(selectedId)) {
-      setPeople([...people, selectedId]); // Add the selected person's ID to the array
-    }
-  };
+const NewTaskModal: React.FC<NewTaskModalProps> = ({ isOpen, close, teams, handleSelectChange, handleAddSubTask, handleSubmit, title, subTaskInput, people, bucket, status, dueDate, setTitle, setSubTaskInput, setBucket, setStatus, setDueDate, peopleData }) => {
+  
 
   return (
     <Modal isOpen={isOpen} close={close}>
@@ -127,7 +86,7 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({ isOpen, close, addTask, tea
 
         <select css={selectStyle} value={bucket} onChange={e => setBucket(e.target.value)}>
           <option value="">Select Bucket</option>
-          {teams.map(team => (
+          {teams.map((team:string) => (
             <option key={team} value={team}>
               {team}
             </option>

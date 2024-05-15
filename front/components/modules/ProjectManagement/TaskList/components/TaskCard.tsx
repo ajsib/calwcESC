@@ -2,20 +2,8 @@
 import { css } from '@emotion/react';
 import RightWedgeThin from '@/components/UI/arrows/RightWedgeMedium';
 import { useState, useEffect } from 'react';
-import { SubTask } from '@/components/Shared/Types/types';
+import { TaskCardProps } from '../Types';
 
-interface TaskCardProps {
-  title: string;
-  dueDate: string;
-  isComplete: boolean;
-  onToggleSubtasks: () => void;
-  expandSubtasks: boolean;
-  subTasks: SubTask[];
-  people: Number[];
-  bucket: string;
-  status: string;
-  onClick?: () => void;
-}
 
 const TaskCard: React.FC<TaskCardProps> = ({
   title,

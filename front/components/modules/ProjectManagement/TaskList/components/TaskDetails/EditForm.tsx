@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import {Task, SubTask} from '@/components/Shared/Types/types';
+import { EditFormProps } from '../../Types';
 
 const inputStyle = css`
   padding: 0.5rem;
@@ -33,19 +33,6 @@ const listItemStyle = css`
   width: 80%;
 `;
 
-
-interface EditFormProps {
-    task: Task;
-    onTitleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    onDueDateChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    onStatusChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-    onBucketChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    onPeopleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    onSaveChanges: () => void;
-    subTasks: SubTask[];
-    onSubTaskChange: (id: number, title: string) => void;
-    onDeleteSubTask: (id: number) => void;
-  }
 
 const TaskEditForm = ({ task, onTitleChange, onDueDateChange, onStatusChange, onBucketChange, onPeopleChange, subTasks, onDeleteSubTask, onSubTaskChange, onSaveChanges }: EditFormProps) => {
   return (

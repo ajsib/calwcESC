@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import ProfileCard from './ProfileCard';
-import {Task, SubTask, Profile} from "@/components/Shared/Types/types";
+import { TaskDisplayProps } from '../../Types';
 
 const headerStyle = css`
   font-size: 2rem;
@@ -59,15 +59,7 @@ const buttonStyle = css`
   font-size: 1.2rem;
 `;
 
-interface TaskDisplayProps {
-    task: Task;
-    subTasks: SubTask[];
-    profiles: Profile[];
-    hoverProfile: Profile | undefined;
-    handleMouseEnter: (id: number) => void;
-    handleMouseLeave: () => void;
-    onEdit: () => void;
-}
+
 
 const TaskDisplay = ({ task, onEdit, profiles, hoverProfile, handleMouseEnter, handleMouseLeave } : TaskDisplayProps) => {
   return (

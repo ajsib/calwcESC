@@ -1,12 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from '@emotion/react';
-import { useState, useEffect } from 'react';
-import { SubTask } from '@/components/Shared/Types/types';
-
-interface SubTaskCardProps {
-  subTasks: SubTask[];
-  expanded: boolean;
-}
+import { useState } from 'react';
+import { SubTaskCardProps } from '../Types';
 
 const slideDown = keyframes`
   from {

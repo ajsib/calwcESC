@@ -2,15 +2,9 @@
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { ProfileCardProps } from '../../Types';
 
-interface ProfileCardProps {
-  profilePhoto: string;
-  name: string;
-  rank: string;
-  email: string;
-  department: string;
-  reportsTo: string;
-}
+
 
 const ProfileCard = ({ profilePhoto, name, rank, email, department, reportsTo }: ProfileCardProps) => {
     const router = useRouter();

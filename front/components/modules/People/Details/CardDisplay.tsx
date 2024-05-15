@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import TicketCards from '../../Tickets/TicketCards/components/TicketCards';
-import TaskCard from '../../ProjectManagement/TaskCard';
+import TaskCard from '../../ProjectManagement/TaskList/components/TaskCard';
 import FileCard from '../../Files/RecentFiles/components/FileCard';
 import ticketsData from '@/components/Shared/API/Data/tickets-dummy.json';
 import filesData from '@/components/Shared/API/Data/files-dummy.json';

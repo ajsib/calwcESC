@@ -3,20 +3,17 @@ import { css } from '@emotion/react';
 import TaskEditForm from './EditForm';
 import TaskDisplay from './TaskDisplay';
 import { useState, useEffect } from 'react';
-import Modal from '@/components/Shared/Internal/Modal';
+import Modal from './Modal';
 import profiles from '@/components/Shared/API/Data/profiles-dummy.json';
-import { Task, SubTask, Profile } from '@/components/Shared/Types/types';
-
+import { SubTask, Profile } from '@/components/modules/ProjectManagement/Types';
+import { TaskDetailsModalProps } from '../../Types';
+import { useProjectManagement } from '../../../ProjectManagementContext';
 
 const containerStyle = css`
   padding: 1.5rem;
 `;
 
-interface TaskDetailsModalProps {
-  task: Task;
-  isOpen: boolean;
-  close: () => void;
-}
+
 
 const TaskDetailsModal = ({ task, isOpen, close }: TaskDetailsModalProps) => {
   const [editMode, setEditMode] = useState<boolean>(false);
@@ -28,6 +25,7 @@ const TaskDetailsModal = ({ task, isOpen, close }: TaskDetailsModalProps) => {
   const [peopleNames, setPeopleNames] = useState<string[]>([]);
   const [subTasks, setSubTasks] = useState<SubTask[]>([]);
   const [hoverProfile, setHoverProfile] = useState<Profile | undefined>(undefined);
+  const { updateTask } = useProjectManagement();
 
   const convertIdsToNames = (ids: number[], allProfiles: Profile[]): string[] => {
     return ids.map(id => {
@@ -84,6 +82,7 @@ const TaskDetailsModal = ({ task, isOpen, close }: TaskDetailsModalProps) => {
     };
 
     setEditMode(false);
+    updateTask(newTask);
     return newTask;
   };
 

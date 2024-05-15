@@ -1,7 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from 'react';
-import Modal from '@/components/Shared/Internal/Modal'; 
+import Modal from './Slideout';
 import { css } from '@emotion/react';
+import { ManageTeamsModalProps } from '../../Types';
+import { useProjectManagement } from '../../../ProjectManagementContext';
 
 const formStyle = css`
   display: flex;
@@ -15,7 +17,7 @@ const inputStyle = css`
   padding: 10px;
   border: 1px solid #ccc;
   font-size: 1rem;
-  font-family: Arial, sans-serif; /* Change font family */
+  font-family: Arial, sans-serif;
   background-color: #f3f3f3;
   transition: border-color 0.3s ease-in-out;
 `;
@@ -37,14 +39,9 @@ const listItemStyle = css`
   border-bottom: 1px solid #ddd;
 `;
 
-const ManageTeamsModal: React.FC<{
-  isOpen: boolean,
-  close: () => void,
-  teams: string[],
-  addTeam: (teamName: string) => void,
-  deleteTeam: (teamName: string) => void
-}> = ({ isOpen, close, teams, addTeam, deleteTeam }) => {
-  const [newTeam, setNewTeam] = useState('');
+const ManageTeamsModal: React.FC<ManageTeamsModalProps> = ({ isOpen, close }) => {
+  const [newTeam, setNewTeam] = useState<string>('');
+  const { teams, addTeam, removeTeam } = useProjectManagement();
 
   const handleAddTeam = () => {
     if (newTeam && !teams.includes(newTeam)) {
@@ -66,10 +63,10 @@ const ManageTeamsModal: React.FC<{
         <button css={buttonStyle} onClick={handleAddTeam}>Add Team</button>
       </form>
       <div>
-        {teams.map(team => (
+        {teams.map((team:string) => (
           <div key={team} css={listItemStyle}>
             <span>{team}</span>
-            <button css={buttonStyle} onClick={() => deleteTeam(team)}>Delete</button>
+            <button css={buttonStyle} onClick={() => removeTeam(team)}>Delete</button>
           </div>
         ))}
       </div>

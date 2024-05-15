@@ -1,46 +1,20 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { useState, useEffect } from 'react';
 import TaskCard from './TaskCard';
 import SubTaskCard from './SubTaskCard';
-import TaskDetailsModal from './Modals/TaskDetails/TaskDetails';
-import {Task} from '@/components/Shared/Types/types';
+import TaskDetailsModal from './TaskDetails/TaskDetailsCon';
+import { TaskListProps } from '../Types';
 
-
-interface TaskListProps {
-  tasks: Task[];
-  onAddTask: (newTask: Task) => void; // Function to handle adding a new task
-}
 
 const taskListStyle = css`
   margin: 2rem 0; // Increased top and bottom margins for more separation
 `;
 
-const TaskList: React.FC<TaskListProps> = ({ tasks, onAddTask }) => {
-  const [expandedTaskId, setExpandedTaskId] = useState<number | null>(null);
-  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  const openTaskDetails = (task: Task) => {
-    setSelectedTask(task);
-    setIsModalOpen(true);
-  };
-
-  const toggleSubtasks = (id: number) => {
-    setExpandedTaskId(prevId => prevId === id ? null : id);
-  };
-
-  useEffect(() => {
-    if (tasks.length > 0) {
-      setExpandedTaskId(tasks[tasks.length - 1].id);
-    }
-  }, [tasks]);
-
-  const filteredTasks = tasks.filter(task => task.status !== 'Complete');
+const TaskList: React.FC<TaskListProps> = ({ tasks, expandedTaskId, openTaskDetails, toggleSubtasks, selectedTask,  isModalOpen, setIsModalOpen }) => {
 
   return (
     <div css={taskListStyle}>
-      {filteredTasks.map((task) => (
+      {tasks.map((task) => (
         <div key={task.id}>
           <TaskCard
             onClick={() => openTaskDetails(task)}

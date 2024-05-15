@@ -23,6 +23,3 @@ export interface Profile {
     department: string;
     reportsTo: string;
   }
-
-
-  
