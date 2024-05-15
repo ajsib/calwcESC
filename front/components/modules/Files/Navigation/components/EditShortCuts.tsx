@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from 'react';
-import Modal from '@/components/Shared/Internal/Modal';
+import Modal from './Modal';
 import { css } from '@emotion/react';
+import { ManageShortcutsModalProps } from '../Types';
 
 const formStyle = css`
   display: flex;
@@ -37,29 +37,15 @@ const listItemStyle = css`
   border-bottom: 1px solid #ddd;
 `;
 
-interface ManageShortcutsModalProps {
-  isOpen: boolean;
-  close: () => void;
-  shortcuts: string[];
-  addShortcut: (shortcut: string) => void;
-  deleteShortcut: (shortcut: string) => void;
-}
-
 const ManageShortcutsModal: React.FC<ManageShortcutsModalProps> = ({
   isOpen,
   close,
   shortcuts,
   addShortcut,
-  deleteShortcut
+  deleteShortcut,
+  newShortcut,
+  setNewShortcut,
 }) => {
-  const [newShortcut, setNewShortcut] = useState<string>('');
-
-  const handleAddShortcut = () => {
-    if (newShortcut && !shortcuts.includes(newShortcut)) {
-      addShortcut(newShortcut);
-      setNewShortcut('');
-    }
-  };
 
   return (
     <Modal isOpen={isOpen} close={close}>
@@ -71,7 +57,7 @@ const ManageShortcutsModal: React.FC<ManageShortcutsModalProps> = ({
           value={newShortcut}
           onChange={(e) => setNewShortcut(e.target.value)}
         />
-        <button css={buttonStyle} onClick={handleAddShortcut}>Add Shortcut</button>
+        <button css={buttonStyle} onClick={() => addShortcut(newShortcut)}>Add Shortcut</button>
       </form>
       <div>
         {shortcuts.map(shortcut => (

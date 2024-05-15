@@ -18,9 +18,9 @@ const inputStyle = css`
 
 const SearchBar = () => {
   return (
-    <div css={searchBarStyle}>
-      <input css={inputStyle} type="text" placeholder="Search files" />
-    </div>
+      <div css={searchBarStyle}>
+        <input css={inputStyle} type="text" placeholder="Search files" />
+      </div>
   );
 };
 

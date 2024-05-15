@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import ManageShortcutsModal from './EditShortCuts';
-import { useState } from 'react';
+import { NavigationTabProps } from '../Types'; 
 
 const tabsStyle = css`
   display: flex;
@@ -48,10 +48,8 @@ const getProportionalWidth = (widthPercentage: number) => css`
   width: ${widthPercentage}%;
 `;
 
-const NavigationTabs = () => {
-    const [isManageShortcutsModalOpen, setIsManageShortcutsModalOpen] = useState(false);
+const NavigationTabs = ({isOpen, close, shortcuts, handleManageShortcutsClick, addShortcut, deleteShortcut, newShortcut, setNewShortcut} : NavigationTabProps) => {
 
-    const [shortcuts, setShortcuts] = useState(["Shortcut 1", "Shortcut 2", "Shortcut 3", "Shortcut 4", "Shortcut 5"]);
 
     const manageShortcutsWidth = 60;
     const shortcut1Width = 20;
@@ -59,24 +57,6 @@ const NavigationTabs = () => {
     const shortcut3Width = 25;
     const shortcut4Width = 25;
     const shortcut5Width = 50;
-
-    const handleManageShortcutsClick = () => {
-        setIsManageShortcutsModalOpen(true);
-    };
-
-    const deleteShortcut = (shortcut: string) => {
-        // delete shortcut with matching name
-        const newShortcuts = shortcuts.filter(s => s !== shortcut);
-        setIsManageShortcutsModalOpen(false);
-        setShortcuts(newShortcuts);
-    };
-
-    const addShortcut = (shortcut: string) => {
-        if (!shortcuts.includes(shortcut) && shortcuts.length < 5) {
-            const newShortcuts = [...shortcuts, shortcut];
-            setShortcuts(newShortcuts);
-        }
-    }; // <- Closing curly brace was missing here
 
     return (
         <div css={tabsStyle}>
@@ -91,7 +71,9 @@ const NavigationTabs = () => {
                 <div css={[tabStyle, getProportionalWidth(shortcut5Width)]}>Shortcut 5</div>
             </div>
 
-            <ManageShortcutsModal isOpen={isManageShortcutsModalOpen} close={() => setIsManageShortcutsModalOpen(false)} shortcuts={shortcuts} addShortcut={addShortcut} deleteShortcut={deleteShortcut} />
+            <ManageShortcutsModal isOpen={isOpen} close={close} shortcuts={shortcuts} addShortcut={addShortcut} deleteShortcut={deleteShortcut} 
+            newShortcut={newShortcut} setNewShortcut={setNewShortcut}
+            />
         </div>
     );
 };

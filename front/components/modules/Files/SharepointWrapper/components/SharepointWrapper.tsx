@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import fileData from '@/components/Shared/API/Data/files-dummy.json';
+import { File } from '../../Types';
 
 const SharepointWrapperStyle = css`
   border: 1px solid #ccc;
@@ -55,7 +55,7 @@ const responsiveTdStyle = css`
   }
 `;
 
-const SharepointWrapper = () => {
+const SharepointWrapper = ({ fileData }: { fileData: File[] }) => {
   return (
     <div css={SharepointWrapperStyle}>
       <table css={tableStyle}>

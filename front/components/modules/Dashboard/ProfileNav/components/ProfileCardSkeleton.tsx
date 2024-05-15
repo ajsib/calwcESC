@@ -15,7 +15,6 @@ const loading = keyframes`
 const skeletonAnimation = css`
   animation: ${loading} 1s infinite linear;
   background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
-  background-size: 800px 104px;
 `;
 
 // Existing styles modified for skeleton
