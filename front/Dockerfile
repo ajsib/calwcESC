@@ -30,8 +30,8 @@ COPY --from=base --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 # Set user and expose port
 USER nextjs
-EXPOSE 3000
-ENV PORT 3000
+EXPOSE 6738
+ENV PORT 6738
 
 # Start the application
 CMD HOSTNAME="0.0.0.0" node server.js
