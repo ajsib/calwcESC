@@ -89,7 +89,7 @@ const NewsCard = ({ id, title, description, imageUrl, date, priority, content }:
                 <p>{date}</p>
             </div>
             <div css={imageStyle}>
-                <Image src={imageUrl} alt={title} />
+                <Image src={imageUrl} alt={title} layout="intrinsic"/>
             </div>
             <div css={titleStyle}>
                 <h3>{title}</h3>

@@ -50,7 +50,7 @@ const ProfileCard = ({ profilePhoto, name, rank, email, department, reportsTo }:
     return (
         <div css={cardStyle} onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <div>
-          <Image src={profilePhoto} alt={name} style={{ width: '55px', height: '55px', borderRadius: '50%' }} />
+        <Image src={profilePhoto} alt={name} style={{ width: '55px', height: '55px', borderRadius: '50%' }} width={55} height={55} layout="intrinsic" />
         </div>
         <div>
           <div>{name}</div>

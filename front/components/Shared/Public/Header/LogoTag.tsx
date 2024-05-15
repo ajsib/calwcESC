@@ -48,7 +48,7 @@ const LogoTag = ({ isScrolled, disabled = false }: LogoTagProps) => {
 
   return (
     <div css={logoContainerStyle} onClick={handleClick}>
-      <Image css={[logoImageStyle, { height: logoHeight }]} src="/images/logo-calwc.png" alt="Logo" />
+      <img css={[logoImageStyle, { height: logoHeight }]} src="/images/logo-calwc.png" alt="Logo" />
       <span css={[logoTextStyle, { height: logoHeight }]}>
         {Acronym}
       </span>
