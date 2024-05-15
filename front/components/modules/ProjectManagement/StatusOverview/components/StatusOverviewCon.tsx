@@ -3,7 +3,7 @@ import StatusOverview from "./StatusOverview";
 import { fetchTaskData } from "../services/fetchTaskData";
 import { Task } from "../../Types";
 import NewTaskCon from "./Slideouts/NewTaskCon";
-import ManageTeamsModal from "./Slideouts/BucketsSlideout";
+import BucketsSlideoutCon from "./Slideouts/BucketsSlideoutCon";
 import { useProjectManagement } from "../../ProjectManagementContext";
 
 const StatusOverviewCon = () => {
@@ -65,7 +65,7 @@ const StatusOverviewCon = () => {
             onManageTeamsModalClose={() => setShowManageTeamsModal(false)}
         />
         {showNewTaskModal && <NewTaskCon close={() => setShowNewTaskModal(false)} isOpen={showNewTaskModal} />}
-        {showManageTeamsModal && <ManageTeamsModal close={() => setShowManageTeamsModal(false)} isOpen={showManageTeamsModal} />}
+        {showManageTeamsModal && <BucketsSlideoutCon close={() => setShowManageTeamsModal(false)} isOpen={showManageTeamsModal} />}
         </>
     );
 };

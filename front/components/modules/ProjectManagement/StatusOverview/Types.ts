@@ -47,4 +47,10 @@ export interface NewTaskModalProps {
 export interface ManageTeamsModalProps {
   isOpen: boolean,
   close: () => void,
+  addTeam: (team: string) => void,
+  removeTeam: (team: string) => void,
+  updateTeams: (teams: string[]) => void,
+  newTeam: string,
+  setNewTeam: (newTeam: string) => void
+  teams: string[],
 }

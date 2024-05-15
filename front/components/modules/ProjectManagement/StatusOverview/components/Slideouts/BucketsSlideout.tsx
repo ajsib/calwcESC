@@ -39,16 +39,7 @@ const listItemStyle = css`
   border-bottom: 1px solid #ddd;
 `;
 
-const ManageTeamsModal: React.FC<ManageTeamsModalProps> = ({ isOpen, close }) => {
-  const [newTeam, setNewTeam] = useState<string>('');
-  const { teams, addTeam, removeTeam } = useProjectManagement();
-
-  const handleAddTeam = () => {
-    if (newTeam && !teams.includes(newTeam)) {
-      addTeam(newTeam);
-      setNewTeam('');
-    }
-  };
+const ManageTeamsModal: React.FC<ManageTeamsModalProps> = ({ isOpen, close, addTeam, removeTeam, updateTeams, newTeam, setNewTeam, teams }) => {
 
   return (
     <Modal isOpen={isOpen} close={close}>
@@ -60,7 +51,7 @@ const ManageTeamsModal: React.FC<ManageTeamsModalProps> = ({ isOpen, close }) =>
           value={newTeam}
           onChange={(e) => setNewTeam(e.target.value)}
         />
-        <button css={buttonStyle} onClick={handleAddTeam}>Add Team</button>
+        <button css={buttonStyle} onClick={() => addTeam(newTeam)}>Add Team</button>
       </form>
       <div>
         {teams.map((team:string) => (
