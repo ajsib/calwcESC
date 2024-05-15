@@ -3,6 +3,8 @@ import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { useArticle } from '@/contexts/ArticleContext';
 import RightWedgeThin from '@/components/UI/arrows/RightWedgeThin';
+import Image from 'next/image'; 
+
 
 const newsCardStyle = css`
     position: relative;
@@ -27,7 +29,7 @@ const newsCardStyle = css`
 `;
 
 const imageStyle = css`
-    img {
+    Image {
         width: 10rem;
         height: 100%;
     }
@@ -87,7 +89,7 @@ const NewsCard = ({ id, title, description, imageUrl, date, priority, content }:
                 <p>{date}</p>
             </div>
             <div css={imageStyle}>
-                <img src={imageUrl} alt={title} />
+                <Image src={imageUrl} alt={title} />
             </div>
             <div css={titleStyle}>
                 <h3>{title}</h3>

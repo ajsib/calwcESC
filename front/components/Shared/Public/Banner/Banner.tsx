@@ -2,6 +2,8 @@
 import { css } from '@emotion/react';
 import Header from "../Header/Header";
 import { useEffect, useState } from 'react';
+import Image from 'next/image'; 
+
 
 interface BannerProps {
     src: string;
@@ -92,7 +94,7 @@ export default function Banner({src, alt, bannerText, title}: BannerProps) {
     return (
         <div css={headerStyle}>
             <Header />
-            <img css={imageStyle} src={src} alt={alt} />
+            <Image css={imageStyle} src={src} alt={alt} />
             <div css={overlayStyle}></div>
             <h1 css={titleStyle}>{title}</h1>
             <div css={divStyle}><p css={textStyle}>{bannerText}</p></div>

@@ -3,8 +3,7 @@ import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { ProfileCardProps } from '../../Types';
-
-
+import Image from 'next/image'; 
 
 const ProfileCard = ({ profilePhoto, name, rank, email, department, reportsTo }: ProfileCardProps) => {
     const router = useRouter();
@@ -51,7 +50,7 @@ const ProfileCard = ({ profilePhoto, name, rank, email, department, reportsTo }:
     return (
         <div css={cardStyle} onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <div>
-          <img src={profilePhoto} alt={name} style={{ width: '55px', height: '55px', borderRadius: '50%' }} />
+          <Image src={profilePhoto} alt={name} style={{ width: '55px', height: '55px', borderRadius: '50%' }} />
         </div>
         <div>
           <div>{name}</div>

@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { useArticle } from '@/contexts/ArticleContext';
 import RightWedgeThin from '@/components/UI/arrows/RightWedgeThin';
+import Image from 'next/image';
 
 interface NewsItem {
   title: string;
@@ -110,7 +111,7 @@ export const MediumNewsCard: FC<MediumNewsCardProps> = ({ item }) => {
   return (
     <div css={cardStyle} onClick={handleClick}>
       <div css={imageContainerStyle}>
-        <img src={item.imageUrl} alt={item.title} css={imageStyle} />
+        <Image src={item.imageUrl} alt={item.title} css={imageStyle} />
         <div css={overlayStyle}></div>
       </div>
       <div css={contentStyle}>

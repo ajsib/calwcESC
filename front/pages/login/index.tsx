@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import Image from 'next/image'; // Import Image component from next/image
+import Image from 'next/image'; 
 
 const SignInComponent = () => {
     const [view, setView] = useState('uname');
@@ -96,7 +96,7 @@ const SignInComponent = () => {
                             <p style={{ marginBottom: '16px', fontSize: '13px' }}>No account? <a href="#" style={{ color: '#0067b8' }}>Create one!</a></p>
                             <p style={{ marginBottom: '16px', fontSize: '13px' }}>
                                 <a href="#" style={{ color: '#0067b8' }}>Sign in with a security key
-                                    <img src="/images/login/question.png" alt="Question img" />
+                                    <Image src="/images/login/question.png" alt="Question img" />
                                 </a>
                             </p>
                         </div>
@@ -112,7 +112,7 @@ const SignInComponent = () => {
                     <div>
                         <div style={{ display: 'flex', gap: '50px', marginTop: '16px', marginBottom: '16px', alignItems: 'center' }}>
                             <button style={{ background: 'none', border: 'none', borderRadius: '50%', width: '24px', height: '24px', cursor: 'pointer' }} onClick={handleBack}>
-                                <img src="/images/login/back.png" alt="Back" style={{ width: '24px', height: '24px' }} />
+                                <Image src="/images/login/back.png" alt="Back" style={{ width: '24px', height: '24px' }} />
                             </button>
                             <Image src="/images/login/bannerlogo.jpg" alt="Microsoft" width={200} height={36} />
                         </div>

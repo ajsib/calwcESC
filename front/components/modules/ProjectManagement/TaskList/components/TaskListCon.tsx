@@ -16,7 +16,7 @@ const TaskListCon = () => {
             setTasks(data);
             setAllTasks(data);
         });
-    }, []);
+    }, [setAllTasks]);
 
     useEffect(() => {
         setTasks(allTasks);

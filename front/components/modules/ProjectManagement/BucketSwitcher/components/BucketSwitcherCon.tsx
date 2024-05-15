@@ -4,7 +4,7 @@ import { useProjectManagement } from "../../ProjectManagementContext";
 import { fetchBucketData } from "../services/fetchBucketData";
 
 const BucketSwitcherCon = () => {
-    const { selectedBucket, handleSelectBucket, updateTeams, teams} = useProjectManagement();
+    const { selectedBucket, handleSelectBucket, updateTeams, teams } = useProjectManagement();
     const [showDropdown, setShowDropdown] = useState(false);
     const [buckets, setBuckets] = useState<string[]>([]);
 
@@ -12,7 +12,7 @@ const BucketSwitcherCon = () => {
         fetchBucketData().then(data => {
             updateTeams(["All", ...data]);
         });
-    }, []);
+    }, [updateTeams]);
 
     useEffect(() => {
         setBuckets(teams);
@@ -32,7 +32,6 @@ const BucketSwitcherCon = () => {
             setShowDropdown={() => setShowDropdown(!showDropdown)}
         />
     );
-
 };
 
 export default BucketSwitcherCon;

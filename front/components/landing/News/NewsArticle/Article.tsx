@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import Image from 'next/image'; 
 
 interface ArticleProps {
     id: number;
@@ -55,7 +56,7 @@ const Article = ({ title, date, imageUrl, description, content }: ArticleProps) 
             <h1 css={titleStyle}>{title}</h1>
             <p css={dateStyle}><strong>Date:</strong> {date}</p>
             <p css={descriptionStyle}>{description}</p>
-            <img src={imageUrl} alt={title} css={imageStyle} />
+            <Image src={imageUrl} alt={title} css={imageStyle} />
             <div css={contentStyle}>{content}</div>
         </div>
     );

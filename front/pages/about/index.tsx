@@ -13,7 +13,7 @@ export default function About() {
     const BannerText = locale === 'en' ? 'Protect, Innovate, Lead' : 'Protéger, Innover, Diriger';
     const Title = locale === 'en' ? 'About Us' : 'Notre mission';
 
-    return (
+    return ( 
         <>
             <Banner src="/images/landing/flicker7.jpg" alt="About Us Banner" bannerText={BannerText} title={Title}/>
             <OurPeople />
