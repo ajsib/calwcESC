@@ -4,6 +4,7 @@
     "name": "John Doe",
     "rank": "Captain",
     "department": "Engineering",
-    "lastLogin": "2024-04-27T10:00:00Z"
+    "lastLogin": "2024-04-27T10:00:00Z",
+    "profileImage": "http://localhost:3000/api/images/internal/avatar.png"
   }
 }

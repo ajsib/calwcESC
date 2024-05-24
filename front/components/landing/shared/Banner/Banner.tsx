@@ -94,7 +94,7 @@ export default function Banner({src, alt, bannerText, title}: BannerProps) {
     return (
         <div css={headerStyle}>
             <Header />
-            <Image css={imageStyle} src={src} alt={alt} width={500} height={300} layout="intrinsic" />
+            <Image css={imageStyle} src={src} alt={alt} width={500} height={300} />
             <div css={overlayStyle}></div>
             <h1 css={titleStyle}>{title}</h1>
             <div css={divStyle}><p css={textStyle}>{bannerText}</p></div>

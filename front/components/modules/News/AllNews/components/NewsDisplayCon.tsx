@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import NewsData from '@/components/Shared/API/Data/news-dummy.json';
+import NewsData from '../../news-dummy.json';
 import { NewsItem } from '../../Types';
 import NewsDisplay from './NewsDisplay';
 

@@ -92,22 +92,22 @@ export default function Cards() {
         <CardTemplate
           title={Title1}
           subtitle={Subtitle1}
-          backgroundImage='/images/about/pub1.png'
+          backgroundImage='http://localhost:3000/api/images/landing/p1.png'
         />
         <CardTemplate
           title={Title2}
           subtitle={Subtitle2}
-          backgroundImage='/images/about/pub4.png'
+          backgroundImage='http://localhost:3000/api/images/landing/p4.png'
         />
         <CardTemplate
           title={Title3}
           subtitle={Subtitle3}
-          backgroundImage='/images/about/pub3.png'
+          backgroundImage='http://localhost:3000/api/images/landing/p3.png'
         />
         <CardTemplate
           title={Title4}
           subtitle={Subtitle4}
-          backgroundImage='/images/about/pub5.png'
+          backgroundImage='http://localhost:3000/api/images/landing/p5.png'
         />
       </GridContainer>
     </div>

@@ -3,7 +3,7 @@
         "id": 111,
         "title": "Canadian Armed Forces Deploy New Arctic Surveillance System",
         "date": "29 Apr. 2024",
-        "imageUrl": "/images/landing/flicker12.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "The Canadian Armed Forces have introduced a cutting-edge surveillance system in the Arctic, aimed at enhancing sovereignty and security.",
         "content": "In a strategic move to bolster surveillance capabilities in the Arctic region, the Canadian Armed Forces have deployed a state-of-the-art surveillance system. This advanced system aims to enhance Canada's monitoring and response capabilities in the Arctic's challenging environment, ensuring sovereignty and security in the region.",
         "priority": 0
@@ -12,7 +12,7 @@
         "id": 112,
         "title": "Canadian Troops Participate in NATO Exercise Trident Juncture",
         "date": "28 Apr. 2024",
-        "imageUrl": "/images/landing/flicker6.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "Canadian troops join NATO forces in Europe for Exercise Trident Juncture, focusing on interoperability and readiness.",
         "content": "As part of Canada's commitment to NATO, Canadian troops have joined multinational forces in Exercise Trident Juncture. The exercise, taking place in Europe, focuses on interoperability and readiness, demonstrating Canada's dedication to collective defense and strengthening alliances.",
         "priority": 1
@@ -21,7 +21,7 @@
         "id": 113,
         "title": "Canada Launches Initiative to Combat Cyber Threats",
         "date": "30 Apr. 2024",
-        "imageUrl": "/images/landing/flicker9.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "A new national initiative to strengthen cybersecurity infrastructure and protect digital assets is launched by Canada.",
         "content": "Amid growing cyber threats, Canada has launched a comprehensive initiative to enhance cyber defense capabilities. The initiative includes investments in cybersecurity infrastructure, collaboration with international partners, and the development of cutting-edge technologies to safeguard Canada's digital assets and national security.",
         "priority": 0
@@ -30,7 +30,7 @@
         "id": 114,
         "title": "Canadian Forces Showcase Innovative Unmanned Aerial Vehicles",
         "date": "01 May 2024",
-        "imageUrl": "/images/landing/flicker4.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "At a military expo, Canadian Armed Forces display new UAV technology enhancing reconnaissance and surveillance.",
         "content": "The Canadian Armed Forces have unveiled a series of innovative unmanned aerial vehicles (UAVs) designed to revolutionize reconnaissance and surveillance operations. These advanced UAVs boast enhanced capabilities, including extended flight endurance, real-time data transmission, and autonomous navigation, bolstering Canada's military capabilities.",
         "priority": 0
@@ -39,7 +39,7 @@
         "id": 115,
         "title": "Canada Hosts International Summit on Peacekeeping Operations",
         "date": "02 May 2024",
-        "imageUrl": "/images/landing/flicker8.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "Canada reaffirms its role as a leader in peacekeeping by hosting a global summit to discuss future strategies.",
         "content": "As a global leader in peacekeeping efforts, Canada is hosting an international summit on peacekeeping operations. The summit aims to foster dialogue, share best practices, and explore innovative approaches to addressing complex security challenges. With participants from around the world, Canada reaffirms its commitment to promoting peace and stability.",
         "priority": 2
@@ -48,7 +48,7 @@
         "id": 116,
         "title": "Canadian Navy Enhances Maritime Security in the Pacific",
         "date": "03 May 2024",
-        "imageUrl": "/images/landing/flicker10.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "The Royal Canadian Navy initiates operations in the Pacific to secure maritime routes and national interests.",
         "content": "The Royal Canadian Navy has launched a maritime security operation in the Pacific region to safeguard vital sea lanes and protect Canadian interests. Through patrols, surveillance, and collaboration with regional partners, the Canadian Navy reinforces its presence in the Indo-Pacific, contributing to regional stability and security.",
         "priority": 0
@@ -57,7 +57,7 @@
         "id": 117,
         "title": "Canada Expands Military Cooperation with NATO Allies",
         "date": "04 May 2024",
-        "imageUrl": "/images/landing/flicker1.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "Canada increases its military engagement with NATO through joint exercises and strategic partnerships.",
         "content": "In an effort to strengthen military cooperation and interoperability, Canada has expanded its engagement with NATO allies. Through joint exercises, training programs, and strategic partnerships, Canada reaffirms its commitment to collective defense and reinforces its role as a key contributor to NATO's missions and objectives.",
         "priority": 3
@@ -66,7 +66,7 @@
         "id": 118,
         "title": "Innovation in Canadian Military Communications Technology",
         "date": "05 May 2024",
-        "imageUrl": "/images/landing/flicker5.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "The latest advancements in secure military communications systems showcased by Canada.",
         "content": "Canada's defense sector announces major advancements in secure communications technology. These innovations provide robust, encrypted systems that enhance operational capabilities and ensure secure transmissions across global military networks, reinforcing Canada's defense communication infrastructure.",
         "priority": 0
@@ -75,7 +75,7 @@
         "id": 119,
         "title": "New Tactical Gear Developed for Canadian Special Forces",
         "date": "06 May 2024",
-        "imageUrl": "/images/landing/flicker2.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "Canada introduces state-of-the-art tactical gear designed to enhance the efficiency and safety of its special forces.",
         "content": "The Canadian military has introduced new tactical gear designed specifically for special forces. This state-of-the-art equipment includes advanced body armor, night vision goggles, and lightweight communication devices, significantly enhancing the operational capabilities and safety of personnel engaged in critical missions.",
         "priority": 0
@@ -84,7 +84,7 @@
         "id": 110,
         "title": "Canada's Role in Global Maritime Peacekeeping Efforts",
         "date": "07 May 2024",
-        "imageUrl": "/images/landing/flicker11.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "Exploring Canada's contributions to maritime peacekeeping and security across international waters.",
         "content": "Canada plays a pivotal role in global maritime peacekeeping efforts, deploying naval forces to international waters to maintain security and enforce peace. These efforts are crucial in preventing conflicts and ensuring safe and open sea lanes for global commerce and navigation.",
         "priority": 0
@@ -93,7 +93,7 @@
         "id": 111,
         "title": "Enhancements to Canadian Arctic Defense Capabilities",
         "date": "08 May 2024",
-        "imageUrl": "/images/landing/flicker13.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "Canada announces upgrades to its defense installations in the Arctic, strengthening surveillance and response capabilities.",
         "content": "In response to increasing geopolitical interest in the Arctic, Canada has upgraded its defense installations in the region. These enhancements include new surveillance stations and upgraded radar systems, strengthening Canada's ability to monitor activities and respond rapidly to threats, ensuring the security of its northern borders.",
         "priority": 0
@@ -102,7 +102,7 @@
         "id": 112,
         "title": "Canadian Military Engages in Humanitarian Missions Abroad",
         "date": "09 May 2024",
-        "imageUrl": "/images/landing/flicker3.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "Canadian Armed Forces are deployed in various humanitarian missions across the globe, providing aid and support.",
         "content": "The Canadian Armed Forces are actively involved in various humanitarian missions around the world, providing essential aid and support in regions affected by natural disasters and conflicts. These missions underscore Canada's commitment to global stability and humanitarian assistance.",
         "priority": 0
@@ -111,7 +111,7 @@
         "id": 113,
         "title": "Modernization of Canadian Armored Vehicles",
         "date": "10 May 2024",
-        "imageUrl": "/images/landing/flicker7.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "A significant upgrade to the armored vehicle fleet enhances the operational readiness of Canadian ground forces.",
         "content": "Canada's defense ministry has announced a significant upgrade to its fleet of armored vehicles. This modernization includes enhanced armor protection, advanced targeting systems, and improved mobility capabilities, ensuring that Canadian ground forces remain highly effective and ready for various operational scenarios.",
         "priority": 0
@@ -120,7 +120,7 @@
         "id": 114,
         "title": "Strategic Defense Partnerships Strengthened Between Canada and Allied Nations",
         "date": "11 May 2024",
-        "imageUrl": "/images/landing/flicker12.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "Canada strengthens its strategic defense partnerships with key allied nations to enhance collective security and defense cooperation.",
         "content": "In a recent development, Canada has strengthened its strategic defense partnerships with key allied nations. These enhanced alliances focus on improving collective security, sharing intelligence, and cooperating on defense technology developments, which are crucial for maintaining peace and stability in the international arena.",
         "priority": 2
@@ -129,7 +129,7 @@
         "id": 115,
         "title": "Canadian Government Invests in Veteran Support Programs",
         "date": "12 May 2024",
-        "imageUrl": "/images/landing/flicker12.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "New funding and resources are allocated by Canada to support veterans with enhanced services and programs.",
         "content": "The Canadian government has announced new investments in support programs for military veterans. These programs aim to provide enhanced services, including mental health support, career training, and housing assistance, to ensure that veterans receive the care and support they deserve after serving the nation.",
         "priority": 0
@@ -138,7 +138,7 @@
         "id": 116,
         "title": "Innovations in Naval Defense Technology by Canadian Engineers",
         "date": "13 May 2024",
-        "imageUrl": "/images/landing/flicker12.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "Canadian engineers introduce groundbreaking naval defense technologies, including unmanned surface vehicles and advanced sonar systems.",
         "content": "Canadian engineers have developed groundbreaking naval defense technologies that are set to transform maritime security. These innovations include unmanned surface vehicles (USVs) equipped with advanced sonar systems, enhancing the Canadian Navy's capability to conduct surveillance and reconnaissance missions in hostile or inaccessible maritime regions.",
         "priority": 0
@@ -147,7 +147,7 @@
         "id": 117,
         "title": "Expansion of Canadian Cyber Command to Thwart Digital Threats",
         "date": "14 May 2024",
-        "imageUrl": "/images/landing/flicker12.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "The expansion of the Canadian Cyber Command aims to bolster national cyber defenses against increasing digital threats.",
         "content": "With the rise of cyber threats, the Canadian government has expanded its Cyber Command. This expansion aims to bolster national defenses against digital threats and ensure the protection of critical infrastructure and sensitive data. The Cyber Command employs state-of-the-art technology and cyber experts to detect, prevent, and respond to cyber incidents.",
         "priority": 0
@@ -156,7 +156,7 @@
         "id": 118,
         "title": "R&D in Military Drone Technology Spearheaded by Canada",
         "date": "15 May 2024",
-        "imageUrl": "/images/landing/flicker12.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "Canada takes a leading role in research and development of military drone technology, focusing on enhancing unmanned aerial capabilities.",
         "content": "Canada is spearheading research and development in military drone technology, focusing on enhancing the capabilities of unmanned aerial vehicles (UAVs). This initiative includes the development of drones for surveillance, reconnaissance, and targeted operations, which are integral to modern warfare and defense strategies.",
         "priority": 0
@@ -165,7 +165,7 @@
         "id": 119,
         "title": "Canadian Military's Role in Global Anti-Piracy Operations",
         "date": "16 May 2024",
-        "imageUrl": "/images/landing/flicker12.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "The Canadian military plays a crucial role in international anti-piracy operations, safeguarding shipping routes and deterring maritime crime.",
         "content": "The Canadian military is actively involved in international anti-piracy operations, playing a crucial role in safeguarding major shipping routes and deterring maritime crime. These operations not only protect global trade routes but also enhance international cooperation and security in strategic maritime zones.",
         "priority": 0
@@ -174,7 +174,7 @@
         "id": 120,
         "title": "Development of Next-Generation Combat Vehicles in Canada",
         "date": "17 May 2024",
-        "imageUrl": "/images/landing/flicker12.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "Canada leads the development of next-generation combat vehicles, incorporating advanced technologies and enhanced combat capabilities.",
         "content": "Canada is at the forefront of developing next-generation combat vehicles, incorporating cutting-edge technologies and enhanced combat capabilities. These new vehicles are designed to operate in diverse environments, providing Canadian forces with a significant advantage in ground operations and ensuring effective response capabilities in conflict situations.",
         "priority": 3
@@ -183,7 +183,7 @@
         "id": 121,
         "title": "Canadian Special Forces' Training with International Counterparts",
         "date": "18 May 2024",
-        "imageUrl": "/images/landing/flicker12.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "Canadian Special Forces engage in joint training sessions with international counterparts, enhancing tactical skills and interoperability.",
         "content": "Canadian Special Forces are engaging in joint training sessions with international counterparts. These sessions are crucial for enhancing tactical skills, interoperability, and readiness. The collaboration also strengthens international military relations and prepares forces for joint operations under multinational frameworks.",
         "priority": 0
@@ -192,7 +192,7 @@
         "id": 122,
         "title": "Strategic Upgrade of Canadian Aerospace Defense Systems",
         "date": "19 May 2024",
-        "imageUrl": "/images/landing/flicker12.jpg",
+        "imageUrl": "http://localhost:3000/api/images/landing/f1.jpg",
         "description": "Canada undertakes a strategic upgrade of its aerospace defense systems, enhancing airspace monitoring and threat response capabilities.",
         "content": "Canada is undertaking a strategic upgrade of its aerospace defense systems. This initiative aims to enhance the nation's airspace monitoring and threat response capabilities, ensuring robust defense against aerial threats and maintaining national security. The upgrades include advanced radar systems and integrated aerospace command and control systems.",
         "priority": 3

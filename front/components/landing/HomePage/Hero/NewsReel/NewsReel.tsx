@@ -35,14 +35,14 @@ export const newsItems: {
   };
 }[] = [
   {
-    imageUrl: "/images/landing/flicker4.jpg",
+    imageUrl: "http://localhost:3000/api/images/landing/f4.jpg",
     props: {
       items: eventsData.slice(0, 3),
       type: 'event'
     }
   },
   {
-    imageUrl: "/images/landing/flicker3.jpg",
+    imageUrl: "http://localhost:3000/api/images/landing/f3.jpg",
     props: {
       items: linksData.slice(0, 4),
       type: 'link'

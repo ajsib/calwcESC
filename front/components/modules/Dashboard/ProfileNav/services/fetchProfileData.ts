@@ -6,8 +6,7 @@ export const fetchProfileData = async (): Promise<UserProfile> => {
     setTimeout(() => {
       const profile = {
         ...dummyData.profile,
-        profileImage: '/images/internal/avatar.png',
-        rankImage: '/images/internal/captain.png',
+        rankImage: `http://localhost:3000/api/images/internal/${dummyData.profile.rank.toLowerCase()}.png`,
       };
       resolve(profile);
     }, 500); // Simulate network delay

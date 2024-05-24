@@ -15,7 +15,7 @@ export default function About() {
 
     return ( 
         <>
-            <Banner src="/images/landing/flicker7.jpg" alt="About Us Banner" bannerText={BannerText} title={Title}/>
+            <Banner src="http://localhost:3000/api/images/landing/f7.jpg" alt="About Us Banner" bannerText={BannerText} title={Title}/>
             <OurPeople />
             <AboutUsContent />
             <Separator />

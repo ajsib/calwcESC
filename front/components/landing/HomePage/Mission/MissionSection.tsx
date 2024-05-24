@@ -55,7 +55,7 @@ const MissionSection = () => {
     <div css={missionStyle}>
       <div>
         <CardTemplate
-          imageSrc="/images/landing/flicker13.jpg"
+          imageSrc="http://localhost:3000/api/images/landing/f13.jpg"
           title={Title1}
           text={Text1}
           isMobile={isMobile}
@@ -64,7 +64,7 @@ const MissionSection = () => {
       </div>
       <div>
         <CardTemplate
-          imageSrc="/images/landing/flicker16.jpg"
+          imageSrc="http://localhost:3000/api/images/landing/f16.jpg"
           title={Title2}
           text={Text2}
           isMobile={isMobile}

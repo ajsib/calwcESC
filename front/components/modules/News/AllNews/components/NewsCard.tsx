@@ -77,6 +77,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
   description,
   date,
   backgroundImage,
+  imageUrl,
   handleClick
 }) => (
   <div css={newsCardStyle} onClick={handleClick}>
@@ -84,9 +85,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
       <p>{date}</p>
     </div>
     <div css={imageContainerStyle}>
-      {backgroundImage && (
-        <Image src={backgroundImage} alt={title} layout="fill" objectFit="cover" />
-      )}
+        <Image src={imageUrl} alt={title} width={150} height={100} objectFit="cover" />
     </div>
     <div css={titleStyle}>
       <h3>{title}</h3>

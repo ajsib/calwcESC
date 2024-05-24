@@ -43,24 +43,19 @@ const contentStyle = css`
 `;
 
 const Article = ({ title, date, imageUrl, description, content }: ArticleProps) => {
-  const [imageSrc, setImageSrc] = useState<string | null>(null);
-  const [imageDimensions, setImageDimensions] = useState<{ width: number; height: number } | null>(null);
-
   return (
     <div css={articleStyle}>
       <h1 css={titleStyle}>{title}</h1>
       <p css={dateStyle}><strong>Date:</strong> {date}</p>
       <p css={descriptionStyle}>{description}</p>
-      {imageSrc && imageDimensions && (
         <Image 
-          src={imageSrc} 
+          src={imageUrl} 
           alt={title} 
           css={imageStyle} 
-          width={imageDimensions.width} 
-          height={imageDimensions.height} 
-          layout="intrinsic" 
+          width="800"
+          height="500"
+          layout="cover" 
         />
-      )}
       <div css={contentStyle}>{content}</div>
     </div>
   );
