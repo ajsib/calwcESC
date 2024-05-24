@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
-import { useArticle } from '@/contexts/ArticleContext';
+import { useArticle } from '@/components/modules/News/ArticleContext';
 import RightWedgeThin from '@/components/UI/arrows/RightWedgeThin';
 
 interface NewsItem {

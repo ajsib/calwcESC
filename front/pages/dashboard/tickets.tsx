@@ -1,4 +1,4 @@
-import Header from "@/components/Shared/Internal/Header/Header";
+import Header from "@/components/modules/shared/Header/Header";
 import Stats from "@/components/modules/Tickets/Stats";
 import TicketCards from "@/components/modules/Tickets/TicketCards";
 

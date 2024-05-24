@@ -1,6 +1,6 @@
-import Footer from "@/components/Shared/Public/Footer";
-import Header from "@/components/Shared/Public/Header/Header";
-import AllNews from "@/components/landing/News/AllNews/AllNews";
+import Footer from "@/components/landing/shared/Footer";
+import Header from "@/components/landing/shared/Header/Header";
+import AllNews from "@/components/modules/News/AllNews";
 
 export default function News() {
     return (

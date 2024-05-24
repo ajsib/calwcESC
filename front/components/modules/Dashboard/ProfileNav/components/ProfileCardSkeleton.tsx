@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from '@emotion/react';
-import React from 'react';
 
 // Keyframes and animation style for the skeleton loading
 const loading = keyframes`
@@ -27,9 +26,6 @@ const profileCardStyle = css`
   height: auto;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
-  &:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1);
-  }
   @media (max-width: 768px) {
     width: 70%;
   }

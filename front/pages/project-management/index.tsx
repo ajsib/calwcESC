@@ -1,4 +1,4 @@
-import Header from "@/components/Shared/Internal/Header/Header";
+import Header from "@/components/modules/shared/Header/Header";
 import StatusOverview from '@/components/modules/ProjectManagement/StatusOverview';
 import { ProjectManagementProvider } from '@/components/modules/ProjectManagement/ProjectManagementContext';
 import TaskList from '@/components/modules/ProjectManagement/TaskList';

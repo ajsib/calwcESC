@@ -1,7 +1,7 @@
 // pages/dashboard/index.tsx
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import Header from "@/components/Shared/Internal/Header/Header";
+import Header from "@/components/modules/shared/Header/Header";
 import ProfileNav from "@/components/modules/Dashboard/ProfileNav";
 import Overview from '@/components/modules/Dashboard/Overview';
 import SearchBar from '@/components/modules/Dashboard/SearchBar';

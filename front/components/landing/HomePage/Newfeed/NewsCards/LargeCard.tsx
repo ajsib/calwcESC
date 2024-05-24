@@ -2,7 +2,8 @@
 import { css } from '@emotion/react';
 import RightWedgeThin from '@/components/UI/arrows/RightWedgeThin';
 import { useRouter } from 'next/router';
-import { useArticle } from '@/contexts/ArticleContext';
+import { useArticle } from '@/components/modules/News/ArticleContext';
+
 
 interface NewsItem {
   id: number; 

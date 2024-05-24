@@ -1,9 +1,9 @@
-import Banner from "@/components/Shared/Public/Banner/Banner";
+import Banner from "@/components/landing/shared/Banner/Banner";
 import ServiceContent from "@/components/landing/ServicePage/ServiceContent";
-import Separator from "@/components/Shared/Public/Separator";
+import Separator from "@/components/landing/shared/Separator";
 import Cards from "@/components/landing/ServicePage/Operations/OperationsContent"
 import Impact from "@/components/landing/ServicePage/Impact/Impact";
-import Footer from "@/components/Shared/Public/Footer";
+import Footer from "@/components/landing/shared/Footer";
 import { useRouter } from 'next/router';
 
 export default function Service() {
