@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 6738",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "node scripts/loadConfig.js local && next dev -p 6738",
+    "build:dev1": "node scripts/loadConfig.js development1 && next build",
+    "build:dev2": "node scripts/loadConfig.js development2 && next build",
+    "build:prod": "node scripts/loadConfig.js production && next build",
+    "start:dev1": "node scripts/loadConfig.js development1 && next start",
+    "start:dev2": "node scripts/loadConfig.js development2 && next start",
+    "start:prod": "node scripts/loadConfig.js production && next start"
   },
   "dependencies": {
     "@emotion/babel-plugin": "^11.11.0",

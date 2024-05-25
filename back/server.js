@@ -13,7 +13,7 @@ app.use('/api/images/', imageRoutes);
 // Error handling middleware
 app.use(errorMiddleware);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 6739;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
