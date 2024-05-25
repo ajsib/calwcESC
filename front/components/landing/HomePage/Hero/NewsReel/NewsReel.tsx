@@ -36,14 +36,14 @@ export const newsItems: {
   };
 }[] = [
   {
-    imageUrl: `${backendUrl}api/images/landing/f4.jpg?quality=80`,
+    imageUrl: `${backendUrl}api/images/landing/f4.jpg?quality=10`,
     props: {
       items: eventsData.slice(0, 3),
       type: 'event'
     }
   },
   {
-    imageUrl: `${backendUrl}api/images/landing/f3.jpg?quality=80`,
+    imageUrl: `${backendUrl}api/images/landing/f3.jpg?quality=10`,
     props: {
       items: linksData.slice(0, 4),
       type: 'link'

@@ -17,7 +17,7 @@ export default function Service() {
 
     return (
         <>
-            <Banner src={`${backendUrl}api/images/landing/f12.jpg?quality=80`} alt="Services Banner" bannerText={bannerText} title={title}/>
+            <Banner src={`${backendUrl}api/images/landing/f12.jpg?quality=10`} alt="Services Banner" bannerText={bannerText} title={title}/>
             <div style={{background: 'white'}}>
               <ServiceContent />
               <Separator />
