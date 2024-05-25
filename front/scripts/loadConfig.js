@@ -9,6 +9,7 @@ function loadConfig(env) {
     const envConfig = data.environments[env];
     if (envConfig) {
       process.env.NEXT_PUBLIC_BACKEND_URL = envConfig.backend_url;
+      console.log(`Loaded NEXT_PUBLIC_BACKEND_URL for ${env}: ${process.env.NEXT_PUBLIC_BACKEND_URL}`);
     } else {
       throw new Error(`Environment ${env} not found in config.yaml`);
     }
