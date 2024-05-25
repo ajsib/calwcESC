@@ -15,6 +15,9 @@ export default function Home() {
 `;
 
 
+  console.log('NEXT_PUBLIC_BACKEND_URL:', process.env.NEXT_PUBLIC_BACKEND_URL);
+
+
   return (
     <>
       <Header />

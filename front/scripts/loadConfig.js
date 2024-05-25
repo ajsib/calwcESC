@@ -1,15 +1,18 @@
 const fs = require('fs');
 const yaml = require('js-yaml');
+const path = require('path');
 
 function loadConfig(env) {
   try {
-    const fileContents = fs.readFileSync('./config/config.yaml', 'utf8');
+    const fileContents = fs.readFileSync(path.resolve(__dirname, '../config/config.yaml'), 'utf8');
     const data = yaml.load(fileContents);
 
     const envConfig = data.environments[env];
     if (envConfig) {
-      process.env.NEXT_PUBLIC_BACKEND_URL = envConfig.backend_url;
-      console.log(`Loaded NEXT_PUBLIC_BACKEND_URL for ${env}: ${process.env.NEXT_PUBLIC_BACKEND_URL}`);
+      const envFilePath = path.resolve(__dirname, '../.env.local');
+      const envFileContent = `NEXT_PUBLIC_BACKEND_URL=${envConfig.backend_url}\n`;
+      fs.writeFileSync(envFilePath, envFileContent);
+      console.log(`Loaded NEXT_PUBLIC_BACKEND_URL for ${env}: ${envConfig.backend_url}`);
     } else {
       throw new Error(`Environment ${env} not found in config.yaml`);
     }
