@@ -23,6 +23,7 @@ export const MediumNewsCard: FC<MediumNewsCardProps> = ({ item }) => {
   const router = useRouter();
   const articleContext = useArticle()!;
   const { setArticle } = articleContext;
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   const handleClick = () => {
     setArticle(item); 
@@ -110,7 +111,7 @@ export const MediumNewsCard: FC<MediumNewsCardProps> = ({ item }) => {
   return (
     <div css={cardStyle} onClick={handleClick}>
       <div css={imageContainerStyle}>
-        <img src={item.imageUrl} alt={item.title} css={imageStyle} />
+        <img src={backendUrl + item.imageUrl} alt={item.title} css={imageStyle} />
         <div css={overlayStyle}></div>
       </div>
       <div css={contentStyle}>

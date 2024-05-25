@@ -41,6 +41,7 @@ const LogoTag = ({ isScrolled, disabled = false }: LogoTagProps) => {
   const { locale } = router
   const Acronym = locale === 'en' ? 'CALWC' : 'CGTAC'
   const logoHeight = isScrolled ? '3rem' : '4rem'; // Adjust height based on isScrolled
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   const handleClick = () => {
       router.push('/')
@@ -48,7 +49,7 @@ const LogoTag = ({ isScrolled, disabled = false }: LogoTagProps) => {
 
   return (
     <div css={logoContainerStyle} onClick={handleClick}>
-      <img css={[logoImageStyle, { height: logoHeight }]} src="http://localhost:3000/api/images/logo-calwc.png" alt="Logo" />
+      <img css={[logoImageStyle, { height: logoHeight }]} src={`${backendUrl}api/images/logo-calwc.png`} alt="Logo" />
       <span css={[logoTextStyle, { height: logoHeight }]}>
         {Acronym}
       </span>

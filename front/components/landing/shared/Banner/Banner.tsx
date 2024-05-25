@@ -4,7 +4,6 @@ import Header from "../Header/Header";
 import { useEffect, useState } from 'react';
 import Image from 'next/image'; 
 
-
 interface BannerProps {
     src: string;
     alt: string;
@@ -12,7 +11,7 @@ interface BannerProps {
     title: string;
 }
 
-export default function Banner({src, alt, bannerText, title}: BannerProps) {
+export default function Banner({ src, alt, bannerText, title }: BannerProps) {
     const [offsetY, setOffsetY] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
 
@@ -29,15 +28,15 @@ export default function Banner({src, alt, bannerText, title}: BannerProps) {
     }, []);
 
     const imageStyle = css`
-    position: absolute;
-    top: -4rem;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: translateY(${offsetY * 0.4}px);
-    z-index: -1;
-`;
+        position: absolute;
+        top: -4rem;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: translateY(${offsetY * 0.4}px);
+        z-index: -1;
+    `;
 
     const overlayStyle = css`
         position: absolute;
@@ -88,13 +87,15 @@ export default function Banner({src, alt, bannerText, title}: BannerProps) {
         position: relative;
         width: 100%;
         height: ${isMobile ? '35vh' : '50vh'};
-        overflow: hidden; 
+        overflow: hidden;
     `;
 
     return (
         <div css={headerStyle}>
             <Header />
-            <Image css={imageStyle} src={src} alt={alt} fill={true} />
+            <div css={imageStyle}>
+                <Image src={src} alt={alt} layout="fill" objectFit="cover" />
+            </div>
             <div css={overlayStyle}></div>
             <h1 css={titleStyle}>{title}</h1>
             <div css={divStyle}><p css={textStyle}>{bannerText}</p></div>

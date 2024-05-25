@@ -13,9 +13,11 @@ export default function Service() {
     const bannerText = locale === 'en' ? 'Discover, Test, Demonstrate, Explore' : 'Découvrir, Tester, Démontrer, Explorer';
     const title = locale === 'en' ? 'Services' : 'Services';
 
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
     return (
         <>
-            <Banner src="http://localhost:3000/api/images/landing/f12.jpg" alt="Services Banner" bannerText={bannerText} title={title}/>
+            <Banner src={`${backendUrl}api/images/landing/f12.jpg?quality=80`} alt="Services Banner" bannerText={bannerText} title={title}/>
             <div style={{background: 'white'}}>
               <ServiceContent />
               <Separator />

@@ -30,6 +30,8 @@ const MissionSection = () => {
   const handleScroll = () => setOffsetY(window.scrollY);
   const checkMobile = () => setIsMobile(window.innerWidth <= 768);
 
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', checkMobile);
@@ -55,7 +57,7 @@ const MissionSection = () => {
     <div css={missionStyle}>
       <div>
         <CardTemplate
-          imageSrc="http://localhost:3000/api/images/landing/f13.jpg"
+        imageSrc={`${backendUrl}api/images/landing/f13.jpg`}
           title={Title1}
           text={Text1}
           isMobile={isMobile}
@@ -64,7 +66,7 @@ const MissionSection = () => {
       </div>
       <div>
         <CardTemplate
-          imageSrc="http://localhost:3000/api/images/landing/f16.jpg"
+          imageSrc={`${backendUrl}api/images/landing/f16.jpg`}
           title={Title2}
           text={Text2}
           isMobile={isMobile}

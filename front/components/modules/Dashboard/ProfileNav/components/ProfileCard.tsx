@@ -86,20 +86,23 @@ const lastLoginStyle = css`
   color: #333;
 `;
 
-const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => (
-  <div css={profileCardStyle}>
-    <div css={profileImageSection} style={{ backgroundImage: `url(${user.profileImage})` }} />
-    <div css={profileInfoSection}>
-      <p css={nameStyle}>{user.name}</p>
-      <p>
-        <span css={rankStyle}>{user.rank}</span>
-        <span css={departmentStyle}> | {user.department}</span>
-      </p>
-      <p className='caption' css={lastLoginStyle}>Last Login: {user.lastLogin}</p>
+const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+  return (
+    <div css={profileCardStyle}>
+      <div css={profileImageSection} style={{ backgroundImage: `url(${backendUrl + user.profileImage})` }} />
+      <div css={profileInfoSection}>
+        <p css={nameStyle}>{user.name}</p>
+        <p>
+          <span css={rankStyle}>{user.rank}</span>
+          <span css={departmentStyle}> | {user.department}</span>
+        </p>
+        <p className='caption' css={lastLoginStyle}>Last Login: {user.lastLogin}</p>
+      </div>
+      <div css={rankEpauletSection} style={{ backgroundImage: `url(${user.rankImage})` }}
+      />
     </div>
-    <div css={rankEpauletSection} style={{ backgroundImage: `url(${user.rankImage})` }}
-    />
-  </div>
-);
+  );
+};
 
 export default ProfileCard;

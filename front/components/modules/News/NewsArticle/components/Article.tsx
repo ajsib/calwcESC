@@ -43,13 +43,14 @@ const contentStyle = css`
 `;
 
 const Article = ({ title, date, imageUrl, description, content }: ArticleProps) => {
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
   return (
     <div css={articleStyle}>
       <h1 css={titleStyle}>{title}</h1>
       <p css={dateStyle}><strong>Date:</strong> {date}</p>
       <p css={descriptionStyle}>{description}</p>
         <Image 
-          src={imageUrl} 
+          src={backendUrl + imageUrl} 
           alt={title} 
           css={imageStyle} 
           width="800"

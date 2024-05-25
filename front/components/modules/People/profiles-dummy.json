@@ -1,7 +1,7 @@
 [
     {
       "id": 1,
-      "profilePhoto": "/images/profile1.jpg",
+      "profilePhoto": "api/images/internal/avatar.png",
       "name": "Alex Johnson",
       "rank": "Manager",
       "email": "alex.johnson@example.com",
@@ -10,7 +10,7 @@
     },
     {
       "id": 2,
-      "profilePhoto": "/images/profile2.jpg",
+      "profilePhoto": "api/images/internal/avatar.png",
       "name": "Bethany Huang",
       "rank": "Senior Developer",
       "email": "bethany.huang@example.com",
@@ -19,7 +19,7 @@
     },
     {
       "id": 3,
-      "profilePhoto": "/images/profile3.jpg",
+      "profilePhoto": "api/images/internal/avatar.png",
       "name": "Charles Duncan",
       "rank": "UX Designer",
       "email": "charles.duncan@example.com",

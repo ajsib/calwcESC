@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 const eventsData = [
   { id: '1', title: 'Operation Northern Shield', date: 'May 10, 2024', url: '/events/operation-northern-shield' },
@@ -35,14 +36,14 @@ export const newsItems: {
   };
 }[] = [
   {
-    imageUrl: "http://localhost:3000/api/images/landing/f4.jpg",
+    imageUrl: `${backendUrl}api/images/landing/f4.jpg?quality=80`,
     props: {
       items: eventsData.slice(0, 3),
       type: 'event'
     }
   },
   {
-    imageUrl: "http://localhost:3000/api/images/landing/f3.jpg",
+    imageUrl: `${backendUrl}api/images/landing/f3.jpg?quality=80`,
     props: {
       items: linksData.slice(0, 4),
       type: 'link'

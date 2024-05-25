@@ -79,23 +79,28 @@ const NewsCard: React.FC<NewsCardProps> = ({
   backgroundImage,
   imageUrl,
   handleClick
-}) => (
-  <div css={newsCardStyle} onClick={handleClick}>
-    <div css={dateStyle}>
-      <p>{date}</p>
+}) => {
+
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
+  return (
+    <div css={newsCardStyle} onClick={handleClick}>
+      <div css={dateStyle}>
+        <p>{date}</p>
+      </div>
+      <div css={imageContainerStyle}>
+          <Image src={backendUrl + imageUrl} alt={title} width={150} height={100} objectFit="cover" />
+      </div>
+      <div css={titleStyle}>
+        <h3>{title}</h3>
+        <p>{description}</p>
+      </div>
+      <div css={readMoreStyle}>
+        <p>Read More</p>
+        <RightWedgeThin size={15} />
+      </div>
     </div>
-    <div css={imageContainerStyle}>
-        <Image src={imageUrl} alt={title} width={150} height={100} objectFit="cover" />
-    </div>
-    <div css={titleStyle}>
-      <h3>{title}</h3>
-      <p>{description}</p>
-    </div>
-    <div css={readMoreStyle}>
-      <p>Read More</p>
-      <RightWedgeThin size={15} />
-    </div>
-  </div>
-);
+  );
+};
 
 export default NewsCard;

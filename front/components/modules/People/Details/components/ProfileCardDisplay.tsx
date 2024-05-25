@@ -50,11 +50,12 @@ const reportsToStyle = css`
 
 const ProfileDisplay = ({ profile }: { profile: Profile }) => {
   const { profilePhoto, name, rank, email, department, reportsTo } = profile;
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   return (
     <>
       <div css={photoParentStyle}>
-        <div css={profilePhotoStyle} style={{ backgroundImage: `url(${profilePhoto})` }}></div>
+        <div css={profilePhotoStyle} style={{ backgroundImage: `url(${backendUrl + profilePhoto})` }}></div>
       </div>
       <div css={textParentStyle}>
         <span css={nameStyle}>{name}</span>

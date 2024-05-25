@@ -21,6 +21,7 @@ export default function Cards() {
   const router = useRouter(); 
   const { locale } = router; 
   const [isMobile, setIsMobile] = useState(false);
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   useEffect(() => {
     const handleResize = () => {
@@ -92,22 +93,22 @@ export default function Cards() {
         <CardTemplate
           title={Title1}
           subtitle={Subtitle1}
-          backgroundImage='http://localhost:3000/api/images/landing/p1.png'
+          backgroundImage={`${backendUrl}api/images/landing/p1.png`}
         />
         <CardTemplate
           title={Title2}
           subtitle={Subtitle2}
-          backgroundImage='http://localhost:3000/api/images/landing/p4.png'
+          backgroundImage={`${backendUrl}api/images/landing/p4.png`}
         />
         <CardTemplate
           title={Title3}
           subtitle={Subtitle3}
-          backgroundImage='http://localhost:3000/api/images/landing/p3.png'
+          backgroundImage={`${backendUrl}api/images/landing/p3.png`}
         />
         <CardTemplate
           title={Title4}
           subtitle={Subtitle4}
-          backgroundImage='http://localhost:3000/api/images/landing/p5.png'
+          backgroundImage={`${backendUrl}api/images/landing/p5.png`}
         />
       </GridContainer>
     </div>

@@ -13,9 +13,11 @@ export default function About() {
     const BannerText = locale === 'en' ? 'Protect, Innovate, Lead' : 'Protéger, Innover, Diriger';
     const Title = locale === 'en' ? 'About Us' : 'Notre mission';
 
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
     return ( 
         <>
-            <Banner src="http://localhost:3000/api/images/landing/f7.jpg" alt="About Us Banner" bannerText={BannerText} title={Title}/>
+            <Banner src={`${backendUrl}api/images/landing/f7.jpg?quality=80`} alt="About Us Banner" bannerText={BannerText} title={Title}/>
             <OurPeople />
             <AboutUsContent />
             <Separator />

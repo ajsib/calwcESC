@@ -24,6 +24,8 @@ export const LargeNewsCard: React.FC<LargeNewsCardProps> = ({ item }) => {
   const articleContext = useArticle();
   const { setArticle } = articleContext!;
 
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
   const handleClick = () => {
     setArticle(item);
     router.push(`/news/${encodeURIComponent(item.id)}`);
@@ -39,7 +41,7 @@ export const LargeNewsCard: React.FC<LargeNewsCardProps> = ({ item }) => {
     background-color: transparent;
     height: 100%;
     max-height: 100%;
-    background-image: url(${item.imageUrl});
+    background-image: url(${backendUrl + item.imageUrl});
     background-size: cover;
     background-position: center;
     transition: all 0.5s ease;
