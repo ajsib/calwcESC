@@ -3,18 +3,21 @@ import TaskList from "./TaskList";
 import { Task } from "../../Types";
 import { fetchTaskData } from "../services/fetchTaskData";
 import { useProjectManagement } from "../../ProjectManagementContext";
+import TaskCardSkeleton from "./TaskCardSkeleton";
 
 const TaskListCon = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [expandedTaskId, setExpandedTaskId] = useState<number | null>(null);
     const [selectedTask, setSelectedTask] = useState<Task | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const { selectedStatus, selectedBucket, allTasks, setAllTasks } = useProjectManagement();
 
     useEffect(() => {
         fetchTaskData().then((data) => {
             setTasks(data);
             setAllTasks(data);
+            setIsLoading(false); // Set loading to false after data is fetched
         });
     }, [setAllTasks]);
 
@@ -39,15 +42,23 @@ const TaskListCon = () => {
     });
 
     return (
-        <TaskList
-            tasks={filteredTasks}
-            expandedTaskId={expandedTaskId}
-            openTaskDetails={openTaskDetails}
-            toggleSubtasks={toggleSubtasks}
-            selectedTask={selectedTask}
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}
-        />
+        <>
+            {isLoading ? (
+                Array.from({ length: 5 }).map((_, index) => (
+                    <TaskCardSkeleton key={index} />
+                ))
+            ) : (
+                <TaskList
+                    tasks={filteredTasks}
+                    expandedTaskId={expandedTaskId}
+                    openTaskDetails={openTaskDetails}
+                    toggleSubtasks={toggleSubtasks}
+                    selectedTask={selectedTask}
+                    isModalOpen={isModalOpen}
+                    setIsModalOpen={setIsModalOpen}
+                />
+            )}
+        </>
     );
 };
 

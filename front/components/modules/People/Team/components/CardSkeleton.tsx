@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from '@emotion/react';
 
+// Keyframes and animation style for the skeleton loading
 const loading = keyframes`
   0% {
     background-position: -200px 0;
@@ -11,19 +12,11 @@ const loading = keyframes`
 `;
 
 const skeletonAnimation = css`
-  animation: ${loading} 1.5s infinite linear;
+  animation: ${loading} 1s infinite linear;
   background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
-  background-size: 800px 104px;
 `;
 
-const skeletonText = css`
-  height: 20px;
-  width: 100%;
-  border-radius: 4px;
-  ${skeletonAnimation};
-`;
-
-const skeletonCardStyle = css`
+const cardSkeletonStyle = css`
   display: flex;
   align-items: center;
   padding: 2.5rem;
@@ -34,7 +27,14 @@ const skeletonCardStyle = css`
   position: relative;
 `;
 
-const skeletonPhotoParentStyle = css`
+const textSkeletonStyle = css`
+  margin-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+const photoParentSkeletonStyle = css`
   display: flex;
   align-items: center;
   margin-right: 3rem;
@@ -42,7 +42,7 @@ const skeletonPhotoParentStyle = css`
   height: 100%;
 `;
 
-const skeletonProfilePhotoStyle = css`
+const profilePhotoSkeletonStyle = css`
   width: 110px;
   height: 110px;
   background-color: #eee;
@@ -51,39 +51,45 @@ const skeletonProfilePhotoStyle = css`
   ${skeletonAnimation};
 `;
 
-const skeletonTextStyle = css`
-  margin-right: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+const skeletonText = css`
+  height: 16px;
+  ${skeletonAnimation};
 `;
 
-const skeletonWedgeStyle = css`
+const skeletonShortText = css`
+  width: 50%;
+  ${skeletonText};
+`;
+
+const skeletonLongText = css`
+  width: 80%;
+  ${skeletonText};
+`;
+
+const rightWedgeSkeletonStyle = css`
   position: absolute;
   top: 50%;
   right: 1.5rem;
   transform: translateY(-50%);
-  width: 26px;
-  height: 26px;
-  ${skeletonAnimation};
 `;
 
-const SkeletonProfileCard = () => {
-  return (
-    <div css={skeletonCardStyle}>
-      <div css={skeletonWedgeStyle}></div>
-      <div css={skeletonPhotoParentStyle}>
-        <div css={skeletonProfilePhotoStyle}></div>
-      </div>
-      <div css={skeletonTextStyle}>
-        <div css={css`${skeletonText}; width: 60%;`}></div>
-        <div css={css`${skeletonText}; width: 40%;`}></div>
-        <div css={css`${skeletonText}; width: 80%;`}></div>
-        <div css={css`${skeletonText}; width: 70%;`}></div>
-        <div css={css`${skeletonText}; width: 50%;`}></div>
-      </div>
+const ProfileCardSkeleton = () => (
+  <div css={cardSkeletonStyle}>
+    <div css={rightWedgeSkeletonStyle}>
+      {/* RightWedgeMedium would be skeleton animation */}
+      <div css={skeletonText} style={{ width: '26px', height: '26px' }}></div>
     </div>
-  );
-};
+    <div css={photoParentSkeletonStyle}>
+      <div css={profilePhotoSkeletonStyle}></div>
+    </div>
+    <div css={textSkeletonStyle}>
+      <div css={skeletonLongText}></div>
+      <div css={skeletonShortText}></div>
+      <div css={skeletonShortText}></div>
+      <div css={skeletonShortText}></div>
+      <div css={skeletonShortText}></div>
+    </div>
+  </div>
+);
 
-export default SkeletonProfileCard;
+export default ProfileCardSkeleton;

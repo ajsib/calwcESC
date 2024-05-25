@@ -68,7 +68,7 @@ const SignInComponent = () => {
     };
 
     const backgroundStyles = {
-        backgroundImage: 'url("/images/login/illustration.jpg")',
+        backgroundImage: 'url("http://localhost:3000/api/images/login/illustration.jpg")',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         width: '100%',
@@ -84,7 +84,7 @@ const SignInComponent = () => {
             {view === 'uname' && (
                 <section style={{ ...baseStyles }}>
                     <div>
-                        <Image src="/images/login/bannerlogo.jpg" alt="Microsoft" width={200} height={36} />
+                        <Image src="http://localhost:3000/api/images/login/bannerlogo.jpg" alt="Microsoft" width={200} height={36} />
                         <h2 style={{ lineHeight: '1.75rem', color: '#1b1b1b', fontSize: '1.5rem', fontWeight: '600', marginTop: '16px', marginBottom: '16px' }}>Sign in</h2>
                         <form>
                             <div style={{ marginBottom: '16px' }}>
@@ -96,7 +96,7 @@ const SignInComponent = () => {
                             <p style={{ marginBottom: '16px', fontSize: '13px' }}>No account? <a href="#" style={{ color: '#0067b8' }}>Create one!</a></p>
                             <p style={{ marginBottom: '16px', fontSize: '13px' }}>
                                 <a href="#" style={{ color: '#0067b8' }}>Sign in with a security key
-                                    <Image src="/images/login/question.png" alt="Question img" />
+                                    <Image src="http://localhost:3000/api/images/login/question.png" alt="Question img" width={16} height={16} />
                                 </a>
                             </p>
                         </div>
@@ -112,9 +112,9 @@ const SignInComponent = () => {
                     <div>
                         <div style={{ display: 'flex', gap: '50px', marginTop: '16px', marginBottom: '16px', alignItems: 'center' }}>
                             <button style={{ background: 'none', border: 'none', borderRadius: '50%', width: '24px', height: '24px', cursor: 'pointer' }} onClick={handleBack}>
-                                <Image src="/images/login/back.png" alt="Back" style={{ width: '24px', height: '24px' }} />
+                                <Image src="http://localhost:3000/api/images/login/back.png" alt="Back" width={24} height={24} />
                             </button>
-                            <Image src="/images/login/bannerlogo.jpg" alt="Microsoft" width={200} height={36} />
+                            <Image src="http://localhost:3000/api/images/login/bannerlogo.jpg" alt="Microsoft" width={200} height={36} />
                         </div>
                         <h2 style={{ lineHeight: '1.75rem', color: '#1b1b1b', fontSize: '1.5rem', fontWeight: '600', marginBottom: '16px' }}>Enter password</h2>
                         <form>
@@ -139,7 +139,7 @@ const SignInComponent = () => {
             {view === 'final' && (
                 <section style={{ ...baseStyles }}>
                     <div>
-                    <Image src="/images/login/bannerlogo.jpg" alt="Microsoft" width={200} height={36} />
+                    <Image src="http://localhost:3000/api/images/login/bannerlogo.jpg" alt="Microsoft" width={200} height={36} />
                         <div style={{ display: 'inline-flex', gap: '5px', marginTop: '16px', marginBottom: '16px' }}>
                         </div>
                         <h2 style={{ lineHeight: '1.75rem', color: '#1b1b1b', fontSize: '1.5rem', fontWeight: '600', marginBottom: '16px' }}>Stay signed in?</h2>
