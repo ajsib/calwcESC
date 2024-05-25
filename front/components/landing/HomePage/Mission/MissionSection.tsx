@@ -57,7 +57,7 @@ const MissionSection = () => {
     <div css={missionStyle}>
       <div>
         <CardTemplate
-        imageSrc={`${backendUrl}api/images/landing/f13.jpg`}
+        imageSrc={`${backendUrl}api/images/landing/f13.jpg?quality=10`}
           title={Title1}
           text={Text1}
           isMobile={isMobile}
@@ -66,7 +66,7 @@ const MissionSection = () => {
       </div>
       <div>
         <CardTemplate
-          imageSrc={`${backendUrl}api/images/landing/f16.jpg`}
+          imageSrc={`${backendUrl}api/images/landing/f16.jpg?quality=10`}
           title={Title2}
           text={Text2}
           isMobile={isMobile}
