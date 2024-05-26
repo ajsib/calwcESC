@@ -132,8 +132,8 @@ const HeroSection = () => {
           key={`current-${visibleIndex}`}
           src={newsItems[visibleIndex].imageUrl}
           alt="Hero background"
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: 'cover' }}
           priority
           css={[heroImageStyle, isAnimating && css`animation: ${fadeOut} 0.5s ease;`]}
         />
@@ -142,8 +142,8 @@ const HeroSection = () => {
             key={`next-${currentIndex}`}
             src={newsItems[currentIndex].imageUrl}
             alt="Hero background"
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: 'cover' }}
             priority
             css={[heroImageStyle, css`animation: ${fadeIn} 0.5s ease;`]}
           />

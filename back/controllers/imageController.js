@@ -16,6 +16,7 @@ exports.getImage = async (req, res) => {
   try {
     const data = fs.readFileSync(imagePath);
     const output = await sharp(data).resize(width).jpeg({ quality }).toBuffer();
+    res.set("Cache-Control", "public, max-age=7200");
     res.type("jpeg").send(output);
   } catch (error) {
     res.status(404).send("Image not found");

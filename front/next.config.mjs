@@ -4,9 +4,6 @@ const nextConfig = {
     locales: ["en", "fr"],
     defaultLocale: "en",
   },
-  images: {
-    domains: ["localhost", "your-production-domain.com"],
-  },
   output: "standalone",
 };
 
