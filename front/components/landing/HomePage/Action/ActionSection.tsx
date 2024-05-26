@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import CardTemplate from './CardTemplate';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
+import { useAuth } from '@/globalContexts/authContext'; // Import the useAuth hook
 
 // Define CSS styles outside of the component for better reusability and performance
 const styles = {
@@ -29,6 +30,7 @@ const styles = {
 const ActionSection = () => {
   const router = useRouter();
   const { locale } = router;
+  const { loggedIn } = useAuth(); // Get the person from useAuth hook
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -42,7 +44,15 @@ const ActionSection = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []); 
+  }, []);
+
+  const handleFirstCardClick = () => {
+    if (loggedIn) {
+      router.push('/dashboard');
+    } else {
+      router.push('/login');
+    }
+  };
 
   return (
     <section css={styles.actionSection}>
@@ -51,7 +61,7 @@ const ActionSection = () => {
         <CardTemplate
           title={locale === 'en' ? 'Already Running an Experiment?' : 'Déjà en cours d\'expérimentation ?'}
           subtitle={locale === 'en' ? 'Tell us about it' : 'parlez-nous de'}
-          onClick={() => router.push(locale === 'en' ? '/dashboard' : '/tableau-de-bord')}
+          onClick={handleFirstCardClick} // Use the handler for the first card
           isMobile={isMobile}
         />
         <CardTemplate

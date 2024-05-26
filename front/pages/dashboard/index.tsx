@@ -7,6 +7,7 @@ import Overview from '@/components/modules/Dashboard/Overview';
 import SearchBar from '@/components/modules/Dashboard/SearchBar';
 import { DashboardProvider } from '@/components/modules/Dashboard/DashboardContext';
 import { useAuth } from '@/globalContexts/authContext';
+import { useUserProfile } from "@/globalContexts/userContext";
 
 const dashboardStyle = css`
   display: flex;
@@ -15,7 +16,11 @@ const dashboardStyle = css`
 `;
 
 export default function Dashboard() {
-  const { login } = useAuth();
+  const { loggedIn } = useAuth();
+  const { profile } = useUserProfile();
+  if (!loggedIn || !profile) {
+    return <div>Either you&apos;re not logged in or you don&apos;t have a profile.</div>;
+  }
   return (
     <div css={dashboardStyle}>
       <Header />

@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from '@emotion/react';
+import { useUserProfile } from '@/globalContexts/userContext';
 
 // Keyframes and animation style for the skeleton loading
 const loading = keyframes`
@@ -16,24 +17,7 @@ const skeletonAnimation = css`
   background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
 `;
 
-// Existing styles modified for skeleton
-const profileCardStyle = css`
-  display: flex;
-  background: #fff;
-  border: 1px solid #ddd;
-  padding: 1rem;
-  width: 50%;
-  height: auto;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: 0.3s;
-  @media (max-width: 768px) {
-    width: 70%;
-  }
-  @media (max-width: 480px) {
-    width: 90%;
-    flex-direction: column;
-  }
-`;
+
 
 const profileImageSection = css`
   flex: 0 0 auto;
@@ -80,16 +64,40 @@ const skeletonRankImage = css`
   ${skeletonAnimation};
 `;
 
-const ProfileCardSkeleton = () => (
-  <div css={profileCardStyle}>
-    <div css={skeletonProfileImage} />
-    <div css={profileInfoSection}>
-      <div css={skeletonText}></div>
-      <div css={skeletonText} style={{ width: '60%' }}></div>
-      <div css={skeletonText} style={{ width: '50%' }}></div>
+const ProfileCardSkeleton = () => {
+  const { profile } = useUserProfile();
+
+
+  // Existing styles modified for skeleton
+  const profileCardStyle = css`
+  display: flex;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  width: ${profile?.role === 'Client' ? '100%' : '50%'}; // Adjust the width as needed
+  height: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  @media (max-width: 768px) {
+    width: 70%;
+  }
+  @media (max-width: 480px) {
+    width: 90%;
+    flex-direction: column;
+  }
+`;
+
+  return (
+    <div css={profileCardStyle}>
+      <div css={skeletonProfileImage} />
+      <div css={profileInfoSection}>
+        <div css={skeletonText}></div>
+        <div css={skeletonText} style={{ width: '60%' }}></div>
+        <div css={skeletonText} style={{ width: '50%' }}></div>
+      </div>
+      <div css={skeletonRankImage} />
     </div>
-    <div css={skeletonRankImage} />
-  </div>
-);
+  );
+};
 
 export default ProfileCardSkeleton;

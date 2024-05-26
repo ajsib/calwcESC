@@ -4,8 +4,15 @@ import { ProjectManagementProvider } from '@/components/modules/ProjectManagemen
 import TaskList from '@/components/modules/ProjectManagement/TaskList';
 import BucketSwitcher from '@/components/modules/ProjectManagement/BucketSwitcher';
 import SearchBar from "@/components/modules/ProjectManagement/SearchBar";
+import { useAuth } from '@/globalContexts/authContext';
+import { useUserProfile } from "@/globalContexts/userContext";
 
 const ProjectManagementPage = () => {
+  const { loggedIn } = useAuth();
+  const { profile } = useUserProfile();
+  if (!loggedIn || !profile) {
+    return <div>Either yo&apos;re not logged in or you don&apos;t have a profile.</div>;
+  }
   return (
     <>
       <Header />
