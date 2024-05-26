@@ -6,7 +6,16 @@ const nextConfig = {
   },
   output: "standalone",
   images: {
-    domains: ['localhost', 'calwc-esc-server.azurewebsites.net'],
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+      },
+      {
+        protocol: 'https',
+        hostname: 'calwc-esc-server.azurewebsites.net',
+      },
+    ],
   },
 };
 
