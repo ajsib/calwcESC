@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useEffect, useState } from 'react';
-import { Keyframes, css, keyframes } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
 import Image from 'next/image';
 import HeroContent from './HeroContent';
 import useNewsReel, { newsItems } from './NewsReel/NewsReel';
@@ -9,18 +9,22 @@ import CardTemplate from './NewsReel/CardTemplate';
 const fadeIn = keyframes`
   from {
     opacity: 0;
+    transform: scale(1.05);
   }
   to {
     opacity: 1;
+    transform: scale(1);
   }
 `;
 
 const fadeOut = keyframes`
   from {
     opacity: 1;
+    transform: scale(1);
   }
   to {
     opacity: 0;
+    transform: scale(0.95);
   }
 `;
 
@@ -28,9 +32,8 @@ const HeroSection = () => {
   const [offsetY, setOffsetY] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [currentIndex, setCurrentIndex, progressItem, regressItem, setIsPaused] = useNewsReel();
-  const [visibleIndex, setVisibleIndex] = useState(currentIndex); 
-  const [nextIndex, setNextIndex] = useState<number | null>(null);
-  const [imageAnimation, setImageAnimation] = useState<Keyframes | null>(null);
+  const [visibleIndex, setVisibleIndex] = useState(currentIndex);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const handleScroll = () => {
     const position = window.scrollY;
@@ -54,13 +57,11 @@ const HeroSection = () => {
 
   useEffect(() => {
     if (visibleIndex !== currentIndex) {
-      setNextIndex(currentIndex);
-      setImageAnimation(fadeOut);
+      setIsAnimating(true);
       const timeout = setTimeout(() => {
         setVisibleIndex(currentIndex);
-        setNextIndex(null);
-        setImageAnimation(fadeIn);
-      }, 500); // Set to match the duration of the fade-out animation
+        setIsAnimating(false);
+      }, 500); // Set to match the duration of the animations
 
       return () => clearTimeout(timeout);
     }
@@ -87,7 +88,7 @@ const HeroSection = () => {
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-color: black;
+    background-color: #000;
   `;
 
   const heroImageStyle = css`
@@ -96,7 +97,6 @@ const HeroSection = () => {
     left: 0;
     width: 100%;
     height: 100%;
-    animation: ${imageAnimation} 0.5s ease-in-out;
   `;
 
   const overlayStyle = css`
@@ -128,32 +128,32 @@ const HeroSection = () => {
         <HeroContent isMobile={isMobile} />
       </div>
       <div css={heroImageContainerStyle}>
-        {nextIndex !== null && (
-          <Image 
-            key={`next-${nextIndex}`}
-            src={newsItems[nextIndex].imageUrl}
-            alt="Hero background next"
-            layout="fill"
-            objectFit="cover"
-            priority
-            css={[heroImageStyle, css`animation: ${fadeOut} 0.5s ease-in-out;`]}
-          />
-        )}
         <Image 
-          key={`visible-${visibleIndex}`}
+          key={`current-${visibleIndex}`}
           src={newsItems[visibleIndex].imageUrl}
           alt="Hero background"
           layout="fill"
           objectFit="cover"
-          priority 
-          css={[heroImageStyle, css`animation: ${fadeIn} 0.5s ease-in-out;`]}
+          priority
+          css={[heroImageStyle, isAnimating && css`animation: ${fadeOut} 0.5s ease;`]}
         />
+        {isAnimating && (
+          <Image 
+            key={`next-${currentIndex}`}
+            src={newsItems[currentIndex].imageUrl}
+            alt="Hero background"
+            layout="fill"
+            objectFit="cover"
+            priority
+            css={[heroImageStyle, css`animation: ${fadeIn} 0.5s ease;`]}
+          />
+        )}
         <div css={overlayStyle}></div>
       </div>
       <div 
         css={newsFeedStyle}
-        onMouseEnter={() => {setIsPaused(true); console.log('paused')}}
-        onMouseLeave={() => {setIsPaused(false); console.log('unpaused')}}
+        onMouseEnter={() => {setIsPaused(true)}}
+        onMouseLeave={() => {setIsPaused(false)}}
       >
         <CardTemplate 
           progressItem={progressItem} 

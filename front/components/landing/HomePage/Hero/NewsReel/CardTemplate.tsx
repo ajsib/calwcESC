@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { css, keyframes } from '@emotion/react';
+import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
 import RightWedgeThin from '@/components/UI/arrows/RightWedgeThin';
 import LeftWedgeThin from '@/components/UI/arrows/LeftWedgeThin';
@@ -17,41 +17,12 @@ interface CardTemplateProps {
     currentIndex: number;
 }
 
-const slideOutLeft = keyframes`
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-`;
-
-const slideInRight = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-`;
-
 const CardTemplate: React.FC<CardTemplateProps> = ({ items, type, progressItem, regressItem, currentIndex }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [visibleItems, setVisibleItems] = useState(items);
-  const [animating, setAnimating] = useState(false);
 
   useEffect(() => {
-    setAnimating(true);
-    const timeout = setTimeout(() => {
-      setVisibleItems(items);
-      setAnimating(false);
-    }, 500); // Set to match the duration of the slide-out animation
-
-    return () => clearTimeout(timeout);
+    setVisibleItems(items);
   }, [items]);
 
   const handleProgress = () => {
@@ -104,7 +75,6 @@ const CardTemplate: React.FC<CardTemplateProps> = ({ items, type, progressItem, 
     flex-direction: column;
     align-items: flex-start; // Align items to the left within each column
     gap: 1rem;
-    animation: ${animating ? slideOutLeft : slideInRight} 0.5s ease;
   `;
 
   const itemStyle = css`
