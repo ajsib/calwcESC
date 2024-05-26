@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import FileCard from './FileCard';
-import { File } from '../../Types';
+import { File } from '@/public/Types/GlobalTypes';
 import { FileCardsProps } from '../Types';
 
 const fileCardsStyle = css`
@@ -17,7 +17,7 @@ const FileCards = ({ fileData }: FileCardsProps) => {
   return (
     <div css={fileCardsStyle}>
       {fileData.map((file: File, index) => (
-        <FileCard key={index} name={file.fileName} />
+        <FileCard key={index} name={file.file_name} />
       ))}
     </div>
   );

@@ -6,5 +6,4 @@ export interface ProfileCardProps {
     department: string;
     reportsTo: string;
     id: number;
-    onClick: () => void;
 }

@@ -54,7 +54,7 @@ const ModuleNavigation = () => {
   return (
     <div css={moduleNavigationStyle}>
       <div css={navigationRowStyle}>
-        <div css={[navigationItemBaseStyle, getProportionalWidth(ticketWidth)]} onClick={() => handleNavigation('/dashboard/tickets')}>Tickets</div>
+        <div css={[navigationItemBaseStyle, getProportionalWidth(ticketWidth)]} onClick={() => handleNavigation('/tickets')}>Tickets</div>
         <div css={[navigationItemBaseStyle, getProportionalWidth(pmWidth)]} onClick={() => handleNavigation('/project-management')}>Project Management</div>
       </div>
       <div css={navigationRowStyle}>

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import TicketCards from '../../../Tickets/TicketCards/components/TicketCards';
-import TaskCard from '../../../ProjectManagement/TaskList/components/TaskCard';
+import TaskCard from './TaskCard';
 import FileCard from '../../../Files/RecentFiles/components/FileCard';
 import { CardDisplayProps } from '../Types';
 
@@ -12,27 +12,23 @@ const ticketsStyle = css`
   margin: 1rem;
 `;
 
-const CardDisplay = ({ selectedTab, ticketsData, tasksData, filesData }: CardDisplayProps) => {
+const CardDisplay = ({ selectedTab, ticketsData, tasksData, filesData, subtasksData }: CardDisplayProps) => {
   return (
     <div css={ticketsStyle}>
       {selectedTab === 'tickets' && ticketsData.map((ticket, index) => (
         <TicketCards key={index} tickets={ticketsData} />
       ))}
       {selectedTab === 'files' && filesData.map((file, index) => (
-        <FileCard key={index} name={file.fileName} />
+        <FileCard key={index} name={file.file_name} />
       ))}
       {selectedTab === 'tasks' && tasksData.map((task, index) => (
         <TaskCard
           key={index}
           title={task.title}
-          people={task.people}
           status={task.status}
-          dueDate={task.dueDate}
-          onClick={() => {}}
+          dueDate={task.due_date}
           isComplete={false}
-          onToggleSubtasks={() => {}}
-          expandSubtasks={false}
-          subTasks={task.subTasks}
+          subTasks={subtasksData[task.task_id]}
           bucket={task.bucket}
         />
       ))}

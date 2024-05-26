@@ -1,10 +1,10 @@
-import { Profile } from '../../Types';
-import dummyData from '../../profiles-dummy.json';
+import { Person as Profile } from '@/public/Types/GlobalTypes';
+import PersonData from '@/public/Database/People.json';
 
 export const fetchProfileData = async (): Promise<Profile[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(dummyData);
+      resolve(PersonData.People);
     }, 500); // Simulate network delay
   });
 };

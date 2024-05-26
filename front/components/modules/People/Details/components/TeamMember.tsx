@@ -3,8 +3,11 @@ import { css } from '@emotion/react';
 import GeneralProfileCard from './ProfileCon';
 import Tabs from './Tabs';
 import CardDisplayCon from './CardDisplayCon';
-import { Profile } from '../../Types';
-import { useState } from 'react';
+import { Person as Profile } from '@/public/Types/GlobalTypes';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { fetchPersonData } from '../services/fetchPersonsStuff';
+import SkeletonProfile from './ProfileCardSkeleton';
 
 const teamMemberStyle = css`
   display: flex;
@@ -13,12 +16,35 @@ const teamMemberStyle = css`
   padding: 1rem;
 `;
 
-const TeamMember = ({ teamMember }: { teamMember: Profile }) => {
+const TeamMember = () => {
   const [selectedTab, setSelectedTab] = useState('All');
+  const [teamMember, setTeamMember] = useState<Profile | null>(null);
+  const router = useRouter();
+  const { personId } = router.query;
+
+  useEffect(() => {
+    if (personId) {
+      fetchPersonData(parseInt(personId as string)).then(data => {
+        setTeamMember(data);
+      }).catch(error => {
+        console.error("Error fetching person data:", error);
+      });
+    }
+  }, [personId]);
 
   const handleTabClick = (tab: string) => {
     setSelectedTab(tab);
   };
+
+  if (!teamMember) {
+    return (
+      <div css={teamMemberStyle}>
+        <SkeletonProfile />
+        <Tabs handleTabClick={handleTabClick} />
+        <CardDisplayCon selectedTab={selectedTab} />
+      </div>
+    )
+  }
 
   return (
     <div css={teamMemberStyle}>

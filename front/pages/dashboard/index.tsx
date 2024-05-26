@@ -6,6 +6,7 @@ import ProfileNav from "@/components/modules/Dashboard/ProfileNav";
 import Overview from '@/components/modules/Dashboard/Overview';
 import SearchBar from '@/components/modules/Dashboard/SearchBar';
 import { DashboardProvider } from '@/components/modules/Dashboard/DashboardContext';
+import { useAuth } from '@/globalContexts/authContext';
 
 const dashboardStyle = css`
   display: flex;
@@ -14,6 +15,7 @@ const dashboardStyle = css`
 `;
 
 export default function Dashboard() {
+  const { login } = useAuth();
   return (
     <div css={dashboardStyle}>
       <Header />

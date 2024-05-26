@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import ProfileCard from './ProfileCard';
 import { TaskDisplayProps } from '../../Types';
+import ProfileCard from './ProfileCard';
 
 const headerStyle = css`
   font-size: 2rem;
@@ -61,13 +61,14 @@ const buttonStyle = css`
 
 
 
-const TaskDisplay = ({ task, onEdit, profiles, hoverProfile, handleMouseEnter, handleMouseLeave } : TaskDisplayProps) => {
+const TaskDisplay = ({ task, profiles, hoverProfile, handleMouseEnter, handleMouseLeave, subTasks } : TaskDisplayProps) => {
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
   return (
     <>
       <div css={headerStyle}>{task.title}</div>
       <div css={sectionStyle}>
         <label css={labelStyle}>Due Date:</label>
-        <span css={contentStyle}>{task.dueDate}</span>
+        <span css={contentStyle}>{task.due_date}</span>
       </div>
       <div css={sectionStyle}>
         <label css={labelStyle}>Status:</label>
@@ -80,13 +81,13 @@ const TaskDisplay = ({ task, onEdit, profiles, hoverProfile, handleMouseEnter, h
       <div css={listContainerStyle}>
         <label css={labelStyle}>People:</label>
         <ul css={listStyle}>
-        {task.people.map(personId => {
-          const personProfile = profiles.find(p => p.id === personId);
+        {profiles.map(person => {
+          const personProfile = profiles.find(p => p.employee_id === person.employee_id);
           return (
-            <li key={personId} css={listItemStyle} onMouseEnter={() => handleMouseEnter(personId)} onMouseLeave={handleMouseLeave}>
+            <li key={person.employee_id} css={listItemStyle} onMouseEnter={() => handleMouseEnter(person.employee_id)} onMouseLeave={handleMouseLeave}>
               {personProfile?.name}
-              {hoverProfile && hoverProfile.id === personId && (
-                <ProfileCard {...hoverProfile} />
+              {hoverProfile && hoverProfile.employee_id === person.employee_id && (
+                <ProfileCard {...hoverProfile} profilePhoto={`${backendUrl}api/images/internal/avatar.png`} />
               )}
             </li>
           );
@@ -96,15 +97,14 @@ const TaskDisplay = ({ task, onEdit, profiles, hoverProfile, handleMouseEnter, h
       <div css={listContainerStyle}>
         <label css={labelStyle}>Subtasks:</label>
         <ul css={listStyle}>
-          {task.subTasks.map(subTask => (
-            <li key={subTask.id} css={listItemStyle}>
-              <input type="checkbox" checked={subTask.isChecked} css={checkBoxStyle} readOnly />
+          {subTasks.map(subTask => (
+            <li key={subTask.subtask_id} css={listItemStyle}>
+              <input type="checkbox" checked={subTask.complete} css={checkBoxStyle} readOnly />
               {subTask.title}
             </li>
           ))}
         </ul>
       </div>
-      <button css={buttonStyle} onClick={onEdit}>Edit Task</button>
     </>
   );
 };

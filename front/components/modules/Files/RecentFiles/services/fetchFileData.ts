@@ -1,10 +1,10 @@
-import { File } from "../../Types";
-import dummyData from "../../files-dummy.json";
+import { File } from '@/public/Types/GlobalTypes';
+import FilesData from "@/public/Database/Files.json";
 
 export const fetchFileData = async (): Promise<File[]> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(dummyData);
-      }, 500); // Simulate network delay
-    });
-  };
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(FilesData.Files);
+    }, 500); // Simulate network delay
+  });
+};

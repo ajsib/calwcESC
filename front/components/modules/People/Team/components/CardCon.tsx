@@ -1,24 +1,17 @@
-import { useTeamMember } from "../../TeamMemberContext";
 import ProfileCard from "./Card";
-import { Profile } from "../../Types";
+import { Person as Profile } from "@/public/Types/GlobalTypes";
 
 const CardCon = ({ profile }: { profile: Profile }) => {
-  const { setTeamMember } = useTeamMember()!;
-
-  const handleClick = () => {
-    setTeamMember(profile);
-  };
-
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
   return (
     <ProfileCard
-      profilePhoto={profile.profilePhoto}
+      profilePhoto={`${backendUrl}api/images/internal/avatar.png`}
       name={profile.name}
       rank={profile.rank}
       email={profile.email}
       department={profile.department}
-      reportsTo={profile.reportsTo}
-      id={profile.id}
-      onClick={handleClick}
+      reportsTo={profile.report_to}
+      id={profile.employee_id}
     />
   );
 };

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import CardCon from './CardCon';
-import { Profile } from '../../Types';
+import { Person as Profile } from '@/public/Types/GlobalTypes';
 
 const profilesListStyle = css`
   display: flex;

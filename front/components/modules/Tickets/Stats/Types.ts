@@ -1,12 +1,4 @@
-export interface Ticket {
-    id: string;
-    title: string;
-    status: string;
-    priority: string;
-    date: string;
-    assignedTo: string;
-    description: string;
-  }
+import {Ticket} from "@/public/Types/GlobalTypes";
 
 export interface StatsProps {
     openTickets: Ticket[];

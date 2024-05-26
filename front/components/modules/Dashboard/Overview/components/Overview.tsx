@@ -1,23 +1,43 @@
-// components/Pages/internalPages/Dashboard/ModulePreview.tsx
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { OverviewProps } from '../Types';
 
 const modulePreviewStyle = css`
   border: 1px solid #ccc;
   margin: 2rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   line-height: 2rem;
   flex-grow: 1;
 `;
 
-const ModulePreview = () => {
+const jsonStyle = css`
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 1rem;
+`;
+
+const ModulePreview = ({ tasks, tickets, counts }: OverviewProps) => {
   return (
     <div css={modulePreviewStyle}>
-      <p>Daily Overview of jobs to be done</p>
-      <p>When searching, will be replaced with search results</p>
+      <div css={jsonStyle}>
+        <h3>Role: ESC Staff</h3>
+      </div>
+      <div css={jsonStyle}>
+        <h3>Tasks JSON</h3>
+        <pre>{JSON.stringify(tasks, null, 2)}</pre>
+      </div>
+      <div css={jsonStyle}>
+        <h3>Tickets JSON</h3>
+        <pre>{JSON.stringify(tickets, null, 2)}</pre>
+      </div>
+      <div css={jsonStyle}>
+        <h3>Counts JSON</h3>
+        <pre>{JSON.stringify(counts, null, 2)}</pre>
+      </div>
     </div>
   );
 };

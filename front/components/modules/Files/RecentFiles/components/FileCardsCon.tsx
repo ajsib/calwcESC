@@ -1,7 +1,7 @@
 import FileCards from "./FileCards";
 import {useState, useEffect} from "react";
 import { fetchFileData } from "../services/fetchFileData";
-import { File } from "../../Types";
+import { File } from '@/public/Types/GlobalTypes';
 import SkeletonContainer from "./SkeletonContainer";
 
 const FileCardsCon = () => {
@@ -16,7 +16,7 @@ const FileCardsCon = () => {
     }, []);
 
     // Sort fileData by last edited timestamp in descending order
-    const sortedFiles: File[] = fileData.sort((a: File, b: File) => new Date(b.dateModified).getTime() - new Date(a.dateModified).getTime());
+    const sortedFiles: File[] = fileData.sort((a: File, b: File) => new Date(b.date_modified).getTime() - new Date(a.date_modified).getTime());
     // Select the 4 most recently edited files
     const recentFiles: File[] = sortedFiles.slice(0, 4);
 

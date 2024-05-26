@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import StatusOverview from "./StatusOverview";
 import { fetchTaskData } from "../services/fetchTaskData";
-import { Task } from "../../Types";
+import { Task } from "@/public/Types/GlobalTypes";
 import NewTaskCon from "./Slideouts/NewTaskCon";
 import BucketsSlideoutCon from "./Slideouts/BucketsSlideoutCon";
 import { useProjectManagement } from "../../ProjectManagementContext";

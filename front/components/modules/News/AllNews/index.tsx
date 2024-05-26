@@ -5,7 +5,7 @@ import NewsDisplayCon from './components/NewsDisplayCon';
 
 
 const allNewsSyle = css`
-    margin-top: 3rem;
+    margin-top: 5rem;
     margin-left: var(--margin);
     margin-right: var(--margin);
 `;

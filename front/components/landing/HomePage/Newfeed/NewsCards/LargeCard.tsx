@@ -2,7 +2,6 @@
 import { css } from '@emotion/react';
 import RightWedgeThin from '@/components/UI/arrows/RightWedgeThin';
 import { useRouter } from 'next/router';
-import { useArticle } from '@/components/modules/News/ArticleContext';
 
 
 interface NewsItem {
@@ -21,13 +20,10 @@ interface LargeNewsCardProps {
 
 export const LargeNewsCard: React.FC<LargeNewsCardProps> = ({ item }) => {
   const router = useRouter();
-  const articleContext = useArticle();
-  const { setArticle } = articleContext!;
 
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   const handleClick = () => {
-    setArticle(item);
     router.push(`/news/${encodeURIComponent(item.id)}`);
   };
 

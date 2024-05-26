@@ -82,13 +82,13 @@ const HeroSection = () => {
   `;
 
   const heroImageContainerStyle = css`
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
     background-color: #000;
+    z-index: -1;
   `;
 
   const heroImageStyle = css`
@@ -106,7 +106,6 @@ const HeroSection = () => {
     width: 100%;
     height: 100%;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5) 10%, rgba(0, 0, 0, 0.2) 100%);
-    z-index: 0;
   `;
 
   const newsFeedStyle = css`

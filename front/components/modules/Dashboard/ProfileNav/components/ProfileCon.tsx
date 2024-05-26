@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import ProfileCard from './ProfileCard';
 import ProfileCardSkeleton from './ProfileCardSkeleton';
-import { UserProfile } from '../Types';
-import { fetchProfileData } from '../services/fetchProfileData';
+import { useAuth } from '@/globalContexts/authContext';
+import { fetchRankImage } from '../services/fetchProfileData';
 
 const ProfileContainer: React.FC = () => {
-  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const { person } = useAuth();
+
+  const [rankImage, setRankImage] = useState<string | undefined>("");
 
   useEffect(() => {
-    fetchProfileData().then(data => setProfile(data));
-    console.log(profile);
-  }, []);
+    // get the rank image
+    if (!person) return;
+    fetchRankImage(person.rank).then((image) => {
+      setRankImage(image);
+    });
+  }, [person]);
 
-  if (!profile) {
+  if (!person) {
     return <ProfileCardSkeleton />;
   }
 
-  return <ProfileCard user={profile} />;
+  return <ProfileCard user={person} rankImage={rankImage} />;
 };
 
 export default ProfileContainer;

@@ -2,7 +2,6 @@
 import { FC } from 'react';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
-import { useArticle } from '@/components/modules/News/ArticleContext';
 import RightWedgeThin from '@/components/UI/arrows/RightWedgeThin';
 
 interface NewsItem {
@@ -21,12 +20,9 @@ interface MediumNewsCardProps {
 
 export const MediumNewsCard: FC<MediumNewsCardProps> = ({ item }) => {
   const router = useRouter();
-  const articleContext = useArticle()!;
-  const { setArticle } = articleContext;
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   const handleClick = () => {
-    setArticle(item); 
     router.push(`/news/${encodeURIComponent(item.id)}`); 
   };
 
