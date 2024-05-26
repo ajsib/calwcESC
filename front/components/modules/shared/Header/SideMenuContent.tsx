@@ -87,7 +87,7 @@ const SideMenuContent: React.FC = () => {
         <Logo />
       </TopSection>
       <MenuOption className="caption" onClick={() => handleNavigation("/dashboard")}>Dashboard</MenuOption>
-      <MenuOption className="caption" onClick={() => handleNavigation("/dashboard/tickets")}>Tickets</MenuOption>
+      <MenuOption className="caption" onClick={() => handleNavigation("/tickets")}>Tickets</MenuOption>
       <MenuOption className="caption" onClick={() => handleNavigation("/project-management")}>Project Management</MenuOption>
       <MenuOption className="caption" onClick={() => handleNavigation("/files")}>Files</MenuOption>
       <MenuOption className="caption" onClick={() => handleNavigation("/team")}>Team</MenuOption>

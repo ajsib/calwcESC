@@ -37,7 +37,7 @@ const WedgeContainer = styled.div<MenuProps>`
   right: 20px;
   cursor: pointer;
   z-index: 100000;
-  transform: ${({ isOpen }) => (isOpen ? "rotate(180deg)" : "rotate(0deg)")};
+  transform: ${({ isOpen }) => (isOpen ? "rotate(180deg)" : "rotate(0)")}; // Corrected here
   transition: transform 0.1s ease-in;
 `;
 

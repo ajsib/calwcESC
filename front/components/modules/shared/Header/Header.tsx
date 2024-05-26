@@ -47,7 +47,7 @@ const Header = () => {
   return (
     <>
       <header css={headerStyle}>
-        <div css={hamburgerIconContainer} onClick={toggleMenu}> {/* Add the CSS class to the container div */}
+        <div css={hamburgerIconContainer} onClick={toggleMenu}>
           <HamburgerIcon />
         </div>
         <div css={logoStyle}>
