@@ -11,6 +11,7 @@ const modulePreviewStyle = css`
   justify-content: center;
   line-height: 2rem;
   flex-grow: 1;
+  overflow-y: scroll;
 `;
 
 const jsonStyle = css`

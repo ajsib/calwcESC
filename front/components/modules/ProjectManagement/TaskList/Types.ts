@@ -15,7 +15,6 @@ export interface TaskCardProps {
 }
 
 export interface TaskListProps {
-  tasks: Task[];
   expandedTaskId: number | null;
   openTaskDetails: (task: Task) => void;
   toggleSubtasks: (id: number) => void;

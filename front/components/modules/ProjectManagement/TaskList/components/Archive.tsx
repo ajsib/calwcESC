@@ -1,28 +1,28 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import TaskCard from './TaskCard';
-import TaskDetailsModal from './TaskDetails/TaskDetailsCon';
 import { useProjectManagement } from '../../ProjectManagementContext';
 import SubTaskCard from './SubTaskCard';
 import { TaskListProps } from '../Types';
 import { Task } from '@/public/Types/GlobalTypes';
+import TaskDetailsModal from './TaskDetails/TaskDetailsCon';
 
 const taskListStyle = css`
   margin: 2rem 0;
 `;
 
-const TaskList = ({ expandedTaskId, openTaskDetails, toggleSubtasks, selectedTask, isModalOpen, setIsModalOpen }: TaskListProps) => {
-    const { filteredTasks, subtasks, people } = useProjectManagement();
+const Archive = ({ expandedTaskId, openTaskDetails, toggleSubtasks, selectedTask, isModalOpen, setIsModalOpen }: TaskListProps) => {
+    const { completedTasks, subtasks, people } = useProjectManagement();
 
     return (
         <div css={taskListStyle}>
-            {filteredTasks.map((task : Task) => (
+            {completedTasks.map((task : Task) => (
                 <div key={task.task_id}>
                     <TaskCard
                         onClick={() => openTaskDetails(task)}
                         title={task.title}
                         dueDate={task.due_date}
-                        isComplete={false}
+                        isComplete={true}
                         onToggleSubtasks={() => toggleSubtasks(task.task_id)}
                         expandSubtasks={expandedTaskId === task.task_id}
                         subTasks={subtasks[task.task_id]}
@@ -49,4 +49,4 @@ const TaskList = ({ expandedTaskId, openTaskDetails, toggleSubtasks, selectedTas
     );
 };
 
-export default TaskList;
+export default Archive;
