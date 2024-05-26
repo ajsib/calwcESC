@@ -53,7 +53,7 @@ const Navigation = () => {
       <Link href="/services" css={linkStyle}>{Services}</Link>
       <Link href={asPath} locale={toggleLocale} css={linkStyle}>{languageLabel}</Link>
       {person ? (
-        <button css={buttonStyle} onClick={logout}>{Logout}</button>
+        <div css={buttonStyle} onClick={logout}>{Logout}</div>
       ) : (
         <Link href="/login" css={linkStyle}>{Login}</Link>
       )}
