@@ -20,17 +20,17 @@ const TeamMember = () => {
   const [selectedTab, setSelectedTab] = useState('All');
   const [teamMember, setTeamMember] = useState<Profile | null>(null);
   const router = useRouter();
-  const { name } = router.query;
+  const { personId } = router.query;
 
   useEffect(() => {
-    if (name) {
-      fetchPersonData(name as string).then(data => {
+    if (personId) {
+      fetchPersonData(parseInt(personId as string)).then(data => {
         setTeamMember(data);
       }).catch(error => {
         console.error("Error fetching person data:", error);
       });
     }
-  }, [name]);
+  }, [personId]);
 
   const handleTabClick = (tab: string) => {
     setSelectedTab(tab);

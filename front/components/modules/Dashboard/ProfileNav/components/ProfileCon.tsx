@@ -15,7 +15,7 @@ const ProfileContainer: React.FC = () => {
     fetchRankImage(person.rank).then((image) => {
       setRankImage(image);
     });
-  }, []);
+  }, [person]);
 
   if (!person) {
     return <ProfileCardSkeleton />;

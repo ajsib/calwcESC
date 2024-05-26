@@ -85,7 +85,7 @@ const ProfileCard = ({ profilePhoto, name, rank, email, department, reportsTo, i
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   return (
-    <Link css={linkStyle} href={`/team/${encodeURIComponent(name)}`} passHref>
+    <Link css={linkStyle} href={`/team/${encodeURIComponent(id)}`} passHref>
       <div css={cardStyle}>
         <div css={rightWedgeStyle}>
           <RightWedgeMedium size={26} />

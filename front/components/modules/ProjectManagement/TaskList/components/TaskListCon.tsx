@@ -12,7 +12,7 @@ const TaskListCon = () => {
 
     useEffect(() => {
         setAllTasks(allTasks); // This seems redundant, consider removing if not needed
-    }, [allTasks]);
+    }, [allTasks, setAllTasks]);
 
     const openTaskDetails = (task: Task) => {
         setSelectedTask(task);

@@ -34,7 +34,7 @@ const OverviewCon: React.FC = () => {
     };
 
     loadData();
-  }, [person]);
+  }, [person, files]);
 
   if (searchTerm) {
     return <SearchResults results={searchTerm} />;
