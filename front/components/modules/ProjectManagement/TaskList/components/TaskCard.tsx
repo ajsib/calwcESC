@@ -15,6 +15,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
   status,
   onClick,
   people,
+  ticket
 }) => {
   const [dropDownHover, setDropdownHover] = useState(false);
   const [hoverList, setHoverList] = useState(false);
@@ -158,6 +159,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
       <div css={statusBorderStyle}></div>
       <div css={statusOverlayStyle}></div>
       <div css={taskTitleStyle}>{title}</div>
+      <div>{ticket}</div>
       <div
         css={avatarContainerStyle}
         onMouseEnter={() => setHoverList(true)}

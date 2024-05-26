@@ -12,6 +12,7 @@ export interface TaskCardProps {
     bucket: string;
     status: string;
     onClick?: () => void;
+    ticket?: number;
 }
 
 export interface TaskListProps {
