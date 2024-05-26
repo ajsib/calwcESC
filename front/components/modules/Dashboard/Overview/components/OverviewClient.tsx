@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { ClientOverviewProps } from '../Types';
+import { useRouter } from 'next/router';
 
 const modulePreviewStyle = css`
   border: 1px solid #ccc;
@@ -21,8 +22,10 @@ const jsonStyle = css`
 `;
 
 const ModulePreviewClient = ({ tickets, counts }: Omit<ClientOverviewProps, 'tasks'>) => {
+  const router = useRouter();
   return (
     <div css={modulePreviewStyle}>
+      <button onClick={() => router.push('/ticket-intake')}>New Ticket</button>
       <div css={jsonStyle}>
         <h3>Role: Client</h3>
       </div>

@@ -3,8 +3,6 @@ import TasksPeopleData from '@/public/Database/Tasks-People.json';
 import TicketsPeopleData from '@/public/Database/Tickets-People.json';
 import TasksData from '@/public/Database/Tasks.json';
 import TicketsData from '@/public/Database/Tickets.json';
-import FilesData from '@/public/Database/Files.json';
-import FilesPeopleData from '@/public/Database/Files-People.json';
 
 export const fetchIdsByEmployeeId = async (employeeId: number): Promise<{ taskIds: number[], ticketIds: number[] }> => {
   return new Promise((resolve) => {
