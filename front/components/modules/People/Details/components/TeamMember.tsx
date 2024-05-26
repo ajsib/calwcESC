@@ -7,6 +7,7 @@ import { Profile } from '../../Types';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { fetchPersonData } from '../services/fetchPersonsStuff';
+import SkeletonProfile from './ProfileCardSkeleton';
 
 const teamMemberStyle = css`
   display: flex;
@@ -36,7 +37,13 @@ const TeamMember = () => {
   };
 
   if (!teamMember) {
-    return <div>Loading...</div>;
+    return (
+      <div css={teamMemberStyle}>
+        <SkeletonProfile />
+        <Tabs handleTabClick={handleTabClick} />
+        <CardDisplayCon selectedTab={selectedTab} />
+      </div>
+    )
   }
 
   return (

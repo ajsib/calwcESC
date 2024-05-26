@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import Article from './Article';
 import { fetchArticleData } from '../services/fetchNews';
 import { ArticleProps } from '../../Types';
+import SkeletonArticle from './ArticleSkeleton';
 
 const containerStyle = css`
   display: flex;
@@ -29,7 +30,7 @@ const ArticleCon = () => {
   }, [router.isReady, articleId]);
 
   if (!article) {
-    return <div css={containerStyle}>Loading...</div>;
+    return <SkeletonArticle />;
   }
 
   return (
