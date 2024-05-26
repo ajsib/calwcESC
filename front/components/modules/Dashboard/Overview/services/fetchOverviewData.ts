@@ -49,7 +49,7 @@ export const countTasksAndTickets = async (employeeId: number): Promise<{ taskCo
       const tickets = TicketsData.Tickets.filter(ticket => ticketIds.includes(ticket.ticket_id));
 
       const tasksDueTodayCount = tasks.filter(task => task.due_date === today).length;
-      const highPriorityTicketsCount = tickets.filter(ticket => ticket.priority === 'high').length;
+      const highPriorityTicketsCount = tickets.filter(ticket => ticket.priority === 'High').length;
 
       resolve({
         taskCount: tasks.length,
