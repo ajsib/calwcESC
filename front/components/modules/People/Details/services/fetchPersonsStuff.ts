@@ -2,6 +2,7 @@ import FileData from '@/public/Database/Files.json';
 import TaskData from '@/public/Database/Tasks.json';
 import TicketData from '@/public/Database/Tickets.json';
 import PeopleData from '@/public/Database/People.json';
+import SubtasksData from '@/public/Database/Subtasks.json';
 import { Ticket, Task, File } from '@/public/Types/GlobalTypes';
 
 export const fetchFileData = async (): Promise<File[]> => {
@@ -17,6 +18,14 @@ export const fetchTaskData = async (): Promise<Task[]> => {
     return new Promise((resolve) => {
         setTimeout(() => {
         resolve(TaskData.Tasks);
+        }, 500); // Simulate network delay
+    });
+};
+
+export const fetchSubtaskDataById = async (taskId: number): Promise<any> => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+        resolve(SubtasksData.Subtasks.filter(subtask => subtask.task_id === taskId));
         }, 500); // Simulate network delay
     });
 };

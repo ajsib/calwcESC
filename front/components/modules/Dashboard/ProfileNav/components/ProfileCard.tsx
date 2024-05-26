@@ -2,32 +2,14 @@
 import { css } from '@emotion/react';
 import React from 'react';
 import { Person as UserProfile } from '@/public/Types/GlobalTypes';
+import { useUserProfile } from '@/globalContexts/userContext';
 
 interface ProfileCardProps {
   user: UserProfile;
   rankImage?: string;
 }
 
-const profileCardStyle = css`
-  display: flex;
-  background: #fff;
-  border: 1px solid #ddd;
-  padding: 1rem;
-  width: 50%;
-  height: auto;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: 0.3s;
-  &:hover {
-    // box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1);
-  }
-  @media (max-width: 768px) {
-    width: 70%;
-  }
-  @media (max-width: 480px) {
-    width: 90%;
-    flex-direction: column;
-  }
-`;
+
 
 const profileImageSection = css`
   flex: 0 0 auto;
@@ -84,6 +66,30 @@ const lastLoginStyle = css`
 `;
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ user, rankImage }) => {
+
+  const { profile } = useUserProfile();
+
+  const profileCardStyle = css`
+  display: flex;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  width: ${profile?.role === 'Client' ? '100%' : '50%'}; // Adjust the width as needed
+  height: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  &:hover {
+    // box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1);
+  }
+  @media (max-width: 768px) {
+    width: 70%;
+  }
+  @media (max-width: 480px) {
+    width: 90%;
+    flex-direction: column;
+  }
+`;
+
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
   return (
     <div css={profileCardStyle}>

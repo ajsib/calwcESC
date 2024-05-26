@@ -4,7 +4,6 @@ import RightWedgeThin from '@/components/UI/arrows/RightWedgeMedium';
 import { useState, useEffect } from 'react';
 import { TaskCardProps } from '../Types';
 
-
 const TaskCard: React.FC<TaskCardProps> = ({
   title,
   dueDate,
@@ -17,7 +16,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
 }) => {
   const [hover, setHover] = useState(false);
   const [dropdownActive, setDropdownActive] = useState(false);
-  const [hasSubtasks, setHasSubtasks] = useState(true);
+  const [hasSubtasks, setHasSubtasks] = useState(subTasks && subTasks.length > 0);
   useEffect(() => {
     setDropdownActive(expandSubtasks);
   }, [expandSubtasks]);

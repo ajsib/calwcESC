@@ -2,19 +2,20 @@ import React from 'react';
 import OverviewCon from './components/OverviewCon';
 import OverviewConClient from './components/OverviewConClient';
 import OverviewConStaff from './components/OverviewConStaff';
+import { useUserProfile } from '@/globalContexts/userContext';
 
-interface OverviewProps {
-  role: string;
-}
-
-const Overview: React.FC<OverviewProps> = ({ role }) => {
-  if (role === 'Client') {
+const Overview: React.FC = () => {
+  const { profile } = useUserProfile();
+  if (!profile) {
+    return null;
+  }
+  if (profile.role === 'Client') {
     return <OverviewConClient />;
   }
-  if (role === 'Staff') {
+  if (profile.role === 'Staff') {
     return <OverviewConStaff />;
   }
-  if (role === 'ESC Staff') {
+  if (profile.role === 'ESC Staff') {
     return <OverviewCon />;
   }
 

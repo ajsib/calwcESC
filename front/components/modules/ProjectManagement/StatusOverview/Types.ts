@@ -1,4 +1,4 @@
-import { Task, SubTask, Profile } from "../Types";
+import { Task, Subtask, Person } from "@/public/Types/GlobalTypes";
 
 export interface StatusCardProps {
     status: string;
@@ -29,7 +29,7 @@ export interface NewTaskModalProps {
     handleAddSubTask: () => void;
     handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
     title: string;
-    subTasks: SubTask[];
+    subTasks: Subtask[];
     people: number[];
     bucket: string;
     status: string;
@@ -41,7 +41,7 @@ export interface NewTaskModalProps {
     setStatus: (status: string) => void;
     setDueDate: (dueDate: string) => void;
     subTaskInput: string;
-    peopleData: Profile[];
+    peopleData: Person[];
   }
 
 export interface ManageTeamsModalProps {

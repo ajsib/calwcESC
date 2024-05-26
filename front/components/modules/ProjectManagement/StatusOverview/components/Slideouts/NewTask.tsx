@@ -78,7 +78,7 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({ isOpen, close, teams, handl
         <select css={selectStyle} value={people.toString()} onChange={handleSelectChange}>
           <option value="">Select People</option>
           {peopleData.map(person => (
-            <option key={person.id} value={person.id}>
+            <option key={person.employee_id} value={person.employee_id}>
               {person.name}
             </option>
           ))}

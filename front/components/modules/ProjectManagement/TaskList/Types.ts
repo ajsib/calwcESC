@@ -1,19 +1,5 @@
 import { Task, Subtask as SubTask, Person as Profile } from "@/public/Types/GlobalTypes";
 
-export interface TaskListProps {
-    tasks: Task[];
-    expandedTaskId: number | null;
-    openTaskDetails: (task: Task) => void;
-    toggleSubtasks: (id: number) => void;
-    selectedTask: Task | null;
-    isModalOpen: boolean;
-    setIsModalOpen: (open: boolean) => void;
-  }
-
-export interface SubTaskCardProps {
-    subTasks: SubTask[];
-    expanded: boolean;
-  }
 
 export interface TaskCardProps {
     title: string;
@@ -21,30 +7,34 @@ export interface TaskCardProps {
     isComplete: boolean;
     onToggleSubtasks: () => void;
     expandSubtasks: boolean;
-    subTasks: null;
-    people: null;
+    subTasks: SubTask[];
+    people: Profile[];
     bucket: string;
     status: string;
     onClick?: () => void;
-  }
-
-export interface EditFormProps {
-  task: Task;
-  onTitleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onDueDateChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onStatusChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  onBucketChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onPeopleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onSaveChanges: () => void;
-  subTasks: SubTask[];
-  onSubTaskChange: (id: number, title: string) => void;
-  onDeleteSubTask: (id: number) => void;
 }
+
+export interface TaskListProps {
+  tasks: Task[];
+  expandedTaskId: number | null;
+  openTaskDetails: (task: Task) => void;
+  toggleSubtasks: (id: number) => void;
+  selectedTask: Task | null;
+  isModalOpen: boolean;
+  setIsModalOpen: (isOpen: boolean) => void;
+}
+
+export interface SubTaskCardProps {
+    subTasks: SubTask[];
+    expanded: boolean;
+  }
 
 export interface TaskDetailsModalProps {
   task: Task;
   isOpen: boolean;
   close: () => void;
+  subtasks: SubTask[];
+  people: Profile[];
 }
 
 export interface TaskDisplayProps {
@@ -54,7 +44,6 @@ export interface TaskDisplayProps {
   hoverProfile: Profile | undefined;
   handleMouseEnter: (id: number) => void;
   handleMouseLeave: () => void;
-  onEdit: () => void;
 }
 
 export interface ProfileCardProps {
@@ -63,5 +52,5 @@ export interface ProfileCardProps {
   rank: string;
   email: string;
   department: string;
-  reportsTo: string;
+  report_to: string;
 }

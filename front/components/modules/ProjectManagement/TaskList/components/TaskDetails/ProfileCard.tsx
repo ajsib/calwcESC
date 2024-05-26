@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { ProfileCardProps } from '../../Types';
 import Image from 'next/image'; 
 
-const ProfileCard = ({ profilePhoto, name, rank, email, department, reportsTo }: ProfileCardProps) => {
+const ProfileCard = ({ profilePhoto, name, rank, email, department, report_to }: ProfileCardProps) => {
     const router = useRouter();
     const [position, setPosition] = useState<{ x: number; y: number } | null>(null);
     const [hideTimeout, setHideTimeout] = useState<number | null>(null); // Store the timeout ID
@@ -56,7 +56,7 @@ const ProfileCard = ({ profilePhoto, name, rank, email, department, reportsTo }:
           <div>{name}</div>
           <div>{rank}</div>
           <div>{department}</div>
-          <div>Reports to: {reportsTo}</div>
+          <div>Reports to: {report_to}</div>
           <div>{email}</div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+// pages/dashboard/index.tsx
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import Header from "@/components/modules/shared/Header/Header";
@@ -14,15 +15,14 @@ const dashboardStyle = css`
 `;
 
 export default function Dashboard() {
-  const { person } = useAuth();
-
+  const { login } = useAuth();
   return (
     <div css={dashboardStyle}>
       <Header />
       <ProfileNav />
       <DashboardProvider>
         <SearchBar />
-        {person && <Overview role={person.role} />}
+        <Overview />
       </DashboardProvider>
     </div>
   );

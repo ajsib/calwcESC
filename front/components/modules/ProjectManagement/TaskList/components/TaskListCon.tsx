@@ -1,28 +1,17 @@
 import { useState, useEffect } from "react";
 import TaskList from "./TaskList";
-import { Task } from "@/public/Types/GlobalTypes";
-import { fetchTaskData } from "../services/fetchTaskData";
 import { useProjectManagement } from "../../ProjectManagementContext";
 import TaskCardSkeleton from "./TaskCardSkeleton";
+import { Task } from "@/public/Types/GlobalTypes";
 
 const TaskListCon = () => {
-    const [tasks, setTasks] = useState<Task[]>([]);
     const [expandedTaskId, setExpandedTaskId] = useState<number | null>(null);
     const [selectedTask, setSelectedTask] = useState<Task | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    const { selectedStatus, selectedBucket, allTasks, setAllTasks } = useProjectManagement();
+    const { selectedStatus, selectedBucket, allTasks, setAllTasks, subtasks, people, isLoading } = useProjectManagement();
 
     useEffect(() => {
-        fetchTaskData().then((data) => {
-            setTasks(data);
-            setAllTasks(data);
-            setIsLoading(false); // Set loading to false after data is fetched
-        });
-    }, [setAllTasks]);
-
-    useEffect(() => {
-        setTasks(allTasks);
+        setAllTasks(allTasks); // This seems redundant, consider removing if not needed
     }, [allTasks]);
 
     const openTaskDetails = (task: Task) => {
@@ -35,7 +24,7 @@ const TaskListCon = () => {
     };
 
     // Filter tasks based on status and bucket
-    const filteredTasks = tasks.filter(task => {
+    const filteredTasks = allTasks.filter((task: Task) => {
         const statusMatch = selectedStatus ? task.status === selectedStatus : true;
         const bucketMatch = selectedBucket && selectedBucket !== "All" ? task.bucket === selectedBucket : true;
         return statusMatch && bucketMatch;

@@ -5,7 +5,6 @@ import { useDashboard } from '@/components/modules/Dashboard/DashboardContext';
 import { useAuth } from '@/globalContexts/authContext';
 import { fetchIdsByEmployeeId, fetchTasksAndTickets, countTasksAndTickets } from '../services/fetchOverviewData';
 import { Ticket } from '@/public/Types/GlobalTypes';
-import SkeletonModulePreview from './OverviewSkeleton';
 
 const OverviewConClient: React.FC = () => {
   const { searchTerm } = useDashboard();
@@ -32,10 +31,6 @@ const OverviewConClient: React.FC = () => {
 
     loadData();
   }, [person]);
-
-  if (loading) {
-    return <SkeletonModulePreview />;
-  }
 
   if (searchTerm) {
     return <SearchResults results={searchTerm} />;

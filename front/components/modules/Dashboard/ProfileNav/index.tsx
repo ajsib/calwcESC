@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import React from 'react';
 import ProfileContainer from './components/ProfileCon';
 import ModuleNavigation from './components/Navigation';
+import { useUserProfile } from '@/globalContexts/userContext';
 
 const profileNavContainer = css`
   display: flex;
@@ -12,11 +12,17 @@ const profileNavContainer = css`
   padding: 2rem;
 `;
 
-const ProfileNavModule: React.FC = () => (
+const ProfileNavModule = () => {
+  const { profile } = useUserProfile();
+  if (!profile) {
+    return null;
+  }
+  return (
     <div css={profileNavContainer}>
       <ProfileContainer />
-      <ModuleNavigation />
+      { profile.role !== 'Client' && <ModuleNavigation />}
     </div>
-);
+  );
+};
 
 export default ProfileNavModule;

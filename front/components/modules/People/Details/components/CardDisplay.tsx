@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import TicketCards from '../../../Tickets/TicketCards/components/TicketCards';
-import TaskCard from '../../../ProjectManagement/TaskList/components/TaskCard';
+import TaskCard from './TaskCard';
 import FileCard from '../../../Files/RecentFiles/components/FileCard';
 import { CardDisplayProps } from '../Types';
 
@@ -12,7 +12,7 @@ const ticketsStyle = css`
   margin: 1rem;
 `;
 
-const CardDisplay = ({ selectedTab, ticketsData, tasksData, filesData }: CardDisplayProps) => {
+const CardDisplay = ({ selectedTab, ticketsData, tasksData, filesData, subtasksData }: CardDisplayProps) => {
   return (
     <div css={ticketsStyle}>
       {selectedTab === 'tickets' && ticketsData.map((ticket, index) => (
@@ -25,14 +25,10 @@ const CardDisplay = ({ selectedTab, ticketsData, tasksData, filesData }: CardDis
         <TaskCard
           key={index}
           title={task.title}
-          people={null}
           status={task.status}
           dueDate={task.due_date}
-          onClick={() => {}}
           isComplete={false}
-          onToggleSubtasks={() => {}}
-          expandSubtasks={false}
-          subTasks={null}
+          subTasks={subtasksData[task.task_id]}
           bucket={task.bucket}
         />
       ))}
