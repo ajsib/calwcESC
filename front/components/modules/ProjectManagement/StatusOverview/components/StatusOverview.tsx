@@ -6,47 +6,80 @@ import { StatusCardProps, StatusOverviewProps } from '../Types';
 const statusOverviewStyle = css`
   display: flex;
   justify-content: space-between;
-  padding: 2rem;
-  gap: 1rem;
+  padding: 0rem;
+  gap: 0rem;
   background-color: #FBFBFB;
   align-items: stretch; // This will ensure all child elements stretch to the same height
+  height: 16rem;  
 `;
 
 const statusCardStyle = css`
-  border: 1px solid #ddd;
+  border: 1px solid #EAEAEA;
   text-align: center;
   cursor: pointer;
   flex: 1; 
-  background-color: #fff;
+  background-color: #F4F4F4;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   line-height: 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
 const buttonContainerStyle = css`
-  display: flex;
-  background-color: #fff;
-  flex-direction: column;
-  border: 1px solid #ddd;
-  gap: 1rem;
-  justify-content: flex-start; 
-  padding: 1rem;
-  flex: 0 1 auto;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    gap: 1rem;
+    justify-content: center;
+    padding: 1rem;
+    flex: 0 1 auto;
+    min-width: 575px;
+    background-color: #DEDEDE;
 `;
 
-const buttonStyle = css`
-  border: 1px solid #ddd;
-  cursor: pointer;
-  padding: 1rem;
-  width: calc(100% - 2rem); 
-  text-align: center; 
-  transition: background-color 0.3s ease;
+const buttonStylePrimary = css`
+    border: 1px solid #C2C2C2;
+    cursor: pointer;
+    padding: 1.25rem;
+    width: 100%;
+    text-align: left;
+    transition: background-color 0.3s ease;
+    background-color: #4E5E48;
+    font-size: 1.25rem;
+    color: #FFFFFF;
+    &:hover {
+        background-color: #667B5E;
+    }
+`;
 
-  &:hover {
+const buttonStyleSecondaryLeft = css`
+  border: 1px solid #C2C2C2;
+  margin-right: 8px;  
+  cursor: pointer;
+  padding: 1.25rem;
+  width: 50%;
+  text-align: left; 
+  transition: background-color 0.3s ease;
+  color: #364132;
+    font-size: 1.25rem;
+
+    &:hover {
+    background-color: #eaeaea;
+  }
+`;
+
+const buttonStyleSecondaryRight = css`
+  border: 1px solid #C2C2C2;
+  margin-left: 8px;  
+  cursor: pointer;
+  padding: 1.25rem;
+    width: 50%;
+  text-align: left; 
+  transition: background-color 0.3s ease;
+    font-size: 1.25rem;
+
+    &:hover {
     background-color: #eaeaea;
   }
 `;
@@ -59,7 +92,7 @@ const titleStyle = css`
 `;
 
 const StatusCard: React.FC<StatusCardProps> = ({ status, count, selected, onClick }) => (
-  <div css={[statusCardStyle, selected && { backgroundColor: '#e0e0e0' }]} onClick={onClick}>
+  <div css={[statusCardStyle, selected && { backgroundColor: '#E8E8E8' }]} onClick={onClick}>
     <h2>{count}</h2>
     <p css={titleStyle}><Circle color={status === 'To Do' ? '#4287f5' : status === 'In Progress' ? 'orange' : '#ad1818'} size={10} />{status}</p>
   </div>
@@ -69,14 +102,19 @@ const StatusOverview: React.FC<StatusOverviewProps> = ({ onSelectStatus, selecte
 
   return (
     <div css={statusOverviewStyle}>
+        <StatusCard status="To Do" count={toDoCount} selected={selectedStatus === 'To Do'} onClick={() => onSelectStatus('To Do')} />
       <StatusCard status="To Do" count={toDoCount} selected={selectedStatus === 'To Do'} onClick={() => onSelectStatus('To Do')} />
       <StatusCard status="In Progress" count={inProgressCount} selected={selectedStatus === 'In Progress'} onClick={() => onSelectStatus('In Progress')} />
       <StatusCard status="Overdue" count={overdueCount} selected={selectedStatus === 'Overdue'} onClick={() => onSelectStatus('Overdue')} />
-      <div css={buttonContainerStyle}>
-        <div css={buttonStyle} onClick={onNewTaskModalOpen}>New Task</div>
-        <div css={buttonStyle} onClick={onManageTeamsModalOpen}>Edit Buckets</div>
-        <div css={buttonStyle}>View Archive</div>
-      </div>
+        <div css={buttonContainerStyle}>
+            <div css={css`display: flex;`}>
+                <div css={buttonStyleSecondaryLeft} onClick={onManageTeamsModalOpen}>Edit Teams</div>
+                <div css={buttonStyleSecondaryRight}>Archive</div>
+            </div>
+            <div css={css`display: flex;`}>
+                <div css={buttonStylePrimary} onClick={onNewTaskModalOpen}>New Task</div>
+            </div>
+        </div>
     </div>
   );
 };

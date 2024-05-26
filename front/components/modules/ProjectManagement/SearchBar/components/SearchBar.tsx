@@ -5,7 +5,7 @@ import SearchBarProps from "@/components/modules/Dashboard/SearchBar/Types";
 const MainContainer = styled.div`
   display: flex;
   align-items: center;
-  height: 3rem;
+  height: 4rem;
   background-color: #fff;
   border: 1px solid #e9e9e9;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.09);
@@ -21,6 +21,7 @@ const SearchContainer = styled.div<{ isFocused: boolean }>`
     isFocused ? "1px solid #eee" : "1px solid transparent"};
   box-shadow: ${({ isFocused }) => (isFocused ? "0 0 0 1px #364132" : "none")};
   cursor: text;
+    background-color: #fff;
 `;
 
 const StyledInput = styled.input`
@@ -29,6 +30,7 @@ const StyledInput = styled.input`
   padding: 8px 20px;
   outline: none;
   border: none;
+    background-color: #fff;
 `;
 
 const FilterButton = styled.button`
