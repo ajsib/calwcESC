@@ -74,7 +74,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ user, rankImage }) => {
   background: #fff;
   border: 1px solid #ddd;
   padding: 1rem;
-  width: ${profile?.role === 'Client' ? '100%' : '50%'}; // Adjust the width as needed
+  width: ${profile?.role === 'Client' ? '100%' : '50%'}; 
   height: auto;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
