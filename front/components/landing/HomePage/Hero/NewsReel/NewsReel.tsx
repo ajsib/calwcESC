@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+import { useState, useEffect, useCallback } from 'react';
+
 
 const eventsData = [
   { id: '1', title: 'Operation Northern Shield', date: 'May 10, 2024', url: '/events/operation-northern-shield' },
@@ -36,39 +36,49 @@ export const newsItems: {
   };
 }[] = [
   {
-    imageUrl: `${backendUrl}api/images/landing/f4.jpg?quality=10`,
+    imageUrl: "/images/f4.jpg",
     props: {
       items: eventsData.slice(0, 3),
       type: 'event'
     }
   },
   {
-    imageUrl: `${backendUrl}api/images/landing/f3.jpg?quality=10`,
+    imageUrl: "/images/f3.jpg",
     props: {
       items: linksData.slice(0, 4),
       type: 'link'
     }
   }
 ];
-  
+
 const useNewsReel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  let interval: NodeJS.Timeout;
+
   const advanceItem = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % newsItems.length);
   };
 
   const regressItem = () => {
-    setCurrentIndex((prevIndex) => prevIndex > 0 ? prevIndex - 1 : newsItems.length - 1);
+    setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : newsItems.length - 1));
   };
-  
-  useEffect(() => {
-    const interval = setInterval(() => {
+
+  const startInterval = useCallback(() => {
+    interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % newsItems.length);
     }, 8000);
-    return () => clearInterval(interval);
   }, []);
-  
-  return [currentIndex, setCurrentIndex, advanceItem, regressItem] as const;
+
+  useEffect(() => {
+    if (!isPaused) {
+      startInterval();
+    }
+
+    return () => clearInterval(interval);
+  }, [isPaused, startInterval]);
+
+  return [currentIndex, setCurrentIndex, advanceItem, regressItem, setIsPaused] as const;
 };
 
 export default useNewsReel;

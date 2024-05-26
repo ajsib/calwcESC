@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-import { useState } from 'react';
+import { css, keyframes } from '@emotion/react';
+import { useState, useEffect } from 'react';
 import RightWedgeThin from '@/components/UI/arrows/RightWedgeThin';
 import LeftWedgeThin from '@/components/UI/arrows/LeftWedgeThin';
 
@@ -14,16 +14,51 @@ interface CardTemplateProps {
     progressItem: () => void;
     regressItem: () => void;
     type: 'event' | 'link';
+    currentIndex: number;
 }
 
-const CardTemplate: React.FC<CardTemplateProps> = ({ items, type, progressItem, regressItem }) => {
+const slideOutLeft = keyframes`
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+`;
+
+const slideInRight = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const CardTemplate: React.FC<CardTemplateProps> = ({ items, type, progressItem, regressItem, currentIndex }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [visibleItems, setVisibleItems] = useState(items);
+  const [animating, setAnimating] = useState(false);
+
+  useEffect(() => {
+    setAnimating(true);
+    const timeout = setTimeout(() => {
+      setVisibleItems(items);
+      setAnimating(false);
+    }, 500); // Set to match the duration of the slide-out animation
+
+    return () => clearTimeout(timeout);
+  }, [items]);
 
   const handleProgress = () => {
     if (!isButtonDisabled) {
       setIsButtonDisabled(true);
       progressItem();
-      setTimeout(() => setIsButtonDisabled(false), 1000); 
+      setTimeout(() => setIsButtonDisabled(false), 1000);
     }
   };
 
@@ -69,6 +104,7 @@ const CardTemplate: React.FC<CardTemplateProps> = ({ items, type, progressItem, 
     flex-direction: column;
     align-items: flex-start; // Align items to the left within each column
     gap: 1rem;
+    animation: ${animating ? slideOutLeft : slideInRight} 0.5s ease;
   `;
 
   const itemStyle = css`
@@ -169,7 +205,7 @@ const CardTemplate: React.FC<CardTemplateProps> = ({ items, type, progressItem, 
     margin-left: auto;
     margin-right: auto;
     width: 100%;
-    `;
+  `;
 
   const renderHeader = () => {
     if (type === 'event') {
@@ -187,7 +223,7 @@ const CardTemplate: React.FC<CardTemplateProps> = ({ items, type, progressItem, 
       <div css={itemsContainerStyle}>
         <div css={itemsStyle}>
           <div className="header" css={HeaderStyle}>{renderHeader()}</div>
-          {items.map((item) => (
+          {visibleItems.map((item) => (
             <div key={item.id} css={itemStyle}>
               <div css={titleStyle}>{item.title}</div>
               {item.date && <div css={dateStyle}>{item.date}</div>}
@@ -196,11 +232,11 @@ const CardTemplate: React.FC<CardTemplateProps> = ({ items, type, progressItem, 
         </div>
         
         <div className="link-column" css={[itemsStyle, {opacity: 0}]}>
-            <div css={[titleStyle, {textDecoration: 'underline'}]}>
-              {type === 'event' ? 'View All Events' : 'View All Links'}
-              <RightWedgeThin color='#fff' size={16} />
-            </div>
-          {items.map((item) => (
+          <div css={[titleStyle, {textDecoration: 'underline'}]}>
+            {type === 'event' ? 'View All Events' : 'View All Links'}
+            <RightWedgeThin color='#fff' size={16} />
+          </div>
+          {visibleItems.map((item) => (
             <div key={item.id} css={itemStyle}>
               <div css={titleStyle}>{item.title}</div>
               {item.date && <div css={dateStyle}>{item.date}</div>}
@@ -208,7 +244,7 @@ const CardTemplate: React.FC<CardTemplateProps> = ({ items, type, progressItem, 
           ))}
         </div>
       </div>
-      <div onClick={ handleProgress} css={[rightButtonStyle, navButtonStyle]} className='button'>
+      <div onClick={handleProgress} css={[rightButtonStyle, navButtonStyle]} className='button'>
         <RightWedgeThin color='#fff' size={25} />
       </div>
     </div>

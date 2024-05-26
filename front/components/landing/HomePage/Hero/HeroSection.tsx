@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useEffect, useState } from 'react';
-import { css, keyframes } from '@emotion/react';
+import { Keyframes, css, keyframes } from '@emotion/react';
 import Image from 'next/image';
 import HeroContent from './HeroContent';
 import useNewsReel, { newsItems } from './NewsReel/NewsReel';
@@ -27,9 +27,10 @@ const fadeOut = keyframes`
 const HeroSection = () => {
   const [offsetY, setOffsetY] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const [currentIndex, setCurrentIndex, progressItem, regressItem] = useNewsReel();
-  const [visibleIndex, setVisibleIndex] = useState(currentIndex); // State to manage the currently visible image
-  const [animation, setAnimation] = useState(fadeIn);
+  const [currentIndex, setCurrentIndex, progressItem, regressItem, setIsPaused] = useNewsReel();
+  const [visibleIndex, setVisibleIndex] = useState(currentIndex); 
+  const [nextIndex, setNextIndex] = useState<number | null>(null);
+  const [imageAnimation, setImageAnimation] = useState<Keyframes | null>(null);
 
   const handleScroll = () => {
     const position = window.scrollY;
@@ -53,11 +54,13 @@ const HeroSection = () => {
 
   useEffect(() => {
     if (visibleIndex !== currentIndex) {
-      setAnimation(fadeOut);
+      setNextIndex(currentIndex);
+      setImageAnimation(fadeOut);
       const timeout = setTimeout(() => {
         setVisibleIndex(currentIndex);
-        setAnimation(fadeIn);
-      }, 1000); // Duration of the fade-out animation
+        setNextIndex(null);
+        setImageAnimation(fadeIn);
+      }, 500); // Set to match the duration of the fade-out animation
 
       return () => clearTimeout(timeout);
     }
@@ -84,10 +87,16 @@ const HeroSection = () => {
     width: 100%;
     height: 100%;
     z-index: -1;
+    background-color: black;
   `;
 
   const heroImageStyle = css`
-    animation: ${animation} 1s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: ${imageAnimation} 0.5s ease-in-out;
   `;
 
   const overlayStyle = css`
@@ -103,14 +112,14 @@ const HeroSection = () => {
   const newsFeedStyle = css`
     display: flex;
     justify-content: space-between;
-    color: #fff;
     position: absolute;
     max-height: calc(100% - 4rem);
     width: 100%;
     height: auto;
     bottom: 0;
     right: 0;
-    overflow: hidden;    
+    overflow: hidden;
+    color: #fff;
   `;
 
   return (
@@ -119,18 +128,40 @@ const HeroSection = () => {
         <HeroContent isMobile={isMobile} />
       </div>
       <div css={heroImageContainerStyle}>
+        {nextIndex !== null && (
+          <Image 
+            key={`next-${nextIndex}`}
+            src={newsItems[nextIndex].imageUrl}
+            alt="Hero background next"
+            layout="fill"
+            objectFit="cover"
+            priority
+            css={[heroImageStyle, css`animation: ${fadeOut} 0.5s ease-in-out;`]}
+          />
+        )}
         <Image 
-          src={newsItems[visibleIndex].imageUrl} 
-          alt="Hero background" 
-          layout="fill" 
-          objectFit="cover" 
+          key={`visible-${visibleIndex}`}
+          src={newsItems[visibleIndex].imageUrl}
+          alt="Hero background"
+          layout="fill"
+          objectFit="cover"
           priority 
-          css={heroImageStyle}
+          css={[heroImageStyle, css`animation: ${fadeIn} 0.5s ease-in-out;`]}
         />
         <div css={overlayStyle}></div>
       </div>
-      <div css={newsFeedStyle}>
-        <CardTemplate progressItem={progressItem} regressItem={regressItem} {...newsItems[currentIndex].props} />
+      <div 
+        css={newsFeedStyle}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
+        <CardTemplate 
+          progressItem={progressItem} 
+          regressItem={regressItem} 
+          items={newsItems[currentIndex].props.items} 
+          type={newsItems[currentIndex].props.type} 
+          currentIndex={currentIndex} 
+        />
       </div>
     </div>
   );
