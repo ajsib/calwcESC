@@ -50,7 +50,7 @@ const CardTemplate: React.FC<CardTemplateProps> = ({ items, type, progressItem, 
     padding: 1rem;
     background: linear-gradient(to bottom right, rgba(51, 51, 51, 0.9), transparent),
                 linear-gradient(to top left, rgba(51, 51, 51, 0.7), transparent);
-    transition: background 0.3s ease, transform 0.3s ease, width 0.3s ease;
+    transition: background 0.3s ease, transform 0.4s ease-in, width 0.3s ease-in;
     &:hover {
       width: 100%;
       background: linear-gradient(to bottom right, rgba(51, 51, 51, 0.9), transparent),
@@ -188,7 +188,7 @@ const CardTemplate: React.FC<CardTemplateProps> = ({ items, type, progressItem, 
   return (
     <div css={containerStyle}>
       <div onClick={handleRegress} css={[leftButtonStyle, navButtonStyle]} className='button'>
-        <LeftWedgeThin size={25} fillColor='#fff' />
+        <LeftWedgeThin size={25} color='#fff' />
       </div>
       <div css={itemsContainerStyle}>
         <div css={itemsStyle}>
