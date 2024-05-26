@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import Article from './Article';
-import { fetchArticleData } from './services/fetchNews';
+import { fetchArticleData } from '../services/fetchNews';
 import { ArticleProps } from '../../Types';
 
 const containerStyle = css`
