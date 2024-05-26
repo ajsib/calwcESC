@@ -32,19 +32,28 @@ const TaskCard: React.FC<TaskCardProps> = ({
 
   const marginRightValue = hasSubtasks ? '1rem' : '3rem';
 
+  const avatarContainerStyle = css`
+    position: relative;
+    display: flex;
+    margin-right: ${marginRightValue};
+  `;
+
   const avatarStyle = css`
     position: relative;
     width: 40px;
     height: 40px;
     border-radius: 20px;
     background-color: #ccc;
-    margin-right: ${marginRightValue};
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
+    margin-left: -10px;
+    &:first-of-type {
+      margin-left: 0;
+    }
   `;
 
   const hoverListStyle = css`
@@ -150,16 +159,22 @@ const TaskCard: React.FC<TaskCardProps> = ({
       <div css={statusOverlayStyle}></div>
       <div css={taskTitleStyle}>{title}</div>
       <div
-        css={avatarStyle}
+        css={avatarContainerStyle}
         onMouseEnter={() => setHoverList(true)}
         onMouseLeave={() => setHoverList(false)}
       >
-        {getInitials(people[0].name)}
-        <div css={hoverListStyle}>
-          {people.map((person: Person) => (
-            <div key={person.employee_id}>{person.name}</div>
-          ))}
-        </div>
+        {people.map((person, index) => (
+          <div key={index} css={avatarStyle}>
+            {getInitials(person.name)}
+            {index === 0 && (
+              <div css={hoverListStyle}>
+                {people.map((person: Person) => (
+                  <div key={person.employee_id}>{person.name}</div>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
       </div>
       <div css={actionButtonsStyle}>
         <div css={dateStyle}>{dueDate}</div>
