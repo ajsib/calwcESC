@@ -12,7 +12,6 @@ const tableStyle = css`
   width: 100%;
   border-collapse: collapse;
   min-width: 600px; // Minimum width before scroll appears
-  
   @media (max-width: 768px) { // Adjustments for tablet and smaller devices
     min-width: 0;
   }
@@ -73,6 +72,7 @@ const SharepointWrapper = ({ fileData }: { fileData: File[] }) => {
             <tr key={index} css={trStyle}>
               <td css={responsiveTdStyle}>{file.file_name}</td>
               <td css={responsiveTdStyle}>{file.file_type}</td>
+              <td css={responsiveTdStyle}>{file.employee_id}</td>
               <td css={responsiveTdStyle}>{file.date_added}</td>
               <td css={responsiveTdStyle}>{file.date_modified}</td>
             </tr>

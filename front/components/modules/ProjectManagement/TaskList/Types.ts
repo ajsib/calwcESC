@@ -1,4 +1,4 @@
-import { Task, SubTask, Profile } from "../Types";
+import { Task, Subtask as SubTask, Person as Profile } from "@/public/Types/GlobalTypes";
 
 export interface TaskListProps {
     tasks: Task[];

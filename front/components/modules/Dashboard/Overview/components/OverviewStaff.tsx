@@ -20,9 +20,12 @@ const jsonStyle = css`
   margin: 1rem;
 `;
 
-const ModulePreview = ({ tasks, tickets, counts }: OverviewProps) => {
+const ModulePreviewStaff = ({ tasks, tickets, counts }: OverviewProps) => {
   return (
     <div css={modulePreviewStyle}>
+      <div css={jsonStyle}>
+        <h3>Role: Staff</h3>
+      </div>
       <div css={jsonStyle}>
         <h3>Tasks JSON</h3>
         <pre>{JSON.stringify(tasks, null, 2)}</pre>
@@ -39,4 +42,4 @@ const ModulePreview = ({ tasks, tickets, counts }: OverviewProps) => {
   );
 };
 
-export default ModulePreview;
+export default ModulePreviewStaff;

@@ -20,12 +20,11 @@ const jsonStyle = css`
   margin: 1rem;
 `;
 
-const ModulePreview = ({ tasks, tickets, counts }: OverviewProps) => {
+const ModulePreviewClient = ({ tickets, counts }: Omit<OverviewProps, 'tasks'>) => {
   return (
     <div css={modulePreviewStyle}>
       <div css={jsonStyle}>
-        <h3>Tasks JSON</h3>
-        <pre>{JSON.stringify(tasks, null, 2)}</pre>
+        <h3>Role: Client</h3>
       </div>
       <div css={jsonStyle}>
         <h3>Tickets JSON</h3>
@@ -39,4 +38,4 @@ const ModulePreview = ({ tasks, tickets, counts }: OverviewProps) => {
   );
 };
 
-export default ModulePreview;
+export default ModulePreviewClient;

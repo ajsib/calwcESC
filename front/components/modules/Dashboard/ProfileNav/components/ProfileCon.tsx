@@ -7,7 +7,7 @@ import { fetchRankImage } from '../services/fetchProfileData';
 const ProfileContainer: React.FC = () => {
   const { person } = useAuth();
 
-  const [rankImage, setRankImage] = useState<string | null>(null);
+  const [rankImage, setRankImage] = useState<string | undefined>("");
 
   useEffect(() => {
     // get the rank image
@@ -21,7 +21,7 @@ const ProfileContainer: React.FC = () => {
     return <ProfileCardSkeleton />;
   }
 
-  return <ProfileCard user={person} />;
+  return <ProfileCard user={person} rankImage={rankImage} />;
 };
 
 export default ProfileContainer;

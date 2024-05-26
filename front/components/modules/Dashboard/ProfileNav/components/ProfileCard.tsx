@@ -55,10 +55,6 @@ const rankEpauletSection = css`
   width: auto;
   height: 100px;
   aspect-ratio: 1;
-  
-
-
-  background-image: url('/images/internal/ranks/captain.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

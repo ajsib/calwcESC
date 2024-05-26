@@ -1,24 +1,24 @@
 {
-    "Tickets_People": [
-        { "ticket_id": 1, "employee_id": 1 },
-        { "ticket_id": 2, "employee_id": 2 },
-        { "ticket_id": 3, "employee_id": 3 },
-        { "ticket_id": 4, "employee_id": 4 },
-        { "ticket_id": 5, "employee_id": 5 },
-        { "ticket_id": 6, "employee_id": 6 },
-        { "ticket_id": 7, "employee_id": 7 },
-        { "ticket_id": 8, "employee_id": 8 },
-        { "ticket_id": 9, "employee_id": 9 },
-        { "ticket_id": 10, "employee_id": 10 },
-        { "ticket_id": 11, "employee_id": 11 },
-        { "ticket_id": 12, "employee_id": 12 },
-        { "ticket_id": 13, "employee_id": 13 },
-        { "ticket_id": 14, "employee_id": 14 },
-        { "ticket_id": 15, "employee_id": 15 },
-        { "ticket_id": 16, "employee_id": 16 },
-        { "ticket_id": 17, "employee_id": 17 },
-        { "ticket_id": 18, "employee_id": 18 },
-        { "ticket_id": 19, "employee_id": 19 },
-        { "ticket_id": 20, "employee_id": 20 }
-      ]
+  "Files_People": [
+      { "file_id": 1, "employee_id": 1 },
+      { "file_id": 2, "employee_id": 2 },
+      { "file_id": 3, "employee_id": 3 },
+      { "file_id": 4, "employee_id": 4 },
+      { "file_id": 5, "employee_id": 5 },
+      { "file_id": 6, "employee_id": 6 },
+      { "file_id": 7, "employee_id": 7 },
+      { "file_id": 8, "employee_id": 8 },
+      { "file_id": 9, "employee_id": 9 },
+      { "file_id": 10, "employee_id": 10 },
+      { "file_id": 11, "employee_id": 11 },
+      { "file_id": 12, "employee_id": 12 },
+      { "file_id": 13, "employee_id": 13 },
+      { "file_id": 14, "employee_id": 14 },
+      { "file_id": 15, "employee_id": 15 },
+      { "file_id": 16, "employee_id": 16 },
+      { "file_id": 17, "employee_id": 17 },
+      { "file_id": 18, "employee_id": 18 },
+      { "file_id": 19, "employee_id": 19 },
+      { "file_id": 20, "employee_id": 20 }
+    ]
 }
