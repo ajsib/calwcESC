@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import CardDisplay from './CardDisplay';
 import { fetchTicketData, fetchFileData, fetchTaskData } from '../services/fetchPersonsStuff';
-import { Ticket, Task, File } from '../Types';
+import { Ticket, Task, File } from '@/public/Types/GlobalTypes';
 
 const CardDisplayCon = ({selectedTab} : {selectedTab: string}) => {
     const [ticketsData, setTicketsData] = useState<Ticket[]>([]);

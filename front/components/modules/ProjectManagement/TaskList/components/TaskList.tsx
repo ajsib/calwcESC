@@ -28,7 +28,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, expandedTaskId, openTaskDeta
             bucket={task.bucket}
             status={task.status}
           />
-          {task.subTasks.length > 0 && <SubTaskCard subTasks={task.subTasks} expanded={expandedTaskId === task.id} />}
+          {/* {task.subTasks.length > 0 && <SubTaskCard subTasks={task.subTasks} expanded={expandedTaskId === task.id} />} */}
         </div>
       ))}
       {selectedTask && (

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { Profile } from '../../Types';
+import { Person as Profile } from '@/public/Types/GlobalTypes';
 
 // Provided styles
 const profilePhotoStyle = css`
@@ -49,20 +49,20 @@ const reportsToStyle = css`
 `;
 
 const ProfileDisplay = ({ profile }: { profile: Profile }) => {
-  const { profilePhoto, name, rank, email, department, reportsTo } = profile;
+  const { name, rank, email, department, report_to } = profile;
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   return (
     <>
       <div css={photoParentStyle}>
-        <div css={profilePhotoStyle} style={{ backgroundImage: `url(${backendUrl + profilePhoto})` }}></div>
+        <div css={profilePhotoStyle} style={{ backgroundImage: `url(${backendUrl}api/images/internal/avatar.png)` }}></div>
       </div>
       <div css={textParentStyle}>
         <span css={nameStyle}>{name}</span>
         <span css={rankStyle}>{rank}</span>
         <span css={emailStyle}>{email}</span>
         <span css={departmentStyle}>{department}</span>
-        <span css={reportsToStyle}>Reports to: {reportsTo}</span>
+        <span css={reportsToStyle}>Reports to: {report_to}</span>
       </div>
     </>
   );

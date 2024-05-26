@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import ProfileDisplay from './ProfileCardDisplay';
-import { Profile } from '../../Types';
+import { Person as Profile } from '@/public/Types/GlobalTypes';
 
 const generalProfileCardStyle = css`
   display: flex;

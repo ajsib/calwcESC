@@ -21,8 +21,8 @@ export interface TaskCardProps {
     isComplete: boolean;
     onToggleSubtasks: () => void;
     expandSubtasks: boolean;
-    subTasks: SubTask[];
-    people: Number[];
+    subTasks: null;
+    people: null;
     bucket: string;
     status: string;
     onClick?: () => void;

@@ -1,13 +1,13 @@
-import dummyFiles from '../../files-dummy.json';
-import dummyTasks from '../../tasks-dummy.json';
-import dummyTickets from '../../tickets-dummy.json';
-import dummyProfiles from '../../profiles-dummy.json';
-import { Ticket, Task, File } from '../Types';
+import FileData from '@/public/Database/Files.json';
+import TaskData from '@/public/Database/Tasks.json';
+import TicketData from '@/public/Database/Tickets.json';
+import PeopleData from '@/public/Database/People.json';
+import { Ticket, Task, File } from '@/public/Types/GlobalTypes';
 
 export const fetchFileData = async (): Promise<File[]> => {
     return new Promise((resolve) => {
         setTimeout(() => {
-        resolve(dummyFiles);
+        resolve(FileData.Files);
         }, 500); // Simulate network delay
     });
 };
@@ -16,7 +16,7 @@ export const fetchFileData = async (): Promise<File[]> => {
 export const fetchTaskData = async (): Promise<Task[]> => {
     return new Promise((resolve) => {
         setTimeout(() => {
-        resolve(dummyTasks);
+        resolve(TaskData.Tasks);
         }, 500); // Simulate network delay
     });
 };
@@ -24,7 +24,7 @@ export const fetchTaskData = async (): Promise<Task[]> => {
 export const fetchTicketData = async (): Promise<Ticket[]> => {
     return new Promise((resolve) => {
         setTimeout(() => {
-        resolve(dummyTickets);
+        resolve(TicketData.Tickets);
         }, 500); // Simulate network delay
     });
 };
@@ -32,7 +32,7 @@ export const fetchTicketData = async (): Promise<Ticket[]> => {
 export const fetchPersonData = async (name: string): Promise<any> => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        const person = dummyProfiles.find(person => person.name.toLowerCase() === name.toLowerCase());
+        const person = PeopleData.People.find(person => person.name.toLowerCase() === name.toLowerCase());
         resolve(person || { message: "Person not found" });
       }, 500); // Simulate network delay
     });

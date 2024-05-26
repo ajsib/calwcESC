@@ -19,20 +19,20 @@ const CardDisplay = ({ selectedTab, ticketsData, tasksData, filesData }: CardDis
         <TicketCards key={index} tickets={ticketsData} />
       ))}
       {selectedTab === 'files' && filesData.map((file, index) => (
-        <FileCard key={index} name={file.fileName} />
+        <FileCard key={index} name={file.file_name} />
       ))}
       {selectedTab === 'tasks' && tasksData.map((task, index) => (
         <TaskCard
           key={index}
           title={task.title}
-          people={task.people}
+          people={null}
           status={task.status}
-          dueDate={task.dueDate}
+          dueDate={task.due_date}
           onClick={() => {}}
           isComplete={false}
           onToggleSubtasks={() => {}}
           expandSubtasks={false}
-          subTasks={task.subTasks}
+          subTasks={null}
           bucket={task.bucket}
         />
       ))}

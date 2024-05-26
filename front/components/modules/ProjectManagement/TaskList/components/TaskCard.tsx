@@ -17,7 +17,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
 }) => {
   const [hover, setHover] = useState(false);
   const [dropdownActive, setDropdownActive] = useState(false);
-  const [hasSubtasks, setHasSubtasks] = useState(subTasks.length > 0);
+  const [hasSubtasks, setHasSubtasks] = useState(true);
   useEffect(() => {
     setDropdownActive(expandSubtasks);
   }, [expandSubtasks]);

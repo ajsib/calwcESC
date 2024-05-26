@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import { Task } from '@/components/modules/ProjectManagement/Types';
+import { Task } from '@/public/Types/GlobalTypes';
 
 const ProjectManagementContext = createContext<any>(null);
 
@@ -40,11 +40,11 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
     };
 
     const removeTask = (task: Task) => {
-        setAllTasks(allTasks.filter(t => t.id !== task.id));
+        setAllTasks(allTasks.filter(t => t.task_id !== task.task_id));
     };
 
     const updateTask = (task: Task) => {
-        setAllTasks(allTasks.map(t => t.id === task.id ? task : t));
+        setAllTasks(allTasks.map(t => t.task_id === task.task_id ? task : t));
     };
 
     return (

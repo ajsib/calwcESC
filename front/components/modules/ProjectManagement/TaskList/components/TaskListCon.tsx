@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import TaskList from "./TaskList";
-import { Task } from "../../Types";
+import { Task } from "@/public/Types/GlobalTypes";
 import { fetchTaskData } from "../services/fetchTaskData";
 import { useProjectManagement } from "../../ProjectManagementContext";
 import TaskCardSkeleton from "./TaskCardSkeleton";

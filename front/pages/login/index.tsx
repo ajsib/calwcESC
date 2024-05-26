@@ -1,25 +1,32 @@
-/**@jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+// pages/login.tsx
+import React, { useState } from 'react';
+import { useAuth } from '@/globalContexts/authContext';
 
-const containerStyle = css`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f5f5f5;
-    gap: 1rem;
-`;
+const LoginPage = () => {
+  const [name, setName] = useState('');
+  const { login } = useAuth();
 
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    login(name);
+  };
 
-const SignInComponent = () => {
-    return(
-        <div css={containerStyle}>
-            <button>Client/Sponsor</button>
-            <button>ESC Staff</button>
-            <button>OR Staff</button>
-        </div>
-    )
-}
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Name:
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </label>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  );
+};
 
-export default SignInComponent;
+export default LoginPage;

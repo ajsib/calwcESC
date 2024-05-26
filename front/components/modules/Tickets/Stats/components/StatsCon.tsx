@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import Stats from "./Stats";
-import { Ticket } from "../Types";
+import { Ticket } from "@/public/Types/GlobalTypes";
 import fetchTicketData from "../services/fetchTicketData";
 
 const StatsCon = () => {

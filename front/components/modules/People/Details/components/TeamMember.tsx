@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import GeneralProfileCard from './ProfileCon';
 import Tabs from './Tabs';
 import CardDisplayCon from './CardDisplayCon';
-import { Profile } from '../../Types';
+import { Person as Profile } from '@/public/Types/GlobalTypes';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { fetchPersonData } from '../services/fetchPersonsStuff';

@@ -80,7 +80,7 @@ const TaskDisplay = ({ task, onEdit, profiles, hoverProfile, handleMouseEnter, h
       <div css={listContainerStyle}>
         <label css={labelStyle}>People:</label>
         <ul css={listStyle}>
-        {task.people.map(personId => {
+        {/* {task.people.map(personId => {
           const personProfile = profiles.find(p => p.id === personId);
           return (
             <li key={personId} css={listItemStyle} onMouseEnter={() => handleMouseEnter(personId)} onMouseLeave={handleMouseLeave}>
@@ -90,18 +90,18 @@ const TaskDisplay = ({ task, onEdit, profiles, hoverProfile, handleMouseEnter, h
               )}
             </li>
           );
-        })}
+        })} */}
         </ul>
       </div>
       <div css={listContainerStyle}>
         <label css={labelStyle}>Subtasks:</label>
         <ul css={listStyle}>
-          {task.subTasks.map(subTask => (
+          {/* {task.subTasks.map(subTask => (
             <li key={subTask.id} css={listItemStyle}>
               <input type="checkbox" checked={subTask.isChecked} css={checkBoxStyle} readOnly />
               {subTask.title}
             </li>
-          ))}
+          ))} */}
         </ul>
       </div>
       <button css={buttonStyle} onClick={onEdit}>Edit Task</button>

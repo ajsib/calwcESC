@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import Circle from '@/components/UI/icons/Dot';
-import { Ticket } from '../Types';
+import { Ticket } from '@/public/Types/GlobalTypes';
 
 const ticketCardsStyle = css`
   display: flex;
@@ -67,13 +67,13 @@ const TicketCards: React.FC<{ tickets: Ticket[] }> = ({ tickets }) => {
   return (
     <div css={ticketCardsStyle}>
       {tickets.map((ticket) => (
-        <div css={ticketCardStyle} key={ticket.id}>
+        <div css={ticketCardStyle} key={ticket.ticket_id}>
           <div css={ticketHeaderStyle}>
             <span>{ticket.title}</span>
             <span>{ticket.date}</span>
           </div>
-          <div css={ticketDescriptionStyle} title={ticket.description}>
-            {ticket.description}
+          <div css={ticketDescriptionStyle} title={ticket.description_question_set}>
+            {ticket.description_question_set}
           </div>
           <div css={ticketInfoStyle}>
             <span>Status: {ticket.status}</span>
@@ -85,7 +85,7 @@ const TicketCards: React.FC<{ tickets: Ticket[] }> = ({ tickets }) => {
               Priority: {ticket.priority}
 
             </span>
-            <span>Assigned to: {ticket.assignedTo}</span>
+            {/* <span>Assigned to: {ticket.assigned_to}</span> */}
           </div>
         </div>
       ))}
