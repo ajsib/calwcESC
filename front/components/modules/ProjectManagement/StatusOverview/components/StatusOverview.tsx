@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import Circle from '@/components/UI/icons/Dot';
 import { StatusCardProps, StatusOverviewProps } from '../Types';
+import { useProjectManagement } from '../../ProjectManagementContext';
 
 const statusOverviewStyle = css`
   display: flex;
@@ -66,6 +67,7 @@ const StatusCard: React.FC<StatusCardProps> = ({ status, count, selected, onClic
 );
 
 const StatusOverview: React.FC<StatusOverviewProps> = ({ onSelectStatus, selectedStatus, toDoCount, inProgressCount, overdueCount, onNewTaskModalOpen, onManageTeamsModalOpen }) => {
+  const { showArchived, handleShowArchived } = useProjectManagement();
 
   return (
     <div css={statusOverviewStyle}>
@@ -75,7 +77,15 @@ const StatusOverview: React.FC<StatusOverviewProps> = ({ onSelectStatus, selecte
       <div css={buttonContainerStyle}>
         <div css={buttonStyle} onClick={onNewTaskModalOpen}>New Task</div>
         <div css={buttonStyle} onClick={onManageTeamsModalOpen}>Edit Buckets</div>
-        <div css={buttonStyle}>View Archive</div>
+        <div
+          css={[
+            buttonStyle,
+            showArchived && { backgroundColor: '#e0e0e0' } // Change background color if archive is being shown
+          ]}
+          onClick={handleShowArchived}
+        >
+          View Archive
+        </div>
       </div>
     </div>
   );
