@@ -1,4 +1,3 @@
-// components/SideMenu.js
 import React from "react";
 import styled from "@emotion/styled";
 import SideMenuContent from "./SideMenuContent";
@@ -32,12 +31,14 @@ const Menu = styled.div<MenuProps>`
   z-index: 1000; // Make sure the menu is above the overlay
 `;
 
-const WedgeContainer = styled.div`
+const WedgeContainer = styled.div<MenuProps>`
   position: absolute;
   top: 20px;
   right: 20px;
   cursor: pointer;
   z-index: 100000;
+  transform: ${({ isOpen }) => (isOpen ? "rotate(180deg)" : "rotate(0deg)")};
+  transition: transform 0.1s ease-in;
 `;
 
 type SideMenuProps = {
@@ -50,7 +51,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
     <>
       {isOpen && <Overlay isOpen={isOpen} onClick={onClose} />}
       <Menu isOpen={isOpen}>
-        <WedgeContainer onClick={onClose}>
+        <WedgeContainer isOpen={isOpen} onClick={onClose}>
           <RightWedgeBold size={27} fillColor="#FFFFFF" />
         </WedgeContainer>
         <SideMenuContent />
