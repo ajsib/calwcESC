@@ -13,7 +13,7 @@ interface CardTemplateProps {
     }[];
     progressItem: () => void;
     regressItem: () => void;
-    type: 'event' | 'link';
+    type: string;
     currentIndex: number;
 }
 

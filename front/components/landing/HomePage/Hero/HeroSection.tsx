@@ -152,8 +152,8 @@ const HeroSection = () => {
       </div>
       <div 
         css={newsFeedStyle}
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
+        onMouseEnter={() => {setIsPaused(true); console.log('paused')}}
+        onMouseLeave={() => {setIsPaused(false); console.log('unpaused')}}
       >
         <CardTemplate 
           progressItem={progressItem} 
