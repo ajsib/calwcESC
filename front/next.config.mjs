@@ -5,6 +5,9 @@ const nextConfig = {
     defaultLocale: "en",
   },
   output: "standalone",
+  images: {
+    domains: ['localhost', 'calwc-esc-server.azurewebsites.net'],
+  },
 };
 
 export default nextConfig;
