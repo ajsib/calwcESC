@@ -9,8 +9,8 @@ const modulePreviewStyle = css`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  line-height: 2rem;
   flex-grow: 1;
+  overflow-y: scroll;
 `;
 
 const jsonStyle = css`
