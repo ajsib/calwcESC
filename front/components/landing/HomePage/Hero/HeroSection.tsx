@@ -68,6 +68,13 @@ const HeroSection = () => {
   }, [currentIndex, visibleIndex]);
 
   const contentContainerStyle = css`
+    // width: ${isMobile ? '100vw' : '50vw'};
+    // height: ${isMobile ? '30vh' : '100%'};
+    // padding-top: ${isMobile ? '4rem' : '0rem'};
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    // align-items: ${isMobile ? 'flex-end' : 'flex-start'};
     z-index: 1;
   `;
 
@@ -76,9 +83,8 @@ const HeroSection = () => {
     align-items: center;
     height: ${isMobile ? '35vh' : '100vh'};
     transition: height 0.3s;
+    // margin-top: -4rem;
     flex-direction: ${isMobile ? 'column' : 'row'};
-    position: relative;
-    overflow: hidden;
   `;
 
   const heroImageContainerStyle = css`
@@ -87,40 +93,40 @@ const HeroSection = () => {
     left: 0;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    transform: translateY(${offsetY * 0.4}px);
     z-index: -1;
-    background-color: #000;
   `;
 
   const heroImageStyle = css`
+    width: 100vw;
+    height: calc(100vh);
     position: absolute;
+    right: 0;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
   `;
 
   const overlayStyle = css`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5) 10%, rgba(0, 0, 0, 0.2) 100%);
-    z-index: 0;
-  `;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5) 10%, rgba(0, 0, 0, 0.2) 100%);
+`;
 
-  const newsFeedStyle = css`
-    display: flex;
-    justify-content: space-between;
-    position: absolute;
-    max-height: calc(100% - 4rem);
-    width: 100%;
-    height: auto;
-    bottom: 0;
-    right: 0;
-    overflow: hidden;
-    color: #fff;
-  `;
+const newsFeedStyle = css`
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  position: absolute;
+  max-height: calc(100% - 4rem);
+  width: 100%;
+  height: auto;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+`;
 
   return (
     <div css={heroSectionStyle}>
