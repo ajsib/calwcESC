@@ -1,16 +1,19 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { OverviewProps } from '../Types';
+import DailyCalendar from "@/components/modules/Dashboard/Overview/components/DailyCalendar";
+import MyDayList from "@/components/modules/Dashboard/Overview/components/MyDayList";
+import MyDay from "@/components/modules/Dashboard/Overview/components/MyDay";
 
 const modulePreviewStyle = css`
-  border: 1px solid #ccc;
-  margin: 2rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  line-height: 2rem;
-  flex-grow: 1;
+    margin: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    line-height: 2rem;
+    flex-grow: 1;
+    gap: 0rem; /* Add some space between the columns */
 `;
 
 const jsonStyle = css`
@@ -23,21 +26,9 @@ const jsonStyle = css`
 const ModulePreview = ({ tasks, tickets, counts }: OverviewProps) => {
   return (
     <div css={modulePreviewStyle}>
-      <div css={jsonStyle}>
-        <h3>Role: ESC Staff</h3>
-      </div>
-      <div css={jsonStyle}>
-        <h3>Tasks JSON</h3>
-        <pre>{JSON.stringify(tasks, null, 2)}</pre>
-      </div>
-      <div css={jsonStyle}>
-        <h3>Tickets JSON</h3>
-        <pre>{JSON.stringify(tickets, null, 2)}</pre>
-      </div>
-      <div css={jsonStyle}>
-        <h3>Counts JSON</h3>
-        <pre>{JSON.stringify(counts, null, 2)}</pre>
-      </div>
+        <MyDay />
+        <MyDayList />
+        <DailyCalendar />
     </div>
   );
 };
