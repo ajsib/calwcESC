@@ -67,19 +67,19 @@ const Stats = ({ openTickets, highPriorityTickets, mediumPriorityTickets, lowPri
   return (
     <div css={statsOverviewStyle}>
       <div css={statCardStyle}>
-        <h2>{openTickets.length}</h2>
+        <h2>{openTickets}</h2>
         <p>Open Tickets</p>
       </div>
       <div css={statCardStyle}>
-        <h2>{highPriorityTickets.length}</h2>
+        <h2>{highPriorityTickets}</h2>
         <p css={titleStyle}><Circle size={10} color="red" /> High Priority</p>
       </div>
       <div css={statCardStyle}>
-        <h2>{mediumPriorityTickets.length}</h2>
+        <h2>{mediumPriorityTickets}</h2>
         <p css={titleStyle}><Circle size={10} color="orange" />Medium Priority</p>
       </div>
       <div css={statCardStyle}>
-        <h2>{lowPriorityTickets.length}</h2>
+        <h2>{lowPriorityTickets}</h2>
         <p css={titleStyle}><Circle size={10} color="green" />Low Priority</p>
       </div>
       <div css={buttonContainerStyle}>

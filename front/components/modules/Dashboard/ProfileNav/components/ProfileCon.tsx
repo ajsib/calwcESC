@@ -18,8 +18,7 @@ const ProfileContainer: React.FC = () => {
       setRankImage(image);
       setLoading(false);
     };
-
-    setTimeout(loadProfileData, 1000); // Add a 1-second delay
+    loadProfileData();
   }, [profile]);
 
   if (loading) {

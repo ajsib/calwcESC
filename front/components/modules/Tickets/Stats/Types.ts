@@ -1,8 +1,6 @@
-import {Ticket} from "@/public/Types/GlobalTypes";
-
 export interface StatsProps {
-    openTickets: Ticket[];
-    highPriorityTickets: Ticket[];
-    mediumPriorityTickets: Ticket[];
-    lowPriorityTickets: Ticket[];
+    openTickets: number;
+    highPriorityTickets: number;
+    mediumPriorityTickets: number;
+    lowPriorityTickets: number;
 }
