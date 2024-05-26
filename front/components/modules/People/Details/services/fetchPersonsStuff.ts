@@ -1,6 +1,7 @@
 import dummyFiles from '../../files-dummy.json';
 import dummyTasks from '../../tasks-dummy.json';
 import dummyTickets from '../../tickets-dummy.json';
+import dummyProfiles from '../../profiles-dummy.json';
 import { Ticket, Task, File } from '../Types';
 
 export const fetchFileData = async (): Promise<File[]> => {
@@ -27,3 +28,12 @@ export const fetchTicketData = async (): Promise<Ticket[]> => {
         }, 500); // Simulate network delay
     });
 };
+
+export const fetchPersonData = async (name: string): Promise<any> => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const person = dummyProfiles.find(person => person.name.toLowerCase() === name.toLowerCase());
+        resolve(person || { message: "Person not found" });
+      }, 500); // Simulate network delay
+    });
+  };

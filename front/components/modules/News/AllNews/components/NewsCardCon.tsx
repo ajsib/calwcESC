@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useArticle } from '@/components/modules/News/ArticleContext';
 import NewsCard from './NewsCard';
 
 interface NewsCardConProps {
@@ -23,14 +22,10 @@ const NewsCardCon: React.FC<NewsCardConProps> = ({
   content
 }) => {
   const router = useRouter();
-  const articleContext = useArticle();
 
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
 
   const handleClick = () => {
-    if (articleContext) {
-      articleContext.setArticle({ id, title, date, imageUrl, description, content, priority });
-    }
     router.push(`/news/${encodeURIComponent(id)}`);
   };
 

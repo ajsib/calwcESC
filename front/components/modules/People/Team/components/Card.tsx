@@ -81,12 +81,12 @@ const rightWedgeStyle = css`
   transform: translateY(-50%); /* Centered on the y-axis */
 `;
 
-const ProfileCard = ({ profilePhoto, name, rank, email, department, reportsTo, id, onClick }: ProfileCardProps) => {
+const ProfileCard = ({ profilePhoto, name, rank, email, department, reportsTo, id }: ProfileCardProps) => {
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   return (
     <Link css={linkStyle} href={`/team/${encodeURIComponent(name)}`} passHref>
-      <div css={cardStyle} onClick={onClick}>
+      <div css={cardStyle}>
         <div css={rightWedgeStyle}>
           <RightWedgeMedium size={26} /> {/* Adjusted size */}
         </div>

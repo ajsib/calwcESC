@@ -10,7 +10,7 @@ const ProfileContainer: React.FC = () => {
   useEffect(() => {
     fetchProfileData().then(data => setProfile(data));
     console.log(profile);
-  }, []);
+  }, [profile]);
 
   if (!profile) {
     return <ProfileCardSkeleton />;
