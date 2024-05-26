@@ -11,7 +11,7 @@ const ProjectManagementPage = () => {
   const { loggedIn } = useAuth();
   const { profile } = useUserProfile();
   if (!loggedIn || !profile) {
-    return <div>Either you're not logged in or you don't have a profile.</div>;
+    return <div>Either yo&apos;re not logged in or you don&apos;t have a profile.</div>;
   }
   return (
     <>
