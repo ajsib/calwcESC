@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import LogoTag from "../../../landing/shared/Header/LogoTag";
 import { useRouter } from 'next/router';
+import { useAuth } from '@/globalContexts/authContext';
 
 const MenuContentContainer = styled.div`
   display: flex;
@@ -74,6 +75,8 @@ const BottomSection = styled.div`
 const SideMenuContent: React.FC = () => {
   const router = useRouter();
 
+  const { logout } = useAuth();
+
   const handleNavigation = (path: string) => {
     router.push(path);
   };
@@ -89,7 +92,7 @@ const SideMenuContent: React.FC = () => {
       <MenuOption className="caption" onClick={() => handleNavigation("/files")}>Files</MenuOption>
       <MenuOption className="caption" onClick={() => handleNavigation("/team")}>Team</MenuOption>
       <BottomSection>
-        <Button className="caption">Sign out</Button>
+        <Button className="caption" onClick={() => {logout; handleNavigation("/")}}>Sign out</Button>
         <Button className="caption">Français</Button>
       </BottomSection>
     </MenuContentContainer>

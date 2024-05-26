@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ModulePreview from './Overview';
 import SearchResults from './SearchResults';
 import { useDashboard } from '@/components/modules/Dashboard/DashboardContext';
-import { useAuth } from '@/globalContexts/authContext';
+import { useUserProfile } from '@/globalContexts/userContext';
 import { fetchIdsByEmployeeId, fetchTasksAndTickets, countTasksAndTickets } from '../services/fetchOverviewData';
 import { Task, Ticket, File } from '@/public/Types/GlobalTypes';
 
@@ -14,14 +14,14 @@ const OverviewCon: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [counts, setCounts] = useState<{ taskCount: number, ticketCount: number, tasksDueTodayCount: number, highPriorityTicketsCount: number } | null>(null);
 
-  const { person } = useAuth();
+  const { profile } = useUserProfile();
 
   useEffect(() => {
-    if (!person) {
+    if (!profile) {
       return;
     }
     const loadData = async () => {
-      const employeeId = person.employee_id;
+      const employeeId = profile.employee_id;
       const { taskIds, ticketIds } = await fetchIdsByEmployeeId(employeeId);
       const { tasks, tickets } = await fetchTasksAndTickets(taskIds, ticketIds);
       const counts = await countTasksAndTickets(employeeId);
@@ -34,7 +34,7 @@ const OverviewCon: React.FC = () => {
     };
 
     loadData();
-  }, [person, files]);
+  }, [profile, files]);
 
   if (searchTerm) {
     return <SearchResults results={searchTerm} />;

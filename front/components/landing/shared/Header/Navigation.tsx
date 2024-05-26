@@ -37,7 +37,7 @@ const buttonStyle = css`
 const Navigation = () => {
   const router = useRouter();
   const { locale, asPath } = router;
-  const { person, logout } = useAuth(); // Get person and logout function from useAuth hook
+  const { loggedIn, logout } = useAuth(); // Get person and logout function from useAuth hook
   const toggleLocale = locale === 'en' ? 'fr' : 'en';
   const languageLabel = locale === 'en' ? 'Français' : 'English';  
   const Home = locale === 'en' ? 'Home' : 'Accueil'
@@ -52,7 +52,7 @@ const Navigation = () => {
       <Link href="/about" css={linkStyle}>{About}</Link>
       <Link href="/services" css={linkStyle}>{Services}</Link>
       <Link href={asPath} locale={toggleLocale} css={linkStyle}>{languageLabel}</Link>
-      {person ? (
+      {loggedIn ? (
         <div css={buttonStyle} onClick={logout}>{Logout}</div>
       ) : (
         <Link href="/login" css={linkStyle}>{Login}</Link>

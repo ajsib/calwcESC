@@ -30,7 +30,7 @@ const styles = {
 const ActionSection = () => {
   const router = useRouter();
   const { locale } = router;
-  const { person } = useAuth(); // Get the person from useAuth hook
+  const { loggedIn } = useAuth(); // Get the person from useAuth hook
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const ActionSection = () => {
   }, []);
 
   const handleFirstCardClick = () => {
-    if (person) {
+    if (loggedIn) {
       router.push('/dashboard');
     } else {
       router.push('/login');

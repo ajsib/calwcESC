@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ModulePreviewClient from './OverviewClient';
 import SearchResults from './SearchResults';
 import { useDashboard } from '@/components/modules/Dashboard/DashboardContext';
-import { useAuth } from '@/globalContexts/authContext';
+import { useUserProfile } from '@/globalContexts/userContext';
 import { fetchIdsByEmployeeId, fetchTasksAndTickets, countTasksAndTickets } from '../services/fetchOverviewData';
 import { Ticket } from '@/public/Types/GlobalTypes';
 
@@ -12,14 +12,14 @@ const OverviewConClient: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [counts, setCounts] = useState<{ taskCount: number, ticketCount: number, tasksDueTodayCount: number, highPriorityTicketsCount: number } | null>(null);
 
-  const { person } = useAuth();
+  const { profile } = useUserProfile();
 
   useEffect(() => {
-    if (!person) {
+    if (!profile) {
       return;
     }
     const loadData = async () => {
-      const employeeId = person.employee_id;
+      const employeeId = profile.employee_id;
       const { ticketIds } = await fetchIdsByEmployeeId(employeeId);
       const { tickets } = await fetchTasksAndTickets([], ticketIds); // Pass empty array for tasks
       const counts = await countTasksAndTickets(employeeId);
@@ -30,7 +30,7 @@ const OverviewConClient: React.FC = () => {
     };
 
     loadData();
-  }, [person]);
+  }, [profile]);
 
   if (searchTerm) {
     return <SearchResults results={searchTerm} />;
