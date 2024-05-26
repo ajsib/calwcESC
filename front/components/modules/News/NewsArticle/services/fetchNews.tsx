@@ -1,4 +1,4 @@
-import newsData from '../../../news-dummy.json';
+import newsData from '../../news-dummy.json';
 
 export const fetchArticleData = async (id: number): Promise<any> => {
   return new Promise((resolve) => {
