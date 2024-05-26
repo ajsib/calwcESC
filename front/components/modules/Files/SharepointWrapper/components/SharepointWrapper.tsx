@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { File } from '../../Types';
+import { File } from '@/public/Types/GlobalTypes';
 
 const SharepointWrapperStyle = css`
   border: 1px solid #ccc;
@@ -12,7 +12,6 @@ const tableStyle = css`
   width: 100%;
   border-collapse: collapse;
   min-width: 600px; // Minimum width before scroll appears
-  
   @media (max-width: 768px) { // Adjustments for tablet and smaller devices
     min-width: 0;
   }
@@ -71,11 +70,11 @@ const SharepointWrapper = ({ fileData }: { fileData: File[] }) => {
         <tbody>
           {fileData.map((file, index) => (
             <tr key={index} css={trStyle}>
-              <td css={responsiveTdStyle}>{file.fileName}</td>
-              <td css={responsiveTdStyle}>{file.fileType}</td>
-              <td css={responsiveTdStyle}>{file.creator}</td>
-              <td css={responsiveTdStyle}>{file.dateAdded}</td>
-              <td css={responsiveTdStyle}>{file.dateModified}</td>
+              <td css={responsiveTdStyle}>{file.file_name}</td>
+              <td css={responsiveTdStyle}>{file.file_type}</td>
+              <td css={responsiveTdStyle}>{file.employee_id}</td>
+              <td css={responsiveTdStyle}>{file.date_added}</td>
+              <td css={responsiveTdStyle}>{file.date_modified}</td>
             </tr>
           ))}
         </tbody>

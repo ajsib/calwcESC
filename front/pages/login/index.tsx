@@ -1,25 +1,37 @@
-/**@jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+// pages/login.tsx
+import React, { useState } from 'react';
+import { useAuth } from '@/globalContexts/authContext';
+import peopleData from '@/public/Database/People.json';
 
-const containerStyle = css`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f5f5f5;
-    gap: 1rem;
-`;
+const LoginPage = () => {
+  const { login } = useAuth();
 
+  const loginAs = (name: string) => {
+    login(name);
+  };
 
-const SignInComponent = () => {
-    return(
-        <div css={containerStyle}>
-            <button>Client/Sponsor</button>
-            <button>ESC Staff</button>
-            <button>OR Staff</button>
-        </div>
-    )
-}
+  const roles = ["Client", "Staff", "ESC Staff"];
 
-export default SignInComponent;
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+        {roles.map(role => (
+          <div key={role} style={{ textAlign: 'center' }}>
+            <h3>{role}</h3>
+            {peopleData.People.filter(person => person.role === role).slice(0, 3).map(person => (
+              <button
+                key={person.name}
+                onClick={() => loginAs(person.name)}
+                style={{ display: 'block', margin: '1rem 0' }}
+              >
+                {person.name}
+              </button>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default LoginPage;

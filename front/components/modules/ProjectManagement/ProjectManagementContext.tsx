@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState } from "react";
-import { Task } from '@/components/modules/ProjectManagement/Types';
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { Task, Person, Subtask } from '@/public/Types/GlobalTypes';
+import { fetchTaskData, fetchSubtasksByTaskId, fetchPeopleAssignedToTask } from './services/fetchTaskData';
 
 const ProjectManagementContext = createContext<any>(null);
 
@@ -10,6 +11,40 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
     const [selectedBucket, setSelectedBucket] = useState<string>("All");
     const [teams, setTeams] = useState<string[]>(["All"]);
     const [allTasks, setAllTasks] = useState<Task[]>([]);
+    const [subtasks, setSubtasks] = useState<{ [key: number]: Subtask[] }>({});
+    const [people, setPeople] = useState<{ [key: number]: Person[] }>({});
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const taskData = await fetchTaskData();
+                setAllTasks(taskData);
+
+                const subtaskPromises = taskData.map(task => fetchSubtasksByTaskId(task.task_id));
+                const subtaskResults = await Promise.all(subtaskPromises);
+                const subtaskMap: { [key: number]: Subtask[] } = {};
+                taskData.forEach((task, index) => {
+                    subtaskMap[task.task_id] = subtaskResults[index];
+                });
+                setSubtasks(subtaskMap);
+
+                const peoplePromises = taskData.map(task => fetchPeopleAssignedToTask(task.task_id));
+                const peopleResults = await Promise.all(peoplePromises);
+                const peopleMap: { [key: number]: Person[] } = {};
+                taskData.forEach((task, index) => {
+                    peopleMap[task.task_id] = peopleResults[index];
+                });
+                setPeople(peopleMap);
+            } catch (error) {
+                console.error("Failed to fetch data", error);
+            } finally {
+                setIsLoading(false); // Set loading to false after data is fetched
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const handleSelectStatus = (status: string) => {
         if (selectedStatus === status) {
@@ -40,11 +75,11 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
     };
 
     const removeTask = (task: Task) => {
-        setAllTasks(allTasks.filter(t => t.id !== task.id));
+        setAllTasks(allTasks.filter(t => t.task_id !== task.task_id));
     };
 
     const updateTask = (task: Task) => {
-        setAllTasks(allTasks.map(t => t.id === task.id ? task : t));
+        setAllTasks(allTasks.map(t => t.task_id === task.task_id ? task : t));
     };
 
     return (
@@ -62,7 +97,10 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
                 allTasks,
                 addTask,
                 removeTask,
-                updateTask
+                updateTask,
+                subtasks,
+                people,
+                isLoading
             }}
         >
             {children}

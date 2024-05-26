@@ -85,13 +85,13 @@ const ProfileCard = ({ profilePhoto, name, rank, email, department, reportsTo, i
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   return (
-    <Link css={linkStyle} href={`/team/${encodeURIComponent(name)}`} passHref>
+    <Link css={linkStyle} href={`/team/${encodeURIComponent(id)}`} passHref>
       <div css={cardStyle}>
         <div css={rightWedgeStyle}>
-          <RightWedgeMedium size={26} /> {/* Adjusted size */}
+          <RightWedgeMedium size={26} />
         </div>
         <div css={photoParentStyle}>
-          <div css={profilePhotoStyle} style={{ backgroundImage: `url(${backendUrl + profilePhoto})`, backgroundSize: 'cover' }}></div>
+          <div css={profilePhotoStyle} style={{ backgroundImage: `url(${profilePhoto})`, backgroundSize: 'cover' }}></div>
         </div>
         <div css={textStyle}>
           <div css={nameStyle}>{name}</div>

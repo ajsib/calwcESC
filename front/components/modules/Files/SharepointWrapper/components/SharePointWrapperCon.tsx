@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import SharepointWrapper from "./SharepointWrapper";
 import SharepointSkeleton from "./SharepointWrapperSkeleton";
 import { fetchFileData } from "../services/fetchFileData";
-import { File } from "../../Types";
+import { File } from "@/public/Types/GlobalTypes";
 
 const SharepointWrapperCon = () => {
     const [fileData, setFileData] = useState<File[]>([]);

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import SearchResult from '../Types';
+import {SearchResult} from '../Types';
 
 const SearchResultsStyle = css`
 border: 1px solid #ccc;

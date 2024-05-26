@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
 import NewTaskModal from "./NewTask";
-import { Task, SubTask, Profile } from '@/components/modules/ProjectManagement/Types';
+import { Subtask, Person as Profile } from '@/public/Types/GlobalTypes';
 import { useProjectManagement } from '../../../ProjectManagementContext';
 import { fetchPeopleData } from "../../services/fetchPeopleData";
 
 const NewTaskCon = ({ isOpen, close }: { isOpen: boolean, close: () => void }) => {
     const [title, setTitle] = useState('');
-    const [subTasks, setSubTasks] = useState<SubTask[]>([]);
+    const [subTasks, setSubTasks] = useState<Subtask[]>([]);
     const [subTaskInput, setSubTaskInput] = useState('');
     const [people, setPeople] = useState<number[]>([]);
     const [bucket, setBucket] = useState('');
     const [status, setStatus] = useState('');
     const [dueDate, setDueDate] = useState('');
     const [peopleData, setPeopleData] = useState<Profile[]>([]);
+    const [task_id, setTaskId] = useState(0);
   
     const { teams, addTask } = useProjectManagement();
 
@@ -20,10 +21,11 @@ const NewTaskCon = ({ isOpen, close }: { isOpen: boolean, close: () => void }) =
         fetchPeopleData().then((data) => {
           setPeopleData(data);
         });
+        setTaskId(Math.floor(Math.random() * 10000));
       }, []);
 
     const handleAddSubTask = () => {
-        const newSubTask = { id: Math.floor(Math.random() * 10000), title: subTaskInput };
+        const newSubTask = { subtask_id: Math.floor(Math.random() * 10000), title: subTaskInput, complete: false, task_id: task_id };
         setSubTasks([...subTasks, newSubTask]);
         setSubTaskInput('');
       };
@@ -31,7 +33,7 @@ const NewTaskCon = ({ isOpen, close }: { isOpen: boolean, close: () => void }) =
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault(); // Prevent form from submitting early
         const newTask = {
-          id: Math.floor(Math.random() * 10000), // Simulate ID generation
+          id: task_id,
           title,
           subTasks,
           people,

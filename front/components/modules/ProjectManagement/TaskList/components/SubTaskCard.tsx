@@ -31,7 +31,7 @@ const subTaskCardContainerStyle = (expanded: boolean) => css`
 `;
 
 const SubTaskCard: React.FC<SubTaskCardProps> = ({ subTasks, expanded }) => {
-  const [checkedState, setCheckedState] = useState(subTasks.map(subTask => subTask.isChecked || false));
+  const [checkedState, setCheckedState] = useState(subTasks.map(subTask => subTask.complete || false));
 
   const handleCheckboxChange = (index: number) => {
     const newCheckedState = [...checkedState];
@@ -57,7 +57,7 @@ const SubTaskCard: React.FC<SubTaskCardProps> = ({ subTasks, expanded }) => {
   return (
     <div css={subTaskCardContainerStyle(expanded)}>
       {subTasks.map((subTask, index) => (
-        <div key={subTask.id} css={subTaskCardStyle(index === subTasks.length - 1)}>
+        <div key={subTask.subtask_id} css={subTaskCardStyle(index === subTasks.length - 1)}>
           <div>{subTask.title}</div>
           <input
             type="checkbox"

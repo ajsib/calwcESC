@@ -1,45 +1,52 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import TaskCard from './TaskCard';
-import SubTaskCard from './SubTaskCard';
 import TaskDetailsModal from './TaskDetails/TaskDetailsCon';
+import { useProjectManagement } from '../../ProjectManagementContext';
+import SubTaskCard from './SubTaskCard';
 import { TaskListProps } from '../Types';
-
+import { Task } from '@/public/Types/GlobalTypes';
 
 const taskListStyle = css`
-  margin: 2rem 0; // Increased top and bottom margins for more separation
+  margin: 2rem 0;
 `;
 
-const TaskList: React.FC<TaskListProps> = ({ tasks, expandedTaskId, openTaskDetails, toggleSubtasks, selectedTask,  isModalOpen, setIsModalOpen }) => {
+const TaskList = ({ expandedTaskId, openTaskDetails, toggleSubtasks, selectedTask, isModalOpen, setIsModalOpen }: TaskListProps) => {
+    const { allTasks, subtasks, people } = useProjectManagement();
 
-  return (
-    <div css={taskListStyle}>
-      {tasks.map((task) => (
-        <div key={task.id}>
-          <TaskCard
-            onClick={() => openTaskDetails(task)}
-            title={task.title}
-            dueDate={task.dueDate}
-            isComplete={false}
-            onToggleSubtasks={() => toggleSubtasks(task.id)}
-            expandSubtasks={expandedTaskId === task.id}
-            subTasks={task.subTasks}
-            people={task.people}
-            bucket={task.bucket}
-            status={task.status}
-          />
-          {task.subTasks.length > 0 && <SubTaskCard subTasks={task.subTasks} expanded={expandedTaskId === task.id} />}
+    return (
+        <div css={taskListStyle}>
+            {allTasks.map((task : Task) => (
+                <div key={task.task_id}>
+                    <TaskCard
+                        onClick={() => openTaskDetails(task)}
+                        title={task.title}
+                        dueDate={task.due_date}
+                        isComplete={false}
+                        onToggleSubtasks={() => toggleSubtasks(task.task_id)}
+                        expandSubtasks={expandedTaskId === task.task_id}
+                        subTasks={subtasks[task.task_id]}
+                        people={people[task.task_id]}
+                        bucket={task.bucket}
+                        status={task.status}
+                    />
+
+                    {expandedTaskId === task.task_id && (
+                        <SubTaskCard subTasks={subtasks[task.task_id]} expanded={expandedTaskId === task.task_id} />
+                    )}
+                </div>
+            ))}
+            {selectedTask && (
+                <TaskDetailsModal
+                    task={selectedTask}
+                    subtasks={subtasks[selectedTask.task_id]}
+                    people={people[selectedTask.task_id]}
+                    isOpen={isModalOpen}
+                    close={() => setIsModalOpen(false)}
+                />
+            )}
         </div>
-      ))}
-      {selectedTask && (
-        <TaskDetailsModal
-          task={selectedTask}
-          isOpen={isModalOpen}
-          close={() => setIsModalOpen(false)}
-        />
-      )}
-    </div>
-  );
+    );
 };
 
 export default TaskList;

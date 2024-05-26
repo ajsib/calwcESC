@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import CardList from './CardList';
 import { fetchProfileData } from '../services/fetchProfileData';
-import { Profile } from '../../Types';
+import { Person as Profile } from '@/public/Types/GlobalTypes';
 import ProfileCardSkeleton from './CardSkeleton';
 
 const CardListCon = () => {

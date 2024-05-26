@@ -2,7 +2,7 @@ import {useState, useEffect} from "react";
 import TicketCards from "./TicketCards";
 import TicketCardSkeleton from "./TicketCardsSkeleton";
 import fetchTicketData from "../services/fetchTicketData";
-import { Ticket } from "../Types";
+import { Ticket } from "@/public/Types/GlobalTypes";
 
 const TicketCardsCon = () => {
     const [tickets, setTickets] = useState<Ticket[]>([]);
