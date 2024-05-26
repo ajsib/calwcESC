@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useUserProfile } from './userContext';
 import PeopleData from '@/public/Database/People.json';
@@ -15,6 +15,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const { saveUserProfile, clearUserProfile } = useUserProfile();
   const router = useRouter();
+
+  useEffect(() => {
+    const storedPersonId = localStorage.getItem('person');
+    if (storedPersonId) {
+      const foundPerson = PeopleData.People.find(person => person.employee_id === parseInt(storedPersonId));
+      if (foundPerson) {
+        saveUserProfile(foundPerson);
+        setLoggedIn(true);
+      }
+    }
+  }, []);
 
   const login = (name: string) => {
     const foundPerson = PeopleData.People.find(person => person.name === name);

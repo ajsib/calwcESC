@@ -92,7 +92,7 @@ const SideMenuContent: React.FC = () => {
       <MenuOption className="caption" onClick={() => handleNavigation("/files")}>Files</MenuOption>
       <MenuOption className="caption" onClick={() => handleNavigation("/team")}>Team</MenuOption>
       <BottomSection>
-        <Button className="caption" onClick={() => {logout; handleNavigation("/")}}>Sign out</Button>
+        <Button className="caption" onClick={() => {logout(); handleNavigation("/")}}>Sign out</Button>
         <Button className="caption">Français</Button>
       </BottomSection>
     </MenuContentContainer>

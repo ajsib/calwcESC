@@ -6,8 +6,9 @@ import { useUserProfile } from '@/globalContexts/userContext';
 
 const Overview: React.FC = () => {
   const { profile } = useUserProfile();
+
   if (!profile) {
-    return null;
+    return;
   }
   if (profile.role === 'Client') {
     return <OverviewConClient />;
