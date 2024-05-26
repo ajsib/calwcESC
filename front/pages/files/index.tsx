@@ -10,7 +10,7 @@ export default function Files() {
     const { loggedIn } = useAuth();
     const { profile } = useUserProfile();
     if (!loggedIn || !profile) {
-      return <div>Either you're not logged in or you don't have a profile.</div>;
+      return <div>Either you&apos;re not logged in or you don&apos;t have a profile.</div>;
     }
 
     return (
