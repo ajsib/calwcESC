@@ -60,3 +60,29 @@ export const countTasksAndTickets = async (employeeId: number): Promise<{ taskCo
     }, 500); // Simulate network delay
   });
 };
+
+export const fetchTicketsBySponsorName = async (sponsorName: string): Promise<Ticket[]> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const tickets = TicketsData.Tickets.filter(ticket => ticket.sponsor === sponsorName);
+      resolve(tickets);
+    }, 500); // Simulate network delay
+  });
+};
+
+export const countTicketsBySponsorName = async (sponsorName: string): Promise<{ total: number, open: number, closed: number }> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const tickets = TicketsData.Tickets.filter(ticket => ticket.sponsor === sponsorName);
+      const total = tickets.length;
+      const open = tickets.filter(ticket => ticket.status.toLowerCase() === 'open').length;
+      const closed = tickets.filter(ticket => ticket.status.toLowerCase() === 'closed').length;
+
+      resolve({
+        total,
+        open,
+        closed
+      });
+    }, 500); // Simulate network delay
+  });
+};

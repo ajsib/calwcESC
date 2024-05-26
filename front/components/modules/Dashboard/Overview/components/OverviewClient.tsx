@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { OverviewProps } from '../Types';
+import { ClientOverviewProps } from '../Types';
 
 const modulePreviewStyle = css`
   border: 1px solid #ccc;
@@ -20,7 +20,7 @@ const jsonStyle = css`
   margin: 1rem;
 `;
 
-const ModulePreviewClient = ({ tickets, counts }: Omit<OverviewProps, 'tasks'>) => {
+const ModulePreviewClient = ({ tickets, counts }: Omit<ClientOverviewProps, 'tasks'>) => {
   return (
     <div css={modulePreviewStyle}>
       <div css={jsonStyle}>
