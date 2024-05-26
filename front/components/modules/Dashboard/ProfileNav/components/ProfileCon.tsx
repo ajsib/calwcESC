@@ -8,17 +8,26 @@ const ProfileContainer: React.FC = () => {
   const { person } = useAuth();
 
   const [rankImage, setRankImage] = useState<string | undefined>("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // get the rank image
     if (!person) return;
-    fetchRankImage(person.rank).then((image) => {
+    
+    const loadProfileData = async () => {
+      const image = await fetchRankImage(person.rank);
       setRankImage(image);
-    });
+      setLoading(false);
+    };
+
+    setTimeout(loadProfileData, 1000); // Add a 1-second delay
   }, [person]);
 
-  if (!person) {
+  if (loading) {
     return <ProfileCardSkeleton />;
+  }
+
+  if (!person) {
+    return null;
   }
 
   return <ProfileCard user={person} rankImage={rankImage} />;
