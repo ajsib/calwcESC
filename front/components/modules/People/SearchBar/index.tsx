@@ -3,8 +3,9 @@ import { css } from '@emotion/react';
 
 
 const commonContainerStyle = css`
-  margin: 2rem var(--margin);
-  width: calc(100% - 2 * var(--margin));
+  margin: 2rem;
+  //width: calc(100% - 2 * var(--margin));
+
 `;
 import SearchBarCon from "./components/SearchBarCon";
 
