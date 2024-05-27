@@ -3,8 +3,8 @@ import { css } from '@emotion/react';
 import BucketSwitcherCon from "./components/BucketSwitcherCon";
 
 const commonContainerStyle = css`
-  margin: 2rem var(--margin);
-  width: calc(100% - 2 * var(--margin));
+    margin-left: 2rem;
+    margin-right: 2rem;
 `;
 
 const BucketSwitcher = () => {

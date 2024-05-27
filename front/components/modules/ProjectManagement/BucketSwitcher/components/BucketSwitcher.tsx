@@ -9,12 +9,14 @@ const selectorContainerStyle = css`
   align-items: center;
   border-bottom: 1px solid #ccc;
   padding-bottom: 0.5rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+    
 `;
 
 const titleStyle = css`
   font-size: 1.8rem;
   font-weight: bold;
+  color: #364132;  
 `;
 
 const dropdownContainerStyle = css`

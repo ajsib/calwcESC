@@ -39,16 +39,20 @@ const TaskCard: React.FC<TaskCardProps> = ({
   const taskCardStyle = css`
     border: 1.5px solid #dadada;
     padding: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: ${dropdownActive ? '1rem' : '1.5rem'};
+    margin-bottom: ${dropdownActive ? '1rem' : '0.5rem'};
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease; // Added transition
+
     &:hover:not(:active) { // Exclude hover effect when the button is being clicked
       transform: ${hover ? "none" : "translateY(-2px)"};
       box-shadow: ${hover ? "none" : "0 4px 6px rgba(0,0,0,0.05)"};
       cursor: pointer;
+      background-color: rgba(248, 248, 248, 0.62);
     }
   `;
 
@@ -57,8 +61,8 @@ const TaskCard: React.FC<TaskCardProps> = ({
     left: 0;
     top: 0;
     bottom: 0;
-    width: 2px;
-    background-color: ${status === 'To Do' ? '#4287f5' : status === 'In Progress' ? 'orange' : '#ad1818'};
+    width: 4px;
+    background-color: ${status === 'To Do' ? '#4287f5' : status === 'In Progress' ? 'orange' : '#4287f5'};
   `;
 
   const statusOverlayStyle = css`

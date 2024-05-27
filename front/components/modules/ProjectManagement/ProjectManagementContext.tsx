@@ -1,8 +1,14 @@
+/** @jsxImportSource @emotion/react */
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Task, Person, Subtask } from '@/public/Types/GlobalTypes';
 import { fetchTaskData, fetchSubtasksByTaskId, fetchPeopleAssignedToTask } from './services/fetchTaskData';
+import {css} from "@emotion/react";
 
 const ProjectManagementContext = createContext<any>(null);
+
+const commonContainerStyle = css`
+  background-color: #E9E9E9;
+`;
 
 export const useProjectManagement = () => useContext(ProjectManagementContext);
 
@@ -83,6 +89,7 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
     };
 
     return (
+        <div css={commonContainerStyle}>
         <ProjectManagementContext.Provider
             value={{
                 selectedStatus,
@@ -105,5 +112,6 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
         >
             {children}
         </ProjectManagementContext.Provider>
+            </div>
     );
 };
