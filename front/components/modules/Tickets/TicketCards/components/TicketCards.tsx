@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import Circle from '@/components/UI/icons/Dot';
 import { Ticket } from '@/public/Types/GlobalTypes';
+import { useRouter } from 'next/router';
 
 const ticketCardsStyle = css`
   display: flex;
@@ -50,6 +51,7 @@ const ticketInfoStyle = css`
 `;
 
 const TicketCards: React.FC<{ tickets: Ticket[] }> = ({ tickets }) => {
+  const router = useRouter();
   // get the color/icon based on the priority
   const getColor = (priority: string) => {
     switch (priority) {
@@ -67,7 +69,7 @@ const TicketCards: React.FC<{ tickets: Ticket[] }> = ({ tickets }) => {
   return (
     <div css={ticketCardsStyle}>
       {tickets.map((ticket) => (
-        <div css={ticketCardStyle} key={ticket.ticket_id}>
+        <div css={ticketCardStyle} key={ticket.ticket_id} onClick={() => router.push(`/tickets/${ticket.ticket_id}`)}>
           <div css={ticketHeaderStyle}>
             <span>{ticket.title}</span>
             <span>{ticket.date}</span>

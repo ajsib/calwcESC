@@ -6,29 +6,34 @@ import { useProjectManagement } from '../../ProjectManagementContext';
 import SubTaskCard from './SubTaskCard';
 import { TaskListProps } from '../Types';
 import { Task } from '@/public/Types/GlobalTypes';
+import { useUserProfile } from '@/globalContexts/userContext';
 
 const taskListStyle = css`
   margin: 2rem 0;
 `;
 
 const TaskList = ({ expandedTaskId, openTaskDetails, toggleSubtasks, selectedTask, isModalOpen, setIsModalOpen }: TaskListProps) => {
-    const { filteredTasks, subtasks, people } = useProjectManagement();
+    const { filteredTasks, subtasks, people, myFilteredTasks } = useProjectManagement();
+    const { profile } = useUserProfile();
+
+    const tasks = profile && profile.role === 'Staff' ? myFilteredTasks : filteredTasks;
 
     return (
         <div css={taskListStyle}>
-            {filteredTasks.map((task : Task) => (
+            {tasks.map((task: Task) => (
                 <div key={task.task_id}>
                     <TaskCard
                         onClick={() => openTaskDetails(task)}
                         title={task.title}
                         dueDate={task.due_date}
-                        isComplete={false}
+                        isComplete={task.complete}
                         onToggleSubtasks={() => toggleSubtasks(task.task_id)}
                         expandSubtasks={expandedTaskId === task.task_id}
                         subTasks={subtasks[task.task_id]}
                         people={people[task.task_id]}
                         bucket={task.bucket}
                         status={task.status}
+                        ticket={task.ticket_id}
                     />
 
                     {expandedTaskId === task.task_id && (

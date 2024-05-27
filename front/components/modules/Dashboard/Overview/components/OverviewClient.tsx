@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { OverviewProps } from '../Types';
+import { ClientOverviewProps } from '../Types';
+import { useRouter } from 'next/router';
 
 const modulePreviewStyle = css`
   border: 1px solid #ccc;
@@ -9,8 +10,8 @@ const modulePreviewStyle = css`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  line-height: 2rem;
   flex-grow: 1;
+  overflow-y: scroll;
 `;
 
 const jsonStyle = css`
@@ -20,9 +21,11 @@ const jsonStyle = css`
   margin: 1rem;
 `;
 
-const ModulePreviewClient = ({ tickets, counts }: Omit<OverviewProps, 'tasks'>) => {
+const ModulePreviewClient = ({ tickets, counts }: Omit<ClientOverviewProps, 'tasks'>) => {
+  const router = useRouter();
   return (
     <div css={modulePreviewStyle}>
+      <button onClick={() => router.push('/ticket-intake')}>New Ticket</button>
       <div css={jsonStyle}>
         <h3>Role: Client</h3>
       </div>
