@@ -70,7 +70,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, close, children }) => {
     if (isOpen) {
       setAnimationDirection('in'); // Set animation direction to 'in' when modal opens
     } else {
-      setAnimationDirection('out'); // Set animation direction to 'out' when modal closes
+      setAnimationDirection('out'); // Set animation direction to 'out' when modal closes off screen
     }
   }, [isOpen]);
 
