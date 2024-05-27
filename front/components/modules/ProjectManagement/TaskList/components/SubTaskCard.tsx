@@ -40,18 +40,42 @@ const SubTaskCard: React.FC<SubTaskCardProps> = ({ subTasks, expanded }) => {
   };
 
   const subTaskCardStyle = (isLast: boolean) => css`
-  border: 1px solid #DADADA;
-  margin-left: 2rem; // Increased for better visual nesting
-  padding: 1.5rem 2rem; // Increased padding for more space
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #f3f3f3;
-  margin-bottom: ${isLast ? '2rem' : '1rem'}; // Increased bottom margin
-`;
+    border: 1px solid #DADADA;
+    margin-left: 2rem;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(243, 243, 243, 0.34);
+    margin-bottom: ${isLast ? '2rem' : '1rem'};
+  `;
 
   const checkboxStyle = css`
-    margin-left: 1rem;
+    position: relative;
+    appearance: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: transparent;
+    border: 2px solid #4b5320; // Military green color
+    border-radius: 3px;
+    cursor: pointer;
+
+    &:checked {
+      background-color: #4f8c40; // Dark green background when checked
+      border-color: #4f8c40;
+    }
+
+    &:checked::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 6px;
+      width: 6px;
+      height: 12px;
+      border: solid #f3f3f3;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
   `;
 
   return (

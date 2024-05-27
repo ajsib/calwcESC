@@ -30,8 +30,7 @@ const modalStyle = css`
   width: 80%;
   max-width: 600px;
   background: white;
-  padding: 20px;
-  border: 1px solid #ccc;
+  border: 0px solid #ccc;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   animation-duration: 0.3s;
   animation-fill-mode: forwards;
@@ -48,12 +47,14 @@ const overlayStyle = css`
 `;
 
 const buttonStyle = css`
-  margin-top: 10px;
+  margin-top: 0px;
   padding: 10px 20px;
   border: none;
   background-color: var(--primary-color);
   color: white;
   cursor: pointer;
+    height: 68px;
+    width: 100%;
 `;
 
 interface ModalProps {
@@ -76,15 +77,15 @@ const Modal: React.FC<ModalProps> = ({ isOpen, close, children }) => {
   return (
     <>
       {isOpen && <div css={overlayStyle} onClick={close} />}
-      <div
-        css={[
-          modalStyle,
-          animationDirection === 'out' ? css`animation-name: ${slideOut};` : css`animation-name: ${slideIn};`,
-        ]}
-      >
-        {children}
-        <button css={buttonStyle} onClick={close}>Close</button>
-      </div>
+        <div
+            css={[
+                modalStyle,
+                animationDirection === 'out' ? css`animation-name: ${slideOut};` : css`animation-name: ${slideIn};`,
+            ]}
+        >
+            <button css={buttonStyle} onClick={close}>Close</button>
+            {children}
+        </div>
     </>
   );
 };
