@@ -17,7 +17,6 @@ const StatusOverviewCon = () => {
     const [showManageTeamsModal, setShowManageTeamsModal] = useState(false);
 
     const { profile } = useUserProfile();
-    if (!profile) return null;
 
     useEffect(() => {
         fetchTaskData().then((data) => {
@@ -26,32 +25,36 @@ const StatusOverviewCon = () => {
     }, []);
 
     useEffect(() => {
-        const tasksToCount = profile.role === "Staff" ? myFilteredTasks : tasks;
+        if (profile) {
+            const tasksToCount = profile.role === "Staff" ? myFilteredTasks : tasks;
 
-        const counts = tasksToCount.reduce(
-            (acc: { toDo: number; inProgress: number; overdue: number }, task:Task) => {
-                switch (task.status) {
-                    case 'To Do':
-                        acc.toDo++;
-                        break;
-                    case 'In Progress':
-                        acc.inProgress++;
-                        break;
-                    case 'Overdue':
-                        acc.overdue++;
-                        break;
-                    default:
-                        break;
-                }
-                return acc;
-            },
-            { toDo: 0, inProgress: 0, overdue: 0 }
-        );
+            const counts = tasksToCount.reduce(
+                (acc: { toDo: number; inProgress: number; overdue: number }, task: Task) => {
+                    switch (task.status) {
+                        case 'To Do':
+                            acc.toDo++;
+                            break;
+                        case 'In Progress':
+                            acc.inProgress++;
+                            break;
+                        case 'Overdue':
+                            acc.overdue++;
+                            break;
+                        default:
+                            break;
+                    }
+                    return acc;
+                },
+                { toDo: 0, inProgress: 0, overdue: 0 }
+            );
 
-        setToDoCount(counts.toDo);
-        setInProgressCount(counts.inProgress);
-        setOverdueCount(counts.overdue);
-    }, [tasks, myFilteredTasks, profile.role]);
+            setToDoCount(counts.toDo);
+            setInProgressCount(counts.inProgress);
+            setOverdueCount(counts.overdue);
+        }
+    }, [tasks, myFilteredTasks, profile]);
+
+    if (!profile) return null;
 
     return (
         <>
