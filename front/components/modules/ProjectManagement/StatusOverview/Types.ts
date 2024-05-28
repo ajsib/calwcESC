@@ -23,13 +23,11 @@ export interface StatusOverviewProps {
 export interface NewTaskModalProps {
     isOpen: boolean;
     close: () => void;
-    addTask: (task: Task) => void;
-    teams: string[]; // Array of teams
-    handleSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+    teams: any; // Define the proper type if possible
     handleAddSubTask: () => void;
-    handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+    handleSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
     title: string;
-    subTasks: Subtask[];
+    subTaskInput: string;
     people: number[];
     bucket: string;
     status: string;
@@ -39,11 +37,15 @@ export interface NewTaskModalProps {
     setPeople: (people: number[]) => void;
     setBucket: (bucket: string) => void;
     setStatus: (status: string) => void;
-    setDueDate: (dueDate: string) => void;
-    handleRemoveSubTask: (subtask_id: number) => void;
-    subTaskInput: string;
+    setDueDate: (date: string) => void;
     peopleData: Person[];
+    subTasks: Subtask[];
+    handleRemoveSubTask: (id: number) => void;
+    handlePeopleCheckboxChange: ({ value, checked }: { value: number; checked: boolean }) => void;
+    addTask: (task: Task) => void; // Ensure this is included
+    handleSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void; // Ensure this is included
   }
+  
 
 export interface ManageTeamsModalProps {
   isOpen: boolean,

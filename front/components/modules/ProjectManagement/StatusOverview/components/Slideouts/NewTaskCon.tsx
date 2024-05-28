@@ -1,87 +1,95 @@
 import { useState, useEffect } from "react";
 import NewTaskModal from "./NewTask";
-import { Subtask, Person as Profile } from '@/public/Types/GlobalTypes';
+import { Task, Subtask, Person as Profile } from '@/public/Types/GlobalTypes';
 import { useProjectManagement } from '../../../ProjectManagementContext';
 import { fetchPeopleData } from "../../services/fetchPeopleData";
 
 const NewTaskCon = ({ isOpen, close }: { isOpen: boolean, close: () => void }) => {
-    const [title, setTitle] = useState('');
-    const [subTasks, setSubTasks] = useState<Subtask[]>([]);
-    const [subTaskInput, setSubTaskInput] = useState('');
-    const [people, setPeople] = useState<number[]>([]);
-    const [bucket, setBucket] = useState('');
-    const [status, setStatus] = useState('');
-    const [dueDate, setDueDate] = useState('');
-    const [peopleData, setPeopleData] = useState<Profile[]>([]);
-    const [task_id, setTaskId] = useState(0);
-  
-    const { teams, addTask } = useProjectManagement();
+  const [title, setTitle] = useState('');
+  const [subTasks, setSubTasks] = useState<Subtask[]>([]);
+  const [subTaskInput, setSubTaskInput] = useState('');
+  const [people, setPeople] = useState<number[]>([]);
+  const [bucket, setBucket] = useState('');
+  const [status, setStatus] = useState('');
+  const [dueDate, setDueDate] = useState('');
+  const [peopleData, setPeopleData] = useState<Profile[]>([]);
+  const [task_id, setTaskId] = useState(0);
 
-    useEffect(() => {
-        fetchPeopleData().then((data) => {
-          setPeopleData(data);
-        });
-        setTaskId(Math.floor(Math.random() * 10000));
-      }, []);
+  const { teams, addTask } = useProjectManagement();
 
-    const handleAddSubTask = () => {
-        const newSubTask = { subtask_id: Math.floor(Math.random() * 10000), title: subTaskInput, complete: false, task_id: task_id };
-        setSubTasks([...subTasks, newSubTask]);
-        setSubTaskInput('');
-      };
+  useEffect(() => {
+    fetchPeopleData().then((data) => {
+      setPeopleData(data);
+    });
+    setTaskId(Math.floor(Math.random() * 10000));
+  }, []);
 
-    const handleRemoveSubTask = (subtask_id: number) => {
-        setSubTasks(subTasks.filter((subtask) => subtask.subtask_id !== subtask_id));
+  const handleAddSubTask = () => {
+    const newSubTask = { subtask_id: Math.floor(Math.random() * 10000), title: subTaskInput, complete: false, task_id: task_id };
+    setSubTasks([...subTasks, newSubTask]);
+    setSubTaskInput('');
+  };
+
+  const handleRemoveSubTask = (subtask_id: number) => {
+    setSubTasks(subTasks.filter((subtask) => subtask.subtask_id !== subtask_id));
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // Prevent form from submitting early
+    const newTask: Task = {
+      task_id,
+      ticket_id: Math.floor(Math.random() * 10000), // Assign a new ticket_id
+      title,
+      bucket,
+      status,
+      due_date: dueDate,
+      complete: false,
     };
+    addTask(newTask);
+  };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault(); // Prevent form from submitting early
-        const newTask = {
-          id: task_id,
-          title,
-          subTasks,
-          people,
-          bucket,
-          status,
-          dueDate
-        };
-        addTask(newTask);
-        close();
-    };
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedId = parseInt(e.target.value);
+    if (!people.includes(selectedId)) {
+      setPeople([...people, selectedId]); // Add the selected person's ID to the array
+    }
+  };
 
-    const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const selectedId = parseInt(e.target.value);
-        if (!people.includes(selectedId)) {
-          setPeople([...people, selectedId]); // Add the selected person's ID to the array
-        }
-    };
+  const handlePeopleCheckboxChange = ({ value, checked }: { value: number, checked: boolean }) => {
+    if (checked) {
+      setPeople([...people, value]);
+    } else {
+      setPeople(people.filter(id => id !== value));
+    }
+  };
 
-    return (
-        <NewTaskModal
-            isOpen={isOpen}
-            close={close}
-            teams={teams}
-            addTask={addTask}
-            handleSelectChange={handleSelectChange}
-            handleAddSubTask={handleAddSubTask}
-            handleSubmit={handleSubmit}
-            title={title}
-            subTasks={subTasks}
-            people={people}
-            bucket={bucket}
-            status={status}
-            dueDate={dueDate}
-            subTaskInput={subTaskInput}
-            setTitle={setTitle}
-            setSubTaskInput={setSubTaskInput}
-            setPeople={setPeople}
-            setBucket={setBucket}
-            setStatus={setStatus}
-            setDueDate={setDueDate}
-            peopleData={peopleData}
-            handleRemoveSubTask={handleRemoveSubTask}
-        />
-    );
+  return (
+    <NewTaskModal
+      isOpen={isOpen}
+      close={close}
+      teams={teams}
+      addTask={addTask} // Pass the addTask prop
+      handleSelectChange={handleSelectChange} // Pass the handleSelectChange prop
+      handleAddSubTask={handleAddSubTask}
+      handleSubmit={handleSubmit}
+      title={title}
+      subTasks={subTasks}
+      people={people}
+      bucket={bucket}
+      status={status}
+      dueDate={dueDate}
+      subTaskInput={subTaskInput}
+      setTitle={setTitle}
+      setSubTaskInput={setSubTaskInput}
+      setPeople={setPeople}
+      setBucket={setBucket}
+      setStatus={setStatus}
+      setDueDate={setDueDate}
+      peopleData={peopleData}
+      handleRemoveSubTask={handleRemoveSubTask}
+      handlePeopleCheckboxChange={handlePeopleCheckboxChange}
+    />
+  );
 };
 
 export default NewTaskCon;

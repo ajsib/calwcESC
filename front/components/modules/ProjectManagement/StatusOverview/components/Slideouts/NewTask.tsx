@@ -2,6 +2,7 @@
 import Modal from './Slideout';
 import { css } from '@emotion/react';
 import { NewTaskModalProps } from '../../Types';
+import { useState } from 'react';
 
 const formStyle = css`
   display: flex;
@@ -42,7 +43,6 @@ const halfInputStyle = css`
 `;
 
 const buttonStyle = css`
-  padding: 10px 20px;
   border: none;
   background-color: #364132;
   color: white;
@@ -113,7 +113,76 @@ const subTaskItemStyle = css`
   }
 `;
 
-const NewTaskModal: React.FC<NewTaskModalProps> = ({ isOpen, close, teams, handleSelectChange, handleAddSubTask, handleSubmit, title, subTaskInput, people, bucket, status, dueDate, setTitle, setSubTaskInput, setBucket, setStatus, setDueDate, peopleData, subTasks, handleRemoveSubTask }) => {
+const dropdownContainerStyle = css`
+  position: relative;
+  display: inline-block;
+  width: 100%;
+`;
+
+const dropdownButtonStyle = css`
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+  color: #333;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+`;
+
+const dropdownContentStyle = css`
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 100%;
+  border: 1px solid #ddd;
+  z-index: 1;
+  max-height: 200px;
+  overflow-y: auto;
+
+  &.show {
+    display: block;
+  }
+`;
+
+const dropdownItemStyle = css`
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: #f1f1f1;
+  }
+`;
+
+const NewTaskModal: React.FC<NewTaskModalProps> = ({
+  isOpen,
+  close,
+  teams,
+  handleAddSubTask,
+  handleSubmit,
+  title,
+  subTaskInput,
+  people,
+  bucket,
+  status,
+  dueDate,
+  setTitle,
+  setSubTaskInput,
+  setBucket,
+  setStatus,
+  setDueDate,
+  peopleData,
+  subTasks,
+  handleRemoveSubTask,
+  handlePeopleCheckboxChange
+}) => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
   return (
     <Modal isOpen={isOpen} close={close}>
       <div css={css`background-color: transparent; padding: 10px; display: flex; justify-content: space-between;`}>
@@ -137,7 +206,11 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({ isOpen, close, teams, handl
           </div>
           <div css={inputContainerStyle}>
             <label css={labelStyle}>Status</label>
-            <input css={halfInputStyle} value={status} onChange={e => setStatus(e.target.value)} />
+            <select css={halfInputStyle} value={status} onChange={e => setStatus(e.target.value)}>
+              <option value="To Do">To Do</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Complete">Complete</option>
+            </select>
           </div>
         </div>
 
@@ -153,21 +226,36 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({ isOpen, close, teams, handl
 
         <div css={inputContainerStyle}>
           <label css={labelStyle}>Select People</label>
-          <select css={inputStyle} value={people.toString()} onChange={handleSelectChange}>
-            <option value="">Select People</option>
-            {peopleData.map(person => (
-              <option key={person.employee_id} value={person.employee_id}>
-                {person.name}
-              </option>
-            ))}
-          </select>
+          <div css={dropdownContainerStyle}>
+            <button type="button" css={dropdownButtonStyle} onClick={toggleDropdown}>
+              {people.length > 0 ? `${people.length} People Selected` : 'Select People'}
+            </button>
+            <div css={[dropdownContentStyle, dropdownOpen && css`display: block;`]}>
+              {peopleData.map(person => (
+                <div
+                  key={person.employee_id}
+                  css={dropdownItemStyle}
+                  onClick={() => handlePeopleCheckboxChange({ value: person.employee_id, checked: !people.includes(person.employee_id) })}
+                >
+                  <input
+                    type="checkbox"
+                    value={person.employee_id}
+                    checked={people.includes(person.employee_id)}
+                    onChange={() => handlePeopleCheckboxChange({ value: person.employee_id, checked: !people.includes(person.employee_id) })}
+                    css={css`margin-right: 10px;`}
+                  />
+                  {person.name}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div css={inputContainerStyle}>
           <label css={labelStyle}>Select Team</label>
           <select css={inputStyle} value={bucket} onChange={e => setBucket(e.target.value)}>
             <option value="">Select Team</option>
-            {teams.map((team:string) => (
+            {teams.map((team: string) => (
               <option key={team} value={team}>
                 {team}
               </option>
@@ -175,7 +263,7 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({ isOpen, close, teams, handl
           </select>
         </div>
         
-        <button type="submit" css={buttonStyle}>Create New Task</button>
+        <button type="submit" css={[buttonStyle, { padding: '20px 50px', marginTop: '10px'}]}>Create New Task</button>
 
         <div css={subTaskListStyle}>
           {subTasks.map((subTask, index) => (

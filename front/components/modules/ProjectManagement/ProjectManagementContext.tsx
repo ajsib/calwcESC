@@ -53,7 +53,6 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
                 setPeople(peopleMap);
 
                 const userTasks = await fetchTasksAssignedToUser(currentUserId);
-                console.log('User tasks:', userTasks); // Debug: Check if user tasks are fetched correctly
                 setMyTasks(userTasks);
             } catch (error) {
                 console.error("Failed to fetch data", error);
@@ -83,7 +82,6 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
                 const notCompleted = !task.complete; // Ensure task is not completed
                 return statusMatch && bucketMatch && notCompleted;
             });
-            console.log('Filtered my tasks:', filtered); // Debug: Check if filtering is correct
             setMyFilteredTasks(filtered);
         };
 

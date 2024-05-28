@@ -12,7 +12,7 @@ export interface Person {
   
 export interface Task {
     task_id: number;
-    ticket_id?: number;
+    ticket_id: number;
     title: string;
     bucket: string;
     status: string;
