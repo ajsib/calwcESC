@@ -1,4 +1,4 @@
-import { Task, Ticket, File } from '@/public/Types/GlobalTypes';
+import { Task, Ticket } from '@/public/Types/GlobalTypes';
 import TasksPeopleData from '@/public/Database/Tasks-People.json';
 import TicketsPeopleData from '@/public/Database/Tickets-People.json';
 import TasksData from '@/public/Database/Tasks.json';

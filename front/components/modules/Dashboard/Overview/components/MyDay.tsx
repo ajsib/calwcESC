@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { MyDayProps, MyDayListProps } from '../Types';
 
 const myDayStyle = css`
     height: calc(100vh - 320px);
@@ -33,7 +34,6 @@ const cardStyle = css`
     background-color: #F5F5F5;
     padding: 1.5rem;
     margin-bottom: 1rem;
-
 `;
 
 const headerStyle = css`
@@ -48,20 +48,22 @@ const textStyle = css`
     font-size: 1.25rem;
 `;
 
+const MyDay = ({ counts } : MyDayProps) => {
+    if (!counts) {
+        return null;
+    }
 
-
-const MyDay = () => {
     return (
         <div css={myDayStyle}>
             <div css={titleStyle}>My Day</div>
             <div css={contentStyle}>
                 <div css={cardStyle}>
-                    <div css={headerStyle}>You have 3 open tickets assigned to you, 1 of the tickets is high priority</div>
-                    <div css={textStyle}>3 new tickets have been added to the system that have not been triaged</div>
+                    <div css={headerStyle}>You have {counts.ticketCount} open tickets assigned to you, {counts.highPriorityTicketsCount} of the tickets are high priority</div>
+                    <div css={textStyle}>Some additional information about tickets...</div>
                 </div>
                 <div css={cardStyle}>
-                    <div css={headerStyle}>You are assigned to 5 tasks, 2 of those tasks are due today</div>
-                    <div css={textStyle}>There are 2 other tasks that are due this week, you have no overdue tasks</div>
+                    <div css={headerStyle}>You are assigned to {counts.taskCount} tasks, {counts.tasksDueTodayCount} of those tasks are due today</div>
+                    <div css={textStyle}>Some additional information about tasks...</div>
                 </div>
             </div>
         </div>

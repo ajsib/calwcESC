@@ -16,16 +16,11 @@ const modulePreviewStyle = css`
     gap: 0rem; /* Add some space between the columns */
 `;
 
-const jsonStyle = css`
-  background-color: #f5f5f5;
-  margin: 1rem;
-`;
-
 const ModulePreview = ({ tasks, tickets, counts }: OverviewProps) => {
   return (
     <div css={modulePreviewStyle}>
-        <MyDay />
-        <MyDayList />
+        <MyDay counts={counts} />
+        <MyDayList tasks={tasks} tickets={tickets} />
         <DailyCalendar />
     </div>
   );

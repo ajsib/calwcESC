@@ -45,6 +45,7 @@ const NewTaskCon = ({ isOpen, close }: { isOpen: boolean, close: () => void }) =
       due_date: dueDate,
       complete: false,
     };
+    //this will be replaced with a call to the API to place the Task, Subtasks, and People in the database
     addTask(newTask);
   };
 

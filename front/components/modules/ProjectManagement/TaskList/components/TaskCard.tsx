@@ -37,6 +37,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
     position: relative;
     display: flex;
     margin-right: ${marginRightValue};
+    z-index: 2;
   `;
 
   const avatarStyle = css`
@@ -66,10 +67,10 @@ const TaskCard: React.FC<TaskCardProps> = ({
     border: 1px solid #ddd;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 0.5rem;
-    z-index: 10;
     white-space: nowrap;
     opacity: ${hoverList ? '1' : '0'};
     transition: opacity 0.3s ease;
+    z-index: 3;
   `;
 
   const taskCardStyle = css`
@@ -82,9 +83,10 @@ const TaskCard: React.FC<TaskCardProps> = ({
     justify-content: space-between;
     margin-bottom: ${dropdownActive ? '1rem' : '0.5rem'};
     position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; // Added transition
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 1;
 
-    &:hover:not(:active) { // Exclude hover effect when the button is being clicked
+    &:hover:not(:active) {
       transform: ${dropDownHover ? "none" : "translateY(-2px)"};
       box-shadow: ${dropDownHover ? "none" : "0 4px 6px rgba(0,0,0,0.05)"};
       cursor: pointer;

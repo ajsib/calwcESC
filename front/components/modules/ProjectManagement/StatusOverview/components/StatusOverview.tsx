@@ -111,7 +111,7 @@ const StatusOverview: React.FC<StatusOverviewProps> = ({ onSelectStatus, selecte
         <div css={buttonContainerStyle}>
             <div css={css`display: flex;`}>
                 <div css={buttonStyleSecondaryLeft} onClick={onManageTeamsModalOpen}>Edit Teams</div>
-                <div css={buttonStyleSecondaryRight}>Archive</div>
+                <div css={buttonStyleSecondaryRight} onClick={handleShowArchived}>Archive</div>
             </div>
             <div css={css`display: flex;`}>
                 <div css={buttonStylePrimary} onClick={onNewTaskModalOpen}>New Task</div>
