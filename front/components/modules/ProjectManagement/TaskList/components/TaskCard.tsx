@@ -85,8 +85,8 @@ const TaskCard: React.FC<TaskCardProps> = ({
     transition: transform 0.3s ease, box-shadow 0.3s ease; // Added transition
 
     &:hover:not(:active) { // Exclude hover effect when the button is being clicked
-      transform: ${hover ? "none" : "translateY(-2px)"};
-      box-shadow: ${hover ? "none" : "0 4px 6px rgba(0,0,0,0.05)"};
+      transform: ${dropDownHover ? "none" : "translateY(-2px)"};
+      box-shadow: ${dropDownHover ? "none" : "0 4px 6px rgba(0,0,0,0.05)"};
       cursor: pointer;
       background-color: rgba(248, 248, 248, 0.62);
     }

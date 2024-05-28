@@ -17,7 +17,6 @@ const StatusOverviewCon = () => {
     const [showManageTeamsModal, setShowManageTeamsModal] = useState(false);
 
     const { profile } = useUserProfile();
-    if (!profile) return null;
 
     useEffect(() => {
         fetchTaskData().then((data) => {
@@ -26,7 +25,7 @@ const StatusOverviewCon = () => {
     }, []);
 
     useEffect(() => {
-        const tasksToCount = profile.role === "Staff" ? myFilteredTasks : tasks;
+        const tasksToCount = profile && profile.role === "Staff" ? myFilteredTasks : tasks;
 
         const counts = tasksToCount.reduce(
             (acc: { toDo: number; inProgress: number; overdue: number }, task:Task) => {
@@ -51,7 +50,7 @@ const StatusOverviewCon = () => {
         setToDoCount(counts.toDo);
         setInProgressCount(counts.inProgress);
         setOverdueCount(counts.overdue);
-    }, [tasks, myFilteredTasks, profile.role]);
+    }, [tasks, myFilteredTasks, profile && profile.role]);
 
     return (
         <>

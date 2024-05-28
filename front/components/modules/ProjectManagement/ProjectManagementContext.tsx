@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Task, Person, Subtask } from '@/public/Types/GlobalTypes';
-import { fetchTaskData, fetchSubtasksByTaskId, fetchPeopleAssignedToTask } from './services/fetchTaskData';
+import { fetchTaskData, fetchSubtasksByTaskId, fetchPeopleAssignedToTask, fetchTasksAssignedToUser } from './services/fetchTaskData';
 import {css} from "@emotion/react";
+import { useUserProfile } from '@/globalContexts/userContext';
 
 const ProjectManagementContext = createContext<any>(null);
 

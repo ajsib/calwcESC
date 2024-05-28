@@ -5,6 +5,7 @@ import { useProjectManagement } from "../../ProjectManagementContext";
 import TaskCardSkeleton from "./TaskCardSkeleton";
 import { Task } from "@/public/Types/GlobalTypes";
 import TaskLegend from "@/components/modules/ProjectManagement/TaskList/components/TaskLegend";
+import Archive from "./Archive";
 import {css} from "@emotion/react";
 
 const taskContainer = css`
