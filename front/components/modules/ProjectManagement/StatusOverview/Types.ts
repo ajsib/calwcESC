@@ -40,6 +40,7 @@ export interface NewTaskModalProps {
     setBucket: (bucket: string) => void;
     setStatus: (status: string) => void;
     setDueDate: (dueDate: string) => void;
+    handleRemoveSubTask: (subtask_id: number) => void;
     subTaskInput: string;
     peopleData: Person[];
   }

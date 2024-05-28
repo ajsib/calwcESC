@@ -30,6 +30,10 @@ const NewTaskCon = ({ isOpen, close }: { isOpen: boolean, close: () => void }) =
         setSubTaskInput('');
       };
 
+    const handleRemoveSubTask = (subtask_id: number) => {
+        setSubTasks(subTasks.filter((subtask) => subtask.subtask_id !== subtask_id));
+    };
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault(); // Prevent form from submitting early
         const newTask = {
@@ -75,6 +79,7 @@ const NewTaskCon = ({ isOpen, close }: { isOpen: boolean, close: () => void }) =
             setStatus={setStatus}
             setDueDate={setDueDate}
             peopleData={peopleData}
+            handleRemoveSubTask={handleRemoveSubTask}
         />
     );
 };
