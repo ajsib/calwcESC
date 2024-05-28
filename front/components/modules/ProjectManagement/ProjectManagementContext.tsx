@@ -17,9 +17,17 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
     const [selectedBucket, setSelectedBucket] = useState<string>("All");
     const [teams, setTeams] = useState<string[]>(["All"]);
     const [allTasks, setAllTasks] = useState<Task[]>([]);
+    const [myTasks, setMyTasks] = useState<Task[]>([]);
+    const [myFilteredTasks, setMyFilteredTasks] = useState<Task[]>([]);
     const [subtasks, setSubtasks] = useState<{ [key: number]: Subtask[] }>({});
     const [people, setPeople] = useState<{ [key: number]: Person[] }>({});
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
+    const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
+    const [showArchived, setShowArchived] = useState<boolean>(false);
+
+    const { profile } = useUserProfile();
+    const currentUserId = profile?.employee_id || 0;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -42,6 +50,10 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
                     peopleMap[task.task_id] = peopleResults[index];
                 });
                 setPeople(peopleMap);
+
+                const userTasks = await fetchTasksAssignedToUser(currentUserId);
+                console.log('User tasks:', userTasks); // Debug: Check if user tasks are fetched correctly
+                setMyTasks(userTasks);
             } catch (error) {
                 console.error("Failed to fetch data", error);
             } finally {
@@ -51,6 +63,35 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
 
         fetchData();
     }, []);
+
+    useEffect(() => {
+        const filterTasks = () => {
+            const filtered = allTasks.filter((task: Task) => {
+                const statusMatch = selectedStatus ? task.status === selectedStatus : true;
+                const bucketMatch = selectedBucket && selectedBucket !== "All" ? task.bucket === selectedBucket : true;
+                const notCompleted = !task.complete; // Ensure task is not completed
+                return statusMatch && bucketMatch && notCompleted;
+            });
+            setFilteredTasks(filtered);
+        };
+
+        const filterMyTasks = () => {
+            const filtered = myTasks.filter((task: Task) => {
+                const statusMatch = selectedStatus ? task.status === selectedStatus : true;
+                const bucketMatch = selectedBucket && selectedBucket !== "All" ? task.bucket === selectedBucket : true;
+                const notCompleted = !task.complete; // Ensure task is not completed
+                return statusMatch && bucketMatch && notCompleted;
+            });
+            console.log('Filtered my tasks:', filtered); // Debug: Check if filtering is correct
+            setMyFilteredTasks(filtered);
+        };
+
+        const completed = allTasks.filter((task: Task) => task.complete);
+        setCompletedTasks(completed);
+
+        filterTasks();
+        filterMyTasks();
+    }, [selectedStatus, selectedBucket, allTasks, myTasks]);
 
     const handleSelectStatus = (status: string) => {
         if (selectedStatus === status) {
@@ -88,6 +129,10 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
         setAllTasks(allTasks.map(t => t.task_id === task.task_id ? task : t));
     };
 
+    const handleShowArchived = () => {
+        setShowArchived(!showArchived);
+    };
+
     return (
         <div css={commonContainerStyle}>
         <ProjectManagementContext.Provider
@@ -98,16 +143,21 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
                 handleSelectStatus,
                 handleSelectBucket,
                 addTeam,
-                removeTeam, 
+                removeTeam,
                 updateTeams,
                 setAllTasks,
                 allTasks,
+                myFilteredTasks,
+                filteredTasks,
+                completedTasks,
                 addTask,
                 removeTask,
                 updateTask,
                 subtasks,
                 people,
-                isLoading
+                isLoading,
+                showArchived,
+                handleShowArchived
             }}
         >
             {children}

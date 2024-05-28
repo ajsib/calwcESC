@@ -12,10 +12,10 @@ export interface TaskCardProps {
     bucket: string;
     status: string;
     onClick?: () => void;
+    ticket?: number;
 }
 
 export interface TaskListProps {
-  tasks: Task[];
   expandedTaskId: number | null;
   openTaskDetails: (task: Task) => void;
   toggleSubtasks: (id: number) => void;

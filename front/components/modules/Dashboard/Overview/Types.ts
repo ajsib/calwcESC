@@ -9,3 +9,9 @@ export interface OverviewProps {
     tickets: Ticket[];
     counts: { taskCount: number, ticketCount: number, tasksDueTodayCount: number, highPriorityTicketsCount: number } | null;
 }
+
+export interface ClientOverviewProps {
+    tasks: Task[];
+    tickets: Ticket[];
+    counts: { total: number, open: number, closed: number } | null;
+}

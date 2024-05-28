@@ -9,7 +9,7 @@ const modulePreviewStyle = css`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  line-height: 2rem;
+  overflow-y: scroll;
   flex-grow: 1;
 `;
 

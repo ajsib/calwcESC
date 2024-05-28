@@ -10,9 +10,9 @@ import { useUserProfile } from "@/globalContexts/userContext";
 const ProjectManagementPage = () => {
   const { loggedIn } = useAuth();
   const { profile } = useUserProfile();
-  if (!loggedIn || !profile) {
-    return <div>Either yo&apos;re not logged in or you don&apos;t have a profile.</div>;
-  }
+  if (!loggedIn || !profile || profile.role === "Client") {
+      return <div>Either you&apos;re not logged in or you don&apos;t have a profile.</div>;
+    }
   return (
     <>
       <Header />

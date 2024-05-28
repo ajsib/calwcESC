@@ -21,11 +21,7 @@ const TaskListCon = () => {
     const [expandedTaskId, setExpandedTaskId] = useState<number | null>(null);
     const [selectedTask, setSelectedTask] = useState<Task | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const { selectedStatus, selectedBucket, allTasks, setAllTasks, subtasks, people, isLoading } = useProjectManagement();
-
-    useEffect(() => {
-        setAllTasks(allTasks); // This seems redundant, consider removing if not needed
-    }, [allTasks, setAllTasks]);
+    const { isLoading, showArchived } = useProjectManagement();
 
     const openTaskDetails = (task: Task) => {
         setSelectedTask(task);
@@ -36,13 +32,6 @@ const TaskListCon = () => {
         setExpandedTaskId(prevId => prevId === id ? null : id);
     };
 
-    // Filter tasks based on status and bucket
-    const filteredTasks = allTasks.filter((task: Task) => {
-        const statusMatch = selectedStatus ? task.status === selectedStatus : true;
-        const bucketMatch = selectedBucket && selectedBucket !== "All" ? task.bucket === selectedBucket : true;
-        return statusMatch && bucketMatch;
-    });
-
     return (
         <>
             <div css={taskContainer}>
@@ -51,9 +40,17 @@ const TaskListCon = () => {
                 Array.from({ length: 5 }).map((_, index) => (
                     <TaskCardSkeleton key={index} />
                 ))
+            ) : showArchived ? (
+                <Archive
+                    expandedTaskId={expandedTaskId}
+                    openTaskDetails={openTaskDetails}
+                    toggleSubtasks={toggleSubtasks}
+                    selectedTask={selectedTask}
+                    isModalOpen={isModalOpen}
+                    setIsModalOpen={setIsModalOpen}
+                />
             ) : (
                 <TaskList
-                    tasks={filteredTasks}
                     expandedTaskId={expandedTaskId}
                     openTaskDetails={openTaskDetails}
                     toggleSubtasks={toggleSubtasks}

@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import Circle from '@/components/UI/icons/Dot';
 import { StatusCardProps, StatusOverviewProps } from '../Types';
+import { useProjectManagement } from '../../ProjectManagementContext';
 
 const statusOverviewStyle = css`
   display: flex;
@@ -99,6 +100,7 @@ const StatusCard: React.FC<StatusCardProps> = ({ status, count, selected, onClic
 );
 
 const StatusOverview: React.FC<StatusOverviewProps> = ({ onSelectStatus, selectedStatus, toDoCount, inProgressCount, overdueCount, onNewTaskModalOpen, onManageTeamsModalOpen }) => {
+  const { showArchived, handleShowArchived } = useProjectManagement();
 
   return (
     <div css={statusOverviewStyle}>
