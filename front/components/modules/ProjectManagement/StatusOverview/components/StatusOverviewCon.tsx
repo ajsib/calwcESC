@@ -5,29 +5,17 @@ import { Task } from "@/public/Types/GlobalTypes";
 import NewTaskCon from "./Slideouts/NewTaskCon";
 import BucketsSlideoutCon from "./Slideouts/BucketsSlideoutCon";
 import { useProjectManagement } from "../../ProjectManagementContext";
-import { useUserProfile } from "@/globalContexts/userContext";
 
 const StatusOverviewCon = () => {
-    const { selectedStatus, handleSelectStatus, filteredTasks } = useProjectManagement();
-    const [tasks, setTasks] = useState<Task[]>([]);
+    const { selectedStatus, handleSelectStatus, allTasks } = useProjectManagement();
     const [toDoCount, setToDoCount] = useState<number>(0);
     const [inProgressCount, setInProgressCount] = useState<number>(0);
     const [overdueCount, setOverdueCount] = useState<number>(0);
     const [showNewTaskModal, setShowNewTaskModal] = useState(false);
     const [showManageTeamsModal, setShowManageTeamsModal] = useState(false);
 
-    const { profile } = useUserProfile();
-
     useEffect(() => {
-        fetchTaskData().then((data) => {
-            setTasks(data);
-        });
-    }, []);
-
-    useEffect(() => {
-        const tasksToCount = profile && profile.role === "Staff" ? filteredTasks : tasks;
-
-            const counts = tasksToCount.reduce(
+            const counts = allTasks.reduce(
                 (acc: { toDo: number; inProgress: number; overdue: number }, task: Task) => {
                     switch (task.status) {
                         case 'To Do':
@@ -50,7 +38,7 @@ const StatusOverviewCon = () => {
         setToDoCount(counts.toDo);
         setInProgressCount(counts.inProgress);
         setOverdueCount(counts.overdue);
-    }, [tasks, filteredTasks, profile && profile.role]);
+    }, [allTasks]);
 
     return (
         <>

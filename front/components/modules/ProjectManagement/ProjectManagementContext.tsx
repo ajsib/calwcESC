@@ -24,6 +24,7 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
     const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
     const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
     const [showArchived, setShowArchived] = useState<boolean>(false);
+    const [searchTerm, setSearchTerm] = useState<string>("");
 
     const { profile } = useUserProfile();
     const currentUserId = profile?.employee_id || 0;
@@ -72,8 +73,9 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
             const filtered = allTasks.filter((task: Task) => {
                 const statusMatch = selectedStatus ? task.status === selectedStatus : true;
                 const bucketMatch = selectedBucket && selectedBucket !== "All" ? task.bucket === selectedBucket : true;
+                const titleMatch = searchTerm ? task.title.toLowerCase().includes(searchTerm.toLowerCase()) : true;
                 const notCompleted = !task.complete;
-                return statusMatch && bucketMatch && notCompleted;
+                return statusMatch && bucketMatch && titleMatch && notCompleted;
             });
             setFilteredTasks(filtered);
         };
@@ -82,7 +84,7 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
         setCompletedTasks(completed);
 
         filterTasks();
-    }, [selectedStatus, selectedBucket, allTasks]);
+    }, [selectedStatus, selectedBucket, searchTerm, allTasks]);
 
     const handleSelectStatus = (status: string) => {
         if (selectedStatus === status) {
@@ -147,7 +149,9 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
                     people,
                     isLoading,
                     showArchived,
-                    handleShowArchived
+                    handleShowArchived,
+                    searchTerm,
+                    setSearchTerm
                 }}
             >
                 {children}
