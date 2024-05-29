@@ -6,21 +6,17 @@ import { useProjectManagement } from '../../ProjectManagementContext';
 import SubTaskCard from './SubTaskCard';
 import { TaskListProps } from '../Types';
 import { Task } from '@/public/Types/GlobalTypes';
-import { useUserProfile } from '@/globalContexts/userContext';
 
 const taskListStyle = css`
   margin: 2rem 0;
 `;
 
 const TaskList = ({ expandedTaskId, openTaskDetails, toggleSubtasks, selectedTask, isModalOpen, setIsModalOpen }: TaskListProps) => {
-    const { filteredTasks, subtasks, people, myFilteredTasks } = useProjectManagement();
-    const { profile } = useUserProfile();
-
-    const tasks = profile && profile.role === 'Staff' ? myFilteredTasks : filteredTasks;
+    const { filteredTasks, subtasks, people } = useProjectManagement();
 
     return (
         <div css={taskListStyle}>
-            {tasks.map((task: Task) => (
+            {filteredTasks.map((task: Task) => (
                 <div key={task.task_id}>
                     <TaskCard
                         onClick={() => openTaskDetails(task)}

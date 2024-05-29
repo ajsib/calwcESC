@@ -8,7 +8,7 @@ import { useProjectManagement } from "../../ProjectManagementContext";
 import { useUserProfile } from "@/globalContexts/userContext";
 
 const StatusOverviewCon = () => {
-    const { selectedStatus, handleSelectStatus, myFilteredTasks } = useProjectManagement();
+    const { selectedStatus, handleSelectStatus, filteredTasks } = useProjectManagement();
     const [tasks, setTasks] = useState<Task[]>([]);
     const [toDoCount, setToDoCount] = useState<number>(0);
     const [inProgressCount, setInProgressCount] = useState<number>(0);
@@ -25,7 +25,7 @@ const StatusOverviewCon = () => {
     }, []);
 
     useEffect(() => {
-        const tasksToCount = profile && profile.role === "Staff" ? myFilteredTasks : tasks;
+        const tasksToCount = profile && profile.role === "Staff" ? filteredTasks : tasks;
 
             const counts = tasksToCount.reduce(
                 (acc: { toDo: number; inProgress: number; overdue: number }, task: Task) => {
@@ -50,7 +50,7 @@ const StatusOverviewCon = () => {
         setToDoCount(counts.toDo);
         setInProgressCount(counts.inProgress);
         setOverdueCount(counts.overdue);
-    }, [tasks, myFilteredTasks, profile && profile.role]);
+    }, [tasks, filteredTasks, profile && profile.role]);
 
     return (
         <>
