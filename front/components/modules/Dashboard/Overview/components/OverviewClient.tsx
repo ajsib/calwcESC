@@ -1,42 +1,26 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import React from 'react';
+import ClientOverview from './ClientOverview';
+import ClientTicketsList from './ClientTicketList';
 import { ClientOverviewProps } from '../Types';
-import { useRouter } from 'next/router';
 
 const modulePreviewStyle = css`
-  border: 1px solid #ccc;
-  margin: 2rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 1;
-  overflow-y: scroll;
+    margin: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch; /* Ensure children stretch to the same height */
+    justify-content: center;
+    line-height: 2rem;
+    flex-grow: 1;
+    gap: 2rem; /* Add some space between the columns */
 `;
 
-const jsonStyle = css`
-  background-color: #f5f5f5;
-  padding: 10px;
-  border-radius: 5px;
-  margin: 1rem;
-`;
-
-const ModulePreviewClient = ({ tickets, counts }: Omit<ClientOverviewProps, 'tasks'>) => {
-  const router = useRouter();
+const ModulePreviewClient = (props: ClientOverviewProps) => {
   return (
     <div css={modulePreviewStyle}>
-      <button onClick={() => router.push('/ticket-intake')}>New Ticket</button>
-      <div css={jsonStyle}>
-        <h3>Role: Client</h3>
-      </div>
-      <div css={jsonStyle}>
-        <h3>Tickets JSON</h3>
-        <pre>{JSON.stringify(tickets, null, 2)}</pre>
-      </div>
-      <div css={jsonStyle}>
-        <h3>Counts JSON</h3>
-        <pre>{JSON.stringify(counts, null, 2)}</pre>
-      </div>
+      <ClientOverview counts={props.counts} />
+      <ClientTicketsList tickets={props.tickets} />
     </div>
   );
 };

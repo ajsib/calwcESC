@@ -11,7 +11,6 @@ export interface OverviewProps {
 }
 
 export interface ClientOverviewProps {
-    tasks: Task[];
     tickets: Ticket[];
     counts: { total: number, open: number, closed: number } | null;
 }
