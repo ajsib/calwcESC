@@ -1,5 +1,21 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
+
+// Keyframe animation for the skeleton
+const loading = keyframes`
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+`;
+
+const skeletonAnimation = css`
+  animation: ${loading} 1.5s infinite linear;
+  background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
+  background-size: 200% 100%;
+`;
 
 const skeletonListContainer = css`
     display: flex;
@@ -22,6 +38,7 @@ const skeletonTab = css`
     width: 30%;
     height: 1.5rem;
     background-color: #E0E0E0;
+    ${skeletonAnimation};
 `;
 
 const skeletonMessageSection = css`
@@ -40,6 +57,7 @@ const skeletonMessageLine = css`
     height: 1.5rem;
     background-color: #E0E0E0;
     margin-bottom: 1rem;
+    ${skeletonAnimation};
 `;
 
 const MyDayListSkeleton = () => {

@@ -1,5 +1,22 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
+
+// Define the keyframes for the skeleton loading animation
+const loading = keyframes`
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+`;
+
+// CSS for the skeleton animation
+const skeletonAnimation = css`
+  animation: ${loading} 1.5s infinite linear;
+  background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
+  background-size: 200% 100%;
+`;
 
 const skeletonStyle = css`
   font-family: "Segoe UI", Arial, sans-serif;
@@ -12,35 +29,35 @@ const skeletonTitleStyle = css`
   width: 60%;
   height: 32px;
   margin: 100px 0 10px 0;
-  background-color: #e0e0e0;
+  ${skeletonAnimation};
 `;
 
 const skeletonDateStyle = css`
   width: 30%;
   height: 18px;
   margin-bottom: 20px;
-  background-color: #e0e0e0;
+  ${skeletonAnimation};
 `;
 
 const skeletonDescriptionStyle = css`
   width: 80%;
   height: 18px;
   margin-bottom: 20px;
-  background-color: #e0e0e0;
+  ${skeletonAnimation};
 `;
 
 const skeletonImageStyle = css`
   width: 100%;
   height: 500px;
   margin-bottom: 20px;
-  background-color: #e0e0e0;
+  ${skeletonAnimation};
 `;
 
 const skeletonContentStyle = css`
   width: 100%;
   height: 18px;
   margin-bottom: 10px;
-  background-color: #e0e0e0;
+  ${skeletonAnimation};
   &:nth-of-type(even) {
     width: 90%;
   }

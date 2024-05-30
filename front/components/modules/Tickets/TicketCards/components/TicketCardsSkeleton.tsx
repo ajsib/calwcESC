@@ -15,13 +15,13 @@ const skeletonAnimation = css`
   animation: ${loading} 1.5s infinite linear;
   background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
   background-size: 800px 104px;
+  border-radius: 4px;
 `;
 
 // Skeleton Text Style
 const skeletonText = css`
   height: 20px;
   width: 100%;
-  border-radius: 4px;
   ${skeletonAnimation};
 `;
 

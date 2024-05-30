@@ -14,11 +14,12 @@ const loading = keyframes`
 // CSS for the skeleton animation
 const skeletonAnimation = css`
   animation: ${loading} 1.5s infinite linear;
+  background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
+  background-size: 200% 100%;
 `;
 
 const lightGradient = css`
   ${skeletonAnimation};
-  background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
 `;
 
 const darkGradient = css`
@@ -51,6 +52,7 @@ const thStyle = css`
 
 const tdStyle = css`
   padding: 10px;
+  ${skeletonAnimation}; // Apply skeleton animation to table cells
 `;
 
 const trStyle = css`
