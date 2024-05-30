@@ -21,6 +21,10 @@ const TaskCard: React.FC<TaskCardProps> = ({
   const [hoverList, setHoverList] = useState(false);
   const [dropdownActive, setDropdownActive] = useState(false);
   const [hasSubtasks, setHasSubtasks] = useState(subTasks && subTasks.length > 0);
+  const [currentStatus, setCurrentStatus] = useState(status);
+  const [isCompleted, setIsCompleted] = useState(isComplete);
+  const [isInteractingWithDropdown, setIsInteractingWithDropdown] = useState(false);
+  const [isInteractingWithCheckbox, setIsInteractingWithCheckbox] = useState(false);
 
   useEffect(() => {
     setDropdownActive(expandSubtasks);
@@ -29,6 +33,23 @@ const TaskCard: React.FC<TaskCardProps> = ({
   const handleToggleSubtasks = () => {
     setDropdownActive(!dropdownActive);
     onToggleSubtasks();
+  };
+
+  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCurrentStatus(e.target.value);
+    setTimeout(() => setIsInteractingWithDropdown(false), 100); // Slight delay to prevent click propagation
+    // Here you would also update the task status in your state management or API
+  };
+
+  const handleCompleteChange = () => {
+    setIsCompleted(!isCompleted);
+    setTimeout(() => setIsInteractingWithCheckbox(false), 100); // Slight delay to prevent click propagation
+    // Here you would also update the task completion status in your state management or API
+  };
+
+  const handleCheckboxMouseDown = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click when interacting with the checkbox
+    setIsInteractingWithCheckbox(true);
   };
 
   const marginRightValue = hasSubtasks ? '1rem' : '3rem';
@@ -101,13 +122,12 @@ const TaskCard: React.FC<TaskCardProps> = ({
   bottom: 0;
   width: 4px;
   background-color: ${
-    status === 'To Do' ? '#4287f5' :
-    status === 'In Progress' ? 'orange' :
-    status === 'Completed' ? 'green' :
+    currentStatus === 'To Do' ? '#4287f5' :
+    currentStatus === 'In Progress' ? 'orange' :
+    currentStatus === 'Completed' ? 'green' :
     '#4287f5'
   };
 `;
-
 
   const statusOverlayStyle = css`
     position: absolute;
@@ -132,6 +152,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
   const actionButtonsStyle = css`
     display: flex;
     align-items: center;
+    gap: 0.5rem;
   `;
 
   const dropDownButtonStyle = css`
@@ -166,8 +187,20 @@ const TaskCard: React.FC<TaskCardProps> = ({
     return firstName[0] + (lastName ? lastName[0] : '');
   };
 
+  const statusSelectStyle = css`
+    border: 1px solid #dadada;
+    padding: 0.25rem;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+  `;
+
+  const checkboxStyle = css`
+    cursor: pointer;
+  `;
+
   return (
-    <div css={taskCardStyle} onClick={dropDownHover ? undefined : onClick}>
+    <div css={taskCardStyle} onClick={dropDownHover || isInteractingWithDropdown || isInteractingWithCheckbox ? undefined : onClick}>
       <div css={statusBorderStyle}></div>
       <div css={statusOverlayStyle}></div>
       <div css={taskTitleStyle}>{title}</div>
@@ -192,8 +225,26 @@ const TaskCard: React.FC<TaskCardProps> = ({
       </div>
       <div css={actionButtonsStyle}>
         <div css={dateStyle}>{dueDate}</div>
-        {isComplete ? <span>&#10003;</span> : null}
-        {hasSubtasks ? (
+        <select
+          css={statusSelectStyle}
+          value={currentStatus}
+          onChange={handleStatusChange}
+          onFocus={() => setIsInteractingWithDropdown(true)}
+          onBlur={() => setTimeout(() => setIsInteractingWithDropdown(false), 100)}
+        >
+          <option value="To Do">To Do</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+        </select>
+        <input
+          type="checkbox"
+          css={checkboxStyle}
+          checked={isCompleted}
+          onChange={handleCompleteChange}
+          onMouseDown={handleCheckboxMouseDown}
+          title="Mark as complete"
+        />
+        {hasSubtasks && (
           <button
             onMouseEnter={() => setDropdownHover(true)}
             onMouseLeave={() => setDropdownHover(false)}
@@ -206,7 +257,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
               fillColor={dropDownHover ? '#777' : dropdownActive ? '#777' : '#bbb'}
             />
           </button>
-        ) : null}
+        )}
       </div>
     </div>
   );
