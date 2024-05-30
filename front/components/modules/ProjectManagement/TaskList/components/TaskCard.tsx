@@ -95,13 +95,19 @@ const TaskCard: React.FC<TaskCardProps> = ({
   `;
 
   const statusBorderStyle = css`
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background-color: ${status === 'To Do' ? '#4287f5' : status === 'In Progress' ? 'orange' : '#4287f5'};
-  `;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: ${
+    status === 'To Do' ? '#4287f5' :
+    status === 'In Progress' ? 'orange' :
+    status === 'Completed' ? 'green' :
+    '#4287f5'
+  };
+`;
+
 
   const statusOverlayStyle = css`
     position: absolute;

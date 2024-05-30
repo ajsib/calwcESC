@@ -23,6 +23,7 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
     const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
+    const [filteredCompletedTasks, setFilteredCompletedTasks] = useState<Task[]>([]);
     const [showArchived, setShowArchived] = useState<boolean>(false);
     const [searchTerm, setSearchTerm] = useState<string>("");
 
@@ -80,10 +81,19 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
             setFilteredTasks(filtered);
         };
 
-        const completed = allTasks.filter((task: Task) => task.complete);
-        setCompletedTasks(completed);
+        const filterCompletedTasks = () => {
+            const filtered = allTasks.filter((task: Task) => {
+                const statusMatch = selectedStatus ? task.status === selectedStatus : true;
+                const bucketMatch = selectedBucket && selectedBucket !== "All" ? task.bucket === selectedBucket : true;
+                const titleMatch = searchTerm ? task.title.toLowerCase().includes(searchTerm.toLowerCase()) : true;
+                const isCompleted = task.complete;
+                return statusMatch && bucketMatch && titleMatch && isCompleted;
+            });
+            setFilteredCompletedTasks(filtered);
+        };
 
         filterTasks();
+        filterCompletedTasks();
     }, [selectedStatus, selectedBucket, searchTerm, allTasks]);
 
     const handleSelectStatus = (status: string) => {
@@ -142,6 +152,7 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
                     allTasks,
                     filteredTasks,
                     completedTasks,
+                    filteredCompletedTasks,
                     addTask,
                     removeTask,
                     updateTask,
