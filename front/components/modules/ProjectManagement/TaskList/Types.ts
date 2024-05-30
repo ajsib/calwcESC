@@ -3,6 +3,7 @@ import { Task, Subtask as SubTask, Person as Profile } from "@/public/Types/Glob
 
 export interface TaskCardProps {
     title: string;
+    task_id: number;
     dueDate: string;
     isComplete: boolean;
     onToggleSubtasks: () => void;

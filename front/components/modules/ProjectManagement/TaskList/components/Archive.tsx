@@ -19,19 +19,20 @@ const noTasksStyle = css`
 `;
 
 const Archive = ({ expandedTaskId, openTaskDetails, toggleSubtasks, selectedTask, isModalOpen, setIsModalOpen }: TaskListProps) => {
-    const { filteredCompletedTasks, subtasks, people, searchTerm } = useProjectManagement();
+    const { filteredArchivedTasks, subtasks, people, searchTerm } = useProjectManagement();
 
     return (
         <div css={taskListStyle}>
-            {filteredCompletedTasks.length === 0 && searchTerm !== "" ? (
+            {filteredArchivedTasks.length === 0 ? (
                 <div css={noTasksStyle}>
-                    No Tasks Matching "{searchTerm}"
+                    No Archived Tasks {searchTerm && `Matching "${searchTerm}"`}
                 </div>
             ) : (
-                filteredCompletedTasks.map((task: Task) => (
+                filteredArchivedTasks.map((task: Task) => (
                     <div key={task.task_id}>
                         <TaskCard
                             onClick={() => openTaskDetails(task)}
+                            task_id={task.task_id}
                             title={task.title}
                             dueDate={task.due_date}
                             isComplete={true}

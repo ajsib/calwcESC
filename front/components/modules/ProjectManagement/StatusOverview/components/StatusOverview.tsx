@@ -95,23 +95,23 @@ const titleStyle = css`
 const StatusCard: React.FC<StatusCardProps> = ({ status, count, selected, onClick }) => (
   <div css={[statusCardStyle, selected && { backgroundColor: '#E8E8E8' }]} onClick={onClick}>
     <h2>{count}</h2>
-    <p css={titleStyle}><Circle color={status === 'To Do' ? '#4287f5' : status === 'In Progress' ? 'orange' : '#ad1818'} size={10} />{status}</p>
+    <p css={titleStyle}><Circle color={status === 'To Do' ? '#4287f5' : status === 'In Progress' ? 'orange' : status === 'Overdue' ? '#ad1818' : 'green'} size={10} />{status}</p>
   </div>
 );
 
-const StatusOverview: React.FC<StatusOverviewProps> = ({ onSelectStatus, selectedStatus, toDoCount, inProgressCount, overdueCount, onNewTaskModalOpen, onManageTeamsModalOpen }) => {
+const StatusOverview: React.FC<StatusOverviewProps> = ({ onSelectStatus, selectedStatus, toDoCount, inProgressCount, overdueCount, completedCount,onNewTaskModalOpen, onManageTeamsModalOpen }) => {
   const { showArchived, handleShowArchived } = useProjectManagement();
 
   return (
     <div css={statusOverviewStyle}>
-        <StatusCard status="To Do" count={toDoCount} selected={selectedStatus === 'To Do'} onClick={() => onSelectStatus('To Do')} />
+        <StatusCard status="Complete" count={completedCount} selected={selectedStatus === 'Completed'} onClick={() => onSelectStatus('Completed')} />
       <StatusCard status="To Do" count={toDoCount} selected={selectedStatus === 'To Do'} onClick={() => onSelectStatus('To Do')} />
       <StatusCard status="In Progress" count={inProgressCount} selected={selectedStatus === 'In Progress'} onClick={() => onSelectStatus('In Progress')} />
       <StatusCard status="Overdue" count={overdueCount} selected={selectedStatus === 'Overdue'} onClick={() => onSelectStatus('Overdue')} />
         <div css={buttonContainerStyle}>
             <div css={css`display: flex;`}>
                 <div css={buttonStyleSecondaryLeft} onClick={onManageTeamsModalOpen}>Edit Teams</div>
-                <div css={buttonStyleSecondaryRight} onClick={handleShowArchived}>Archive</div>
+                <div css={buttonStyleSecondaryRight} onClick={handleShowArchived}>{showArchived ? 'Hide Archived' : 'Show Archived'}</div>
             </div>
             <div css={css`display: flex;`}>
                 <div css={buttonStylePrimary} onClick={onNewTaskModalOpen}>New Task</div>

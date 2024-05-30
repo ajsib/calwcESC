@@ -13,6 +13,7 @@ export interface StatusOverviewProps {
     toDoCount: number;
     inProgressCount: number;
     overdueCount: number;
+    completedCount: number;
     onNewTaskModalOpen: () => void;
     onNewTaskModalClose: () => void;
     onManageTeamsModalOpen: () => void;

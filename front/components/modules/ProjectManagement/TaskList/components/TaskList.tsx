@@ -23,15 +23,16 @@ const TaskList = ({ expandedTaskId, openTaskDetails, toggleSubtasks, selectedTas
 
     return (
         <div css={taskListStyle}>
-            {filteredTasks.length === 0 && searchTerm !== "" ? (
+            {filteredTasks.length === 0 ? (
                 <div css={noTasksStyle}>
-                    No Tasks Matching "{searchTerm}"
+                    {searchTerm !== "" ? `No Tasks Matching "${searchTerm}"` : "No Tasks To Show"}
                 </div>
             ) : (
                 filteredTasks.map((task: Task) => (
                     <div key={task.task_id}>
                         <TaskCard
                             onClick={() => openTaskDetails(task)}
+                            task_id={task.task_id}
                             title={task.title}
                             dueDate={task.due_date}
                             isComplete={task.complete}

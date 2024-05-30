@@ -22,8 +22,8 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
     const [people, setPeople] = useState<{ [key: number]: Person[] }>({});
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
-    const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
-    const [filteredCompletedTasks, setFilteredCompletedTasks] = useState<Task[]>([]);
+    const [filteredArchivedTasks, setFilteredArchivedTasks] = useState<Task[]>([]);
+    const [archivedTasks, setArchivedTasks] = useState<Task[]>([]);
     const [showArchived, setShowArchived] = useState<boolean>(false);
     const [searchTerm, setSearchTerm] = useState<string>("");
 
@@ -75,26 +75,24 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
                 const statusMatch = selectedStatus ? task.status === selectedStatus : true;
                 const bucketMatch = selectedBucket && selectedBucket !== "All" ? task.bucket === selectedBucket : true;
                 const titleMatch = searchTerm ? task.title.toLowerCase().includes(searchTerm.toLowerCase()) : true;
-                const notCompleted = !task.complete;
-                return statusMatch && bucketMatch && titleMatch && notCompleted;
+                const notArchived = !archivedTasks.some(archivedTask => archivedTask.task_id === task.task_id);
+                return statusMatch && bucketMatch && titleMatch && notArchived;
             });
             setFilteredTasks(filtered);
         };
 
-        const filterCompletedTasks = () => {
-            const filtered = allTasks.filter((task: Task) => {
-                const statusMatch = selectedStatus ? task.status === selectedStatus : true;
+        const filterArchivedTasks = () => {
+            const filtered = archivedTasks.filter((task: Task) => {
                 const bucketMatch = selectedBucket && selectedBucket !== "All" ? task.bucket === selectedBucket : true;
                 const titleMatch = searchTerm ? task.title.toLowerCase().includes(searchTerm.toLowerCase()) : true;
-                const isCompleted = task.complete;
-                return statusMatch && bucketMatch && titleMatch && isCompleted;
+                return bucketMatch && titleMatch;
             });
-            setFilteredCompletedTasks(filtered);
+            setFilteredArchivedTasks(filtered);
         };
 
         filterTasks();
-        filterCompletedTasks();
-    }, [selectedStatus, selectedBucket, searchTerm, allTasks]);
+        filterArchivedTasks();
+    }, [selectedStatus, selectedBucket, searchTerm, allTasks, archivedTasks]);
 
     const handleSelectStatus = (status: string) => {
         if (selectedStatus === status) {
@@ -136,6 +134,19 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
         setShowArchived(!showArchived);
     };
 
+    const archiveTask = (task: Task) => {
+        console.log(task)
+        if (!archivedTasks.some(archivedTask => archivedTask.task_id === task.task_id)) {
+            setArchivedTasks([...archivedTasks, task]);
+            console.log("Task archived:", task);
+        }
+    };
+
+    const unarchiveTask = (task: Task) => {
+        setArchivedTasks(archivedTasks.filter(t => t.task_id !== task.task_id));
+        console.log("Task unarchived:", task);
+    };
+
     return (
         <div css={commonContainerStyle}>
             <ProjectManagementContext.Provider
@@ -151,8 +162,8 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
                     setAllTasks,
                     allTasks,
                     filteredTasks,
-                    completedTasks,
-                    filteredCompletedTasks,
+                    filteredArchivedTasks,
+                    archivedTasks,
                     addTask,
                     removeTask,
                     updateTask,
@@ -162,7 +173,9 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
                     showArchived,
                     handleShowArchived,
                     searchTerm,
-                    setSearchTerm
+                    setSearchTerm,
+                    archiveTask,
+                    unarchiveTask
                 }}
             >
                 {children}

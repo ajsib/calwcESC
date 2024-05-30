@@ -3,9 +3,11 @@ import { css } from '@emotion/react';
 import RightWedgeThin from '@/components/UI/arrows/RightWedgeMedium';
 import { useState, useEffect } from 'react';
 import { TaskCardProps } from '../Types';
-import { Person } from '@/public/Types/GlobalTypes';
+import { Person, Task } from '@/public/Types/GlobalTypes';
+import { useProjectManagement } from '../../ProjectManagementContext';
 
 const TaskCard: React.FC<TaskCardProps> = ({
+  task_id,
   title,
   dueDate,
   isComplete,
@@ -23,8 +25,11 @@ const TaskCard: React.FC<TaskCardProps> = ({
   const [hasSubtasks, setHasSubtasks] = useState(subTasks && subTasks.length > 0);
   const [currentStatus, setCurrentStatus] = useState(status);
   const [isCompleted, setIsCompleted] = useState(isComplete);
-  const [isInteractingWithDropdown, setIsInteractingWithDropdown] = useState(false);
   const [isInteractingWithCheckbox, setIsInteractingWithCheckbox] = useState(false);
+
+  const { archiveTask, unarchiveTask, archivedTasks } = useProjectManagement();
+
+  const isArchived = archivedTasks.some((archivedTask : Task) => archivedTask.task_id === task_id);
 
   useEffect(() => {
     setDropdownActive(expandSubtasks);
@@ -33,12 +38,6 @@ const TaskCard: React.FC<TaskCardProps> = ({
   const handleToggleSubtasks = () => {
     setDropdownActive(!dropdownActive);
     onToggleSubtasks();
-  };
-
-  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCurrentStatus(e.target.value);
-    setTimeout(() => setIsInteractingWithDropdown(false), 100); // Slight delay to prevent click propagation
-    // Here you would also update the task status in your state management or API
   };
 
   const handleCompleteChange = () => {
@@ -52,12 +51,19 @@ const TaskCard: React.FC<TaskCardProps> = ({
     setIsInteractingWithCheckbox(true);
   };
 
-  const marginRightValue = hasSubtasks ? '1rem' : '3rem';
+  const handleArchiveToggle = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click when interacting with the archive button
+    if (isArchived) {
+      unarchiveTask({ task_id, title, dueDate, isComplete, subTasks, status, people, ticket });
+    } else {
+      archiveTask({ task_id, title, dueDate, isComplete, subTasks, status, people, ticket });
+    }
+  };
 
   const avatarContainerStyle = css`
     position: relative;
     display: flex;
-    margin-right: ${marginRightValue};
+    margin-right: 1rem;
     z-index: 2;
   `;
 
@@ -116,18 +122,18 @@ const TaskCard: React.FC<TaskCardProps> = ({
   `;
 
   const statusBorderStyle = css`
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background-color: ${
-    currentStatus === 'To Do' ? '#4287f5' :
-    currentStatus === 'In Progress' ? 'orange' :
-    currentStatus === 'Completed' ? 'green' :
-    '#4287f5'
-  };
-`;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: ${
+      currentStatus === 'To Do' ? '#4287f5' :
+      currentStatus === 'In Progress' ? 'orange' :
+      currentStatus === 'Completed' ? 'green' :
+      '#4287f5'
+    };
+  `;
 
   const statusOverlayStyle = css`
     position: absolute;
@@ -182,25 +188,28 @@ const TaskCard: React.FC<TaskCardProps> = ({
     font-family: PT Serif;
   `;
 
+  const archiveButtonStyle = css`
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s ease;
+    &:hover {
+      color: #000;
+    }
+  `;
+
   const getInitials = (name: string) => {
     const [firstName, lastName] = name.split(' ');
     return firstName[0] + (lastName ? lastName[0] : '');
   };
-
-  const statusSelectStyle = css`
-    border: 1px solid #dadada;
-    padding: 0.25rem;
-    border-radius: 4px;
-    background-color: #fff;
-    cursor: pointer;
-  `;
 
   const checkboxStyle = css`
     cursor: pointer;
   `;
 
   return (
-    <div css={taskCardStyle} onClick={dropDownHover || isInteractingWithDropdown || isInteractingWithCheckbox ? undefined : onClick}>
+    <div css={taskCardStyle} onClick={dropDownHover || isInteractingWithCheckbox ? undefined : onClick}>
       <div css={statusBorderStyle}></div>
       <div css={statusOverlayStyle}></div>
       <div css={taskTitleStyle}>{title}</div>
@@ -225,17 +234,6 @@ const TaskCard: React.FC<TaskCardProps> = ({
       </div>
       <div css={actionButtonsStyle}>
         <div css={dateStyle}>{dueDate}</div>
-        <select
-          css={statusSelectStyle}
-          value={currentStatus}
-          onChange={handleStatusChange}
-          onFocus={() => setIsInteractingWithDropdown(true)}
-          onBlur={() => setTimeout(() => setIsInteractingWithDropdown(false), 100)}
-        >
-          <option value="To Do">To Do</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Completed">Completed</option>
-        </select>
         <input
           type="checkbox"
           css={checkboxStyle}
@@ -244,12 +242,14 @@ const TaskCard: React.FC<TaskCardProps> = ({
           onMouseDown={handleCheckboxMouseDown}
           title="Mark as complete"
         />
-        {hasSubtasks && (
+        <button css={archiveButtonStyle} onClick={handleArchiveToggle} title="Archive task">
+          {isArchived ? 'Unarchive' : 'Archive'}
+        </button>
           <button
             onMouseEnter={() => setDropdownHover(true)}
             onMouseLeave={() => setDropdownHover(false)}
             onClick={handleToggleSubtasks}
-            css={dropDownButtonStyle}
+            css={[dropDownButtonStyle, !hasSubtasks && css`visibility: hidden`]}
           >
             <RightWedgeThin
               size={20}
@@ -257,7 +257,6 @@ const TaskCard: React.FC<TaskCardProps> = ({
               fillColor={dropDownHover ? '#777' : dropdownActive ? '#777' : '#bbb'}
             />
           </button>
-        )}
       </div>
     </div>
   );
