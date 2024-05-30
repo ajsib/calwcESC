@@ -20,7 +20,6 @@ const noTasksStyle = css`
 
 const Archive = ({ expandedTaskId, openTaskDetails, toggleSubtasks, selectedTask, isModalOpen, setIsModalOpen }: TaskListProps) => {
     const { filteredArchivedTasks, subtasks, people, searchTerm } = useProjectManagement();
-
     return (
         <div css={taskListStyle}>
             {filteredArchivedTasks.length === 0 ? (

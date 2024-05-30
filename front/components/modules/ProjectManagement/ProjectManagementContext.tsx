@@ -135,16 +135,14 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
     };
 
     const archiveTask = (task: Task) => {
-        console.log(task)
         if (!archivedTasks.some(archivedTask => archivedTask.task_id === task.task_id)) {
             setArchivedTasks([...archivedTasks, task]);
-            console.log("Task archived:", task);
         }
     };
 
     const unarchiveTask = (task: Task) => {
         setArchivedTasks(archivedTasks.filter(t => t.task_id !== task.task_id));
-        console.log("Task unarchived:", task);
+        console.log("Task unarchived:", task.bucket);
     };
 
     return (

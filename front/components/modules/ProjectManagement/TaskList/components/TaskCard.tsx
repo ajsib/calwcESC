@@ -17,7 +17,8 @@ const TaskCard: React.FC<TaskCardProps> = ({
   status,
   onClick,
   people,
-  ticket
+  ticket,
+  bucket
 }) => {
   const [dropDownHover, setDropdownHover] = useState(false);
   const [hoverList, setHoverList] = useState(false);
@@ -54,9 +55,9 @@ const TaskCard: React.FC<TaskCardProps> = ({
   const handleArchiveToggle = (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent card click when interacting with the archive button
     if (isArchived) {
-      unarchiveTask({ task_id, title, dueDate, isComplete, subTasks, status, people, ticket });
+      unarchiveTask({ task_id, title, dueDate, isComplete, subTasks, status, people, ticket, bucket });
     } else {
-      archiveTask({ task_id, title, dueDate, isComplete, subTasks, status, people, ticket });
+      archiveTask({ task_id, title, dueDate, isComplete, subTasks, status, people, ticket, bucket });
     }
   };
 
