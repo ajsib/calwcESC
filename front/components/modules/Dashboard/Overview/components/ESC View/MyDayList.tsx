@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import { MyDayListProps } from '../Types';
+import { MyDayListProps } from '../../Types';
 
 const myDayListStyle = css`
     display: flex;

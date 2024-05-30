@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { MyDayProps, MyDayListProps } from '../Types';
+import { MyDayProps, MyDayListProps } from '../../Types';
 
 const myDayStyle = css`
     height: calc(100vh - 320px);
