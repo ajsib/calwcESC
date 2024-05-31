@@ -48,14 +48,14 @@ mock.onPost('/api/files').reply(config => {
   return [201, newFile];
 });
 
-mock.onPut('/api/files/:id').reply(config => {
+mock.onPut('/api/files').reply(config => {
   const id = parseInt(config.params.id);
   const updatedFile = JSON.parse(config.data);
   store.dispatch(updateFile({ ...updatedFile, file_id: id }));
   return [200, updatedFile];
 });
 
-mock.onDelete('/api/files/:id').reply(config => {
+mock.onDelete('/api/files').reply(config => {
   const id = parseInt(config.params.id);
   store.dispatch(deleteFile(id));
   return [204];
@@ -83,14 +83,14 @@ mock.onPost('/api/people').reply(config => {
   return [201, newPerson];
 });
 
-mock.onPut('/api/people/:id').reply(config => {
+mock.onPut('/api/people').reply(config => {
   const id = parseInt(config.params.id);
   const updatedPerson = JSON.parse(config.data);
   store.dispatch(updatePerson({ ...updatedPerson, employee_id: id }));
   return [200, updatedPerson];
 });
 
-mock.onDelete('/api/people/:id').reply(config => {
+mock.onDelete('/api/people').reply(config => {
   const id = parseInt(config.params.id);
   store.dispatch(deletePerson(id));
   return [204];
@@ -107,14 +107,14 @@ mock.onPost('/api/files_people').reply(config => {
   return [201, newFilePerson];
 });
 
-mock.onPut('/api/files_people/:id').reply(config => {
+mock.onPut('/api/files_people').reply(config => {
   const id = parseInt(config.params.id);
   const updatedFilePerson = JSON.parse(config.data);
   store.dispatch(updateFilePerson({ ...updatedFilePerson, id }));
   return [200, updatedFilePerson];
 });
 
-mock.onDelete('/api/files_people/:id').reply(config => {
+mock.onDelete('/api/files_people').reply(config => {
   const id = parseInt(config.params.id);
   store.dispatch(deleteFilePerson(id));
   return [204];
@@ -131,14 +131,14 @@ mock.onPost('/api/tasks').reply(config => {
   return [201, newTask];
 });
 
-mock.onPut('/api/tasks/:id').reply(config => {
+mock.onPut('/api/tasks').reply(config => {
   const id = parseInt(config.params.id);
   const updatedTask = JSON.parse(config.data);
   store.dispatch(updateTask({ ...updatedTask, task_id: id }));
   return [200, updatedTask];
 });
 
-mock.onDelete('/api/tasks/:id').reply(config => {
+mock.onDelete('/api/tasks').reply(config => {
   const id = parseInt(config.params.id);
   store.dispatch(deleteTask(id));
   return [204];
@@ -155,14 +155,14 @@ mock.onPost('/api/subtasks').reply(config => {
   return [201, newSubtask];
 });
 
-mock.onPut('/api/subtasks/:id').reply(config => {
+mock.onPut('/api/subtasks').reply(config => {
   const id = parseInt(config.params.id);
   const updatedSubtask = JSON.parse(config.data);
   store.dispatch(updateSubtask({ ...updatedSubtask, subtask_id: id }));
   return [200, updatedSubtask];
 });
 
-mock.onDelete('/api/subtasks/:id').reply(config => {
+mock.onDelete('/api/subtasks').reply(config => {
   const id = parseInt(config.params.id);
   store.dispatch(deleteSubtask(id));
   return [204];
@@ -179,14 +179,14 @@ mock.onPost('/api/tasks_people').reply(config => {
   return [201, newTaskPerson];
 });
 
-mock.onPut('/api/tasks_people/:id').reply(config => {
+mock.onPut('/api/tasks_people').reply(config => {
   const id = parseInt(config.params.id);
   const updatedTaskPerson = JSON.parse(config.data);
   store.dispatch(updateTaskPerson({ ...updatedTaskPerson, id }));
   return [200, updatedTaskPerson];
 });
 
-mock.onDelete('/api/tasks_people/:id').reply(config => {
+mock.onDelete('/api/tasks_people').reply(config => {
   const id = parseInt(config.params.id);
   store.dispatch(deleteTaskPerson(id));
   return [204];
@@ -203,14 +203,14 @@ mock.onPost('/api/tickets').reply(config => {
   return [201, newTicket];
 });
 
-mock.onPut('/api/tickets/:id').reply(config => {
+mock.onPut('/api/tickets').reply(config => {
   const id = parseInt(config.params.id);
   const updatedTicket = JSON.parse(config.data);
   store.dispatch(updateTicket({ ...updatedTicket, ticket_id: id }));
   return [200, updatedTicket];
 });
 
-mock.onDelete('/api/tickets/:id').reply(config => {
+mock.onDelete('/api/tickets').reply(config => {
   const id = parseInt(config.params.id);
   store.dispatch(deleteTicket(id));
   return [204];
@@ -227,14 +227,14 @@ mock.onPost('/api/tickets_people').reply(config => {
   return [201, newTicketPerson];
 });
 
-mock.onPut('/api/tickets_people/:id').reply(config => {
+mock.onPut('/api/tickets_people').reply(config => {
   const id = parseInt(config.params.id);
   const updatedTicketPerson = JSON.parse(config.data);
   store.dispatch(updateTicketPerson({ ...updatedTicketPerson, id }));
   return [200, updatedTicketPerson];
 });
 
-mock.onDelete('/api/tickets_people/:id').reply(config => {
+mock.onDelete('/api/tickets_people').reply(config => {
   const id = parseInt(config.params.id);
   store.dispatch(deleteTicketPerson(id));
   return [204];

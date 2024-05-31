@@ -25,12 +25,11 @@ const TaskCard: React.FC<TaskCardProps> = ({
   const [dropdownActive, setDropdownActive] = useState(false);
   const [hasSubtasks, setHasSubtasks] = useState(subTasks && subTasks.length > 0);
   const [currentStatus, setCurrentStatus] = useState(status);
-  const [isCompleted, setIsCompleted] = useState(isComplete);
-  const [isInteractingWithCheckbox, setIsInteractingWithCheckbox] = useState(false);
+  const [actionHover, setActionHover] = useState(false);
 
   const { archiveTask, unarchiveTask, archivedTasks } = useProjectManagement();
 
-  const isArchived = archivedTasks.some((archivedTask : Task) => archivedTask.task_id === task_id);
+  const isArchived = archivedTasks.some((archivedTask: Task) => archivedTask.task_id === task_id);
 
   useEffect(() => {
     setDropdownActive(expandSubtasks);
@@ -41,23 +40,14 @@ const TaskCard: React.FC<TaskCardProps> = ({
     onToggleSubtasks();
   };
 
-  const handleCompleteChange = () => {
-    setIsCompleted(!isCompleted);
-    setTimeout(() => setIsInteractingWithCheckbox(false), 100); // Slight delay to prevent click propagation
-    // Here you would also update the task completion status in your state management or API
-  };
+  const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newStatus = event.target.value;
+    setCurrentStatus(newStatus);
 
-  const handleCheckboxMouseDown = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent card click when interacting with the checkbox
-    setIsInteractingWithCheckbox(true);
-  };
-
-  const handleArchiveToggle = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent card click when interacting with the archive button
-    if (isArchived) {
-      unarchiveTask({ task_id, title, dueDate, isComplete, subTasks, status, people, ticket, bucket });
-    } else {
+    if (newStatus === 'Archived') {
       archiveTask({ task_id, title, dueDate, isComplete, subTasks, status, people, ticket, bucket });
+    } else {
+      // Update the task status in your state management or API
     }
   };
 
@@ -189,15 +179,11 @@ const TaskCard: React.FC<TaskCardProps> = ({
     font-family: PT Serif;
   `;
 
-  const archiveButtonStyle = css`
-    border: none;
-    background-color: transparent;
+  const selectorStyle = css`
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.25rem;
     cursor: pointer;
-    color: #666;
-    transition: color 0.3s ease;
-    &:hover {
-      color: #000;
-    }
   `;
 
   const getInitials = (name: string) => {
@@ -205,12 +191,8 @@ const TaskCard: React.FC<TaskCardProps> = ({
     return firstName[0] + (lastName ? lastName[0] : '');
   };
 
-  const checkboxStyle = css`
-    cursor: pointer;
-  `;
-
   return (
-    <div css={taskCardStyle} onClick={dropDownHover || isInteractingWithCheckbox ? undefined : onClick}>
+    <div css={taskCardStyle} onClick={actionHover ? undefined : onClick}>
       <div css={statusBorderStyle}></div>
       <div css={statusOverlayStyle}></div>
       <div css={taskTitleStyle}>{title}</div>
@@ -233,31 +215,29 @@ const TaskCard: React.FC<TaskCardProps> = ({
           </div>
         ))}
       </div>
-      <div css={actionButtonsStyle}>
+      <div css={actionButtonsStyle}
+        onMouseEnter={() => setActionHover(true)}
+        onMouseLeave={() => setActionHover(false)}
+      >
         <div css={dateStyle}>{dueDate}</div>
-        <input
-          type="checkbox"
-          css={checkboxStyle}
-          checked={isCompleted}
-          onChange={handleCompleteChange}
-          onMouseDown={handleCheckboxMouseDown}
-          title="Mark as complete"
-        />
-        <button css={archiveButtonStyle} onClick={handleArchiveToggle} title="Archive task">
-          {isArchived ? 'Unarchive' : 'Archive'}
+        <select css={selectorStyle} value={currentStatus} onChange={handleStatusChange}>
+          <option value="To Do">To Do</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+          <option value="Archived">Archive</option>
+        </select>
+        <button
+          onMouseEnter={() => setDropdownHover(true)}
+          onMouseLeave={() => setDropdownHover(false)}
+          onClick={handleToggleSubtasks}
+          css={[dropDownButtonStyle, !hasSubtasks && css`visibility: hidden`]}
+        >
+          <RightWedgeThin
+            size={20}
+            rotation={dropDownHover ? 90 : dropdownActive ? 90 : 0}
+            fillColor={dropDownHover ? '#777' : dropdownActive ? '#777' : '#bbb'}
+          />
         </button>
-          <button
-            onMouseEnter={() => setDropdownHover(true)}
-            onMouseLeave={() => setDropdownHover(false)}
-            onClick={handleToggleSubtasks}
-            css={[dropDownButtonStyle, !hasSubtasks && css`visibility: hidden`]}
-          >
-            <RightWedgeThin
-              size={20}
-              rotation={dropDownHover ? 90 : dropdownActive ? 90 : 0}
-              fillColor={dropDownHover ? '#777' : dropdownActive ? '#777' : '#bbb'}
-            />
-          </button>
       </div>
     </div>
   );
