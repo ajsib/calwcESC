@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import { MyDayListProps } from '../../Types';
+import { useRouter } from 'next/router';
 
 const myDayListStyle = css`
     display: flex;
@@ -34,12 +35,12 @@ const tabStyle = css`
 
 const messageSectionStyle = css`
   flex-grow: 1;
+  overflow: auto; /* Enable scrolling for tasks and tickets */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background-color: #F9F9F9;
-  border-radius: 0 0 8px 8px;
   padding: 2rem;
   box-sizing: border-box;
 `;
@@ -50,8 +51,34 @@ const messageStyle = css`
   text-align: center;
 `;
 
+const cardStyle = css`
+  background-color: #E8E8E8;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer; /* Add cursor pointer to indicate clickable */
+`;
+
+const textStyle = css`
+  margin-bottom: 0.5rem;
+  color: #606060;
+  font-size: 1.25rem;
+`;
+
 const MyDayList = ({ tasks, tickets }: MyDayListProps) => {
     const [selectedTab, setSelectedTab] = useState<'tasks' | 'tickets'>('tasks');
+    const router = useRouter();
+
+    const handleCardClick = (id: number, type: 'task' | 'ticket') => {
+        if (type === 'task') {
+            localStorage.setItem('taskId', id as unknown as string);
+            router.push(`/project-management`);
+        } else {
+            router.push(`/tickets/${id}`);
+        }
+    };
 
     return (
         <div css={myDayListStyle}>
@@ -63,22 +90,22 @@ const MyDayList = ({ tasks, tickets }: MyDayListProps) => {
             <div css={messageSectionStyle}>
                 {selectedTab === 'tasks' && tasks.length > 0 && (
                     <div>
-                        <h2>Tasks</h2>
-                        <ul>
-                            {tasks.map(task => (
-                                <li key={task.task_id}>{task.title}</li>
-                            ))}
-                        </ul>
+                        {tasks.map(task => (
+                            <div key={task.task_id} css={cardStyle} onClick={() => handleCardClick(task.task_id, 'task')}>
+                                <div css={textStyle}><strong>Title:</strong> {task.title}</div>
+                                <div css={textStyle}><strong>Status:</strong> {task.status}</div>
+                            </div>
+                        ))}
                     </div>
                 )}
                 {selectedTab === 'tickets' && tickets.length > 0 && (
                     <div>
-                        <h2>Tickets</h2>
-                        <ul>
-                            {tickets.map(ticket => (
-                                <li key={ticket.ticket_id}>{ticket.title}</li>
-                            ))}
-                        </ul>
+                        {tickets.map(ticket => (
+                            <div key={ticket.ticket_id} css={cardStyle} onClick={() => handleCardClick(ticket.ticket_id, 'ticket')}>
+                                <div css={textStyle}><strong>Title:</strong> {ticket.title}</div>
+                                <div css={textStyle}><strong>Status:</strong> {ticket.status}</div>
+                            </div>
+                        ))}
                     </div>
                 )}
                 {selectedTab === 'tasks' && tasks.length === 0 && (
