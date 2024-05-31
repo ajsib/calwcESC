@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import Modal from './Modal';
+import Modal from '@/components/modules/shared/Modal';
 import { css } from '@emotion/react';
 import { ManageShortcutsModalProps } from '../Types';
 
