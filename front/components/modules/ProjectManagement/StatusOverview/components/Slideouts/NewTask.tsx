@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import Modal from './Slideout';
+import Modal from '@/components/modules/shared/Modal';
 import { css } from '@emotion/react';
 import { NewTaskModalProps } from '../../Types';
 import { useState } from 'react';
@@ -229,7 +229,7 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({
                 css={subTaskInputStyle}
                 value={subTaskInput}
                 onChange={e => setSubTaskInput(e.target.value)}
-                onKeyPress={handleKeyPress} // Add key press event
+                onKeyDown={handleKeyPress} // Add key press event
               />
               <button type="button" css={subTaskButtonStyle} onClick={handleAddSubTask}>Add</button>
             </div>

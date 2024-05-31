@@ -23,6 +23,7 @@ export interface TaskListProps {
   selectedTask: Task | null;
   isModalOpen: boolean;
   setIsModalOpen: (isOpen: boolean) => void;
+  isSubTaskVisible: boolean;
 }
 
 export interface SubTaskCardProps {

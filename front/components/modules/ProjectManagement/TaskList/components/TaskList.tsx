@@ -18,7 +18,7 @@ const noTasksStyle = css`
   color: #555;
 `;
 
-const TaskList = ({ expandedTaskId, openTaskDetails, toggleSubtasks, selectedTask, isModalOpen, setIsModalOpen }: TaskListProps) => {
+const TaskList = ({ expandedTaskId, openTaskDetails, toggleSubtasks, selectedTask, isModalOpen, setIsModalOpen, isSubTaskVisible }: TaskListProps) => {
     const { filteredTasks, subtasks, people, searchTerm } = useProjectManagement();
 
     return (
@@ -46,7 +46,7 @@ const TaskList = ({ expandedTaskId, openTaskDetails, toggleSubtasks, selectedTas
                             ticket={task.ticket_id}
                         />
                         {expandedTaskId === task.task_id && (
-                            <SubTaskCard subTasks={subtasks[task.task_id]} expanded={expandedTaskId === task.task_id} />
+                            <SubTaskCard subTasks={subtasks[task.task_id]} expanded={isSubTaskVisible} />
                         )}
                     </div>
                 )})

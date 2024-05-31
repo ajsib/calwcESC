@@ -17,11 +17,11 @@ const taskContainer = css`
     padding-right: 1rem;
 `;
 
-
 const TaskListCon = () => {
     const [expandedTaskId, setExpandedTaskId] = useState<number | null>(null);
     const [selectedTask, setSelectedTask] = useState<Task | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [isSubTaskVisible, setIsSubTaskVisible] = useState<boolean>(false);
     const { isLoading, showArchived } = useProjectManagement();
 
     const openTaskDetails = (task: Task) => {
@@ -30,7 +30,13 @@ const TaskListCon = () => {
     };
 
     const toggleSubtasks = (id: number) => {
-        setExpandedTaskId(prevId => prevId === id ? null : id);
+        if (expandedTaskId === id) {
+            setIsSubTaskVisible(false);
+            setTimeout(() => setExpandedTaskId(null), 500); // Match the animation duration
+        } else {
+            setExpandedTaskId(id);
+            setIsSubTaskVisible(true);
+        }
     };
 
     return (
@@ -49,6 +55,7 @@ const TaskListCon = () => {
                     selectedTask={selectedTask}
                     isModalOpen={isModalOpen}
                     setIsModalOpen={setIsModalOpen}
+                    isSubTaskVisible={isSubTaskVisible}
                 />
             ) : (
                 <TaskList
@@ -58,6 +65,7 @@ const TaskListCon = () => {
                     selectedTask={selectedTask}
                     isModalOpen={isModalOpen}
                     setIsModalOpen={setIsModalOpen}
+                    isSubTaskVisible={isSubTaskVisible}
                 />
             )}
             </div>
