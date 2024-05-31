@@ -1,4 +1,5 @@
 import TicketView from "@/components/modules/Tickets/TicketView";
+import Header from "@/components/modules/shared/Header/Header";
 import { useAuth } from "@/globalContexts/authContext";
 import { useUserProfile } from "@/globalContexts/userContext";
 
@@ -10,6 +11,7 @@ const Ticket = () => {
       }
     return (
         <div>
+            <Header />
             <TicketView />
         </div>
     )

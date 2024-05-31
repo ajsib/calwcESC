@@ -1,4 +1,5 @@
 import Details from "@/components/modules/People/Details";
+import Header from "@/components/modules/shared/Header/Header";
 import { useAuth } from "@/globalContexts/authContext";
 import { useUserProfile } from "@/globalContexts/userContext";
 
@@ -10,6 +11,7 @@ const TeamMemberPage = () => {
     }
   return(
     <div>
+      <Header />
       <Details/>
     </div>
   )
