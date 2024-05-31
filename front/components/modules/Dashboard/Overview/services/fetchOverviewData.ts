@@ -1,86 +1,103 @@
-import { Task, Ticket } from '@/public/Types/GlobalTypes';
-import TasksPeopleData from '@/public/Database/Tasks-People.json';
-import TicketsPeopleData from '@/public/Database/Tickets-People.json';
-import TasksData from '@/public/Database/Tasks.json';
-import TicketsData from '@/public/Database/Tickets.json';
+import axios from 'axios';
+import { Task, Ticket, TaskPerson, TicketPerson } from '@/public/Types/GlobalTypes';
 
 export const fetchIdsByEmployeeId = async (employeeId: number): Promise<{ taskIds: number[], ticketIds: number[] }> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const taskIds = TasksPeopleData.Tasks_People
-        .filter(tp => tp.employee_id === employeeId)
-        .map(tp => tp.task_id);
+  try {
+    const { data: tasksPeople } = await axios.get<TaskPerson[]>('/api/tasks_people');
+    const { data: ticketsPeople } = await axios.get<TicketPerson[]>('/api/tickets_people');
 
-      const ticketIds = TicketsPeopleData.Tickets_People
-        .filter(tp => tp.employee_id === employeeId)
-        .map(tp => tp.ticket_id);
+    const taskIds = tasksPeople
+      .filter(tp => tp.employee_id === employeeId)
+      .map(tp => tp.task_id);
 
-      resolve({ taskIds, ticketIds });
-    }, 500); // Simulate network delay
-  });
+    const ticketIds = ticketsPeople
+      .filter(tp => tp.employee_id === employeeId)
+      .map(tp => tp.ticket_id);
+
+    return { taskIds, ticketIds };
+  } catch (error) {
+    console.error('Error fetching IDs by employee ID:', error);
+    throw error;
+  }
 };
 
 export const fetchTasksAndTickets = async (taskIds: number[], ticketIds: number[]): Promise<{ tasks: Task[], tickets: Ticket[] }> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const tasks = TasksData.Tasks.filter(task => taskIds.includes(task.task_id));
-      const tickets = TicketsData.Tickets.filter(ticket => ticketIds.includes(ticket.ticket_id));
-      resolve({ tasks, tickets });
-    }, 500); // Simulate network delay
-  });
+  try {
+    const { data: tasks } = await axios.get<Task[]>('/api/tasks');
+    const { data: tickets } = await axios.get<Ticket[]>('/api/tickets');
+
+    const filteredTasks = tasks.filter(task => taskIds.includes(task.task_id));
+    const filteredTickets = tickets.filter(ticket => ticketIds.includes(ticket.ticket_id));
+
+    return { tasks: filteredTasks, tickets: filteredTickets };
+  } catch (error) {
+    console.error('Error fetching tasks and tickets:', error);
+    throw error;
+  }
 };
 
 export const countTasksAndTickets = async (employeeId: number): Promise<{ taskCount: number, ticketCount: number, tasksDueTodayCount: number, highPriorityTicketsCount: number }> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const today = new Date().toISOString().split('T')[0];
+  try {
+    const today = new Date().toISOString().split('T')[0];
 
-      const taskIds = TasksPeopleData.Tasks_People
-        .filter(tp => tp.employee_id === employeeId)
-        .map(tp => tp.task_id);
+    const { data: tasksPeople } = await axios.get<TaskPerson[]>('/api/tasks_people');
+    const { data: ticketsPeople } = await axios.get<TicketPerson[]>('/api/tickets_people');
+    const { data: tasks } = await axios.get<Task[]>('/api/tasks');
+    const { data: tickets } = await axios.get<Ticket[]>('/api/tickets');
 
-      const ticketIds = TicketsPeopleData.Tickets_People
-        .filter(tp => tp.employee_id === employeeId)
-        .map(tp => tp.ticket_id);
+    const taskIds = tasksPeople
+      .filter(tp => tp.employee_id === employeeId)
+      .map(tp => tp.task_id);
 
-      const tasks = TasksData.Tasks.filter(task => taskIds.includes(task.task_id));
-      const tickets = TicketsData.Tickets.filter(ticket => ticketIds.includes(ticket.ticket_id));
+    const ticketIds = ticketsPeople
+      .filter(tp => tp.employee_id === employeeId)
+      .map(tp => tp.ticket_id);
 
-      const tasksDueTodayCount = tasks.filter(task => task.due_date === today).length;
-      const highPriorityTicketsCount = tickets.filter(ticket => ticket.priority === 'High').length;
+    const filteredTasks = tasks.filter(task => taskIds.includes(task.task_id));
+    const filteredTickets = tickets.filter(ticket => ticketIds.includes(ticket.ticket_id));
 
-      resolve({
-        taskCount: tasks.length,
-        ticketCount: tickets.length,
-        tasksDueTodayCount,
-        highPriorityTicketsCount
-      });
-    }, 500); // Simulate network delay
-  });
+    const tasksDueTodayCount = filteredTasks.filter(task => task.due_date === today).length;
+    const highPriorityTicketsCount = filteredTickets.filter(ticket => ticket.priority === 'High').length;
+
+    return {
+      taskCount: filteredTasks.length,
+      ticketCount: filteredTickets.length,
+      tasksDueTodayCount,
+      highPriorityTicketsCount
+    };
+  } catch (error) {
+    console.error('Error counting tasks and tickets:', error);
+    throw error;
+  }
 };
 
 export const fetchTicketsBySponsorName = async (sponsorName: string): Promise<Ticket[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const tickets = TicketsData.Tickets.filter(ticket => ticket.sponsor === sponsorName);
-      resolve(tickets);
-    }, 500); // Simulate network delay
-  });
+  try {
+    const { data: tickets } = await axios.get<Ticket[]>('/api/tickets');
+    const filteredTickets = tickets.filter(ticket => ticket.sponsor === sponsorName);
+    return filteredTickets;
+  } catch (error) {
+    console.error('Error fetching tickets by sponsor name:', error);
+    throw error;
+  }
 };
 
 export const countTicketsBySponsorName = async (sponsorName: string): Promise<{ total: number, open: number, closed: number }> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const tickets = TicketsData.Tickets.filter(ticket => ticket.sponsor === sponsorName);
-      const total = tickets.length;
-      const open = tickets.filter(ticket => ticket.status.toLowerCase() === 'open').length;
-      const closed = tickets.filter(ticket => ticket.status.toLowerCase() === 'closed').length;
+  try {
+    const { data: tickets } = await axios.get<Ticket[]>('/api/tickets');
+    const filteredTickets = tickets.filter(ticket => ticket.sponsor === sponsorName);
 
-      resolve({
-        total,
-        open,
-        closed
-      });
-    }, 500); // Simulate network delay
-  });
+    const total = filteredTickets.length;
+    const open = filteredTickets.filter(ticket => ticket.status.toLowerCase() === 'open').length;
+    const closed = filteredTickets.filter(ticket => ticket.status.toLowerCase() === 'closed').length;
+
+    return {
+      total,
+      open,
+      closed
+    };
+  } catch (error) {
+    console.error('Error counting tickets by sponsor name:', error);
+    throw error;
+  }
 };

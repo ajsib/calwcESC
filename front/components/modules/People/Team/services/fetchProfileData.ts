@@ -1,10 +1,12 @@
+import axios from 'axios';
 import { Person as Profile } from '@/public/Types/GlobalTypes';
-import PersonData from '@/public/Database/People.json';
 
 export const fetchProfileData = async (): Promise<Profile[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(PersonData.People);
-    }, 500); // Simulate network delay
-  });
+  try {
+    const { data: people } = await axios.get('/api/people');
+    return people as Profile[];
+  } catch (error) {
+    console.error('Error fetching profile data:', error);
+    throw error;
+  }
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ModulePreviewStaff from './OverviewStaff';
-import SearchResults from './SearchResults';
+import SearchResults from '../components/SearchResults';
 import { useDashboard } from '@/components/modules/Dashboard/DashboardContext';
 import { useUserProfile } from '@/globalContexts/userContext';
 import { fetchIdsByEmployeeId, fetchTasksAndTickets, countTasksAndTickets } from '../services/fetchOverviewData';
@@ -39,7 +39,7 @@ const OverviewConStaff: React.FC = () => {
     return <SearchResults results={searchTerm} />;
   }
 
-  return <ModulePreviewStaff tasks={tasks} tickets={tickets} counts={counts} />;
+  return <ModulePreviewStaff tasks={tasks} tickets={tickets} counts={counts} loading={loading} />;
 };
 
 export default OverviewConStaff;

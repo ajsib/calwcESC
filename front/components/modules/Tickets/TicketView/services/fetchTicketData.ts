@@ -1,12 +1,13 @@
-// services/api.ts
-import TicketsData from '@/public/Database/Tickets.json';
+import axios from 'axios';
 import { Ticket } from '@/public/Types/GlobalTypes';
 
 export const fetchTicketById = async (ticketId: number): Promise<Ticket | null> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const ticket = TicketsData.Tickets.find(t => t.ticket_id === ticketId);
-      resolve(ticket || null);
-    }, 500); // Simulate network delay
-  });
+  try {
+    const { data: tickets } = await axios.get('/api/tickets');
+    const ticket = tickets.find((t: Ticket) => t.ticket_id === ticketId);
+    return ticket || null;
+  } catch (error) {
+    console.error('Error fetching ticket by ID:', error);
+    throw error;
+  }
 };
