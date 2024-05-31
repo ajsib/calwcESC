@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import NewTaskModal from "./NewTask";
-import { Task, Subtask, Person as Profile } from '@/public/Types/GlobalTypes';
+import NewTaskModal from "./NewTask"; 
+import { Task, Subtask, Person as Profile, TaskPerson } from '@/public/Types/GlobalTypes';
 import { useProjectManagement } from '../../../ProjectManagementContext';
 import { fetchPeopleData } from "../../services/fetchPeopleData";
 
@@ -25,9 +25,11 @@ const NewTaskCon = ({ isOpen, close }: { isOpen: boolean, close: () => void }) =
   }, []);
 
   const handleAddSubTask = () => {
-    const newSubTask = { subtask_id: Math.floor(Math.random() * 10000), title: subTaskInput, complete: false, task_id: task_id };
-    setSubTasks([...subTasks, newSubTask]);
-    setSubTaskInput('');
+    if (subTaskInput.trim()) {
+      const newSubTask = { subtask_id: Math.floor(Math.random() * 10000), title: subTaskInput, complete: false, task_id: task_id };
+      setSubTasks([...subTasks, newSubTask]);
+      setSubTaskInput('');
+    }
   };
 
   const handleRemoveSubTask = (subtask_id: number) => {
@@ -45,8 +47,14 @@ const NewTaskCon = ({ isOpen, close }: { isOpen: boolean, close: () => void }) =
       due_date: dueDate,
       complete: false,
     };
-    //this will be replaced with a call to the API to place the Task, Subtasks, and People in the database
-    addTask(newTask);
+    
+    //create task_person objects
+    const taskPeople: TaskPerson[] = people.map((id) => ({
+      task_id,
+      employee_id: id,
+    }));
+    addTask(newTask, subTasks, taskPeople);
+    close();
   };
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

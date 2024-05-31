@@ -183,6 +183,13 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({
     setDropdownOpen(!dropdownOpen);
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && subTaskInput.trim()) {
+      e.preventDefault(); // Prevent form submission
+      handleAddSubTask();
+    }
+  };
+
   return (
     <Modal isOpen={isOpen} close={close}>
       <div css={css`background-color: transparent; padding: 10px; display: flex; justify-content: space-between;`}>
@@ -218,7 +225,12 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({
           <div css={css`flex: 1;`}>
             <label css={labelStyle}>Add SubTask</label>
             <div css={css`display: flex; align-items: center;`}>
-              <input css={subTaskInputStyle} value={subTaskInput} onChange={e => setSubTaskInput(e.target.value)} />
+              <input
+                css={subTaskInputStyle}
+                value={subTaskInput}
+                onChange={e => setSubTaskInput(e.target.value)}
+                onKeyPress={handleKeyPress} // Add key press event
+              />
               <button type="button" css={subTaskButtonStyle} onClick={handleAddSubTask}>Add</button>
             </div>
           </div>
@@ -266,10 +278,10 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({
         <button type="submit" css={[buttonStyle, { padding: '20px 50px', marginTop: '10px'}]}>Create New Task</button>
 
         <div css={subTaskListStyle}>
-          {subTasks.map((subTask, index) => (
-            <div key={index} css={subTaskItemStyle}>
+          {subTasks.map((subTask) => (
+            <div key={subTask.subtask_id} css={subTaskItemStyle}>
               <span>{subTask.title}</span>
-              <button type="button" onClick={() => handleRemoveSubTask(index)}>✖</button>
+              <button type="button" onClick={() => handleRemoveSubTask(subTask.subtask_id)}>✖</button>
             </div>
           ))}
         </div>

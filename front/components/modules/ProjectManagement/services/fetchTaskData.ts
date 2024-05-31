@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Task, Person, Subtask, TaskPerson, TicketPerson } from '@/public/Types/GlobalTypes';
 
+// Existing functions
 export const fetchTaskData = async (): Promise<Task[]> => {
   try {
     const { data: tasks } = await axios.get<Task[]>('/api/tasks');
@@ -103,3 +104,55 @@ export const fetchTasksAssignedToUser = async (employeeId: number): Promise<Task
     throw error;
   }
 };
+
+// New functions
+export const addNewTask = async (task: Task): Promise<Task> => {
+  try {
+    const { data: newTask } = await axios.post('/api/tasks', task);
+    return newTask;
+  } catch (error) {
+    console.error('Error adding new task:', error);
+    throw error;
+  }
+};
+
+export const addNewSubtask = async (subtask: Subtask): Promise<Subtask> => {
+  try {
+    const { data: newSubtask } = await axios.post('/api/subtasks', subtask);
+    return newSubtask;
+  } catch (error) {
+    console.error('Error adding new subtask:', error);
+    throw error;
+  }
+};
+
+export const addNewTaskPerson = async (taskPerson: TaskPerson): Promise<TaskPerson> => {
+  try {
+    const { data: newTaskPerson } = await axios.post('/api/tasks_people', taskPerson);
+    return newTaskPerson;
+  } catch (error) {
+    console.error('Error adding new task person:', error);
+    throw error;
+  }
+};
+
+export const fetchPersonById = async (employeeId: number): Promise<Person | null> => {
+  try {
+    const { data: person } = await axios.get<Person>(`/api/people`, { params: { id: employeeId } });
+    console.log("Person:", person);
+    return person || null;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response && error.response.status === 404) {
+        console.error('Person not found:', error.response.data.message);
+        return null;
+      } else {
+        console.error('Error response:', error.response ? error.response.data : error.message);
+      }
+    } else {
+      console.error('Unexpected error:', error);
+    }
+    throw error;
+  }
+};
+

@@ -28,7 +28,8 @@ const TaskList = ({ expandedTaskId, openTaskDetails, toggleSubtasks, selectedTas
                     {searchTerm !== "" ? `No Tasks Matching "${searchTerm}"` : "No Tasks To Show"}
                 </div>
             ) : (
-                filteredTasks.map((task: Task) => (
+                filteredTasks.map((task: Task) => {
+                return (
                     <div key={task.task_id}>
                         <TaskCard
                             onClick={() => openTaskDetails(task)}
@@ -48,7 +49,7 @@ const TaskList = ({ expandedTaskId, openTaskDetails, toggleSubtasks, selectedTas
                             <SubTaskCard subTasks={subtasks[task.task_id]} expanded={expandedTaskId === task.task_id} />
                         )}
                     </div>
-                ))
+                )})
             )}
             {selectedTask && (
                 <TaskDetailsModal

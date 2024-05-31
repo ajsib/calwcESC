@@ -62,8 +62,19 @@ mock.onDelete('/api/files/:id').reply(config => {
 });
 
 // People routes
-mock.onGet('/api/people').reply(() => {
+mock.onGet('/api/people').reply((config) => {
+  if(config.params === undefined || config.params.id === undefined) {
   return [200, store.getState().People];
+  } else {
+    const id = parseInt(config.params.id);
+    console.log("id", id);
+    const person = store.getState().People.find(p => p.employee_id === id);
+    if (person) {
+      return [200, person];
+    } else {
+      return [404, { message: 'Person not found' }];
+    }
+  }
 });
 
 mock.onPost('/api/people').reply(config => {
