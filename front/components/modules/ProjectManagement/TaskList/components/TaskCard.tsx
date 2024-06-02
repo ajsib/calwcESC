@@ -55,7 +55,6 @@ const TaskCard: React.FC<TaskCardProps> = ({
     position: relative;
     display: flex;
     margin-right: 1rem;
-    z-index: 2;
   `;
 
   const avatarStyle = css`
@@ -78,9 +77,6 @@ const TaskCard: React.FC<TaskCardProps> = ({
 
   const hoverListStyle = css`
     position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
     background-color: white;
     border: 1px solid #ddd;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
