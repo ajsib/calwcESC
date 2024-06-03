@@ -1,7 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { useState } from 'react';
 import { TaskDisplayProps } from '../../Types';
 import ProfileCard from './ProfileCard';
+import { useProjectManagement } from '../../../ProjectManagementContext';
 
 const headerStyle = css`
   font-size: 2rem;
@@ -22,8 +24,14 @@ const labelStyle = css`
   display: block; /* Make label block to push content down */
 `;
 
-const contentStyle = css`
+const inputStyle = css`
   font-size: 1.2rem;
+  padding: 0.5rem;
+`;
+
+const selectStyle = css`
+  font-size: 1.2rem;
+  padding: 0.5rem;
 `;
 
 const listContainerStyle = css`
@@ -59,39 +67,58 @@ const buttonStyle = css`
   font-size: 1.2rem;
 `;
 
-
-
 const TaskDisplay = ({ task, profiles, hoverProfile, handleMouseEnter, handleMouseLeave, subTasks } : TaskDisplayProps) => {
+  const [dueDate, setDueDate] = useState(task.due_date);
+  const [status, setStatus] = useState(task.status);
+  const [bucket, setBucket] = useState(task.bucket);
+  const { teams } = useProjectManagement();
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
   return (
     <>
       <div css={headerStyle}>{task.title}</div>
       <div css={sectionStyle}>
         <label css={labelStyle}>Due Date:</label>
-        <span css={contentStyle}>{task.due_date}</span>
+        <input
+          type="date"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+          css={inputStyle}
+        />
       </div>
       <div css={sectionStyle}>
         <label css={labelStyle}>Status:</label>
-        <span css={contentStyle}>{task.status}</span>
+        <select value={status} onChange={(e) => setStatus(e.target.value)} css={selectStyle}>
+          <option value="To Do">To Do</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Complete">Complete</option>
+          <option value="Archive">Archive</option>
+        </select>
       </div>
       <div css={sectionStyle}>
         <label css={labelStyle}>Bucket:</label>
-        <span css={contentStyle}>{task.bucket}</span>
+        <select value={bucket} onChange={(e) => setBucket(e.target.value)} css={selectStyle}>
+          {teams.map((bucketOption:string) => (
+            <option key={bucketOption} value={bucketOption}>
+              {bucketOption}
+            </option>
+          ))}
+        </select>
       </div>
       <div css={listContainerStyle}>
         <label css={labelStyle}>People:</label>
         <ul css={listStyle}>
-        {profiles.map(person => {
-          const personProfile = profiles.find(p => p.employee_id === person.employee_id);
-          return (
-            <li key={person.employee_id} css={listItemStyle} onMouseEnter={() => handleMouseEnter(person.employee_id)} onMouseLeave={handleMouseLeave}>
-              {personProfile?.name}
-              {hoverProfile && hoverProfile.employee_id === person.employee_id && (
-                <ProfileCard {...hoverProfile} profilePhoto={`${backendUrl}api/images/internal/avatar.png`} />
-              )}
-            </li>
-          );
-        })}
+          {profiles.map(person => {
+            const personProfile = profiles.find(p => p.employee_id === person.employee_id);
+            return (
+              <li key={person.employee_id} css={listItemStyle} onMouseEnter={() => handleMouseEnter(person.employee_id)} onMouseLeave={handleMouseLeave}>
+                {personProfile?.name}
+                {hoverProfile && hoverProfile.employee_id === person.employee_id && (
+                  <ProfileCard {...hoverProfile} profilePhoto={`${backendUrl}api/images/internal/avatar.png`} />
+                )}
+              </li>
+            );
+          })}
         </ul>
       </div>
       <div css={listContainerStyle}>
