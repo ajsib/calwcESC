@@ -33,6 +33,12 @@ const TaskList = ({ expandedTaskId, openTaskDetails, toggleSubtasks, selectedTas
         }
     }, [filteredTasks, openTaskDetails, setIsModalOpen]);
 
+    useEffect(() => {
+        return () => {
+            localStorage.removeItem('taskId');
+        };
+    }, []);
+
     return (
         <div css={taskListStyle}>
             {filteredTasks.length === 0 ? (
