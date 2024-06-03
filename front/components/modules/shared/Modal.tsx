@@ -64,28 +64,35 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, close, children }) => {
-  const [animationDirection, setAnimationDirection] = useState<'in' | 'out'>('in');
+  const [animationDirection, setAnimationDirection] = useState<'in' | 'out'>(isOpen ? 'in' : 'out');
+  const [isFullyClosed, setIsFullyClosed] = useState(true);
 
   useEffect(() => {
     if (isOpen) {
-      setAnimationDirection('in'); // Set animation direction to 'in' when modal opens
+      setIsFullyClosed(false);
+      setAnimationDirection('in');
     } else {
-      setAnimationDirection('out'); // Set animation direction to 'out' when modal closes off screen
+      setAnimationDirection('out');
+      setTimeout(() => {
+        setIsFullyClosed(true);
+      }, 300); // Match this duration with your animation duration
     }
   }, [isOpen]);
 
   return (
     <>
       {isOpen && <div css={overlayStyle} onClick={close} />}
+      {!isFullyClosed && (
         <div
-            css={[
-                modalStyle,
-                animationDirection === 'out' ? css`animation-name: ${slideOut};` : css`animation-name: ${slideIn};`,
-            ]}
+          css={[
+            modalStyle,
+            animationDirection === 'out' ? css`animation-name: ${slideOut};` : css`animation-name: ${slideIn};`,
+          ]}
         >
-            <button css={buttonStyle} onClick={close}>Close</button>
-            {children}
+          <button css={buttonStyle} onClick={close}>Close</button>
+          {children}          
         </div>
+      )}
     </>
   );
 };

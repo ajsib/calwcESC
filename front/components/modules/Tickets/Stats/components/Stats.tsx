@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import Circle from '@/components/UI/icons/Dot';
 import { StatsProps } from '../Types';
+import { useRouter } from 'next/router';
 
 // Layout for the stats and button container
 const statsOverviewStyle = css`
@@ -63,7 +64,7 @@ const buttonStyle = css`
 `;
 
 const Stats = ({ openTickets, highPriorityTickets, mediumPriorityTickets, lowPriorityTickets } : StatsProps) => {
-
+  const router = useRouter();
   return (
     <div css={statsOverviewStyle}>
       <div css={statCardStyle}>
@@ -83,7 +84,7 @@ const Stats = ({ openTickets, highPriorityTickets, mediumPriorityTickets, lowPri
         <p css={titleStyle}><Circle size={10} color="green" />Low Priority</p>
       </div>
       <div css={buttonContainerStyle}>
-        <div css={buttonStyle}>Project Management</div>
+        <div css={buttonStyle} onClick={() => router.push('/project-management')}>Project Management</div>
         <div css={buttonStyle}>Manual Entry</div>
       </div>
     </div>
