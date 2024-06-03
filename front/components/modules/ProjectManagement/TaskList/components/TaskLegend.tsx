@@ -16,13 +16,19 @@ const legendStyle = css`
 
 
 const assigneeStyle = css`
-  flex: 0 0 150px;
-  text-align: right;
+  flex: 0 0 110px;
+  text-align: left;
     margin-right: 1rem;
     color: #737373;
 `;
 
 const endDateStyle = css`
+  flex: 0 0 120px;
+  text-align: left;
+    color: #737373;
+`;
+
+const statusStyle = css`
   flex: 0 0 180px;
   text-align: left;
     color: #737373;
@@ -42,6 +48,7 @@ const TaskLegend = () => {
             <span css={titleStyle}>Tasks</span>
             <div css={assigneeStyle}>Assignees</div>
             <div css={endDateStyle}>End Date</div>
+            <div css={statusStyle}>Status</div>
         </div>
     );
 };
