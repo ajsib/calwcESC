@@ -3,6 +3,7 @@ import Stats from "@/components/modules/Tickets/Stats";
 import TicketCards from "@/components/modules/Tickets/TicketCards";
 import { useAuth } from "@/globalContexts/authContext";
 import { useUserProfile } from "@/globalContexts/userContext";
+import { TicketProvider } from "@/components/modules/Tickets/TicketContext";
 
 const TicketsPage = () => {
   const { loggedIn } = useAuth();
@@ -14,8 +15,10 @@ const TicketsPage = () => {
   return (
     <>
       <Header />
-      <Stats />
-      <TicketCards />
+      <TicketProvider>
+        <Stats />
+        <TicketCards />
+      </TicketProvider>
     </>
   );
 };

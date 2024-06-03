@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import Circle from '@/components/UI/icons/Dot';
 import { StatsProps } from '../Types';
 import { useRouter } from 'next/router';
+import { useTicketContext } from '../../TicketContext';
 
 // Layout for the stats and button container
 const statsOverviewStyle = css`
@@ -15,9 +16,9 @@ const statsOverviewStyle = css`
 `;
 
 // Style for the stats cards
-const statCardStyle = css`
+const statCardStyle = (isSelected?: boolean) => css`
   border: 1px solid #ddd;
-  background-color: #fff;
+  background-color: ${isSelected ? '#e0f7fa' : '#fff'};
   text-align: center;
   cursor: pointer;
   flex: 1; 
@@ -34,7 +35,7 @@ const titleStyle = css`
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  `;
+`;
 
 // Container for buttons
 const buttonContainerStyle = css`
@@ -63,29 +64,40 @@ const buttonStyle = css`
   }
 `;
 
-const Stats = ({ openTickets, highPriorityTickets, mediumPriorityTickets, lowPriorityTickets } : StatsProps) => {
+const Stats = ({ openTickets, highPriorityTickets, mediumPriorityTickets, lowPriorityTickets }: StatsProps) => {
   const router = useRouter();
+  const { selectedPriority, setSelectedPriority, setIsTicketEntryPageOpen } = useTicketContext();
+  console.log(selectedPriority);
+
+  const handleCardClick = (priority: string) => {
+    if (selectedPriority === priority) {
+      setSelectedPriority('');
+    } else {
+      setSelectedPriority(priority);
+    }
+  };
+
   return (
     <div css={statsOverviewStyle}>
-      <div css={statCardStyle}>
+      <div css={statCardStyle()}>
         <h2>{openTickets}</h2>
         <p>Open Tickets</p>
       </div>
-      <div css={statCardStyle}>
+      <div css={statCardStyle(selectedPriority === 'High')} onClick={() => handleCardClick('High')}>
         <h2>{highPriorityTickets}</h2>
         <p css={titleStyle}><Circle size={10} color="red" /> High Priority</p>
       </div>
-      <div css={statCardStyle}>
+      <div css={statCardStyle(selectedPriority === 'Medium')} onClick={() => handleCardClick('Medium')}>
         <h2>{mediumPriorityTickets}</h2>
         <p css={titleStyle}><Circle size={10} color="orange" />Medium Priority</p>
       </div>
-      <div css={statCardStyle}>
+      <div css={statCardStyle(selectedPriority === 'Low')} onClick={() => handleCardClick('Low')}>
         <h2>{lowPriorityTickets}</h2>
         <p css={titleStyle}><Circle size={10} color="green" />Low Priority</p>
       </div>
       <div css={buttonContainerStyle}>
         <div css={buttonStyle} onClick={() => router.push('/project-management')}>Project Management</div>
-        <div css={buttonStyle}>Manual Entry</div>
+        <div css={buttonStyle} onClick={() => setIsTicketEntryPageOpen(true)}>Manual Entry</div>
       </div>
     </div>
   );
