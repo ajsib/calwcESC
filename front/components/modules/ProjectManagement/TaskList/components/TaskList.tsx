@@ -24,7 +24,6 @@ const TaskList = ({ expandedTaskId, openTaskDetails, toggleSubtasks, selectedTas
 
     useEffect(() => {
         const taskId = localStorage.getItem('taskId');
-        console.log(taskId);
         if (taskId) {
             const task = filteredTasks.find((task: Task) => task.task_id === parseInt(taskId as string));
             if (task) {
