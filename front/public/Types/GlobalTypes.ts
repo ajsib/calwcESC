@@ -1,6 +1,6 @@
 export interface Person {
     employee_id: number;
-    image_id: number;
+    image_id?: number;
     name: string;
     rank: string;
     department: string;
