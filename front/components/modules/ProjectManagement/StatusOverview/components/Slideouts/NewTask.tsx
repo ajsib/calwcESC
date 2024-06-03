@@ -229,7 +229,7 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({
                 css={subTaskInputStyle}
                 value={subTaskInput}
                 onChange={e => setSubTaskInput(e.target.value)}
-                onKeyDown={handleKeyPress} // Add key press event
+                onKeyPress={handleKeyPress} // Add key press event
               />
               <button type="button" css={subTaskButtonStyle} onClick={handleAddSubTask}>Add</button>
             </div>
