@@ -14,7 +14,7 @@ const headerStyle = css`
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  height: 68px;
+  min-height: 68px;
 `;
 
 const logoStyle = css`

@@ -5,7 +5,7 @@ import SearchBarProps from "@/components/modules/Dashboard/SearchBar/Types";
 const MainContainer = styled.div`
   display: flex;
   align-items: center;
-  height: 3rem;
+  height: 4rem;
   background-color: #fff;
   border: 1px solid #e9e9e9;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.09);

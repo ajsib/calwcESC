@@ -8,10 +8,19 @@ export interface OverviewProps {
     tasks: Task[];
     tickets: Ticket[];
     counts: { taskCount: number, ticketCount: number, tasksDueTodayCount: number, highPriorityTicketsCount: number } | null;
+    loading: boolean;
 }
 
 export interface ClientOverviewProps {
-    tasks: Task[];
     tickets: Ticket[];
     counts: { total: number, open: number, closed: number } | null;
+}
+
+export interface MyDayProps {
+    counts: { taskCount: number, ticketCount: number, tasksDueTodayCount: number, highPriorityTicketsCount: number } | null;
+}
+
+export interface MyDayListProps {
+    tasks: Task[];
+    tickets: Ticket[];
 }

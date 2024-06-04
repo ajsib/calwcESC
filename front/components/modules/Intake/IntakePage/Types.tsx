@@ -1,4 +1,6 @@
-export interface IntakeProps{
-    goForward: () => void;
-    goBack: () => void;
+export interface ProjectInfo {
+    name: string;
+    description: string;
+    contactName: string;
+    contactInfo: string;
 }

@@ -13,11 +13,10 @@ const loading = keyframes`
 `;
 
 const skeletonAnimation = css`
-  animation: ${loading} 1s infinite linear;
+  animation: ${loading} 1.5s infinite linear;
   background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
+  background-size: 200% 100%;
 `;
-
-
 
 const profileImageSection = css`
   flex: 0 0 auto;
@@ -66,7 +65,6 @@ const skeletonRankImage = css`
 
 const ProfileCardSkeleton = () => {
   const { profile } = useUserProfile();
-
 
   // Existing styles modified for skeleton
   const profileCardStyle = css`

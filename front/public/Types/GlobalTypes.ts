@@ -1,6 +1,6 @@
 export interface Person {
     employee_id: number;
-    image_id: number;
+    image_id?: number;
     name: string;
     rank: string;
     department: string;
@@ -12,7 +12,7 @@ export interface Person {
   
 export interface Task {
     task_id: number;
-    ticket_id?: number;
+    ticket_id: number;
     title: string;
     bucket: string;
     status: string;

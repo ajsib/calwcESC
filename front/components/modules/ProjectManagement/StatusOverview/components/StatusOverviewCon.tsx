@@ -1,60 +1,70 @@
 import { useState, useEffect } from "react";
 import StatusOverview from "./StatusOverview";
-import { fetchTaskData } from "../services/fetchTaskData";
 import { Task } from "@/public/Types/GlobalTypes";
 import NewTaskCon from "./Slideouts/NewTaskCon";
 import BucketsSlideoutCon from "./Slideouts/BucketsSlideoutCon";
 import { useProjectManagement } from "../../ProjectManagementContext";
-import { useUserProfile } from "@/globalContexts/userContext";
 
 const StatusOverviewCon = () => {
-    const { selectedStatus, handleSelectStatus, myFilteredTasks } = useProjectManagement();
-    const [tasks, setTasks] = useState<Task[]>([]);
+    const { selectedStatus, handleSelectStatus, allTasks } = useProjectManagement();
     const [toDoCount, setToDoCount] = useState<number>(0);
     const [inProgressCount, setInProgressCount] = useState<number>(0);
     const [overdueCount, setOverdueCount] = useState<number>(0);
+    const [completedCount, setCompletedCount] = useState<number>(0);
     const [showNewTaskModal, setShowNewTaskModal] = useState(false);
     const [showManageTeamsModal, setShowManageTeamsModal] = useState(false);
-
-    const { profile } = useUserProfile();
-
-    useEffect(() => {
-        fetchTaskData().then((data) => {
-            setTasks(data);
-        });
-    }, []);
+    const [isNewTaskModalVisible, setIsNewTaskModalVisible] = useState(false);
+    const [isManageTeamsModalVisible, setIsManageTeamsModalVisible] = useState(false);
 
     useEffect(() => {
-        if (profile) {
-            const tasksToCount = profile.role === "Staff" ? myFilteredTasks : tasks;
+        const counts = allTasks.reduce(
+            (acc: { toDo: number; inProgress: number; overdue: number; completed: number }, task: Task) => {
+                switch (task.status) {
+                    case 'To Do':
+                        acc.toDo++;
+                        break;
+                    case 'In Progress':
+                        acc.inProgress++;
+                        break;
+                    case 'Overdue':
+                        acc.overdue++;
+                        break;
+                    case 'Completed':
+                        acc.completed++;
+                        break;
+                    default:
+                        break;
+                }
+                return acc;
+            },
+            { toDo: 0, inProgress: 0, overdue: 0, completed: 0 }
+        );
 
-            const counts = tasksToCount.reduce(
-                (acc: { toDo: number; inProgress: number; overdue: number }, task: Task) => {
-                    switch (task.status) {
-                        case 'To Do':
-                            acc.toDo++;
-                            break;
-                        case 'In Progress':
-                            acc.inProgress++;
-                            break;
-                        case 'Overdue':
-                            acc.overdue++;
-                            break;
-                        default:
-                            break;
-                    }
-                    return acc;
-                },
-                { toDo: 0, inProgress: 0, overdue: 0 }
-            );
+        setToDoCount(counts.toDo);
+        setInProgressCount(counts.inProgress);
+        setOverdueCount(counts.overdue);
+        setCompletedCount(counts.completed);
+    }, [allTasks]);
 
-            setToDoCount(counts.toDo);
-            setInProgressCount(counts.inProgress);
-            setOverdueCount(counts.overdue);
-        }
-    }, [tasks, myFilteredTasks, profile]);
+    const handleNewTaskModalOpen = () => {
+        setIsNewTaskModalVisible(true);
+        setShowNewTaskModal(true);
+    };
 
-    if (!profile) return null;
+    const handleNewTaskModalClose = () => {
+        setShowNewTaskModal(false);
+        setTimeout(() => setIsNewTaskModalVisible(false), 300); // Match the animation duration
+    };
+
+    const handleManageTeamsModalOpen = () => {
+        setIsManageTeamsModalVisible(true);
+        setShowManageTeamsModal(true);
+    };
+
+    const handleManageTeamsModalClose = () => {
+        setShowManageTeamsModal(false);
+        setTimeout(() => setIsManageTeamsModalVisible(false), 300); // Match the animation duration
+    };
 
     return (
         <>
@@ -64,13 +74,18 @@ const StatusOverviewCon = () => {
                 toDoCount={toDoCount}
                 inProgressCount={inProgressCount}
                 overdueCount={overdueCount}
-                onNewTaskModalOpen={() => setShowNewTaskModal(true)}
-                onNewTaskModalClose={() => setShowNewTaskModal(false)}
-                onManageTeamsModalOpen={() => setShowManageTeamsModal(true)}
-                onManageTeamsModalClose={() => setShowManageTeamsModal(false)}
+                completedCount={completedCount}
+                onNewTaskModalOpen={handleNewTaskModalOpen}
+                onNewTaskModalClose={handleNewTaskModalClose}
+                onManageTeamsModalOpen={handleManageTeamsModalOpen}
+                onManageTeamsModalClose={handleManageTeamsModalClose}
             />
-            {showNewTaskModal && <NewTaskCon close={() => setShowNewTaskModal(false)} isOpen={showNewTaskModal} />}
-            {showManageTeamsModal && <BucketsSlideoutCon close={() => setShowManageTeamsModal(false)} isOpen={showManageTeamsModal} />}
+            {isNewTaskModalVisible && (
+                <NewTaskCon close={handleNewTaskModalClose} isOpen={showNewTaskModal} />
+            )}
+            {isManageTeamsModalVisible && (
+                <BucketsSlideoutCon close={handleManageTeamsModalClose} isOpen={showManageTeamsModal} />
+            )}
         </>
     );
 };

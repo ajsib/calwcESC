@@ -1,8 +1,9 @@
-import {useState, useRef, ChangeEvent} from 'react'; 
+import { useState, useRef, ChangeEvent } from 'react'; 
 import SearchBar from "./SearchBar";
+import { useProjectManagement } from '../../ProjectManagementContext';
 
 export default function SearchBarCon() {
-    const [searchTerm, setSearchTerm] = useState("");
+    const { searchTerm, setSearchTerm } = useProjectManagement();
     const [isFocused, setIsFocused] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
 

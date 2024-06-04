@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import DropDownIcon from '@/components/UI/icons/DropDown';
 import { BucketTeamSelectorProps } from '../Types';
+import { useProjectManagement } from '../../ProjectManagementContext';
 
 const selectorContainerStyle = css`
   display: flex;
@@ -9,12 +10,14 @@ const selectorContainerStyle = css`
   align-items: center;
   border-bottom: 1px solid #ccc;
   padding-bottom: 0.5rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+    
 `;
 
 const titleStyle = css`
   font-size: 1.8rem;
   font-weight: bold;
+  color: #364132;  
 `;
 
 const dropdownContainerStyle = css`
@@ -55,10 +58,11 @@ const dropdownItemStyle = css`
 `;
 
 const BucketTeamSelector: React.FC<BucketTeamSelectorProps> = ({ currentTeam, teams, onTeamSelect, showDropdown, setShowDropdown }) => {
+  const { searchTerm } = useProjectManagement();
 
   return (
     <div css={[selectorContainerStyle]}>
-      <div css={titleStyle}>{currentTeam}</div>
+      <div css={titleStyle}>{searchTerm ? "Search Results" : currentTeam}</div>
       <div css={dropdownContainerStyle}>
         <div css={dropdownStyle} onClick={setShowDropdown}>
           <span css={dropdownText}>{currentTeam ? currentTeam : 'Choose Team'}</span>

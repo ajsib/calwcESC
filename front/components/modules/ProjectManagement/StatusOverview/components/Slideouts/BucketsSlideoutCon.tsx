@@ -2,13 +2,13 @@ import { useState } from "react";
 import { useProjectManagement } from "../../../ProjectManagementContext";
 import ManageTeamsModal from "./BucketsSlideout";
 
-const BucketsSlideoutCon = ({close, isOpen}: {close: () => void, isOpen: boolean}) => {
+const BucketsSlideoutCon = ({ close, isOpen }: { close: () => void, isOpen: boolean }) => {
     const { teams, addTeam, removeTeam, updateTeams } = useProjectManagement();
 
     const [newTeam, setNewTeam] = useState<string>('');
 
     const handleAddTeam = () => {
-        if (newTeam && !teams.includes(newTeam)) {
+        if (newTeam && !teams.includes(newTeam) && newTeam !== "All") {
             addTeam(newTeam);
             setNewTeam('');
         }
@@ -24,7 +24,7 @@ const BucketsSlideoutCon = ({close, isOpen}: {close: () => void, isOpen: boolean
                 updateTeams={updateTeams}
                 newTeam={newTeam}
                 setNewTeam={setNewTeam}
-                teams={teams}
+                teams={teams.filter((team: string) => team !== "All")}
             />
         </>
     );

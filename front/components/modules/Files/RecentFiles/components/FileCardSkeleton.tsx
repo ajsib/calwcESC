@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from '@emotion/react';
 
-// Define the keyframes for the skeleton loading animation
+// Keyframes and animation style for the skeleton loading
 const loading = keyframes`
   0% {
     background-position: -200px 0;
@@ -12,8 +12,9 @@ const loading = keyframes`
 `;
 
 const skeletonAnimation = css`
-  animation: ${loading} 1s infinite linear;
+  animation: ${loading} 1.5s infinite linear;
   background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
+  background-size: 200% 100%;
 `;
 
 // CSS for the FileCard component modified for skeleton
@@ -39,11 +40,11 @@ const fileCardSkeletonStyle = css`
 
 // Skeleton FileCard component
 const FileCardSkeleton = () => {
-    return (
-      <div css={fileCardSkeletonStyle}>
-        &nbsp;
-      </div>
-    );
-  };
+  return (
+    <div css={fileCardSkeletonStyle}>
+      &nbsp;
+    </div>
+  );
+};
 
 export default FileCardSkeleton;

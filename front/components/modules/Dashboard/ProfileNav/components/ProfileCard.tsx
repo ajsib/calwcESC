@@ -9,18 +9,18 @@ interface ProfileCardProps {
   rankImage?: string;
 }
 
-
-
 const profileImageSection = css`
   flex: 0 0 auto;
-  width: 100px; // Adjust the width as needed
-  height: 100px; // Adjust the height as needed
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  background: #eee; // Placeholder color
-  // Placeholder for profile image
-  background-image: url('/path/to/default-avatar.jpg');
-  background-size: cover;
-  background-position: center;
+  background: #ccc; // Grey background
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  font-weight: bold;
 `;
 
 const profileInfoSection = css`
@@ -30,7 +30,6 @@ const profileInfoSection = css`
   align-items: center; 
   justify-content: center; 
 `;
-
 
 const rankEpauletSection = css`
   flex: 0 0 auto;
@@ -90,10 +89,17 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ user, rankImage }) => {
   }
 `;
 
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const getInitials = (name: string) => {
+    const nameParts = name.split(' ');
+    const initials = nameParts.map(part => part.charAt(0).toUpperCase()).join('');
+    return initials;
+  };
+
   return (
     <div css={profileCardStyle}>
-      <div css={profileImageSection} style={{ backgroundImage: `url(${backendUrl}api/images/internal/avatar.png)` }} />
+      <div css={profileImageSection}>
+        {getInitials(user.name)}
+      </div>
       <div css={profileInfoSection}>
         <p css={nameStyle}>{user.name}</p>
         <p>
@@ -102,8 +108,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ user, rankImage }) => {
         </p>
         <p className='caption' css={lastLoginStyle}>Last Login: {user.last_login}</p>
       </div>
-      <div css={rankEpauletSection} style={{ backgroundImage: `url(${rankImage})` }}
-      />
+      <div css={rankEpauletSection} style={{ backgroundImage: `url(${rankImage})` }} />
     </div>
   );
 };

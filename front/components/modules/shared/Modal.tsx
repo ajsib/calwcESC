@@ -30,8 +30,7 @@ const modalStyle = css`
   width: 80%;
   max-width: 600px;
   background: white;
-  padding: 20px;
-  border: 1px solid #ccc;
+  border: 0px solid #ccc;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   animation-duration: 0.3s;
   animation-fill-mode: forwards;
@@ -48,12 +47,14 @@ const overlayStyle = css`
 `;
 
 const buttonStyle = css`
-  margin-top: 10px;
+  margin-top: 0px;
   padding: 10px 20px;
   border: none;
   background-color: var(--primary-color);
   color: white;
   cursor: pointer;
+    height: 68px;
+    width: 100%;
 `;
 
 interface ModalProps {
@@ -63,28 +64,35 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, close, children }) => {
-  const [animationDirection, setAnimationDirection] = useState<'in' | 'out'>('in');
+  const [animationDirection, setAnimationDirection] = useState<'in' | 'out'>(isOpen ? 'in' : 'out');
+  const [isFullyClosed, setIsFullyClosed] = useState(true);
 
   useEffect(() => {
     if (isOpen) {
-      setAnimationDirection('in'); // Set animation direction to 'in' when modal opens
+      setIsFullyClosed(false);
+      setAnimationDirection('in');
     } else {
-      setAnimationDirection('out'); // Set animation direction to 'out' when modal closes
+      setAnimationDirection('out');
+      setTimeout(() => {
+        setIsFullyClosed(true);
+      }, 300); // Match this duration with your animation duration
     }
   }, [isOpen]);
 
   return (
     <>
       {isOpen && <div css={overlayStyle} onClick={close} />}
-      <div
-        css={[
-          modalStyle,
-          animationDirection === 'out' ? css`animation-name: ${slideOut};` : css`animation-name: ${slideIn};`,
-        ]}
-      >
-        {children}
-        <button css={buttonStyle} onClick={close}>Close</button>
-      </div>
+      {!isFullyClosed && (
+        <div
+          css={[
+            modalStyle,
+            animationDirection === 'out' ? css`animation-name: ${slideOut};` : css`animation-name: ${slideIn};`,
+          ]}
+        >
+          <button css={buttonStyle} onClick={close}>Close</button>
+          {children}          
+        </div>
+      )}
     </>
   );
 };

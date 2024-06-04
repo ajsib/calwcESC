@@ -3,8 +3,8 @@ import { css } from '@emotion/react';
 import StatusOverviewCon from "./components/StatusOverviewCon";
 
 const commonContainerStyle = css`
-  margin: 2rem var(--margin);
-  width: calc(100% - 2 * var(--margin));
+  width: 100%;
+    background-color: #F4F4F4;
 `;
 
 const StatusOverview = () => {

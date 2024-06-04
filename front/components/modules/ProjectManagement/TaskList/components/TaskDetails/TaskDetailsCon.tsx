@@ -2,10 +2,10 @@
 import { css } from '@emotion/react';
 import TaskDisplay from './TaskDisplay';
 import { useState, useEffect } from 'react';
-import Modal from './Modal';
+import Modal from '@/components/modules/shared/Modal';
 import { useProjectManagement } from '../../../ProjectManagementContext';
 import { fetchPeopleData } from '../../../services/fetchTaskData';
-import { TaskDetailsModalProps  } from '../../Types';
+import { TaskDetailsModalProps } from '../../Types';
 import { Person as Profile } from '@/public/Types/GlobalTypes';
 
 const containerStyle = css`

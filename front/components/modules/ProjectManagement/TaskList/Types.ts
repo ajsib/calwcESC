@@ -3,6 +3,7 @@ import { Task, Subtask as SubTask, Person as Profile } from "@/public/Types/Glob
 
 export interface TaskCardProps {
     title: string;
+    task_id: number;
     dueDate: string;
     isComplete: boolean;
     onToggleSubtasks: () => void;
@@ -22,6 +23,7 @@ export interface TaskListProps {
   selectedTask: Task | null;
   isModalOpen: boolean;
   setIsModalOpen: (isOpen: boolean) => void;
+  isSubTaskVisible: boolean;
 }
 
 export interface SubTaskCardProps {

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import ModulePreview from './Overview';
-import SearchResults from './SearchResults';
+import SearchResults from '../SearchResults';
 import { useDashboard } from '@/components/modules/Dashboard/DashboardContext';
 import { useUserProfile } from '@/globalContexts/userContext';
-import { fetchIdsByEmployeeId, fetchTasksAndTickets, countTasksAndTickets } from '../services/fetchOverviewData';
+import { fetchIdsByEmployeeId, fetchTasksAndTickets, countTasksAndTickets } from '../../services/fetchOverviewData';
 import { Task, Ticket, File } from '@/public/Types/GlobalTypes';
 
 const OverviewCon: React.FC = () => {
@@ -40,7 +40,7 @@ const OverviewCon: React.FC = () => {
     return <SearchResults results={searchTerm} />;
   }
 
-  return <ModulePreview tasks={tasks} tickets={tickets} counts={counts} />;
+  return <ModulePreview tasks={tasks} tickets={tickets} counts={counts} loading={loading} />;
 };
 
 export default OverviewCon;

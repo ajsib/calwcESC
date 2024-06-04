@@ -10,6 +10,7 @@ const profileNavContainer = css`
   background: #FBFBFB;
   gap: 1rem;
   padding: 2rem;
+  padding-bottom: 4rem;
 `;
 
 const ProfileNavModule = () => {

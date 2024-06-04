@@ -13,6 +13,7 @@ const dashboardStyle = css`
   display: flex;
   flex-direction: column;
   height: 100vh;
+    background-color: #EAEAEA;
 `;
 
 export default function Dashboard() {

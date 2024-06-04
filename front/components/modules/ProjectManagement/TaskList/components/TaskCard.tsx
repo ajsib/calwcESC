@@ -3,9 +3,11 @@ import { css } from '@emotion/react';
 import RightWedgeThin from '@/components/UI/arrows/RightWedgeMedium';
 import { useState, useEffect } from 'react';
 import { TaskCardProps } from '../Types';
-import { Person } from '@/public/Types/GlobalTypes';
+import { Person, Task } from '@/public/Types/GlobalTypes';
+import { useProjectManagement } from '../../ProjectManagementContext';
 
 const TaskCard: React.FC<TaskCardProps> = ({
+  task_id,
   title,
   dueDate,
   isComplete,
@@ -15,12 +17,19 @@ const TaskCard: React.FC<TaskCardProps> = ({
   status,
   onClick,
   people,
-  ticket
+  ticket,
+  bucket
 }) => {
   const [dropDownHover, setDropdownHover] = useState(false);
   const [hoverList, setHoverList] = useState(false);
   const [dropdownActive, setDropdownActive] = useState(false);
   const [hasSubtasks, setHasSubtasks] = useState(subTasks && subTasks.length > 0);
+  const [currentStatus, setCurrentStatus] = useState(status);
+  const [actionHover, setActionHover] = useState(false);
+
+  const { archiveTask, unarchiveTask, archivedTasks } = useProjectManagement();
+
+  const isArchived = archivedTasks.some((archivedTask: Task) => archivedTask.task_id === task_id);
 
   useEffect(() => {
     setDropdownActive(expandSubtasks);
@@ -31,12 +40,21 @@ const TaskCard: React.FC<TaskCardProps> = ({
     onToggleSubtasks();
   };
 
-  const marginRightValue = hasSubtasks ? '1rem' : '3rem';
+  const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newStatus = event.target.value;
+    setCurrentStatus(newStatus);
+
+    if (newStatus === 'Archived') {
+      archiveTask({ task_id, title, dueDate, isComplete, subTasks, status, people, ticket, bucket });
+    } else {
+      // Update the task status in your state management or API
+    }
+  };
 
   const avatarContainerStyle = css`
     position: relative;
     display: flex;
-    margin-right: ${marginRightValue};
+    margin-right: 1rem;
   `;
 
   const avatarStyle = css`
@@ -59,32 +77,34 @@ const TaskCard: React.FC<TaskCardProps> = ({
 
   const hoverListStyle = css`
     position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
     background-color: white;
     border: 1px solid #ddd;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 0.5rem;
-    z-index: 10;
     white-space: nowrap;
     opacity: ${hoverList ? '1' : '0'};
     transition: opacity 0.3s ease;
+    z-index: 3;
   `;
 
   const taskCardStyle = css`
     border: 1.5px solid #dadada;
     padding: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: ${dropdownActive ? '1rem' : '1.5rem'};
+    margin-bottom: ${dropdownActive ? '1rem' : '0.5rem'};
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 1;
+
     &:hover:not(:active) {
-      transform: ${dropDownHover ? 'none' : 'translateY(-2px)'};
-      box-shadow: ${dropDownHover ? 'none' : '0 4px 6px rgba(0,0,0,0.05)'};
+      transform: ${dropDownHover ? "none" : "translateY(-2px)"};
+      box-shadow: ${dropDownHover ? "none" : "0 4px 6px rgba(0,0,0,0.05)"};
       cursor: pointer;
+      background-color: rgba(248, 248, 248, 0.62);
     }
   `;
 
@@ -93,8 +113,13 @@ const TaskCard: React.FC<TaskCardProps> = ({
     left: 0;
     top: 0;
     bottom: 0;
-    width: 2px;
-    background-color: ${status === 'To Do' ? '#4287f5' : status === 'In Progress' ? 'orange' : '#ad1818'};
+    width: 4px;
+    background-color: ${
+      currentStatus === 'To Do' ? '#4287f5' :
+      currentStatus === 'In Progress' ? 'orange' :
+      currentStatus === 'Completed' ? 'green' :
+      '#4287f5'
+    };
   `;
 
   const statusOverlayStyle = css`
@@ -120,6 +145,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
   const actionButtonsStyle = css`
     display: flex;
     align-items: center;
+    gap: 0.5rem;
   `;
 
   const dropDownButtonStyle = css`
@@ -149,13 +175,20 @@ const TaskCard: React.FC<TaskCardProps> = ({
     font-family: PT Serif;
   `;
 
+  const selectorStyle = css`
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.25rem;
+    cursor: pointer;
+  `;
+
   const getInitials = (name: string) => {
     const [firstName, lastName] = name.split(' ');
     return firstName[0] + (lastName ? lastName[0] : '');
   };
 
   return (
-    <div css={taskCardStyle} onClick={dropDownHover ? undefined : onClick}>
+    <div css={taskCardStyle} onClick={actionHover ? undefined : onClick}>
       <div css={statusBorderStyle}></div>
       <div css={statusOverlayStyle}></div>
       <div css={taskTitleStyle}>{title}</div>
@@ -178,23 +211,29 @@ const TaskCard: React.FC<TaskCardProps> = ({
           </div>
         ))}
       </div>
-      <div css={actionButtonsStyle}>
+      <div css={actionButtonsStyle}
+        onMouseEnter={() => setActionHover(true)}
+        onMouseLeave={() => setActionHover(false)}
+      >
         <div css={dateStyle}>{dueDate}</div>
-        {isComplete ? <span>&#10003;</span> : null}
-        {hasSubtasks ? (
-          <button
-            onMouseEnter={() => setDropdownHover(true)}
-            onMouseLeave={() => setDropdownHover(false)}
-            onClick={handleToggleSubtasks}
-            css={dropDownButtonStyle}
-          >
-            <RightWedgeThin
-              size={20}
-              rotation={dropDownHover ? 90 : dropdownActive ? 90 : 0}
-              fillColor={dropDownHover ? '#777' : dropdownActive ? '#777' : '#bbb'}
-            />
-          </button>
-        ) : null}
+        <select css={selectorStyle} value={currentStatus} onChange={handleStatusChange}>
+          <option value="To Do">To Do</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+          <option value="Archived">Archive</option>
+        </select>
+        <button
+          onMouseEnter={() => setDropdownHover(true)}
+          onMouseLeave={() => setDropdownHover(false)}
+          onClick={handleToggleSubtasks}
+          css={[dropDownButtonStyle, !hasSubtasks && css`visibility: hidden`]}
+        >
+          <RightWedgeThin
+            size={20}
+            rotation={dropDownHover ? 90 : dropdownActive ? 90 : 0}
+            fillColor={dropDownHover ? '#777' : dropdownActive ? '#777' : '#bbb'}
+          />
+        </button>
       </div>
     </div>
   );

@@ -3,16 +3,17 @@ import { css } from '@emotion/react';
 import TaskListCon from "./components/TaskListCon";
 
 const commonContainerStyle = css`
-  margin: 2rem var(--margin);
-  width: calc(100% - 2 * var(--margin));
+  background-color: #E9E9E9;
+  height: 100%;
 `;
 
 const TaskList = () => {
-    return (
-        <div css={commonContainerStyle}>
-            <TaskListCon />
-        </div>
-    );
+  return (
+    <div css={commonContainerStyle}>
+      <TaskListCon />
+    </div>
+  );
 };
 
 export default TaskList;
+

@@ -1,9 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from 'react';
-import Modal from './Slideout';
+import Modal from '@/components/modules/shared/Modal';
 import { css } from '@emotion/react';
 import { ManageTeamsModalProps } from '../../Types';
-import { useProjectManagement } from '../../../ProjectManagementContext';
 
 const formStyle = css`
   display: flex;

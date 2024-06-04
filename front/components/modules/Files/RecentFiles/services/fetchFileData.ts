@@ -1,10 +1,12 @@
+import axios from 'axios';
 import { File } from '@/public/Types/GlobalTypes';
-import FilesData from "@/public/Database/Files.json";
 
 export const fetchFileData = async (): Promise<File[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(FilesData.Files);
-    }, 500); // Simulate network delay
-  });
+  try {
+    const { data: files } = await axios.get('/api/files');
+    return files;
+  } catch (error) {
+    console.error('Error fetching file data:', error);
+    throw error;
+  }
 };

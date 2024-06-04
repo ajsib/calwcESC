@@ -14,6 +14,7 @@ const loading = keyframes`
 const skeletonAnimation = css`
   animation: ${loading} 1s infinite linear;
   background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
+  background-size: 200% 100%;
 `;
 
 // Skeleton styles based on TaskCard styles
