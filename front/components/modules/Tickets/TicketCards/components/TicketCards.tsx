@@ -20,6 +20,7 @@ const ticketCardStyle = css`
   box-shadow: 0 0px 0px rgba(0,0,0,0);
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff;
 
   &:hover {
     transform: translateY(-2px);
