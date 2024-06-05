@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import SearchIcon from '@/components/UI/icons/SearchIcon'; // Importing the SearchIcon component
 import SearchBarProps from "@/components/modules/Dashboard/SearchBar/Types";
+import { useProjectManagement } from "../../ProjectManagementContext";
 
 const MainContainer = styled.div`
   display: flex;
@@ -47,6 +48,7 @@ const FilterButton = styled.button`
 `;
 
 const SearchBar = ({isFocused, searchTerm, inputRef, handleSearchChange, handleBlur, handleFocus} : SearchBarProps) => {
+  const { filterBarOpen, setFilterBarOpen } = useProjectManagement();
   return (
     <MainContainer>
       <SearchContainer isFocused={isFocused} onClick={handleFocus}>
@@ -61,7 +63,7 @@ const SearchBar = ({isFocused, searchTerm, inputRef, handleSearchChange, handleB
           onBlur={handleBlur}
         />
       </SearchContainer>
-      <FilterButton>Filters</FilterButton>
+      <FilterButton onClick={() => {setFilterBarOpen(!filterBarOpen)}}>Filters</FilterButton>
     </MainContainer>
   );
 };
