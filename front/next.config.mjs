@@ -17,6 +17,7 @@ const nextConfig = {
       },
     ],
   },
+  basePath: '/calwc-esc',
 };
 
 export default nextConfig;
