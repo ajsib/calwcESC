@@ -27,15 +27,13 @@ spec:
               cpu: 1000m
           livenessProbe:
             httpGet:
-            # TODO
-              path: /api/health
+              path: /calwc-esc/api/health
               port: 6738
             failureThreshold: 3
             periodSeconds: 20
           startupProbe:
             httpGet:
-            # TODO
-              path: /api/health
+              path: /calwc-esc/api/health
               port: 6738
             failureThreshold: 3
             periodSeconds: 20
