@@ -20,4 +20,4 @@ stages:
     parameters:
       appName: calwc-esc
       mainSourceBranchRef: refs/heads/main
-      sourcePath: /front
+      sourcePath: front
