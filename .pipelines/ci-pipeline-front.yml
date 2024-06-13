@@ -1,0 +1,23 @@
+pool: ArmyDevOpsAgent
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: 'Army App/army-app-cicd-templates'
+
+trigger:
+  branches:
+    include:
+      - refs/heads/main
+
+  paths:
+    exclude:
+      - README.md
+
+stages:
+  - template: npm-ci-template.yml@templates
+    parameters:
+      appName: calwc-esc
+      mainSourceBranchRef: refs/heads/main
+      sourcePath: /front
