@@ -39,7 +39,7 @@ Clone the repository to your local machine using:
 Our team consisits of a diverse group of individuals:
 
 - Jess Daves
-- Cpl Aidan Sibley
+- CPL Aidan Sibley
 - Emils Beloglazovs
 - Kevin Morrison
 
