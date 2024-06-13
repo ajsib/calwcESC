@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: army-app-staff-checks-server
+  labels:
+    app: army-app-staff-checks-server
+spec:
+  selector:
+    matchLabels:
+      app: army-app-staff-checks-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: army-app-staff-checks-server
+    spec:
+      containers:
+        - name: army-app-staff-checks-server
+          image: army-app-staff-checks-server
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: 500m
+            limits:
+              memory: 1Gi
+              cpu: 1000m
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            failureThreshold: 3
+            periodSeconds: 20
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            failureThreshold: 3
+            periodSeconds: 20
+          volumeMounts:
+            - name: secrets-store01-inline
+              mountPath: '/mnt/secrets-store'
+              readOnly: true
+          envFrom:
+            - configMapRef:
+                name: staff-checks-config
+          env:
+            - name: DBCONNECTION
+              valueFrom:
+                secretKeyRef:
+                  name: army-app-staff-checks-secret
+                  key: staffchecksdbconnection
+                  optional: false
+      volumes:
+        - name: secrets-store01-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: 'army-app-staff-checks-secret-provider'

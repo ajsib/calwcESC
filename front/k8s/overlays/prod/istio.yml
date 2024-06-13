@@ -1,0 +1,34 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  labels:
+    app: army-app-staff-checks-server
+  name: army-app-staff-checks-server
+spec:
+  gateways:
+    - istio-system/wildcard-gateway
+    - mesh
+  hosts:
+    - armyapp.cloud.mil.ca
+    - armyapp.cloud.forces.gc.ca
+  http:
+    - match:
+      - uri:
+          prefix: /staff-checks-server/
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: army-app-staff-checks-server.armyapp.svc.cluster.local
+            port:
+              number: 80
+    - match:
+      - uri:
+          prefix: /staff-checks-server
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: army-app-staff-checks-server.armyapp.svc.cluster.local
+            port:
+              number: 80
