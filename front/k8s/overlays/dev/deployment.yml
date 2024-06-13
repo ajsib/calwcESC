@@ -28,14 +28,14 @@ spec:
           livenessProbe:
             httpGet:
             # TODO
-              path: /health
+              path: /api/health
               port: 6738
             failureThreshold: 3
             periodSeconds: 20
           startupProbe:
             httpGet:
             # TODO
-              path: /health
+              path: /api/health
               port: 6738
             failureThreshold: 3
             periodSeconds: 20
