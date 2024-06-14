@@ -40,3 +40,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: calwc-esc-config
+          volumeMounts:
+            - name: calwc-front-config-volume
+              subPath: env.json
+              mountPath: '/app/public/env.json'
+              readOnly: true
+      volumes:
+        - name: calwc-front-config-volume
+          configMap:
+            name: calwc-front-config

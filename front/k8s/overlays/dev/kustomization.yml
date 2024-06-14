@@ -13,3 +13,6 @@ configMapGenerator:
   - name: calwc-esc-config
     envs:
       - config.properties
+  - name: calwc-front-config
+    files:
+      - env.json
