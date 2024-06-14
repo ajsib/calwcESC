@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-import env from './public/env.json' with { type: 'json' };
 
 const nextConfig = {
   i18n: {
@@ -19,7 +18,7 @@ const nextConfig = {
       },
     ],
   },
-  basePath: env.basePath,
+  basePath: '/calwc-esc',
 };
 
 export default nextConfig;
