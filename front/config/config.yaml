@@ -1,9 +1,0 @@
-environments:
-  local:
-    backend_url: http://localhost:6739/
-  development1:
-    backend_url: https://calwc-esc-server.azurewebsites.net/
-  development2:
-    backend_url: https://<name>.dev2.azurewebsites.net/
-  production:
-    backend_url: https://<name>.azurewebsites.net/
