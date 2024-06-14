@@ -15,8 +15,6 @@ spec:
     - match:
       - uri:
           prefix: /calwc-esc/
-      rewrite:
-        uri: /
       route:
         - destination:
             host: calwc-esc.armyapp-dev.svc.cluster.local
@@ -25,8 +23,6 @@ spec:
     - match:
       - uri:
           prefix: /calwc-esc
-      rewrite:
-        uri: /
       route:
         - destination:
             host: calwc-esc.armyapp-dev.svc.cluster.local
