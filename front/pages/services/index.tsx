@@ -15,7 +15,7 @@ export default function Service() {
 
     return (
         <>
-            <Banner src="/images/f12.jpg" alt="Services Banner" bannerText={bannerText} title={title}/>
+            <Banner src="/calwc-esc/images/f12.jpg" alt="Services Banner" bannerText={bannerText} title={title}/>
             <div style={{background: 'white'}}>
               <ServiceContent />
               <Separator />

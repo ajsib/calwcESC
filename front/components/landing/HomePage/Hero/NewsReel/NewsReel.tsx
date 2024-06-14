@@ -28,14 +28,14 @@ const linksData = [
 
 export const newsItems = [
   {
-    imageUrl: "/images/f4.jpg",
+    imageUrl: "/calwc-esc/images/f4.jpg",
     props: {
       items: eventsData.slice(0, 3),
       type: 'event'
     }
   },
   {
-    imageUrl: "/images/f3.jpg",
+    imageUrl: "/calwc-esc/images/f3.jpg",
     props: {
       items: linksData.slice(0, 4),
       type: 'link'

@@ -94,7 +94,7 @@ export default function Banner({ src, alt, bannerText, title }: BannerProps) {
         <div css={headerStyle}>
             <Header />
             <div css={imageStyle}>
-                <Image src={src} alt={alt} layout="fill" objectFit="cover" priority={true}/>
+                <img src={src} alt={alt} style={{ width: "100%", position: "absolute", top: "-300px" }} />
             </div>
             <div css={overlayStyle}></div>
             <h1 css={titleStyle}>{title}</h1>

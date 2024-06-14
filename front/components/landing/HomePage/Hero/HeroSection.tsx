@@ -127,23 +127,19 @@ const HeroSection = () => {
         <HeroContent isMobile={isMobile} />
       </div>
       <div css={heroImageContainerStyle}>
-        <Image 
+        <img 
           key={`current-${visibleIndex}`}
           src={newsItems[visibleIndex].imageUrl}
           alt="Hero background"
-          fill
           style={{ objectFit: 'cover' }}
-          priority
           css={[heroImageStyle, isAnimating && css`animation: ${fadeOut} 0.5s ease;`]}
         />
         {isAnimating && (
-          <Image 
+          <img 
             key={`next-${currentIndex}`}
             src={newsItems[currentIndex].imageUrl}
             alt="Hero background"
-            fill
             style={{ objectFit: 'cover' }}
-            priority
             css={[heroImageStyle, css`animation: ${fadeIn} 0.5s ease;`]}
           />
         )}
