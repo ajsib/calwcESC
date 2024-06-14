@@ -100,7 +100,6 @@ const infoContentStyle = css`
     justify-content: center;
     align-items: center;
     color: black;
-    border: 1px solid black;
 `;
 
 const IntakePage = () => {
@@ -117,7 +116,7 @@ const IntakePage = () => {
                     </div>
                     <div css={infoSectionStyle}>
                         <div css={infoContentStyle}>
-                            <p>Info content goes here</p>
+                            <p>Info content for page {page} goes here</p>
                         </div>
                         <button css={moreInfoButtonStyle}>More Info</button>
                         <div css={buttonContainerStyle}>
