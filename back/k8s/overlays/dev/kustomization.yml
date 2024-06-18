@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: armyapp-dev
+resources:
+  - ../../base
+  - istio.yml
+patches:
+  - path: deployment.yml
+images:
+  - name: calwc-esc-server
+    newName: armycontainersdev.azurecr.io/calwc-esc-server
+configMapGenerator:
+  - name: calwc-esc-server-config
+    envs:
+      - config.properties
+  - name: calwc-back-config
+    files:
+      - env.json

@@ -1,0 +1,30 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  labels:
+    app: calwc-esc-server
+  name: calwc-esc-server
+spec:
+  gateways:
+    - istio-system/wildcard-gateway
+    - mesh
+  hosts:
+    - armyapp-dev.cloud.mil.ca
+    - armyapp-dev.cloud.forces.gc.ca
+  http:
+    - match:
+      - uri:
+          prefix: /calwc-esc-server/
+      route:
+        - destination:
+            host: calwc-esc-server.armyapp-dev.svc.cluster.local
+            port:
+              number: 80
+    - match:
+      - uri:
+          prefix: /calwc-esc-server
+      route:
+        - destination:
+            host: calwc-esc-server.armyapp-dev.svc.cluster.local
+            port:
+              number: 80

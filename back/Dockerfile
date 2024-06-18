@@ -5,11 +5,13 @@ FROM node:18-alpine AS base
 WORKDIR /app
 
 # Install dependencies
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package.json pnpm-lock.yaml ./
+RUN npm install pnpm -g
+RUN pnpm install --frozen-lockfile
 
-# Copy application files
+# Copy application files and build the application
 COPY . .
+RUN pnpm run build
 
 # Production image
 FROM node:18-alpine AS runner

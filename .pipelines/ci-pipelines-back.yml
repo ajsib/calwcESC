@@ -18,6 +18,6 @@ trigger:
 stages:
   - template: npm-ci-template.yml@templates
     parameters:
-      appName: calwc-esc
+      appName: calwc-esc-server
       mainSourceBranchRef: refs/heads/main
-      sourcePath: front
+      sourcePath: back

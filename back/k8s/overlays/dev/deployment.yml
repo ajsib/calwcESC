@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calwc-esc-server
+  labels:
+    app: calwc-esc-server
+spec:
+  selector:
+    matchLabels:
+      app: calwc-esc-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: calwc-esc-server
+    spec:
+      containers:
+        - name: calwc-esc-server
+          image: calwc-esc-server
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: 500m
+            limits:
+              memory: 1Gi
+              cpu: 1000m
+          livenessProbe:
+            httpGet:
+              path: /calwc-esc-server/api/health
+              port: 6739
+            failureThreshold: 3
+            periodSeconds: 20
+          startupProbe:
+            httpGet:
+              path: /calwc-esc-server/api/health
+              port: 6739
+            failureThreshold: 3
+            periodSeconds: 20
+          envFrom:
+            - configMapRef:
+                name: calwc-esc-server-config
+          volumeMounts:
+            - name: calwc-back-config-volume
+              subPath: env.json
+              mountPath: '/app/public/env.json'
+              readOnly: true
+      volumes:
+        - name: calwc-back-config-volume
+          configMap:
+            name: calwc-back-config
