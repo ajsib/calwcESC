@@ -1,21 +1,33 @@
-// WizardContext.js
 import React, { createContext, useContext, useState } from 'react';
+import { useUserProfile } from '@/globalContexts/userContext';
 
 const WizardContext = createContext<any>(null);
 
 export const useWizard = () => useContext(WizardContext);
 
 export const WizardProvider = ({ children } : { children: React.ReactNode }) => {
+    const { profile } = useUserProfile();
     const [page, setPage] = useState(1);
-    const [projectInfo, setProjectInfo] = useState({
-        name: '',
+    const [experimentRequest, setExperimentRequest] = useState({
+        name: profile?.name || '',
+        unit: '',
+        phoneNumber: '',
+        email: profile?.email || '',
         description: '',
-        contactName: '',
-        contactInfo: ''
+        links: [],
     });
-    const [questions, setQuestions] = useState(['']);
-    const [experimentType, setExperimentType] = useState('');
-    const [studyMethods, setStudyMethods] = useState([]);
+
+    const [experimentReport, setExperimentReport] = useState({
+        name: profile?.name || '',
+        unit: '',
+        phoneNumber: '',
+        email: profile?.email || '',
+        description: '',
+        questions: '',
+        assets: '',
+        status: '',
+        links: [],
+    });
 
     const goForward = () => {
         setPage((prevPage) => Math.min(prevPage + 1, 7));
@@ -32,14 +44,10 @@ export const WizardProvider = ({ children } : { children: React.ReactNode }) => 
                 setPage,
                 goForward,
                 goBack,
-                projectInfo,
-                setProjectInfo,
-                questions,
-                setQuestions,
-                experimentType,
-                setExperimentType,
-                studyMethods,
-                setStudyMethods
+                experimentRequest,
+                setExperimentRequest,
+                experimentReport,
+                setExperimentReport,
             }}
         >
             {children}

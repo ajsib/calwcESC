@@ -2,6 +2,10 @@
 import { css } from '@emotion/react';
 import { useWizard } from '../../IntakeContext';
 import StepIndicator from './stages';
+import ContactForm from './requestForms/RequestContact';
+import DescriptionForm from './requestForms/RequestDescription';
+import LinksForm from './requestForms/RequestLinks';
+import ReviewForm from './requestForms/RequestReview';
 
 const intakePageStyle = css`
     display: flex;
@@ -102,6 +106,21 @@ const infoContentStyle = css`
     color: black;
 `;
 
+const getRequestForm = (page: number) => {
+    switch (page) {
+        case 1:
+            return <ContactForm />;
+        case 2:
+            return <DescriptionForm />;
+        case 3:
+            return <LinksForm />;
+        case 4:
+            return <ReviewForm />;
+        default:
+            return null;
+    }
+};
+
 const IntakePage = () => {
     const { page, goForward, goBack } = useWizard();
 
@@ -112,7 +131,7 @@ const IntakePage = () => {
                 <StepIndicator currentPage={page} />
                 <div css={wizardContentStyle}>
                     <div css={inputSectionStyle}>
-                        <p>Page {page}</p>
+                        {getRequestForm(page)}
                     </div>
                     <div css={infoSectionStyle}>
                         <div css={infoContentStyle}>

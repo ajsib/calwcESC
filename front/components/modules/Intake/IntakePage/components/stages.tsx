@@ -1,18 +1,23 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { useWizard } from '../../IntakeContext';
 
 const stepIndicatorStyle = css`
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 1rem 0;
     border-bottom: 1px solid #ccc;
 `;
 
 const stepStyle = css`
     display: flex;
     align-items: center;
-    margin: 0 2rem;
+    transition: all 0.3s ease;
+    padding: 1rem 1.5rem;
+    &:hover{
+        cursor: pointer;
+        text-decoration: underline;
+    }
 `;
 
 const circleStyle = (isActive: boolean) => css`
@@ -34,17 +39,18 @@ const labelStyle = css`
 `;
 
 const StepIndicator = ({ currentPage } : { currentPage: number }) => {
+    const { setPage } = useWizard();
     const steps = [
         { number: 1, label: 'General Info' },
-        { number: 2, label: 'Question List' },
-        { number: 3, label: 'Additional Info' },
+        { number: 2, label: 'Description' },
+        { number: 3, label: 'Links' },
         { number: 4, label: 'Review' },
     ];
 
     return (
         <div css={stepIndicatorStyle}>
             {steps.map((step) => (
-                <div key={step.number} css={stepStyle}>
+                <div key={step.number} css={stepStyle} onClick={() => setPage(step.number)}>
                     <div css={circleStyle(step.number === currentPage)}>{step.number}</div>
                     <div css={labelStyle}>{step.label}</div>
                 </div>

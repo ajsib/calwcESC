@@ -1,5 +1,5 @@
 import IntakePage from "./IntakePage/components/Intake";
-import { useWizard, WizardProvider } from './IntakeContext';
+import { WizardProvider } from './IntakeContext';
 
 const Intake = () => {
     return (
