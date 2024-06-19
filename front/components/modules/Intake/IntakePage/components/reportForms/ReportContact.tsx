@@ -27,20 +27,20 @@ const inputField = css`
 `;
 
 const ContactForm = () => {
-    const { experimentRequest, setExperimentRequest } = useWizard();
+    const { experimentReport, setExperimentReport } = useWizard();
     return (
         <div css={formContainer}>
             <div css={fieldContainer}>
                 <label htmlFor="unit">What unit are you with?</label>
-                <input type="text" id="unit" css={inputField} onChange={(e) => setExperimentRequest({...experimentRequest, unit: e.target.value})}/>
+                <input type="text" id="unit" css={inputField} onChange={(e) => setExperimentReport({...experimentReport, unit: e.target.value})}/>
             </div>
             <div css={fieldContainer}>
                 <label htmlFor="phone">What is your phone number?</label>
-                <input type="text" id="phone" css={inputField} onChange={(e) => setExperimentRequest({...experimentRequest, phoneNumber: e.target.value})}/>
+                <input type="text" id="phone" css={inputField} onChange={(e) => setExperimentReport({...experimentReport, phoneNumber: e.target.value})}/>
             </div>
             <div css={fieldContainer}>
                 <label htmlFor="email">What is your email?</label>
-                <input type="text" id="email" css={inputField} value={experimentRequest.email} />
+                <input type="text" id="email" css={inputField} value={experimentReport.email} />
             </div>
         </div>
     );

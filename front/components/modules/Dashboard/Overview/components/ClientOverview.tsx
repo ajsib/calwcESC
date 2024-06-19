@@ -67,7 +67,7 @@ const ClientOverview = ({ counts }: Omit<ClientOverviewProps, 'tasks' | 'tickets
 
   return (
     <div css={myDayStyle}>
-      <button css={buttonStyle} onClick={() => router.push('/ticket-intake')}>New Ticket</button>
+      <button css={buttonStyle} onClick={() => router.push(`/ticket-intake/${0}`)}>New Ticket</button>
       <div css={cardStyle}>
         <h3 css={headerStyle}>Ticket Overview</h3>
         <div css={textStyle}>Total Tickets: {counts?.total}</div>

@@ -4,7 +4,7 @@ import { useUserProfile } from './userContext';
 import PeopleData from '@/public/Database/People.json';
 
 interface AuthContextProps {
-  login: (name: string) => void;
+  login: (name: string, redirect?: string | string[]) => void;
   logout: () => void;
   loggedIn: boolean;
 }
@@ -27,12 +27,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  const login = (name: string) => {
+  const login = (name: string, redirect: string | undefined | string[]) => {
     const foundPerson = PeopleData.People.find(person => person.name === name);
     if (foundPerson) {
       saveUserProfile(foundPerson);
       setLoggedIn(true);
-      router.push('/dashboard');
+      if (redirect) {
+        router.push(redirect === 'running' ? '/ticket-intake/1' : '/ticket-intake/0');
+      } else {
+        router.push('/dashboard');
+      }
     } else {
       alert('Person not found');
     }

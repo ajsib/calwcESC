@@ -36,38 +36,50 @@ const submitButton = css`
 `;
 
 const ReviewComponent = () => {
-    const { experimentRequest } = useWizard();
+    const { experimentReport } = useWizard();
 
     const handleSubmit = () => {
-        console.log(experimentRequest);
+        console.log(experimentReport);
     };
 
     return (
         <div css={formContainer}>
             <div css={fieldContainer}>
                 <label htmlFor="name">Name:</label>
-                <div css={reviewField}>{experimentRequest.name}</div>
+                <div css={reviewField}>{experimentReport.name}</div>
             </div>
             <div css={fieldContainer}>
                 <label htmlFor="unit">Unit:</label>
-                <div css={reviewField}>{experimentRequest.unit}</div>
+                <div css={reviewField}>{experimentReport.unit}</div>
             </div>
             <div css={fieldContainer}>
                 <label htmlFor="phoneNumber">Phone Number:</label>
-                <div css={reviewField}>{experimentRequest.phoneNumber}</div>
+                <div css={reviewField}>{experimentReport.phoneNumber}</div>
             </div>
             <div css={fieldContainer}>
                 <label htmlFor="email">Email:</label>
-                <div css={reviewField}>{experimentRequest.email}</div>
+                <div css={reviewField}>{experimentReport.email}</div>
             </div>
             <div css={fieldContainer}>
                 <label htmlFor="description">Description:</label>
-                <div css={reviewField}>{experimentRequest.description}</div>
+                <div css={reviewField}>{experimentReport.description}</div>
+            </div>
+            <div css={fieldContainer}>
+                <label htmlFor="questions">Questions:</label>
+                <div css={reviewField}>{experimentReport.questions}</div>
+            </div>
+            <div css={fieldContainer}>
+                <label htmlFor="assets">Assets:</label>
+                <div css={reviewField}>{experimentReport.assets}</div>
+            </div>
+            <div css={fieldContainer}>
+                <label htmlFor="status">Status:</label>
+                <div css={reviewField}>{experimentReport.status}</div>
             </div>
             <div css={fieldContainer}>
                 <label htmlFor="links">Links:</label>
                 <div css={reviewField}>
-                    {experimentRequest.links.map((link: string, index: number) => (
+                    {experimentReport.links.map((link: string, index: number) => (
                         <div key={index}>{link}</div>
                     ))}
                 </div>

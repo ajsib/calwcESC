@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import { useUserProfile } from '@/globalContexts/userContext';
+import { useRouter } from 'next/router';
 
 const WizardContext = createContext<any>(null);
 
@@ -7,6 +8,11 @@ export const useWizard = () => useContext(WizardContext);
 
 export const WizardProvider = ({ children } : { children: React.ReactNode }) => {
     const { profile } = useUserProfile();
+    const router = useRouter();
+    const mode = router.query.mode || '1';
+
+    const maxPages = mode === '1' ? 6 : 4;
+
     const [page, setPage] = useState(1);
     const [experimentRequest, setExperimentRequest] = useState({
         name: profile?.name || '',
@@ -30,7 +36,7 @@ export const WizardProvider = ({ children } : { children: React.ReactNode }) => 
     });
 
     const goForward = () => {
-        setPage((prevPage) => Math.min(prevPage + 1, 7));
+        setPage((prevPage) => Math.min(prevPage + 1, maxPages));
     };
 
     const goBack = () => {

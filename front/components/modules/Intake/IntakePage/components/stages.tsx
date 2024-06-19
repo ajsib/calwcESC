@@ -38,14 +38,24 @@ const labelStyle = css`
     font-size: 1.25rem;
 `;
 
-const StepIndicator = ({ currentPage } : { currentPage: number }) => {
+const StepIndicator = ({ currentPage, mode } : { currentPage: number, mode: string | string[] | undefined }) => {
     const { setPage } = useWizard();
-    const steps = [
-        { number: 1, label: 'General Info' },
-        { number: 2, label: 'Description' },
-        { number: 3, label: 'Links' },
-        { number: 4, label: 'Review' },
-    ];
+    
+    const steps = mode === '0'
+        ? [
+            { number: 1, label: 'General Info' },
+            { number: 2, label: 'Description' },
+            { number: 3, label: 'Links' },
+            { number: 4, label: 'Review' },
+        ]
+        : [
+            { number: 1, label: 'Contact' },
+            { number: 2, label: 'Description' },
+            { number: 3, label: 'Assets' },
+            { number: 4, label: 'Questions' },
+            { number: 5, label: 'Status' },
+            { number: 6, label: 'Review' },
+        ];
 
     return (
         <div css={stepIndicatorStyle}>

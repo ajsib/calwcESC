@@ -1,13 +1,16 @@
 // pages/login.tsx
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useAuth } from '@/globalContexts/authContext';
 import peopleData from '@/public/Database/People.json';
 
 const LoginPage = () => {
   const { login } = useAuth();
+  const router = useRouter();
+  const { redirect } = router.query;
 
   const loginAs = (name: string) => {
-    login(name);
+    login(name, redirect);
   };
 
   const roles = ["Client", "Staff", "ESC Staff"];

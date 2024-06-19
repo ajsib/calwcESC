@@ -49,7 +49,7 @@ const linkContainer = css`
 `;
 
 const LinkForm = () => {
-    const { experimentRequest, setExperimentRequest } = useWizard();
+    const { experimentReport, setExperimentReport } = useWizard();
     const [inputValue, setInputValue] = useState('');
     const [isValid, setIsValid] = useState(true);
 
@@ -64,8 +64,8 @@ const LinkForm = () => {
 
     const addLink = () => {
         if (validateLink(inputValue)) {
-            const updatedLinks = [...experimentRequest.links, inputValue];
-            setExperimentRequest({ ...experimentRequest, links: updatedLinks });
+            const updatedLinks = [...experimentReport.links, inputValue];
+            setExperimentReport({ ...experimentReport, links: updatedLinks });
             setInputValue('');
             setIsValid(true);
         } else {
@@ -75,8 +75,8 @@ const LinkForm = () => {
     };
 
     const deleteLink = (index: number) => {
-        const updatedLinks = experimentRequest.links.filter((_:number, i:number) => i !== index);
-        setExperimentRequest({ ...experimentRequest, links: updatedLinks });
+        const updatedLinks = experimentReport.links.filter((_:number, i:number) => i !== index);
+        setExperimentReport({ ...experimentReport, links: updatedLinks });
     };
 
     const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -102,7 +102,7 @@ const LinkForm = () => {
                 <button css={button} onClick={addLink}>+</button>
             </div>
             <div css={fieldContainer}>
-                {experimentRequest.links.map((link:string, index:number) => (
+                {experimentReport.links.map((link:string, index:number) => (
                     <div css={linkContainer} key={index}>
                         <a href={link} target="_blank" rel="noopener noreferrer">{link}</a>
                         <button css={button} onClick={() => deleteLink(index)}>🗑️</button>

@@ -2,7 +2,6 @@
 import { css } from '@emotion/react';
 import { useWizard } from '../../../IntakeContext';
 
-
 const formContainer = css`
     width: 100%;
     height: 100%;
@@ -21,26 +20,33 @@ const fieldContainer = css`
     gap: 0.5rem;
 `;
 
-const inputField = css`
+const TextAreaField = css`
     padding: 0.5rem;
     font-size: 1rem;
     border: 1px solid #ccc;
-    height: 100%;
+    height: 100px;
 `;
 
-
-const DescriptionForm = () => {
-    const { experimentRequest, setExperimentRequest } = useWizard();
-
+const AssetsForm = () => {
+    const { experimentReport, setExperimentReport } = useWizard();
     return (
         <div css={formContainer}>
             <div css={fieldContainer}>
-                <label htmlFor="description">Describe your project</label>
-                <textarea id="description" css={inputField} onChange={(e) => setExperimentRequest({...experimentRequest, description: e.target.value})}/>
+                <label htmlFor="assets">Assets</label>
+                <textarea
+                    id="assets"
+                    css={TextAreaField}
+                    onChange={(e) =>
+                        setExperimentReport({
+                            ...experimentReport,
+                            assets: e.target.value,
+                        })
+                    }
+                />
             </div>
         </div>
     );
 };
 
 
-export default DescriptionForm;
+export default AssetsForm;

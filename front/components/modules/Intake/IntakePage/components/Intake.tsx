@@ -1,11 +1,18 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useWizard } from '../../IntakeContext';
+import { useRouter } from 'next/router';
 import StepIndicator from './stages';
-import ContactForm from './requestForms/RequestContact';
-import DescriptionForm from './requestForms/RequestDescription';
-import LinksForm from './requestForms/RequestLinks';
-import ReviewForm from './requestForms/RequestReview';
+import RequestContactForm from './requestForms/RequestContact';
+import RequestDescriptionForm from './requestForms/RequestDescription';
+import RequestLinksForm from './requestForms/RequestLinks';
+import RequestReviewForm from './requestForms/RequestReview';
+import ReportContactForm from './reportForms/ReportContact';
+import ReportDescriptionForm from './reportForms/ReportDescription';
+import ReportAssetsForm from './reportForms/AssetsForm';
+import ReportQuestionsForm from './reportForms/QuestionsForm';
+import ReportStatusForm from './reportForms/StatusForm';
+import ReportReviewForm from './reportForms/ReportReview';
 
 const intakePageStyle = css`
     display: flex;
@@ -41,12 +48,14 @@ const wizardPlaceholderStyle = css`
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 2;
     position: relative;
+    overflow: hidden; /* Ensure no overflow */
 `;
 
 const wizardContentStyle = css`
     display: flex;
     height: 100%;
     width: 100%;
+    overflow: hidden; /* Ensure no overflow */
 `;
 
 const inputSectionStyle = css`
@@ -58,6 +67,7 @@ const inputSectionStyle = css`
     margin: 1rem;
     width: 60%;
     height: calc(100% - 2rem);
+    overflow-y: auto; /* Allow vertical scrolling */
 `;
 
 const infoSectionStyle = css`
@@ -69,6 +79,7 @@ const infoSectionStyle = css`
     margin: 1rem;
     width: 40%;
     height: calc(100% - 2rem);
+    overflow-y: auto; /* Allow vertical scrolling */
 `;
 
 const buttonContainerStyle = css`
@@ -106,32 +117,54 @@ const infoContentStyle = css`
     color: black;
 `;
 
-const getRequestForm = (page: number) => {
-    switch (page) {
-        case 1:
-            return <ContactForm />;
-        case 2:
-            return <DescriptionForm />;
-        case 3:
-            return <LinksForm />;
-        case 4:
-            return <ReviewForm />;
-        default:
-            return null;
+const getForm = (page: number, mode: string | string[] | undefined) => {
+    if (mode === '0') {
+        switch (page) {
+            case 1:
+                return <RequestContactForm />;
+            case 2:
+                return <RequestDescriptionForm />;
+            case 3:
+                return <RequestLinksForm />;
+            case 4:
+                return <RequestReviewForm />;
+            default:
+                return null;
+        }
+    } else if (mode === '1') {
+        switch (page) {
+            case 1:
+                return <ReportContactForm />;
+            case 2:
+                return <ReportDescriptionForm />;
+            case 3:
+                return <ReportAssetsForm />;
+            case 4:
+                return <ReportQuestionsForm />;
+            case 5:
+                return <ReportStatusForm />;
+            case 6:
+                return <ReportReviewForm />;
+            default:
+                return null;
+        }
     }
+    return null;
 };
 
 const IntakePage = () => {
     const { page, goForward, goBack } = useWizard();
+    const router = useRouter();
+    const { mode } = router.query;
 
     return (
         <div css={intakePageStyle}>
             <div css={gradientStyle}></div>
             <div css={wizardPlaceholderStyle}>
-                <StepIndicator currentPage={page} />
+                <StepIndicator currentPage={page} mode={mode} />
                 <div css={wizardContentStyle}>
                     <div css={inputSectionStyle}>
-                        {getRequestForm(page)}
+                        {getForm(page, mode)}
                     </div>
                     <div css={infoSectionStyle}>
                         <div css={infoContentStyle}>

@@ -17,7 +17,7 @@ const styles = {
     font-size: 3rem;
     font-weight: normal;
   `,
-  cardsContainer: (isMobile: boolean) => css`
+  cardsContainer: (isMobile : boolean) => css`
     gap: ${isMobile ? '0.5rem' : '1rem'};
     display: flex;
     flex-direction: ${isMobile ? 'column' : 'row'};
@@ -46,11 +46,11 @@ const ActionSection = () => {
     };
   }, []);
 
-  const handleFirstCardClick = () => {
+  const handleCardClick = (route: string, queryParam: string | string[] | undefined) => {
     if (loggedIn) {
-      router.push('/dashboard');
+      router.push(route);
     } else {
-      router.push('/login');
+      router.push(`/login?redirect=${queryParam}`);
     }
   };
 
@@ -61,13 +61,13 @@ const ActionSection = () => {
         <CardTemplate
           title={locale === 'en' ? 'Already Running an Experiment?' : 'Déjà en cours d\'expérimentation ?'}
           subtitle={locale === 'en' ? 'Tell us about it' : 'parlez-nous de'}
-          onClick={handleFirstCardClick} // Use the handler for the first card
+          onClick={() => handleCardClick('/ticket-intake/1', 'running')}
           isMobile={isMobile}
         />
         <CardTemplate
           title={locale === 'en' ? 'Ready to Begin an Experiment?' : 'Prêt à commencer une expérience ?'}
           subtitle={locale === 'en' ? 'Begin the journey' : 'Commencer le voyage'}
-          onClick={() => router.push(locale === 'en' ? '/submit-request' : '/soumettre-demande')}
+          onClick={() => handleCardClick('/ticket-intake/0', 'beginning')}
           isMobile={isMobile}
         />
       </div>
