@@ -54,7 +54,8 @@ const StepIndicator = ({ currentPage, mode } : { currentPage: number, mode: stri
             { number: 3, label: 'Assets' },
             { number: 4, label: 'Questions' },
             { number: 5, label: 'Status' },
-            { number: 6, label: 'Review' },
+            { number: 6, label: 'Links' },
+            { number: 7, label: 'Review' },
         ];
 
     return (

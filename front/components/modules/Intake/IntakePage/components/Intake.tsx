@@ -13,6 +13,7 @@ import ReportAssetsForm from './reportForms/AssetsForm';
 import ReportQuestionsForm from './reportForms/QuestionsForm';
 import ReportStatusForm from './reportForms/StatusForm';
 import ReportReviewForm from './reportForms/ReportReview';
+import ReportLinkForm from './reportForms/ReportLinks';
 
 const intakePageStyle = css`
     display: flex;
@@ -144,6 +145,8 @@ const getForm = (page: number, mode: string | string[] | undefined) => {
             case 5:
                 return <ReportStatusForm />;
             case 6:
+                return <ReportLinkForm />;
+            case 7:
                 return <ReportReviewForm />;
             default:
                 return null;
