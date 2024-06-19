@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode, ChangeEvent } from 'react';
 import { fetchTicketData, fetchTicketsByIds, fetchTicketIdsByUserId } from './services/fetchTicketData';
 import { Ticket } from '@/public/Types/GlobalTypes';
 import { useUserProfile } from '@/globalContexts/userContext';
@@ -10,6 +10,10 @@ interface TicketContextType {
   selectedPriority: string;
   setSelectedPriority: React.Dispatch<React.SetStateAction<string>>;
   filteredTickets: Ticket[];
+  searchTerm: string;
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  isFilterBarOpen: boolean;
+  setIsFilterBarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // Define the context
@@ -25,6 +29,8 @@ export const TicketProvider: React.FC<TicketProviderProps> = ({ children }) => {
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [filteredTickets, setFilteredTickets] = useState<Ticket[]>([]);
   const [selectedPriority, setSelectedPriority] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [isFilterBarOpen, setIsFilterBarOpen] = useState(false);
 
   const { profile } = useUserProfile();
 
@@ -52,12 +58,13 @@ export const TicketProvider: React.FC<TicketProviderProps> = ({ children }) => {
   }, [profile]);
 
   useEffect(() => {
-    const filteredTickets = selectedPriority !== ''
-        ? tickets.filter(ticket => ticket.priority === selectedPriority) 
-        : tickets;
+    const filteredTickets = tickets.filter(ticket =>
+      (selectedPriority === '' || ticket.priority === selectedPriority) &&
+      (searchTerm === '' || ticket.title.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
 
     setFilteredTickets(filteredTickets);
-  }, [selectedPriority, tickets]); // Add tickets to the dependency array
+  }, [selectedPriority, searchTerm, tickets]); // Add searchTerm to the dependency array
 
   return (
     <TicketContext.Provider value={{
@@ -66,7 +73,11 @@ export const TicketProvider: React.FC<TicketProviderProps> = ({ children }) => {
       tickets,
       selectedPriority,
       setSelectedPriority,
-      filteredTickets
+      filteredTickets,
+      searchTerm,
+      setSearchTerm,
+      isFilterBarOpen,
+      setIsFilterBarOpen
     }}>
       {children}
     </TicketContext.Provider>

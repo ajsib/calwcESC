@@ -1,13 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { useWizard, WizardProvider } from '../../IntakeContext';
-import Page1 from './Intro';
-import Page2 from './ProjectInfo';
-import Page3 from './MQL';
-import Page4 from './ExperimentType';
-import Page5 from './StudyMethod';
-import Page6 from './Review';
-import Page7 from './Success';
+import { useWizard } from '../../IntakeContext';
+import StepIndicator from './stages';
 
 const intakePageStyle = css`
     display: flex;
@@ -16,97 +10,124 @@ const intakePageStyle = css`
     justify-content: center;
     height: 100%;
     width: 100%;
+    background-color: #ebebeb;
+    position: relative;
 `;
 
-const intakePageContentStyle = css`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+const gradientStyle = css`
     width: 100%;
-    max-width: 1200px;
-    padding: 1rem;
+    height: calc((100vh - 68px) * 0.38);
+    background: linear-gradient(to bottom, #00ff00, #006400);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
 `;
 
-const intakePageHeaderStyle = css`
+const wizardPlaceholderStyle = css`
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    width: calc(100% - 16rem); /* 8rem padding on each side */
+    height: calc((100vh - 68px) - 8rem); /* 8rem padding on top and bottom */
+    background-color: white;
+    margin: 8rem;
+    margin-bottom: 4rem;
+    margin-top: 4rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    position: relative;
+`;
+
+const wizardContentStyle = css`
+    display: flex;
+    height: 100%;
     width: 100%;
-    margin-bottom: 2rem;
+`;
+
+const inputSectionStyle = css`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 1rem;
+    width: 60%;
+    height: calc(100% - 2rem);
+`;
+
+const infoSectionStyle = css`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin: 1rem;
+    width: 40%;
+    height: calc(100% - 2rem);
 `;
 
 const buttonContainerStyle = css`
     display: flex;
-    justify-content: space-between;
+    gap: 1rem;
     width: 100%;
-    max-width: 300px;
-    margin-top: 2rem;
 `;
 
 const buttonStyle = css`
-    padding: 0.5rem 1rem;
+    padding: 0.75rem;
     border: none;
-    background-color: #364132;
     color: white;
-    font-size: 1rem;
     cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease-in-out;
-    &:hover {
-        background-color: #2b332a;
-    }
-    &:disabled {
-        background-color: #ccc;
-        cursor: not-allowed;
-    }
+    font-size: 1.5rem;
+    width: 50%;
+`;
+
+const moreInfoButtonStyle = css`
+    padding: 0.75rem;
+    border: none;
+    color: black;
+    cursor: pointer;
+    font-size: 1.5rem;
+    width: 100%;
+    margin: 1rem 0;
+    background-color: #ccc;
+`;
+
+const infoContentStyle = css`
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
 `;
 
 const IntakePage = () => {
     const { page, goForward, goBack } = useWizard();
 
-    const renderPage = () => {
-        switch (page) {
-            case 1:
-                return <Page1 />;
-            case 2:
-                return <Page2 />;
-            case 3:
-                return <Page3 />;
-            case 4:
-                return <Page4 />;
-            case 5:
-                return <Page5 />;
-            case 6:
-                return <Page6 />;
-            case 7:
-                return <Page7 />;
-            default:
-                return <Page1 />;
-        }
-    };
-
     return (
         <div css={intakePageStyle}>
-            <div css={intakePageContentStyle}>
-                <div css={intakePageHeaderStyle}>
-                    <h1>Intake</h1>
-                </div>
-                {renderPage()}
-                <div css={buttonContainerStyle}>
-                    <button onClick={goBack} css={buttonStyle} disabled={page <= 1}>Back</button>
-                    <button onClick={goForward} css={buttonStyle} disabled={page >= 7}>Next</button>
+            <div css={gradientStyle}></div>
+            <div css={wizardPlaceholderStyle}>
+                <StepIndicator currentPage={page} />
+                <div css={wizardContentStyle}>
+                    <div css={inputSectionStyle}>
+                        <p>Page {page}</p>
+                    </div>
+                    <div css={infoSectionStyle}>
+                        <div css={infoContentStyle}>
+                            <p>Info content for page {page} goes here</p>
+                        </div>
+                        <button css={moreInfoButtonStyle}>More Info</button>
+                        <div css={buttonContainerStyle}>
+                            <button css={[buttonStyle, { backgroundColor: 'black' }]} onClick={goBack}>Back</button>
+                            <button css={[buttonStyle, { backgroundColor: 'var(--primary-color)' }]} onClick={goForward}>Next</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     );
 };
 
-const App = () => (
-    <WizardProvider>
-        <IntakePage />
-    </WizardProvider>
-);
-
-export default App;
+export default IntakePage;

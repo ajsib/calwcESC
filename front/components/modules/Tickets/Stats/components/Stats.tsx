@@ -5,20 +5,19 @@ import { StatsProps } from '../Types';
 import { useRouter } from 'next/router';
 import { useTicketContext } from '../../TicketContext';
 
-// Layout for the stats and button container
 const statsOverviewStyle = css`
   display: flex;
   justify-content: space-between;
+  padding: 0rem;
+  gap: 0rem;
   background-color: #FBFBFB;
-  padding: 1rem;
-  gap: 1rem;
-  align-items: stretch;
+  align-items: stretch; 
+  height: 16rem;  
 `;
 
-// Style for the stats cards
 const statCardStyle = (isSelected?: boolean) => css`
-  border: 1px solid #ddd;
-  background-color: ${isSelected ? '#e0f7fa' : '#fff'};
+  border: 1px solid #EAEAEA;
+  background-color: ${isSelected ? '#E8E8E8' : '#F4F4F4'};
   text-align: center;
   cursor: pointer;
   flex: 1; 
@@ -27,7 +26,64 @@ const statCardStyle = (isSelected?: boolean) => css`
   justify-content: center;
   align-items: center;
   line-height: 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+const buttonContainerStyle = css`
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem;
+  flex: 0 1 auto;
+  min-width: 575px;
+  background-color: #DEDEDE;
+`;
+
+const buttonStylePrimary = css`
+  border: 1px solid #C2C2C2;
+  cursor: pointer;
+  padding: 1.25rem;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.3s ease;
+  background-color: #4E5E48;
+  font-size: 1.25rem;
+  color: #FFFFFF;
+  &:hover {
+    background-color: #667B5E;
+  }
+`;
+
+const buttonStyleSecondaryLeft = css`
+  border: 1px solid #C2C2C2;
+  margin-right: 8px;  
+  cursor: pointer;
+  padding: 1.25rem;
+  width: 50%;
+  text-align: left; 
+  transition: background-color 0.3s ease;
+  color: #364132;
+  font-size: 1.25rem;
+
+  &:hover {
+    background-color: #eaeaea;
+  }
+`;
+
+const buttonStyleSecondaryRight = css`
+  border: 1px solid #C2C2C2;
+  margin-left: 8px;  
+  cursor: pointer;
+  padding: 1.25rem;
+  width: 50%;
+  text-align: left; 
+  transition: background-color 0.3s ease;
+  font-size: 1.25rem;
+
+  &:hover {
+    background-color: #eaeaea;
+  }
 `;
 
 const titleStyle = css`
@@ -37,37 +93,9 @@ const titleStyle = css`
   gap: 1rem;
 `;
 
-// Container for buttons
-const buttonContainerStyle = css`
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #ddd;
-  gap: 1rem;
-  background-color: #fff;
-  justify-content: flex-start; 
-  padding: 1rem;
-  flex: 0 1 auto;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
-// Style for each button
-const buttonStyle = css`
-  border: 1px solid #ddd;
-  cursor: pointer;
-  padding: 1rem;
-  width: calc(100% - 2rem); 
-  text-align: center; 
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #eaeaea;
-  }
-`;
-
 const Stats = ({ openTickets, highPriorityTickets, mediumPriorityTickets, lowPriorityTickets }: StatsProps) => {
   const router = useRouter();
   const { selectedPriority, setSelectedPriority, setIsTicketEntryPageOpen } = useTicketContext();
-  console.log(selectedPriority);
 
   const handleCardClick = (priority: string) => {
     if (selectedPriority === priority) {
@@ -89,15 +117,17 @@ const Stats = ({ openTickets, highPriorityTickets, mediumPriorityTickets, lowPri
       </div>
       <div css={statCardStyle(selectedPriority === 'Medium')} onClick={() => handleCardClick('Medium')}>
         <h2>{mediumPriorityTickets}</h2>
-        <p css={titleStyle}><Circle size={10} color="orange" />Medium Priority</p>
+        <p css={titleStyle}><Circle size={10} color="orange" /> Medium Priority</p>
       </div>
       <div css={statCardStyle(selectedPriority === 'Low')} onClick={() => handleCardClick('Low')}>
         <h2>{lowPriorityTickets}</h2>
-        <p css={titleStyle}><Circle size={10} color="green" />Low Priority</p>
+        <p css={titleStyle}><Circle size={10} color="green" /> Low Priority</p>
       </div>
       <div css={buttonContainerStyle}>
-        <div css={buttonStyle} onClick={() => router.push('/project-management')}>Project Management</div>
-        <div css={buttonStyle} onClick={() => setIsTicketEntryPageOpen(true)}>Manual Entry</div>
+        <div css={css`display: flex;`}>
+          <div css={buttonStyleSecondaryLeft} onClick={() => router.push('/project-management')}>Project Management</div>
+          <div css={buttonStyleSecondaryRight} onClick={() => setIsTicketEntryPageOpen(true)}>Manual Entry</div>
+        </div>
       </div>
     </div>
   );

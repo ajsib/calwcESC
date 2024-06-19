@@ -1,20 +1,27 @@
+import React, { useState } from 'react';
 import styled from "@emotion/styled";
 import SearchIcon from '@/components/UI/icons/SearchIcon'; // Importing the SearchIcon component
 import SearchBarProps from "@/components/modules/Dashboard/SearchBar/Types";
 
 const MainContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: -2rem 2rem 0 2rem;
+`;
+
+const SearchContainer = styled.div<{ isFilterBarVisible: boolean; isFocused: boolean }>`
+  display: flex;
   align-items: center;
   height: 4rem;
   background-color: #fff;
   border: 1px solid #e9e9e9;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.09);
-    margin-right: 2rem;
-    margin-left: 2rem;
-    margin-top: -2rem;
+  width: 100%;
+  margin-bottom: ${({ isFilterBarVisible }) => (isFilterBarVisible ? '1rem' : '0')};
 `;
 
-const SearchContainer = styled.div<{ isFocused: boolean }>`
+const InnerSearchContainer = styled.div<{ isFocused: boolean }>`
   display: flex;
   align-items: center;
   flex-grow: 1;
@@ -32,7 +39,6 @@ const StyledInput = styled.input`
   padding: 8px 20px;
   outline: none;
   border: none;
-    
 `;
 
 const FilterButton = styled.button`
@@ -48,22 +54,42 @@ const FilterButton = styled.button`
   }
 `;
 
+const FilterBar = styled.div`
+  display: flex;
+  align-items: center;
+  height: 4rem;
+  background-color: #fff;
+  border: 1px solid #e9e9e9;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.09);
+  width: 100%;
+  margin-top: 1rem;
+`;
+
 const SearchBar = ({isFocused, searchTerm, inputRef, handleSearchChange, handleBlur, handleFocus} : SearchBarProps) => {
+  const [isFilterBarVisible, setIsFilterBarVisible] = useState(false);
+
+  const toggleFilterBar = () => {
+    setIsFilterBarVisible(!isFilterBarVisible);
+  };
+
   return (
     <MainContainer>
-      <SearchContainer isFocused={isFocused} onClick={handleFocus}>
-        <SearchIcon size={20} />
-        <StyledInput
-          ref={inputRef}
-          placeholder="Search..."
-          type="text"
-          value={searchTerm}
-          onChange={handleSearchChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        />
+      <SearchContainer isFocused={isFocused} isFilterBarVisible={isFilterBarVisible}>
+        <InnerSearchContainer isFocused={isFocused} onClick={handleFocus}>
+          <SearchIcon size={20} />
+          <StyledInput
+            ref={inputRef}
+            placeholder="Search..."
+            type="text"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+          />
+        </InnerSearchContainer>
+        {searchTerm && <FilterButton onClick={toggleFilterBar}>Filters</FilterButton>}
       </SearchContainer>
-      <FilterButton>Filters</FilterButton>
+      {isFilterBarVisible && <FilterBar />}
     </MainContainer>
   );
 };

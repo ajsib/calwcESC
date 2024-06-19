@@ -26,6 +26,7 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
     const [archivedTasks, setArchivedTasks] = useState<Task[]>([]);
     const [showArchived, setShowArchived] = useState<boolean>(false);
     const [searchTerm, setSearchTerm] = useState<string>("");
+    const [filterBarOpen, setFilterBarOpen] = useState<boolean>(false);
 
     const { profile } = useUserProfile();
     const currentUserId = profile?.employee_id || 0;
@@ -199,7 +200,9 @@ export const ProjectManagementProvider = ({ children }: { children: React.ReactN
                     searchTerm,
                     setSearchTerm,
                     archiveTask,
-                    unarchiveTask
+                    unarchiveTask,
+                    filterBarOpen,
+                    setFilterBarOpen,
                 }}
             >
                 {children}
