@@ -77,20 +77,20 @@ export default function OperationsContent() {
             <h1 css={titleStyle}>{Title}</h1>
             <GridContainer margin={isMobile ? 1 : 10}>
                 <CardTemplate
-                    title={locale === 'en' ? <>Experiment <br /> Consultation</> : <>Consultation <br /> d&apos;expérimentation</>}
-                    subtitle={locale === 'en' ? <>Get the process started with our team to run an experiment.</> : <>Commencez le processus avec notre équipe pour mener une expérience.</>}
+                    title={locale === 'en' ? <>Research and <br /> Document Review</> : <>Consultation <br /> d&apos;expérimentation</>}
+                    subtitle={locale === 'en' ? <>We will research your topic and review existing documentation for you.</> : <>Commencez le processus avec notre équipe pour mener une expérience.</>}
                 />
                 <CardTemplate
-                    title={locale === 'en' ? <>Knowledge <br /> Base</> : <>Base de <br /> connaissances</>}
-                    subtitle={locale === 'en' ? <>Explore our knowledge base to find information on past experiments, or reports.</> : <>Explorez notre base de connaissances pour trouver des informations sur les expériences passées ou les rapports.</>}
+                    title={locale === 'en' ? <>Conduct an <br /> Experiment</> : <>Base de <br /> connaissances</>}
+                    subtitle={locale === 'en' ? <>We will plan and conduct the needed experiment or campaign.</> : <>Explorez notre base de connaissances pour trouver des informations sur les expériences passées ou les rapports.</>}
                 />
                 <CardTemplate
-                    title={locale === 'en' ? <>Active <br /> Experiments</> : <>Expériences <br /> Actives</>}
-                    subtitle={locale === 'en' ? <>See what is happening, what it&apos;s related to and who is involved</> : <>Voyez ce qui se passe, à quoi cela est lié et qui est impliqué</>}
+                    title={locale === 'en' ? <>Consolidate and <br /> Report</> : <>Expériences <br /> Actives</>}
+                    subtitle={locale === 'en' ? <>We will distill conclusions from data and make it presentable for appropriate stakeholders.</> : <>Voyez ce qui se passe, à quoi cela est lié et qui est impliqué</>}
                 />
                 <CardTemplate
-                    title={locale === 'en' ? <>Community <br /> Experimentation</> : <>Expérimentation <br /> Communautaire</>}
-                    subtitle={locale === 'en' ? <>Get in on the action, share ideas and collaborate.</> : <>Participez à l&apos;action, partagez des idées et collaborez.</>}
+                    title={locale === 'en' ? <>Support for <br /> Any Stage</> : <>Expérimentation <br /> Communautaire</>}
+                    subtitle={locale === 'en' ? <>We are here to assist anywhere in the process, advise, or connect you to resources.</> : <>Participez à l&apos;action, partagez des idées et collaborez.</>}
                 />
             </GridContainer>
             <div css={faqContainerStyle}>
